@@ -101,7 +101,7 @@ trash/
 
 # Folders to ignore
 reports-gen/
-docs/
+
 .cursor/rules/
 
 # Spyder project settings
