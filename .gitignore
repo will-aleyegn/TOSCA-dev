@@ -100,7 +100,9 @@ trash/
 +docs/**/*.txt
 
 # Folders to ignore
-reports/
+reports-gen/
+docs/
+.cursor/rules/
 
 # Spyder project settings
 .spyderproject
@@ -136,5 +138,5 @@ cython_debug/
 # Project Specific
 *.log
 .repomix-*
-data/ # Add if data generated should not be version controlled 
+# data/ # REMOVED - We want to track data
 +.repomixignore 
