@@ -1,0 +1,420 @@
+LocalDevice — VmbPy 1.1.0 documentation
+VmbPy
+1.1.0
+VmbSystem
+TransportLayer
+Interface
+Camera
+Stream
+LocalDevice
+LocalDevice
+LocalDevice.get_all_features()
+LocalDevice.get_feature_by_name()
+LocalDevice.get_features_by_category()
+LocalDevice.get_features_by_type()
+LocalDevice.get_features_selected_by()
+LocalDevice.load_settings()
+LocalDevice.save_settings()
+Frame
+Feature
+Error
+VmbPy
+LocalDevice
+LocalDevice
+
+class
+vmbpy.
+LocalDevice
+
+This class provides access to the Local Device of a Camera.
+get_all_features
+(
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get access to all discovered features.
+Returns
+:
+A set of all currently detected Features.
+Raises
+:
+RuntimeError
+– If called outside of
+with
+context.
+get_feature_by_name
+(
+feat_name
+:
+str
+)
+→
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+
+Get a feature by its name.
+Parameters
+:
+feat_name
+– Name used to find a feature.
+Returns
+:
+Feature with the associated name.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+VmbFeatureError
+– If no feature is associated with
+feat_name
+.
+get_features_by_category
+(
+category
+:
+str
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get all features of a specific category.
+Parameters
+:
+category
+– Category that should be used for filtering.
+Returns
+:
+A set of features of category
+category
+.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+get_features_by_type
+(
+feat_type
+:
+Type
+[
+IntFeature
+]
+|
+Type
+[
+FloatFeature
+]
+|
+Type
+[
+StringFeature
+]
+|
+Type
+[
+BoolFeature
+]
+|
+Type
+[
+EnumFeature
+]
+|
+Type
+[
+CommandFeature
+]
+|
+Type
+[
+RawFeature
+]
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get all features of a specific feature type.
+Valid FeatureTypes are:
+IntFeature
+,
+FloatFeature
+,
+StringFeature
+,
+BoolFeature
+,
+EnumFeature
+,
+CommandFeature
+,
+RawFeature
+Parameters
+:
+feat_type
+– FeatureType used to find features of that type.
+Returns
+:
+A set of features of type
+feat_type`
+.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+get_features_selected_by
+(
+feat
+:
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get all features selected by a specific feature.
+Parameters
+:
+feat
+– Feature used to find features that are selected by
+feat
+.
+Returns
+:
+A set of features selected by
+feat
+.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+VmbFeatureError
+– If
+feat
+is not a valid feature.
+load_settings
+(
+file_path
+:
+str
+,
+persist_type
+:
+PersistType
+=
+PersistType.Streamable
+,
+persist_flags
+:
+ModulePersistFlags
+=
+ModulePersistFlags.None_
+,
+max_iterations
+:
+int
+=
+0
+)
+
+Load settings from XML file.
+Parameters
+:
+file_path
+– The location for loading current settings. The given file must be a file ending with
+“.xml”.
+persist_type
+– Parameter specifying which setting types to load. For an overview of the possible
+values and their implication see the
+PersistType
+enum
+persist_flags
+– Flags specifying the modules to load. By default only features of the calling module
+itself are persisted. For an overview of available flags see the
+ModulePersistFlags
+type
+max_iterations
+– Number of iterations when storing settings. If 0 is given (default) the value found
+in the XML file is used
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside
+with
+context.
+ValueError
+– If argument path is no “.xml” file.
+save_settings
+(
+file_path
+:
+str
+,
+persist_type
+:
+PersistType
+=
+PersistType.Streamable
+,
+persist_flags
+:
+ModulePersistFlags
+=
+ModulePersistFlags.None_
+,
+max_iterations
+:
+int
+=
+0
+)
+
+Save settings to XML File.
+Parameters
+:
+file_path
+– The location for storing the current settings. The given file must be a file ending
+with “.xml”.
+persist_type
+– Parameter specifying which setting types to store. For an overview of the possible
+values and their implication see the
+PersistType
+enum
+persist_flags
+– Flags specifying the modules to store. By default only features of the calling
+module itself are persisted. For an overview of available flags see the
+ModulePersistFlags
+type
+max_iterations
+– Number of iterations when loading settings. If
+0
+is given (default) the VmbC
+default is used
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside
+with
+context.
+ValueError
+– If argument path is no “.xml”- File.
+Previous
+Next
+© Copyright 2023, Allied Vision.
+Built with
+Sphinx
+using a
+theme
+provided by
+Read the Docs
+.

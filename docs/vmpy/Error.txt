@@ -1,0 +1,89 @@
+Error — VmbPy 1.1.0 documentation
+VmbPy
+1.1.0
+VmbSystem
+TransportLayer
+Interface
+Camera
+Stream
+LocalDevice
+Frame
+Feature
+Error
+VmbCameraError
+VmbChunkError
+VmbFeatureError
+VmbFrameError
+VmbInterfaceError
+VmbSystemError
+VmbTimeout
+VmbTransportLayerError
+VmbPy
+Error
+Error
+
+class
+vmbpy.
+VmbCameraError
+
+Errors related to cameras
+Error Type to indicate camera-related errors like:
+Access of a disconnected Camera object
+Lookup of non-existing cameras
+class
+vmbpy.
+VmbChunkError
+
+Errors related to chunk data and chunk access
+class
+vmbpy.
+VmbFeatureError
+
+Error related to Feature access
+Error type to indicate invalid Feature access like:
+Invalid access mode on Feature access.
+Out of range values upon setting a value.
+Failed lookup of features.
+class
+vmbpy.
+VmbFrameError
+
+Error related to Frame data
+class
+vmbpy.
+VmbInterfaceError
+
+Errors related to Interfaces
+Error Type to indicated interface-related errors like:
+Access on a disconnected Interface object
+Lookup of a non-existing Interface
+class
+vmbpy.
+VmbSystemError
+
+Errors related to the underlying Vimba X System
+Error type to indicate system-wide errors like:
+Incomplete Vimba X installation
+Incompatible version of the underlying C-Layer
+An unsupported OS
+class
+vmbpy.
+VmbTimeout
+
+Indicates that an operation timed out
+class
+vmbpy.
+VmbTransportLayerError
+
+Errors related to Transport Layers
+Error type to indicate Transport Layer related errors like:
+Lookup of a non-existing Transport Layer
+Previous
+© Copyright 2023, Allied Vision.
+Built with
+Sphinx
+using a
+theme
+provided by
+Read the Docs
+.

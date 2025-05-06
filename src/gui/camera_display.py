@@ -26,6 +26,18 @@ from PyQt6.QtGui import QImage, QPixmap
 # Import our camera controllers
 from src.hardware.vmpy_camera import VMPyCameraController
 
+try:
+    from vmbpy import PixelFormat, AccessMode
+except ImportError:
+    class PixelFormat:
+        Mono8 = None
+    class AccessMode:
+        None_ = 0
+        Full = 1
+        Read = 2
+        Unknown = 4
+        Exclusive = 8
+
 logger = logging.getLogger(__name__)
 if os.environ.get("TOSCA_DEBUG") == "1":
     logger.setLevel(logging.DEBUG)
@@ -83,6 +95,21 @@ class CameraDisplayWidget(QWidget):
         self.camera_id_combo.addItem("Camera 0", 0)
         self.camera_id_combo.addItem("Camera 1", 1)
         
+        # Pixel Format selection
+        self.pixel_format_combo = QComboBox()
+        self.pixel_format_combo.addItem("Auto", None)  # Will populate after camera connect
+        camera_row.addWidget(QLabel("Pixel Format:"))
+        camera_row.addWidget(self.pixel_format_combo)
+        
+        # Access Mode selection
+        self.access_mode_combo = QComboBox()
+        self.access_mode_combo.addItem("Full", AccessMode.Full)
+        self.access_mode_combo.addItem("Read", AccessMode.Read)
+        self.access_mode_combo.addItem("Exclusive", AccessMode.Exclusive)
+        self.access_mode_combo.addItem("None", AccessMode.None_)
+        camera_row.addWidget(QLabel("Access Mode:"))
+        camera_row.addWidget(self.access_mode_combo)
+        
         self.auto_connect_checkbox = QCheckBox("Auto-connect")
         self.auto_connect_checkbox.setChecked(True)
         
@@ -136,6 +163,22 @@ class CameraDisplayWidget(QWidget):
         feature_row.addWidget(self.gain_slider)
         feature_row.addWidget(self.gain_value_label)
         control_layout.addLayout(feature_row)
+        # Save/Load Settings buttons
+        settings_row = QHBoxLayout()
+        self.save_settings_btn = QPushButton("Save Settings")
+        self.save_settings_btn.clicked.connect(self.on_save_settings)
+        self.save_settings_btn.setEnabled(False)
+        self.load_settings_btn = QPushButton("Load Settings")
+        self.load_settings_btn.clicked.connect(self.on_load_settings)
+        self.load_settings_btn.setEnabled(False)
+        # Advanced: Show Features button
+        self.show_features_btn = QPushButton("Show All Features")
+        self.show_features_btn.clicked.connect(self.on_show_features)
+        self.show_features_btn.setEnabled(False)
+        settings_row.addWidget(self.save_settings_btn)
+        settings_row.addWidget(self.load_settings_btn)
+        settings_row.addWidget(self.show_features_btn)
+        control_layout.addLayout(settings_row)
         # --- End Camera Feature Controls ---
         
         # Capture and display controls
@@ -187,14 +230,21 @@ class CameraDisplayWidget(QWidget):
     def on_connect_camera(self):
         """Connect to the camera."""
         try:
-            # Disconnect existing camera if any
             if self.camera_controller is not None:
                 self.on_disconnect_camera()
             camera_id = self.camera_id_combo.currentData()
-            # Create the appropriate camera controller
-            self.camera_controller = VMPyCameraController(vmb=self.vmb, camera_id=camera_id)
+            # Get selected pixel format and access mode
+            pixel_format = self.pixel_format_combo.currentData()
+            if pixel_format is None:
+                pixel_format = PixelFormat.Mono8  # Default fallback
+            access_mode = self.access_mode_combo.currentData()
+            if access_mode is None:
+                access_mode = AccessMode.Full
+            self.camera_controller = VMPyCameraController(
+                vmb=self.vmb, camera_id=camera_id,
+                pixel_format=pixel_format, access_mode=access_mode
+            )
             self.status_label.setText("Connecting to VMPy camera...")
-            # Initialize the camera
             success = self.camera_controller.initialize()
             if not success:
                 QMessageBox.critical(
@@ -204,15 +254,41 @@ class CameraDisplayWidget(QWidget):
                 self.camera_controller = None
                 self.status_label.setText("Camera initialization failed")
                 return
-            # Set auto exposure and auto gain ON by default
+            # Populate pixel format combo with available formats
+            self.pixel_format_combo.clear()
+            formats = self.camera_controller.get_available_pixel_formats()
+            for fmt in formats:
+                self.pixel_format_combo.addItem(str(fmt), fmt)
+            # Set the current pixel format in the combo
+            idx = self.pixel_format_combo.findData(self.camera_controller.pixel_format)
+            if idx >= 0:
+                self.pixel_format_combo.setCurrentIndex(idx)
+            # Enable Save/Load Settings buttons
+            self.save_settings_btn.setEnabled(True)
+            self.load_settings_btn.setEnabled(True)
+            self.show_features_btn.setEnabled(True)
+            # Set auto exposure and auto gain ON by default (Try 'Continuous')
+            auto_on_value = "Continuous" # Common alternative to 'On'
+            auto_off_value = "Off"
             try:
                 cam = self.camera_controller.camera
                 with cam:
-                    cam.get_feature_by_name("ExposureAuto").set_value("On")
-                    cam.get_feature_by_name("GainAuto").set_value("On")
+                    # Try setting to Continuous first
+                    cam.get_feature_by_name("ExposureAuto").set(auto_on_value)
+                    cam.get_feature_by_name("GainAuto").set(auto_on_value)
             except Exception as e:
-                logger.warning(f"Could not set auto exposure/gain on connect: {e}")
-            # Update UI elements
+                logger.warning(f"Could not set auto exposure/gain to '{auto_on_value}' on connect: {e}")
+                # If 'Continuous' fails, maybe 'On' works on some models? Try that? (Less likely given previous error)
+                # Or just default to Off?
+                try:
+                    with cam:
+                         cam.get_feature_by_name("ExposureAuto").set(auto_off_value)
+                         cam.get_feature_by_name("GainAuto").set(auto_off_value)
+                    logger.info("Defaulting auto exposure/gain to Off after failing to set 'Continuous'")
+                except Exception as e2:
+                     logger.error(f"Also failed to set auto exposure/gain to Off: {e2}")
+
+            # Update UI elements (reading back values)
             self.connect_btn.setEnabled(False)
             self.disconnect_btn.setEnabled(True)
             self.start_stream_btn.setEnabled(True)
@@ -426,27 +502,35 @@ class CameraDisplayWidget(QWidget):
             with cam:
                 # Exposure
                 try:
-                    exposure_auto = cam.get_feature_by_name("ExposureAuto").get_value()
-                    self.exposure_auto_checkbox.setChecked(exposure_auto == "On")
-                except Exception:
+                    exposure_auto = cam.get_feature_by_name("ExposureAuto").get()
+                    # Check if the current value indicates 'on' (e.g., not 'Off')
+                    is_on = (exposure_auto != "Off") 
+                    self.exposure_auto_checkbox.setChecked(is_on)
+                except Exception as e:
+                    logger.error(f"Error reading ExposureAuto: {e}")
                     self.exposure_auto_checkbox.setChecked(False)
                 try:
                     exposure_time = cam.get_feature_by_name("ExposureTime").get()
                     self.exposure_slider.setValue(int(exposure_time))
                     self.exposure_value_label.setText(f"{int(exposure_time):,} us")
-                except Exception:
+                except Exception as e:
+                    logger.error(f"Error reading ExposureTime: {e}")
                     pass
                 # Gain
                 try:
-                    gain_auto = cam.get_feature_by_name("GainAuto").get_value()
-                    self.gain_auto_checkbox.setChecked(gain_auto == "On")
-                except Exception:
+                    gain_auto = cam.get_feature_by_name("GainAuto").get()
+                    # Check if the current value indicates 'on' (e.g., not 'Off')
+                    is_on = (gain_auto != "Off")
+                    self.gain_auto_checkbox.setChecked(is_on)
+                except Exception as e:
+                    logger.error(f"Error reading GainAuto: {e}")
                     self.gain_auto_checkbox.setChecked(False)
                 try:
                     gain = cam.get_feature_by_name("Gain").get()
                     self.gain_slider.setValue(int(gain * 10))
                     self.gain_value_label.setText(f"{gain:.1f} dB")
-                except Exception:
+                except Exception as e:
+                    logger.error(f"Error reading Gain: {e}")
                     pass
         except Exception as e:
             logger.error(f"Error updating feature controls from camera: {e}")
@@ -454,17 +538,19 @@ class CameraDisplayWidget(QWidget):
     def on_exposure_auto_changed(self, state):
         if self.camera_controller and self.camera_controller.camera:
             cam = self.camera_controller.camera
+            # Determine target state string (Assume 'Continuous' for On, 'Off' for Off)
+            target_state_str = "Continuous" if state else "Off"
             with cam:
                 try:
-                    cam.get_feature_by_name("ExposureAuto").set_value("On" if state else "Off")
+                    cam.get_feature_by_name("ExposureAuto").set(target_state_str)
                     # Read back and update UI
-                    actual = cam.get_feature_by_name("ExposureAuto").get_value()
-                    self.exposure_auto_checkbox.setChecked(actual == "On")
-                    if (actual == "On") != bool(state):
-                        self.status_label.setText("Warning: ExposureAuto setting not applied!")
-                        logger.warning("ExposureAuto set to %s but read back as %s", "On" if state else "Off", actual)
+                    actual = cam.get_feature_by_name("ExposureAuto").get()
+                    self.exposure_auto_checkbox.setChecked(actual != "Off")
+                    if actual != target_state_str:
+                        self.status_label.setText(f"Warning: ExposureAuto set to {target_state_str} but read {actual}!")
+                        logger.warning(f"ExposureAuto set to {target_state_str} but read back as {actual}")
                 except Exception as e:
-                    logger.error(f"Failed to set ExposureAuto: {e}")
+                    logger.error(f"Failed to set ExposureAuto to {target_state_str}: {e}")
                     self.status_label.setText("Failed to set Auto Exposure")
     
     def on_exposure_slider_changed(self, value):
@@ -488,17 +574,19 @@ class CameraDisplayWidget(QWidget):
     def on_gain_auto_changed(self, state):
         if self.camera_controller and self.camera_controller.camera:
             cam = self.camera_controller.camera
+             # Determine target state string (Assume 'Continuous' for On, 'Off' for Off)
+            target_state_str = "Continuous" if state else "Off"
             with cam:
                 try:
-                    cam.get_feature_by_name("GainAuto").set_value("On" if state else "Off")
+                    cam.get_feature_by_name("GainAuto").set(target_state_str)
                     # Read back and update UI
-                    actual = cam.get_feature_by_name("GainAuto").get_value()
-                    self.gain_auto_checkbox.setChecked(actual == "On")
-                    if (actual == "On") != bool(state):
-                        self.status_label.setText("Warning: GainAuto setting not applied!")
-                        logger.warning("GainAuto set to %s but read back as %s", "On" if state else "Off", actual)
+                    actual = cam.get_feature_by_name("GainAuto").get()
+                    self.gain_auto_checkbox.setChecked(actual != "Off")
+                    if actual != target_state_str:
+                        self.status_label.setText(f"Warning: GainAuto set to {target_state_str} but read {actual}!")
+                        logger.warning(f"GainAuto set to {target_state_str} but read back as {actual}")
                 except Exception as e:
-                    logger.error(f"Failed to set GainAuto: {e}")
+                    logger.error(f"Failed to set GainAuto to {target_state_str}: {e}")
                     self.status_label.setText("Failed to set Auto Gain")
     
     def on_gain_slider_changed(self, value):
@@ -519,6 +607,57 @@ class CameraDisplayWidget(QWidget):
                 except Exception as e:
                     logger.error(f"Failed to set Gain: {e}")
                     self.status_label.setText("Failed to set Gain")
+    
+    def on_save_settings(self):
+        if self.camera_controller is None:
+            return
+        file_path, _ = QFileDialog.getSaveFileName(self, "Save Camera Settings", "settings.xml", "XML Files (*.xml)")
+        if file_path:
+            success = self.camera_controller.save_settings(file_path)
+            if success:
+                QMessageBox.information(self, "Success", f"Settings saved to {file_path}")
+            else:
+                QMessageBox.critical(self, "Error", "Failed to save camera settings.")
+    
+    def on_load_settings(self):
+        if self.camera_controller is None:
+            return
+        file_path, _ = QFileDialog.getOpenFileName(self, "Load Camera Settings", "settings.xml", "XML Files (*.xml)")
+        if file_path:
+            success = self.camera_controller.load_settings(file_path)
+            if success:
+                QMessageBox.information(self, "Success", f"Settings loaded from {file_path}")
+                self._update_feature_controls_from_camera()
+            else:
+                QMessageBox.critical(self, "Error", "Failed to load camera settings.")
+    
+    def on_show_features(self):
+        if self.camera_controller is None:
+            return
+        cam = self.camera_controller.camera
+        if cam is None:
+            return
+        try:
+            with cam:
+                features = cam.get_all_features()
+                feature_texts = []
+                for feat in features:
+                    try:
+                        name = getattr(feat, 'get_name', lambda: str(feat))()
+                        value = getattr(feat, 'get', lambda: 'N/A')()
+                        feature_texts.append(f"{name}: {value}")
+                    except Exception as e:
+                        feature_texts.append(f"{str(feat)}: [Error: {e}]")
+                text = '\n'.join(feature_texts)
+                dlg = QMessageBox(self)
+                dlg.setWindowTitle("Camera Features")
+                dlg.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
+                dlg.setIcon(QMessageBox.Icon.Information)
+                dlg.setText(f"<pre>{text}</pre>")
+                dlg.setStandardButtons(QMessageBox.StandardButton.Ok)
+                dlg.exec()
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to retrieve features: {e}")
     
     def closeEvent(self, event):
         """Handle widget close event."""

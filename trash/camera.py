@@ -1,1 +1,0 @@
-# This file has been moved to trash as part of the codebase cleanup. See trash/camera.py for the legacy OpenCV camera controller. 

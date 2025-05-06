@@ -12,7 +12,7 @@ import time
 from threading import Thread, Lock
 try:
     import vmbpy
-    from vmbpy import VmbSystem, VmbCameraError, Camera, Frame, FrameStatus, PixelFormat
+    from vmbpy import VmbSystem, VmbCameraError, Camera, Frame, FrameStatus, PixelFormat, AccessMode
 except ImportError:
     logging.error("VmbPy module not found. Please install the VmbPy package.")
     # Define dummy classes if VmbPy is not available to avoid runtime errors on import
@@ -24,6 +24,12 @@ except ImportError:
     class Frame: pass
     class FrameStatus: Complete = None
     class PixelFormat: Mono8=None; Bgr8=None # Add others if needed
+    class AccessMode:
+        None_ = 0
+        Full = 1
+        Read = 2
+        Unknown = 4
+        Exclusive = 8
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +48,7 @@ class VMPyCameraController:
     # For simplicity, we'll stick to the get_current_frame() pull method for now.
     # frame_ready = pyqtSignal(np.ndarray)
 
-    def __init__(self, vmb, camera_id=None, resolution=None, pixel_format=PixelFormat.Mono8):
+    def __init__(self, vmb, camera_id=None, resolution=None, pixel_format=PixelFormat.Mono8, access_mode=AccessMode.Full):
         """
         Initialize the camera controller.
 
@@ -51,6 +57,7 @@ class VMPyCameraController:
             camera_id (str): Camera ID or index. If None, first available camera will be used.
             resolution (tuple): Desired resolution (width, height). Applied if possible.
             pixel_format (vmbpy.PixelFormat): Desired pixel format. Defaults to Mono8.
+            access_mode (vmbpy.AccessMode): Desired access mode. Defaults to Full.
         """
         if PixelFormat.Mono8 is None and vmb is not None: # Check if VmbPy loaded correctly
             raise ImportError("VmbPy types (PixelFormat) not available.")
@@ -59,6 +66,7 @@ class VMPyCameraController:
         self.camera_id = camera_id
         self.resolution = resolution
         self.pixel_format = pixel_format
+        self.access_mode = access_mode
         self.camera: Camera | None = None
         self.is_running: bool = False
         self.current_frame: np.ndarray | None = None
@@ -110,7 +118,13 @@ class VMPyCameraController:
 
             self.camera = found_cam
 
-            # Camera context handles opening/closing device and feature loading
+            # Set access mode before opening camera context
+            try:
+                self.camera.set_access_mode(self.access_mode)
+                logger.info(f"Set camera access mode to: {self.access_mode}")
+            except Exception as e:
+                logger.warning(f"Could not set access mode {self.access_mode}: {e}. Using camera default.")
+
             with self.camera as cam:
                 logger.info(f"Opened camera: {cam.get_id()}")
 
@@ -372,6 +386,45 @@ class VMPyCameraController:
         except Exception as e_generic:
             logger.error(f"Unexpected error during frame conversion: {e_generic}", exc_info=True)
             return None
+
+    def get_available_pixel_formats(self):
+        """Return a list of supported pixel formats for the current camera."""
+        if not self.camera:
+            return []
+        with self.camera as cam:
+            try:
+                return cam.get_pixel_formats()
+            except Exception as e:
+                logger.error(f"Error getting pixel formats: {e}")
+                return []
+
+    def save_settings(self, file_path: str) -> bool:
+        """Save camera settings to an XML file."""
+        if not self.camera:
+            logger.error("Camera not initialized. Cannot save settings.")
+            return False
+        with self.camera as cam:
+            try:
+                cam.save_settings(file_path)
+                logger.info(f"Camera settings saved to {file_path}")
+                return True
+            except Exception as e:
+                logger.error(f"Failed to save camera settings: {e}")
+                return False
+
+    def load_settings(self, file_path: str) -> bool:
+        """Load camera settings from an XML file."""
+        if not self.camera:
+            logger.error("Camera not initialized. Cannot load settings.")
+            return False
+        with self.camera as cam:
+            try:
+                cam.load_settings(file_path)
+                logger.info(f"Camera settings loaded from {file_path}")
+                return True
+            except Exception as e:
+                logger.error(f"Failed to load camera settings: {e}")
+                return False
 
 # Example Usage (for testing)
 if __name__ == '__main__':

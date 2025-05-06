@@ -95,6 +95,9 @@ env/
 ENV.bak/
 env.bak/
 trash/
++output/
++VmbPy_Function_Reference/
++docs/**/*.txt
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -121,8 +124,10 @@ cython_debug/
 
 # VSCode
 .vscode/
++.cursor/
 
 # Project Specific
 *.log
 .repomix-*
 data/ # Add if data generated should not be version controlled 
++.repomixignore 

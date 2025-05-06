@@ -1,0 +1,840 @@
+VmbSystem — VmbPy 1.1.0 documentation
+VmbPy
+1.1.0
+VmbSystem
+VmbSystem
+VmbSystem.__Impl
+VmbSystem.__Impl.disable_log()
+VmbSystem.__Impl.enable_log()
+VmbSystem.__Impl.get_all_cameras()
+VmbSystem.__Impl.get_all_features()
+VmbSystem.__Impl.get_all_interfaces()
+VmbSystem.__Impl.get_all_transport_layers()
+VmbSystem.__Impl.get_camera_by_id()
+VmbSystem.__Impl.get_cameras_by_interface()
+VmbSystem.__Impl.get_cameras_by_tl()
+VmbSystem.__Impl.get_feature_by_name()
+VmbSystem.__Impl.get_features_by_category()
+VmbSystem.__Impl.get_features_by_type()
+VmbSystem.__Impl.get_features_selected_by()
+VmbSystem.__Impl.get_interface_by_id()
+VmbSystem.__Impl.get_interfaces_by_tl()
+VmbSystem.__Impl.get_transport_layer_by_id()
+VmbSystem.__Impl.get_version()
+VmbSystem.__Impl.read_memory()
+VmbSystem.__Impl.register_camera_change_handler()
+VmbSystem.__Impl.register_interface_change_handler()
+VmbSystem.__Impl.set_path_configuration()
+VmbSystem.__Impl.unregister_all_camera_change_handlers()
+VmbSystem.__Impl.unregister_all_interface_change_handlers()
+VmbSystem.__Impl.unregister_camera_change_handler()
+VmbSystem.__Impl.unregister_interface_change_handler()
+VmbSystem.__Impl.write_memory()
+TransportLayer
+Interface
+Camera
+Stream
+LocalDevice
+Frame
+Feature
+Error
+VmbPy
+VmbSystem
+VmbSystem
+
+class
+vmbpy.
+VmbSystem
+static
+get_instance
+(
+)
+→
+__Impl
+Get VmbSystem Singleton.
+class
+vmbpy.
+VmbSystem
+
+class
+__Impl
+
+This class allows access to the entire Vimba X System.
+VmbSystem is meant be used in conjunction with the
+with
+context. Upon entering the
+context, all system features, connected cameras and interfaces are detected and can be used.
+disable_log
+(
+)
+
+Disable vmbpy’s logging mechanism.
+enable_log
+(
+config
+:
+LogConfig
+)
+
+Enable vmbpy’s logging mechanism.
+Parameters
+:
+config
+– Configuration for the logging mechanism.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+get_all_cameras
+(
+)
+→
+Tuple
+[
+Camera
+,
+...
+]
+
+Get access to all discovered Cameras.
+Returns
+:
+A set of all currently detected Cameras.
+Raises
+:
+RuntimeError
+– If called outside of
+with
+context.
+get_all_features
+(
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get access to all discovered features.
+Returns
+:
+A set of all currently detected Features.
+Raises
+:
+RuntimeError
+– If called outside of
+with
+context.
+get_all_interfaces
+(
+)
+→
+Tuple
+[
+Interface
+,
+...
+]
+
+Get access to all discovered Interfaces.
+Returns
+:
+A set of all currently detected Interfaces.
+Raises
+:
+RuntimeError
+– If called outside of
+with
+context.
+get_all_transport_layers
+(
+)
+→
+Tuple
+[
+TransportLayer
+,
+...
+]
+
+Get access to all loaded Transport Layers.
+Returns
+:
+A set of all currently loaded Transport Layers.
+Raises
+:
+RuntimeError
+– If called outside of
+with
+context.
+get_camera_by_id
+(
+id_
+:
+str
+)
+→
+Camera
+
+Lookup Camera with given Id.
+Parameters
+:
+id
+– Camera Id to search for. For GigE Cameras, the IP and MAC Address can be used
+for Camera lookup.
+Returns
+:
+Camera associated with given Id.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+VmbCameraError
+– If camera with
+id_
+can’t be found.
+get_cameras_by_interface
+(
+inter_
+:
+Interface
+)
+
+Get access to cameras associated with the given interface.
+Parameters
+:
+inter
+– Interface whose cameras should be returned.
+Returns
+:
+A tuple of all cameras associated with the given interface.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+get_cameras_by_tl
+(
+tl_
+:
+TransportLayer
+)
+→
+Tuple
+[
+Camera
+,
+...
+]
+
+Get access to cameras associated with the given Transport Layer.
+Parameters
+:
+tl
+– Transport Layer whose cameras should be returned.
+Returns
+:
+A tuple of all cameras associated with the given Transport Layer.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+get_feature_by_name
+(
+feat_name
+:
+str
+)
+→
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+
+Get a feature by its name.
+Parameters
+:
+feat_name
+– Name used to find a feature.
+Returns
+:
+Feature with the associated name.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+VmbFeatureError
+– If no feature is associated with
+feat_name
+.
+get_features_by_category
+(
+category
+:
+str
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get all features of a specific category.
+Parameters
+:
+category
+– Category that should be used for filtering.
+Returns
+:
+A set of features of category
+category
+.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+get_features_by_type
+(
+feat_type
+:
+Type
+[
+IntFeature
+]
+|
+Type
+[
+FloatFeature
+]
+|
+Type
+[
+StringFeature
+]
+|
+Type
+[
+BoolFeature
+]
+|
+Type
+[
+EnumFeature
+]
+|
+Type
+[
+CommandFeature
+]
+|
+Type
+[
+RawFeature
+]
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get all features of a specific feature type.
+Valid FeatureTypes are:
+IntFeature
+,
+FloatFeature
+,
+StringFeature
+,
+BoolFeature
+,
+EnumFeature
+,
+CommandFeature
+,
+RawFeature
+Parameters
+:
+feat_type
+– FeatureType used to find features of that type.
+Returns
+:
+A set of features of type
+feat_type`
+.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+get_features_selected_by
+(
+feat
+:
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get all features selected by a specific feature.
+Parameters
+:
+feat
+– Feature used to find features that are selected by
+feat
+.
+Returns
+:
+A set of features selected by
+feat
+.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+VmbFeatureError
+– If
+feat
+is not a valid feature.
+get_interface_by_id
+(
+id_
+:
+str
+)
+→
+Interface
+
+Lookup Interface with given Id.
+Parameters
+:
+id
+– Interface Id to search for.
+Returns
+:
+Interface associated with given Id.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+VmbInterfaceError
+– If interface with
+id_
+can’t be found.
+get_interfaces_by_tl
+(
+tl_
+:
+TransportLayer
+)
+→
+Tuple
+[
+Interface
+,
+...
+]
+
+Get access to interfaces associated with the given Transport Layer.
+Parameters
+:
+tl
+– Transport Layer whose interfaces should be returned.
+Returns
+:
+A tuple of all interfaces associated with the given Transport Layer.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+get_transport_layer_by_id
+(
+id_
+:
+str
+)
+→
+TransportLayer
+
+Lookup Transport Layer with given Id.
+Parameters
+:
+id
+– Transport Layer Id to search for.
+Returns
+:
+Transport Layer associated with given Id.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+VmbTransportLayerError
+– If Transport Layer with
+id_
+can’t be found.
+get_version
+(
+)
+→
+str
+
+Returns version string of vmbpy and underlying dependencies.
+read_memory
+(
+addr
+:
+int
+,
+max_bytes
+:
+int
+)
+→
+bytes
+
+Read a byte sequence from a given memory address.
+Parameters
+:
+addr
+– Starting address to read from.
+max_bytes
+– Maximum number of bytes to read from addr.
+Returns
+:
+Read memory contents as bytes.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+ValueError
+– If
+addr
+is negative.
+ValueError
+– If
+max_bytes
+is negative.
+ValueError
+– If the memory access was invalid.
+register_camera_change_handler
+(
+handler
+:
+Callable
+[
+[
+Camera
+,
+CameraEvent
+]
+,
+None
+]
+)
+
+Add Callable that is executed on camera connect/disconnect.
+Parameters
+:
+handler
+– The change handler that shall be added.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+register_interface_change_handler
+(
+handler
+:
+Callable
+[
+[
+Interface
+,
+InterfaceEvent
+]
+,
+None
+]
+)
+
+Add Callable that is executed on interface connect/disconnect.
+Parameters
+:
+handler
+– The change handler that shall be added.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+set_path_configuration
+(
+*
+args
+:
+str
+)
+
+Set the path_configuration parameter that can be passed to VmbStartup.
+Using this is optional. If no path configuration is set, the
+GENICAM_GENTL{32|64}_PATH
+environment variables are considered.
+Parameters
+:
+args
+– Paths of directories that should be included in the path configuration. Each
+path should be a separate argument. The paths contain directories to search for
+.cti files, paths to .cti files and optionally the path to a configuration xml
+file.
+Returns
+:
+An instance of self. This allows setting the path configuration while entering the
+VmbSystem
+with
+context at the same time.
+Example
+Using the returned instance to directly open the
+with
+context of
+VmbSystem
+:
+with
+vmbpy
+.
+VmbSytem
+.
+get_instance
+()
+.
+set_path_configuration
+(
+'/foo'
+,
+'/bar'
+):
+# do something
+unregister_all_camera_change_handlers
+(
+)
+
+Remove all currently registered camera change handlers
+unregister_all_interface_change_handlers
+(
+)
+
+Remove all currently registered interface change handlers.
+unregister_camera_change_handler
+(
+handler
+:
+Callable
+[
+[
+Camera
+,
+CameraEvent
+]
+,
+None
+]
+)
+
+Remove previously registered camera change handler.
+Parameters
+:
+handler
+– The change handler that shall be removed.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+unregister_interface_change_handler
+(
+handler
+:
+Callable
+[
+[
+Interface
+,
+InterfaceEvent
+]
+,
+None
+]
+)
+
+Remove previously registered interface change handler.
+Parameters
+:
+handler
+– The change handler that shall be removed.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+write_memory
+(
+addr
+:
+int
+,
+data
+:
+bytes
+)
+
+Write a byte sequence to a given memory address.
+Parameters
+:
+addr
+– Address to write the content of
+data
+to.
+data
+– Byte sequence to write at address
+addr
+.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+ValueError
+– If
+addr
+is negative.
+Previous
+Next
+© Copyright 2023, Allied Vision.
+Built with
+Sphinx
+using a
+theme
+provided by
+Read the Docs
+.
