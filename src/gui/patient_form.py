@@ -247,11 +247,8 @@ class PatientFormWidget(QWidget):
         if patient_data:
             # If a patient was created, populate the form with the data
             self.populate_form(patient_data)
-            
-            # Emit signal that a patient was loaded
             self.patient_updated.emit(patient_data)
-            
-            logger.info(f"Created new patient: {patient_data.get('patient_id')}")
+            logger.info(f"New patient {patient_data.get('patient_id')} created via dialog and loaded.")
         else:
             # If no patient was created (dialog cancelled), just clear the form
             self.clear_form()
@@ -259,7 +256,17 @@ class PatientFormWidget(QWidget):
     
     def on_load_patient(self):
         """Handle load patient button click."""
-        # Open the patient select dialog
+        # Check if current form has unsaved changes
+        if self.current_patient and self._is_form_dirty():
+            reply = QMessageBox.question(
+                self, "Unsaved Changes",
+                "You have unsaved changes. Do you want to load a different patient anyway?",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                QMessageBox.StandardButton.No
+            )
+            if reply == QMessageBox.StandardButton.No:
+                return
+
         dialog = PatientSelectDialog(self, self.data_manager)
         result = dialog.exec()
         
@@ -286,6 +293,9 @@ class PatientFormWidget(QWidget):
         else:
             # Dialog cancelled
             logger.info("Patient loading cancelled")
+        
+        # Set initial state
+        self.clear_form()
     
     def on_save_patient(self):
         """Handle save patient button click."""
@@ -406,4 +416,38 @@ class PatientFormWidget(QWidget):
                     
             except Exception as e:
                 QMessageBox.critical(self, "Import Error", f"An error occurred: {str(e)}")
-                logger.error(f"Error importing patient data: {str(e)}") 
+                logger.error(f"Error importing patient data: {str(e)}")
+
+    def _is_form_dirty(self):
+        """Check if the form has unsaved changes compared to current_patient."""
+        if not self.current_patient:
+            # If no patient is loaded, any data in form means it's dirty (for a new record)
+            # However, this check is typically for loaded patients. For a new unsaved patient, 
+            # self.current_patient would be None, but fields might be filled.
+            # A more robust check might see if any field has content if no current_patient.
+            # For now, consider dirty if no current_patient but fields are not default.
+            if self.first_name_edit.text() or self.last_name_edit.text() or self.notes_edit.toPlainText(): # Example check
+                return True
+            return False
+
+        current_form_data = self.get_form_data()       
+        
+        # Compare relevant fields, ignoring fields that might change due to re-serialization (like timestamps if any)
+        # For simplicity, comparing all fields retrieved by get_form_data which doesn't include created_at/updated_at
+        # Note: get_form_data() generates a new patient_id if self.patient_id_edit is empty,
+        # so we must compare with self.current_patient['patient_id'] carefully.
+
+        if self.current_patient.get('patient_id') != current_form_data.get('patient_id') and self.patient_id_edit.text(): # if ID exists and changed
+             return True # this case should ideally not happen as ID is usually read-only after load
+
+        fields_to_compare = ['first_name', 'last_name', 'date_of_birth', 'gender', 'contact_info', 'medical_history', 'notes']
+        for field in fields_to_compare:
+            if self.current_patient.get(field) != current_form_data.get(field):
+                # Special handling for QTextEdit default empty string vs None if field was missing
+                if self.current_patient.get(field) is None and current_form_data.get(field) == '':
+                    continue
+                if current_form_data.get(field) is None and self.current_patient.get(field) == '':
+                    continue
+                logger.debug(f"Form dirty. Field: {field}, Current: '{self.current_patient.get(field)}', Form: '{current_form_data.get(field)}'")
+                return True
+        return False 

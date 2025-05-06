@@ -98,6 +98,10 @@ trash/
 +output/
 +VmbPy_Function_Reference/
 +docs/**/*.txt
+
+# Folders to ignore
+reports/
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -125,6 +129,9 @@ cython_debug/
 # VSCode
 .vscode/
 +.cursor/
+
+# Python cache files
+*.pyc
 
 # Project Specific
 *.log

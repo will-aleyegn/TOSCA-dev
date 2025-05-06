@@ -13,6 +13,7 @@ import datetime
 import pandas as pd
 from pathlib import Path
 import sqlite3
+import shutil
 
 logger = logging.getLogger(__name__)
 
@@ -747,41 +748,145 @@ class PatientDataManager:
                 except json.JSONDecodeError:
                     pass  # Keep as string if not valid JSON
             
+            # Determine report output paths
+            if output_path:
+                output_file = Path(output_path)
+                report_dir = output_file.parent
+            else:
+                # Create a temporary output in the patient's directory
+                patient_dir = self.patients_dir / session['patient_id']
+                report_dir = patient_dir / "reports"
+                report_dir.mkdir(exist_ok=True)
+                output_file = report_dir / f"session_report_{session_id}.html"
+            
+            # Create an images subdirectory for the report
+            report_images_dir = report_dir / "images"
+            report_images_dir.mkdir(exist_ok=True)
+            
+            # Copy images to the report directory and update paths
+            image_paths = []
+            for i, img in enumerate(images):
+                # Source image path
+                src_img_path = Path(img['image_path'])
+                
+                # Only process if source image exists
+                if src_img_path.exists():
+                    # Create a destination path in the report images directory
+                    img_filename = f"image_{i+1}_{src_img_path.name}"
+                    dest_img_path = report_images_dir / img_filename
+                    
+                    # Copy the image file
+                    try:
+                        shutil.copy2(src_img_path, dest_img_path)
+                        logger.debug(f"Copied image from {src_img_path} to {dest_img_path}")
+                        
+                        # Store the relative path for use in HTML
+                        image_paths.append({
+                            "original_path": img['image_path'],
+                            "report_path": f"images/{img_filename}",
+                            "image_type": img['image_type'],
+                            "notes": img['notes']
+                        })
+                    except Exception as e:
+                        logger.warning(f"Failed to copy image {src_img_path}: {str(e)}")
+                else:
+                    logger.warning(f"Image not found: {src_img_path}")
+            
             # Generate report as HTML
             report_content = f"""<!DOCTYPE html>
             <html>
             <head>
-                <title>Treatment Session Report - {session_id}</title>
+                <title>TOSCA Treatment Session Documentation - {session_id}</title>
                 <style>
-                    body {{ font-family: Arial, sans-serif; margin: 20px; }}
-                    h1, h2 {{ color: #2c3e50; }}
-                    .section {{ margin-bottom: 20px; }}
-                    table {{ border-collapse: collapse; width: 100%; }}
-                    th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
-                    th {{ background-color: #f2f2f2; }}
-                    .image-gallery {{ display: flex; flex-wrap: wrap; }}
-                    .image-container {{ margin: 10px; text-align: center; }}
-                    .image-container img {{ max-width: 300px; max-height: 300px; }}
+                    body {{ 
+                        font-family: 'Segoe UI', Arial, sans-serif; 
+                        margin: 20px; 
+                        max-width: 1100px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        line-height: 1.6;
+                        color: #333;
+                    }}
+                    h1, h2 {{ 
+                        color: #2c3e50; 
+                        border-bottom: 1px solid #cccccc;
+                        padding-bottom: 5px;
+                    }}
+                    h1 {{ 
+                        color: #2c3e50;
+                        border-bottom: 2px solid #2c3e50;
+                        padding-bottom: 10px;
+                        font-weight: 600;
+                    }}
+                    h2 {{
+                        margin-top: 30px;
+                        font-weight: 500;
+                    }}
+                    .section {{ margin-bottom: 30px; }}
+                    table {{ 
+                        border-collapse: collapse; 
+                        width: 100%; 
+                        margin-bottom: 20px;
+                    }}
+                    th, td {{ 
+                        border: 1px solid #ddd; 
+                        padding: 12px; 
+                        text-align: left; 
+                    }}
+                    th {{ 
+                        background-color: #f2f2f2;
+                        font-weight: 600;
+                    }}
+                    .image-gallery {{ 
+                        display: flex; 
+                        flex-wrap: wrap; 
+                        justify-content: space-around;
+                    }}
+                    .image-container {{ 
+                        margin: 15px; 
+                        text-align: center; 
+                        max-width: 300px;
+                        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                        padding: 10px;
+                        border: 1px solid #ddd;
+                        border-radius: 3px;
+                    }}
+                    .image-container img {{ 
+                        max-width: 300px; 
+                        max-height: 300px; 
+                        display: block;
+                        margin: 0 auto 10px auto;
+                        border: 1px solid #eee;
+                    }}
+                    .image-container p {{ margin: 5px 0; }}
+                    strong {{ color: #2c3e50; }}
+                    .metadata {{
+                        font-size: 0.9em;
+                        color: #666;
+                        margin-top: 5px;
+                        text-align: right;
+                    }}
                 </style>
             </head>
             <body>
-                <h1>TOSCA Treatment Session Report</h1>
+                <h1>TOSCA Treatment Session Documentation</h1>
+                <p class="metadata">Session ID: {session_id} | Generated: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
                 
                 <div class="section">
                     <h2>Session Information</h2>
                     <table>
-                        <tr><th>Session ID</th><td>{session_id}</td></tr>
                         <tr><th>Date</th><td>{session['date']}</td></tr>
                         <tr><th>Operator</th><td>{session['operator']}</td></tr>
+                        <tr><th>Session ID</th><td>{session_id}</td></tr>
                     </table>
                 </div>
                 
                 <div class="section">
                     <h2>Patient Information</h2>
                     <table>
-                        <tr><th>Patient ID</th><td>{session['patient_id']}</td></tr>
                         <tr><th>Name</th><td>{session['first_name']} {session['last_name']}</td></tr>
                         <tr><th>Date of Birth</th><td>{session['date_of_birth']}</td></tr>
+                        <tr><th>Patient ID</th><td>{session['patient_id']}</td></tr>
                     </table>
                 </div>
             """
@@ -790,7 +895,7 @@ class PatientDataManager:
             if session['device_settings']:
                 report_content += f"""
                 <div class="section">
-                    <h2>Device Settings</h2>
+                    <h2>Treatment Parameters</h2>
                     <table>
                 """
                 
@@ -809,7 +914,7 @@ class PatientDataManager:
             if session['treatment_area']:
                 report_content += f"""
                 <div class="section">
-                    <h2>Treatment Area</h2>
+                    <h2>Anatomical Region</h2>
                     <p>{session['treatment_area']}</p>
                 </div>
                 """
@@ -818,28 +923,28 @@ class PatientDataManager:
             if session['notes']:
                 report_content += f"""
                 <div class="section">
-                    <h2>Notes</h2>
+                    <h2>Clinical Observations</h2>
                     <p>{session['notes']}</p>
                 </div>
                 """
             
             # Add images section if available
-            if images:
+            if image_paths:
                 report_content += f"""
                 <div class="section">
-                    <h2>Images ({len(images)})</h2>
+                    <h2>Diagnostic Imaging ({len(image_paths)})</h2>
                     <div class="image-gallery">
                 """
                 
-                for img in images:
-                    img_path = img['image_path']
+                for img in image_paths:
+                    img_path = img['report_path']
                     img_type = img['image_type']
                     img_notes = img['notes'] or ""
                     
                     report_content += f"""
                     <div class="image-container">
                         <img src="{img_path}" alt="{img_type}">
-                        <p><strong>{img_type}</strong>: {img_notes}</p>
+                        <p><strong>{img_type}</strong>{": " + img_notes if img_notes else ""}</p>
                     </div>
                     """
                 
@@ -854,15 +959,11 @@ class PatientDataManager:
             </html>
             """
             
-            # Save report if output path specified
-            if output_path:
-                output_file = Path(output_path)
-                with open(output_file, 'w') as f:
-                    f.write(report_content)
-                logger.info(f"Generated report for session {session_id} at {output_path}")
-                return str(output_file)
-            else:
-                return report_content
+            # Save report
+            with open(output_file, 'w') as f:
+                f.write(report_content)
+            logger.info(f"Generated report for session {session_id} at {output_file}")
+            return str(output_file)
             
         except Exception as e:
             logger.error(f"Error generating report for session {session_id}: {str(e)}")

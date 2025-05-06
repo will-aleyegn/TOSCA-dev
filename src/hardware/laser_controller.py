@@ -67,18 +67,50 @@ class LaserController:
                 logger.error("No serial ports found")
                 return False
             
-            # TODO: Implement heuristics to identify the correct laser device port
-            # For now, just use the first available port
-            self.port = available_ports[0]
+            logger.info(f"Attempting auto-detection from available ports: {available_ports}")
+            for port_to_try in available_ports:
+                logger.info(f"Attempting to connect and verify laser on port {port_to_try}...")
+                try:
+                    temp_connection = serial.Serial(
+                        port=port_to_try,
+                        baudrate=self.baudrate,
+                        timeout=self.timeout
+                    )
+                    # Temporarily assign for _verify_connection to use
+                    self.connection = temp_connection 
+                    if self._verify_connection():
+                        self.port = port_to_try
+                        # self.connection is already set to temp_connection
+                        self.connected = True
+                        logger.info(f"Successfully connected to and verified laser on {self.port}")
+                        self._get_device_info()
+                        return True
+                    else:
+                        temp_connection.close()
+                        self.connection = None # Important to reset if verification fails
+                        logger.info(f"Verification failed on port {port_to_try}")
+                except serial.SerialException as e:
+                    logger.warning(f"Could not open or test port {port_to_try}: {e}")
+                    if self.connection: # Ensure it's closed if partially opened
+                        self.connection.close()
+                    self.connection = None
             
+            # If loop completes without returning True, no suitable port was found
+            logger.error("Auto-detection failed: No verified laser device found on any port.")
+            self.port = None # Reset port if auto-detection failed
+            return False
+        
+        # If self.port was specified or found by auto-detection above
         try:
-            self.connection = serial.Serial(
-                port=self.port,
-                baudrate=self.baudrate,
-                timeout=self.timeout
-            )
+            # If connection already established by auto-detection, self.connection is set
+            if not self.connection or not self.connection.is_open:
+                self.connection = serial.Serial(
+                    port=self.port,
+                    baudrate=self.baudrate,
+                    timeout=self.timeout
+                )
             
-            # Verify connection by sending a test command and checking response
+            # Verify connection (again if port was specified, or as final check)
             if self._verify_connection():
                 self.connected = True
                 logger.info(f"Connected to laser device on {self.port}")

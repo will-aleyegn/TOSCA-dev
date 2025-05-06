@@ -135,7 +135,7 @@ python app.py
 - Patient data is stored in SQLite database (`data/tosca.db`)
 - Patient-specific files are organized in folders:
   - `data/patients/{patient_id}/` - Base patient directory
-  - `data/patients/{patient_id}/images/` - Patient images
+  - `data/patients/{patient_id}/sessions/{session_id}/images/` - Images associated with a specific treatment session
 
 - Image files include patient information in filenames
 - Treatment sessions are linked to patients and their images
@@ -143,23 +143,27 @@ python app.py
 ## Directory Structure
 
 - `app.py`: Main application entry point
+- `code_structure_report.md`: Brief overview of the source code structure.
+- `functional_report.md`: Detailed description of module and function purposes.
 - `src/`: Source code directory
   - `data_io/`: Data input/output modules
-    - `patient_data.py`: Patient data management
-  - `gui/`: GUI modules
+    - `patient_data.py`: Patient data management (SQLite backend)
+  - `gui/`: GUI modules (PyQt6)
     - `main_window.py`: Main application window
     - `patient_form.py`: Patient information form
-    - `patient_dialogs.py`: Patient selection dialogs
+    - `patient_dialogs.py`: Patient selection/creation dialogs
     - `session_form.py`: Treatment session form
-    - `camera_display.py`: Camera display widget
+    - `camera_display.py`: Camera display and control widget
   - `hardware/`: Hardware control modules
-    - `vmpy_camera.py`: Allied Vision camera controller
-  - `image_processing/`: Image processing utilities
-- `data/`: Data storage directory
-  - `patients/`: Patient-specific data
-  - `tosca.db`: SQLite database for patient records
+    - `vmpy_camera.py`: Allied Vision camera controller (VmbPy)
+    - `laser_controller.py`: Laser device controller (Serial)
+    - `actuator_controller.py`: Motion actuator controller (Serial)
+- `data/`: Data storage directory (Created automatically)
+  - `patients/`: Patient-specific data and session images
+  - `tosca.db`: SQLite database
 - `docs/`: Documentation files
-  - `cti/`: GenICam Transport Layer files
+  - `cti/`: GenICam Transport Layer files (Needed for Vimba X)
+- `reports/`: Directory for generated reports (Note: Ignored by Git).
 
 ## Development
 
@@ -197,6 +201,12 @@ python app.py
   - Automated creation of patient-specific directories
   - Improved image file naming with patient IDs and timestamps
   - Added automatic saving of "latest" image for each patient
+
+- **Code Cleanup & Documentation (Recent)**:
+  - Performed code review across core modules (`gui`, `data_io`, `hardware`).
+  - Applied minor cleanups (path handling, UI consistency checks).
+  - Generated code structure and functional overview reports (`code_structure_report.md`, `functional_report.md`).
+  - Updated this README to reflect current structure.
 
 ## License
 

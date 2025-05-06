@@ -15,6 +15,11 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt, QSize, pyqtSlot, QTimer
 from PyQt6.QtGui import QIcon, QAction, QPixmap
 
+# Define the project's root directory more robustly
+# Assuming this file is in src/gui/main_window.py
+# and the 'data' directory is at the project root (e.g., TOSCA-dev/data)
+PROJECT_DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"
+
 # Import the camera display widget
 from .camera_display import CameraDisplayWidget
 # Import the patient form widget
@@ -199,7 +204,7 @@ class MainWindow(QMainWindow):
         # Patient information tab
         self.patient_tab = QWidget()
         self.patient_tab_layout = QVBoxLayout(self.patient_tab)
-        self.patient_form = PatientFormWidget(parent=self.patient_tab, data_dir="./data")
+        self.patient_form = PatientFormWidget(parent=self.patient_tab, data_dir=str(PROJECT_DATA_DIR))
         self.patient_form.patient_updated.connect(self._on_patient_updated)
         self.patient_tab_layout.addWidget(self.patient_form)
         self.tab_widget.addTab(self.patient_tab, "Patient Information")
@@ -219,7 +224,7 @@ class MainWindow(QMainWindow):
         # Treatment tab - using our SessionFormWidget
         self.treatment_tab = QWidget()
         self.treatment_tab_layout = QVBoxLayout(self.treatment_tab)
-        self.session_form = SessionFormWidget(parent=self.treatment_tab, data_dir="./data")
+        self.session_form = SessionFormWidget(parent=self.treatment_tab, data_dir=str(PROJECT_DATA_DIR))
         self.session_form.session_updated.connect(self._on_session_updated)
         self.treatment_tab_layout.addWidget(self.session_form)
         self.tab_widget.addTab(self.treatment_tab, "Treatment")

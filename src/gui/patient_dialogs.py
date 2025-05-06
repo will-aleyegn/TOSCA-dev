@@ -5,11 +5,13 @@ This module provides dialogs for patient selection and management.
 """
 
 import logging
+import uuid
 from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QListWidget, QDialogButtonBox,
-    QLabel, QPushButton, QLineEdit, QFormLayout, QMessageBox, QComboBox
+    QLabel, QPushButton, QLineEdit, QFormLayout, QMessageBox, QComboBox,
+    QDateEdit
 )
-from PyQt6.QtCore import Qt, QSize, pyqtSignal
+from PyQt6.QtCore import Qt, QSize, pyqtSignal, QDate
 
 from src.data_io.patient_data import PatientDataManager
 

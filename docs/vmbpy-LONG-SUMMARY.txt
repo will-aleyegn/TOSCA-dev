@@ -1,0 +1,200 @@
+# VmbPy API Documentation
+
+## Overview
+
+VmbPy is a Python API for Allied Vision cameras, providing a comprehensive set of classes and methods to control camera hardware, capture images, and process frame data. This document serves as a complete reference guide for programming with the VmbPy API.
+
+## Core Components
+
+VmbPy's architecture consists of several main components:
+
+- **VmbSystem**: The entry point to the entire system
+- **TransportLayer**: Represents different transport technologies
+- **Interface**: Represents physical interfaces
+- **Camera**: Provides access to camera devices
+- **Stream**: Handles data streams from cameras
+- **LocalDevice**: Provides access to local device features
+- **Frame**: Represents an image frame
+- **Feature**: Various feature types to control camera parameters
+- **Error**: Different error types for exception handling
+
+## 1. VmbSystem
+
+The `VmbSystem` class is the entry point to the API, implemented as a singleton.
+
+### Basic Usage
+
+```python
+import vmbpy
+
+# Get the VmbSystem singleton instance
+with vmbpy.VmbSystem.get_instance() as vmb:
+    # Use the system within this context
+    cameras = vmb.get_all_cameras()
+```
+
+### Key Methods
+
+- `get_instance()`: Get the singleton instance
+- `get_all_cameras()`: Get all available cameras
+- `get_camera_by_id(id_)`: Find a specific camera
+- `get_all_interfaces()`: Get all interfaces
+- `get_all_transport_layers()`: Get all transport layers
+- `get_version()`: Get API version
+- `register_camera_change_handler(handler)`: Register callback for camera events
+- `register_interface_change_handler(handler)`: Register callback for interface events
+
+## 2. Camera
+
+The `Camera` class represents a physical camera device and is the primary interface for image acquisition.
+
+### Basic Usage
+
+```python
+import vmbpy
+
+with vmbpy.VmbSystem.get_instance() as vmb:
+    cameras = vmb.get_all_cameras()
+    
+    if cameras:
+        with cameras[0] as cam:
+            # Use the camera
+            model = cam.get_model()
+            print(f"Using camera model: {model}")
+            
+            # Configure camera
+            cam.set_pixel_format(vmbpy.PixelFormat.Mono8)
+            
+            # Get a single frame
+            frame = cam.get_frame()
+```
+
+### Key Methods
+
+- **Information Methods**
+  - `get_id()`: Get camera ID
+  - `get_name()`: Get camera name
+  - `get_model()`: Get camera model
+  - `get_serial()`: Get camera serial number
+  - `get_interface()`: Get camera interface
+  - `get_transport_layer()`: Get camera transport layer
+
+- **Feature Access**
+  - `get_all_features()`: Get all features
+  - `get_feature_by_name(feat_name)`: Get a specific feature
+  - `get_features_by_category(category)`: Get features by category
+  - `get_features_by_type(feat_type)`: Get features by type
+
+- **Image Acquisition**
+  - `get_pixel_format()`: Get current pixel format
+  - `set_pixel_format(fmt)`: Set pixel format
+  - `get_frame(timeout_ms=2000)`: Get a single frame (synchronous)
+  - `get_frame_generator(limit=None, timeout_ms=2000)`: Generate frames one by one
+  - `get_frame_with_context(timeout_ms=2000)`: Get a frame for use in a context
+  - `start_streaming(handler, buffer_count=5)`: Start asynchronous streaming
+  - `stop_streaming()`: Stop streaming
+  - `queue_frame(frame)`: Return a frame to the queue in streaming mode
+  - `is_streaming()`: Check if camera is streaming
+
+- **Settings Management**
+  - `load_settings(file_path)`: Load settings from XML file
+  - `save_settings(file_path)`: Save settings to XML file
+
+- **Access Mode**
+  - `get_access_mode()`: Get current access mode
+  - `set_access_mode(access_mode)`: Set access mode
+  - `get_permitted_access_modes()`: Get all permitted access modes
+
+- **Memory Access**
+  - `read_memory(addr, max_bytes)`: Read from camera memory
+  - `write_memory(addr, data)`: Write to camera memory
+
+## 3. Frame
+
+The `Frame` class represents an image frame acquired from a camera.
+
+### Basic Usage
+
+```python
+import vmbpy
+import numpy as np
+import cv2
+
+with vmbpy.VmbSystem.get_instance() as vmb:
+    with vmb.get_all_cameras()[0] as cam:
+        frame = cam.get_frame()
+        
+        # Convert to numpy array for processing
+        image = frame.as_numpy_ndarray()
+        
+        # Get frame metadata
+        width = frame.get_width()
+        height = frame.get_height()
+        pixel_format = frame.get_pixel_format()
+        
+        # Convert to a different format if needed
+        if pixel_format != vmbpy.PixelFormat.Bgr8:
+            frame = frame.convert_pixel_format(vmbpy.PixelFormat.Bgr8)
+            
+        # Use with OpenCV
+        opencv_image = frame.as_opencv_image()
+        cv2.imshow("Camera Image", opencv_image)
+        cv2.waitKey(0)
+```
+
+### Key Methods
+
+- **Data Access**
+  - `get_buffer()`: Get internal buffer object
+  - `get_buffer_size()`: Get buffer size in bytes
+  - `as_numpy_ndarray()`: Convert to NumPy array
+  - `as_opencv_image()`: Convert to OpenCV-compatible image
+  - `convert_pixel_format(target_fmt)`: Convert to different pixel format
+
+- **Metadata**
+  - `get_width()`: Get image width
+  - `get_height()`: Get image height
+  - `get_offset_x()`: Get horizontal offset
+  - `get_offset_y()`: Get vertical offset
+  - `get_pixel_format()`: Get pixel format
+  - `get_id()`: Get frame ID
+  - `get_timestamp()`: Get frame timestamp
+  - `get_status()`: Get frame status
+
+- **Chunk Data**
+  - `contains_chunk_data()`: Check if frame contains chunk data
+  - `access_chunk_data(callback)`: Access chunk data via callback
+
+## 4. Feature Types
+
+Features are used to control camera parameters. There are different feature types:
+
+- `IntFeature`: Integer values
+- `FloatFeature`: Floating-point values
+- `BoolFeature`: Boolean values
+- `StringFeature`: String values
+- `EnumFeature`: Enumeration values
+- `CommandFeature`: Command execution
+- `RawFeature`: Raw byte sequences
+
+### Common Feature Methods
+
+All feature types share these methods:
+
+- `get()`: Get current value
+- `set(val)`: Set value
+- `get_name()`: Get feature name
+- `get_display_name()`: Get display name
+- `get_description()`: Get description
+- `get_tooltip()`: Get tooltip
+- `get_category()`: Get category
+- `get_visibility()`: Get UI visibility level
+- `get_access_mode()`: Get access mode
+- `is_readable()`: Check if readable
+- `is_writeable()`: Check if writeable
+- `register_change_handler(handler)`: Register callback for value changes
+
+### Specific Feature Methods
+
+- **IntFeature/FloatFeature**
+  - `get_range()`: Get min/max range 

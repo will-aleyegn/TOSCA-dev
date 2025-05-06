@@ -160,9 +160,15 @@ class ActuatorController:
                 
                 if response and "OK" in response:
                     # Wait for the homing to complete
+                    wait_start_time = time.time()
+                    max_wait_sec = 30 # Example: 30 seconds max wait for homing
                     while self._is_actuator_busy():
                         time.sleep(0.1)
-                        
+                        if time.time() - wait_start_time > max_wait_sec:
+                            logger.error(f"Homing timeout after {max_wait_sec} seconds. Actuator might be stuck.")
+                            self.is_moving = False
+                            return False # Or raise an exception
+                            
                     # Update current position
                     self.current_position = self.HOME_POSITION
                     self.is_moving = False
@@ -227,9 +233,15 @@ class ActuatorController:
                 
                 if response and "OK" in response:
                     # Wait for the movement to complete
+                    wait_start_time = time.time()
+                    max_wait_sec = 60 # Example: 60 seconds max wait for movement
                     while self._is_actuator_busy():
                         time.sleep(0.1)
-                        
+                        if time.time() - wait_start_time > max_wait_sec:
+                            logger.error(f"Movement timeout after {max_wait_sec} seconds. Actuator might be stuck.")
+                            self.is_moving = False
+                            return False # Or raise an exception
+                            
                     # Update current position
                     self.current_position = (target_x, target_y, target_z)
                     self.is_moving = False

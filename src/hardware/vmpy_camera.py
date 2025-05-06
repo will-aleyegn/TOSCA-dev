@@ -388,43 +388,97 @@ class VMPyCameraController:
             return None
 
     def get_available_pixel_formats(self):
-        """Return a list of supported pixel formats for the current camera."""
+        """Get a list of pixel formats supported by the camera."""
         if not self.camera:
+            logger.error("Camera not initialized. Cannot get pixel formats.")
             return []
-        with self.camera as cam:
-            try:
-                return cam.get_pixel_formats()
-            except Exception as e:
-                logger.error(f"Error getting pixel formats: {e}")
-                return []
+        try:
+            # Camera features must be accessed within the camera's context
+            with self.camera as cam:
+                formats = cam.get_pixel_formats()
+                # Convert to string representations if they are VmbPy enum objects for easier use in GUI
+                return [str(f) for f in formats] # Example, adjust based on actual VmbPy return type
+        except VmbCameraError as e:
+            logger.error(f"Vimba specific error getting pixel formats: {e}")
+            return []
+        except Exception as e:
+            logger.error(f"Unexpected error getting available pixel formats: {e}", exc_info=True)
+            return []
 
     def save_settings(self, file_path: str) -> bool:
-        """Save camera settings to an XML file."""
+        """Save current camera settings to an XML file."""
         if not self.camera:
             logger.error("Camera not initialized. Cannot save settings.")
             return False
-        with self.camera as cam:
-            try:
-                cam.save_settings(file_path)
+        try:
+            with self.camera as cam:
+                cam.save_settings_to_xml(file_path)
                 logger.info(f"Camera settings saved to {file_path}")
                 return True
-            except Exception as e:
-                logger.error(f"Failed to save camera settings: {e}")
-                return False
+        except VmbCameraError as e:
+            logger.error(f"Vimba specific error saving settings: {e}")
+            return False
+        except Exception as e:
+            logger.error(f"Unexpected error saving settings to {file_path}: {e}", exc_info=True)
+            return False
 
     def load_settings(self, file_path: str) -> bool:
         """Load camera settings from an XML file."""
         if not self.camera:
             logger.error("Camera not initialized. Cannot load settings.")
             return False
-        with self.camera as cam:
-            try:
-                cam.load_settings(file_path)
+        try:
+            with self.camera as cam:
+                cam.load_settings_from_xml(file_path)
                 logger.info(f"Camera settings loaded from {file_path}")
+                # After loading settings, internal state like self.pixel_format might need update
+                # Also, GUI controls should be refreshed.
+                try:
+                    self.pixel_format = cam.get_pixel_format()
+                    logger.info(f"Pixel format after loading settings: {self.pixel_format}")
+                except Exception as e_pf:
+                    logger.warning(f"Could not read pixel format after loading settings: {e_pf}")
                 return True
-            except Exception as e:
-                logger.error(f"Failed to load camera settings: {e}")
-                return False
+        except VmbCameraError as e:
+            logger.error(f"Vimba specific error loading settings: {e}")
+            return False
+        except Exception as e:
+            logger.error(f"Unexpected error loading settings from {file_path}: {e}", exc_info=True)
+            return False
+
+    def get_feature_value(self, feature_name: str):
+        """Get the value of a camera feature by its name."""
+        if not self.camera:
+            logger.error(f"Camera not initialized. Cannot get feature {feature_name}.")
+            return None
+        try:
+            with self.camera as cam:
+                feature = cam.get_feature_by_name(feature_name)
+                return feature.get()
+        except VmbCameraError as e:
+            logger.error(f"Vimba error getting feature {feature_name}: {e}")
+            return None
+        except Exception as e:
+            logger.error(f"Error getting feature {feature_name}: {e}", exc_info=True)
+            return None
+
+    def set_feature_value(self, feature_name: str, value) -> bool:
+        """Set the value of a camera feature by its name."""
+        if not self.camera:
+            logger.error(f"Camera not initialized. Cannot set feature {feature_name}.")
+            return False
+        try:
+            with self.camera as cam:
+                feature = cam.get_feature_by_name(feature_name)
+                feature.set(value)
+                logger.info(f"Set feature {feature_name} to {value}")
+                return True
+        except VmbCameraError as e:
+            logger.error(f"Vimba error setting feature {feature_name} to {value}: {e}")
+            return False
+        except Exception as e:
+            logger.error(f"Error setting feature {feature_name} to {value}: {e}", exc_info=True)
+            return False
 
 # Example Usage (for testing)
 if __name__ == '__main__':

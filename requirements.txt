@@ -12,4 +12,7 @@ pandas>=2.1.0
 matplotlib>=3.8.0
 # Testing
 pytest>=7.4.0
-pyautogui==0.9.54 
+# Reporting and screenshots
+pyautogui==0.9.54
+markdown>=3.5.1
+pillow>=10.0.0 

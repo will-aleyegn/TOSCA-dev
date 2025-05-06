@@ -78,6 +78,9 @@ class CameraDisplayWidget(QWidget):
         # Initialize UI
         self._init_ui()
         
+        if self.vmb:
+            self._populate_camera_list()
+        
         # Try to initialize camera on startup if auto-connect is checked
         if self.auto_connect_checkbox.isChecked():
             QTimer.singleShot(500, self.on_connect_camera)
@@ -94,9 +97,9 @@ class CameraDisplayWidget(QWidget):
         # Camera selection row
         camera_row = QHBoxLayout()
         self.camera_id_combo = QComboBox()
-        self.camera_id_combo.addItem("Default/Auto-detect", None)
-        self.camera_id_combo.addItem("Camera 0", 0)
-        self.camera_id_combo.addItem("Camera 1", 1)
+        # self.camera_id_combo.addItem("Default/Auto-detect", None) # Will be populated by _populate_camera_list
+        # self.camera_id_combo.addItem("Camera 0", 0) # Remove hardcoded items
+        # self.camera_id_combo.addItem("Camera 1", 1) # Remove hardcoded items
         
         # Pixel Format selection
         self.pixel_format_combo = QComboBox()
@@ -229,6 +232,35 @@ class CameraDisplayWidget(QWidget):
         self.status_label = QLabel("Ready")
         status_layout.addWidget(self.status_label)
         layout.addLayout(status_layout)
+    
+    def _populate_camera_list(self):
+        """Populate the camera ID combo box with available cameras."""
+        self.camera_id_combo.clear()
+        self.camera_id_combo.addItem("Default/Auto-detect", None) # Add default option first
+        if not self.vmb:
+            logger.warning("VmbSystem instance not available to populate camera list.")
+            return
+        try:
+            cameras = self.vmb.get_all_cameras()
+            if not cameras:
+                logger.info("No cameras detected.")
+                self.camera_id_combo.addItem("No cameras found", None)
+                self.camera_id_combo.setEnabled(False)
+            else:
+                for i, cam in enumerate(cameras):
+                    try:
+                        # Using camera ID if available, otherwise index
+                        cam_id = cam.get_id()
+                        cam_name = f"{cam.get_name()} ({cam_id})"
+                        self.camera_id_combo.addItem(cam_name, cam_id)
+                    except Exception as e:
+                        logger.error(f"Error getting info for camera {i}: {e}")
+                        self.camera_id_combo.addItem(f"Camera {i} (Error)", None) # Fallback
+                self.camera_id_combo.setEnabled(True)
+        except Exception as e:
+            logger.error(f"Failed to get camera list: {e}")
+            self.camera_id_combo.addItem("Error listing cameras", None)
+            self.camera_id_combo.setEnabled(False)
     
     def on_connect_camera(self):
         """Connect to the camera."""
