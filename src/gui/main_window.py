@@ -48,6 +48,10 @@ class MainWindow(QMainWindow):
         self.status_timer.timeout.connect(self._update_status)
         self.status_timer.start(5000)  # Update every 5 seconds
         
+        # Switch to camera tab and auto-connect camera on startup
+        self.tab_widget.setCurrentWidget(self.camera_tab)
+        QTimer.singleShot(100, self.camera_display.on_connect_camera)
+        
         logger.info("Main window initialized")
     
     def closeEvent(self, event):
@@ -191,10 +195,12 @@ class MainWindow(QMainWindow):
         # Patient information tab
         self.patient_tab = QWidget()
         self.tab_widget.addTab(self.patient_tab, "Patient Information")
+        # TODO: Implement Patient Information panel
         
         # Laser control tab
         self.laser_tab = QWidget()
         self.tab_widget.addTab(self.laser_tab, "Laser Control")
+        # TODO: Implement Laser Control panel
         
         # Camera and imaging tab - using our CameraDisplayWidget
         self.camera_tab = QWidget()
@@ -206,6 +212,7 @@ class MainWindow(QMainWindow):
         # Treatment tab
         self.treatment_tab = QWidget()
         self.tab_widget.addTab(self.treatment_tab, "Treatment")
+        # TODO: Implement Treatment panel
         
         # Quick access buttons at the bottom
         self.button_layout = QHBoxLayout()

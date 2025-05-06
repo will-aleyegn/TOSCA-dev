@@ -5,70 +5,64 @@ This application provides a GUI for controlling a laser device and acquiring ima
 
 ## Quick Start
 1. Install Python 3.7+ (64-bit recommended).
-2. Install the Vimba X SDK and VmbPy (see docs/vmbpy_summary.md for details).
-3. Copy the required .cti files to `docs/cti` and ensure the environment variable is set (handled in app.py).
+2. Install the Vimba X SDK and VmbPy (see `docs/vmbpy_summary.md` for details).
+3. Copy the required .cti files to `docs/cti` (handled in `app.py`).
 4. Run the application:
    ```bash
    python app.py
    ```
-5. Use the GUI to connect, stream, and capture images from your Allied Vision camera.
+5. Use the GUI to connect, stream, capture images, and control settings (Exposure, Gain) from your Allied Vision camera. The app starts in auto-exposure/gain mode.
 
 ## Documentation
 - See `docs/vmbpy_summary.md` for VmbPy usage, best practices, and troubleshooting.
 - Example scripts for camera usage are in `docs/vmpy/examples/`.
 
-## Supported Features
-- Camera connection, streaming, and image capture (VmbPy only)
-- GUI controls for camera operations
+## Core Features
+- VMPy Camera Control:
+    - Auto-detection and connection.
+    - Live streaming and display.
+    - Image capture with settings in filename (saved to `output/` folder).
+    - Real-time control of Exposure and Gain (manual/auto).
+- Basic GUI Structure:
+    - Camera control tab (functional).
+    - Placeholder tabs for Patient Info, Laser Control, Treatment (TODO).
+- Hardware modules for Laser and Actuator control (placeholders/not implemented).
 
-## Not Supported
-- OpenCV/USB cameras
-- Legacy camera controllers
+## Not Supported / Archived
+- OpenCV/USB camera support (legacy code moved to `trash/`).
+- Advanced image processing (legacy code moved to `trash/`).
+- Extensive Vimba X SDK documentation (moved to `trash/` to reduce repo size; refer to original SDK installation if needed).
 
 ---
-For more details, see the summary and example scripts in the documentation folder.
-
-## Features
-
-- Hardware interface for laser device control
-- Image acquisition and processing
-- Data input/output management
-- Interactive graphical user interface
-- Real-time monitoring and analysis
 
 ## Setup and Installation
 
-1. Clone this repository:
-```
-git clone <repository-url>
-cd <repository-name>
-```
-
-2. Create a virtual environment (recommended):
-```
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install the required dependencies:
-```
-pip install -r requirements.txt
-pip install docs/vmpy/vmbpy-1.1.0-py3-none-win_amd64.whl
-```
+1. Clone this repository.
+2. Create and activate a Python virtual environment.
+3. Install requirements:
+   ```bash
+   pip install -r requirements.txt
+   ```
+   *(Note: VmbPy is typically installed via a .whl file provided with the Vimba X SDK, see `docs/vmbpy_summary.md` for details. The `requirements.txt` may need updating based on your exact VmbPy installation method.)*
 
 ## Project Structure
 
-- `src/hardware/` - Hardware control modules
-- `src/image_processing/` - Image acquisition and processing
-- `src/data_io/` - Data input/output management
-- `src/gui/` - Graphical user interface components
-- `docs/` - Documentation
-- `tests/` - Test files
+- `src/`:
+    - `hardware/`: VMPy camera controller, placeholder laser/actuator controllers.
+    - `data_io/`: Placeholder for data management.
+    - `gui/`: PyQt GUI components (main window, camera display).
+    - `main.py`: Application entry point.
+- `docs/`:
+    - `vmbpy_summary.md`: Key VmbPy documentation.
+    - `vmpy/examples/`: Useful VmbPy example scripts.
+    - `cti/`: Transport Layer files (ensure these are present).
+- `output/`: Default directory for saved images.
+- `trash/`: Archived legacy code and documentation.
+- `app.py`: Main application launcher.
+- `requirements.txt`: Python dependencies.
 
 ## Usage
-
-*Coming soon...*
+Run `python app.py`. The application will open, connect to the first available Allied Vision camera, and start streaming on the "Camera & Imaging" tab.
 
 ## License
-
 *Specify your license here* 
