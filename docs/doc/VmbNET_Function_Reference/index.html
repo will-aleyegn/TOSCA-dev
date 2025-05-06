@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VmbNET C# API Function Reference &mdash; VmbNET 1.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=cbcdba59"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="VmbNET C# API Function Reference" href="vmbNetApiReference.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            VmbNET
+          </a>
+              <div class="version">
+                1.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="vmbNetApiReference.html">VmbNET C# API Function Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">VmbNET</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">VmbNET C# API Function Reference</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vmbnet-c-api-function-reference">
+<h1>VmbNET C# API Function Reference<a class="headerlink" href="#vmbnet-c-api-function-reference" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vmbNetApiReference.html">VmbNET C# API Function Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vmbNetApiReference.html#main-interfaces">Main Interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#ivmbsystem">IVmbSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#itransportlayer">ITransportLayer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#iinterface">IInterface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#icamerainfo">ICameraInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#icamera">ICamera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#iopencamera">IOpenCamera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#ilocaldevice">ILocalDevice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#istream">IStream</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#ipersistablefeaturecontainer">IPersistableFeatureContainer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#ifeaturecontainer">IFeatureContainer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vmbNetApiReference.html#acquisition-interfaces">Acquisition Interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#istreamcapture">IStreamCapture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#iacquisition">IAcquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#icapturingmodule">ICapturingModule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#iframelist">IFrameList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#iframebufferpool">IFrameBufferPool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#id1">IFrameBufferPool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#iframe">IFrame</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vmbNetApiReference.html#feature-interfaces">Feature Interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#ifeature">IFeature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#iboolfeature">IBoolFeature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#iintfeature">IIntFeature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#ifloatfeature">IFloatFeature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#istringfeature">IStringFeature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#ienumfeature">IEnumFeature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#ienumentry">IEnumEntry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#icommandfeature">ICommandFeature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#irawfeature">IRawFeature</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vmbNetApiReference.html#classes">Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#cameralisteventargs">CameraListEventArgs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#featurechangedeventargs">FeatureChangedEventArgs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#interfacelisteventargs">InterfaceListEventArgs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#vmbnetexception">VmbNETException</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#vmbexception">VmbException</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#vmbtimeoutexception">VmbTimeoutException</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#featurepersistsettings">FeaturePersistSettings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#framebufferpool">FrameBufferPool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#framereceivedeventargs">FrameReceivedEventArgs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vmbNetApiReference.html#other-enums">Other Enums</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#transportlayertype">TransportLayerType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmbNetApiReference.html#listchangedeventtype">ListChangedEventType</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="vmbNetApiReference.html" class="btn btn-neutral float-right" title="VmbNET C# API Function Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python API Manual &mdash; Vimba X Developer Guide 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Image Transform Manual" href="imagetransformManual.html" />
+    <link rel="prev" title=".NET API Manual" href="dotNetAPIManual.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Vimba X Developer Guide
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Vimba X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">System Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrationGuide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examplesOverview.html">Examples Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manuals:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="driverInstaller.html">Driver Installer Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fwUpdater.html">Firmware Updater Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="viewerGuide.html">Viewer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdkManual.html">SDK Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cAPIManual.html">C API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cppAPIManual.html">CPP API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotNetAPIManual.html">.NET API Manual</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python API Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction-to-the-api">Introduction to the API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#is-this-the-best-api-for-you">Is this the best API for you?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#compatibility">Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-python-windows">Installing Python - Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-python-linux">Installing Python - Linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#yocto-on-nxp-i-mx8-and-opencv">Yocto on NXP i.MX8 and OpenCV</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-python-macos">Installing Python - macOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-vmbpy">Install VmbPy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#general-aspects-of-the-api">General aspects of the API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#entry-point">Entry point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#entity-documentation">Entity documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#context-manager">Context manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#api-usage">API usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#listing-cameras">Listing cameras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#listing-features">Listing features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-features">Accessing features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#acquiring-images">Acquiring images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changing-the-pixel-format">Changing the pixel format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#listing-chunk-data">Listing chunk data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-and-saving-user-sets">Loading and saving user sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-and-saving-settings">Loading and saving settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software-trigger">Software trigger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trigger-over-ethernet-action-commands">Trigger over Ethernet - Action Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multithreading">Multithreading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#migrating-to-the-c-or-c-api">Migrating to the C or C++ API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logging">Logging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#logging-levels">Logging levels</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="imagetransformManual.html">Image Transform Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help &amp; information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem.html">Vimba X Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legalInformation.html">Legal Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vimba X Developer Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Python API Manual</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python-api-manual">
+<h1>Python API Manual<a class="headerlink" href="#python-api-manual" title="Permalink to this heading"></a></h1>
+<section id="introduction-to-the-api">
+<h2>Introduction to the API<a class="headerlink" href="#introduction-to-the-api" title="Permalink to this heading"></a></h2>
+<p>The Python API (VmbPy) is a Python wrapper around the VmbC API. It provides all functions from
+VmbC, but enables you to program with less lines of code.</p>
+<p>We recommend using VmbPy for:</p>
+<ul class="simple">
+<li><p>Quick prototyping</p></li>
+<li><p>Getting started with programming machine vision or embedded vision applications</p></li>
+<li><p>Easy interfacing with deep learning frameworks and libraries such as OpenCV via NumPy arrays</p></li>
+</ul>
+<section id="is-this-the-best-api-for-you">
+<h3>Is this the best API for you?<a class="headerlink" href="#is-this-the-best-api-for-you" title="Permalink to this heading"></a></h3>
+<p>Vimba X provides three APIs:</p>
+<ul class="simple">
+<li><p>The <strong>Python API</strong> is ideal for quick prototyping. We also recommend this API for an easy start
+with machine vision or embedded vision applications. For best performance and deterministic
+behavior, the C and C++ APIs are a better choice. To ease migration, the structure of VmbPy
+is very similar to VmbCPP.</p></li>
+<li><p>The <strong>C API</strong> is easy-to-use, but requires more lines of code than the Python API. It can also be
+used as API for C++ applications.</p></li>
+<li><p>The <strong>C++ API</strong> has an elaborate class architecture. It is designed as a highly efficient and
+sophisticated API for advanced object-oriented programming including the STL (standard template
+library), shared pointers, and interface classes. If you prefer an API with less design patterns, we
+recommend the C API.</p></li>
+</ul>
+<p>All Vimba X APIs cover the following functions:</p>
+<ul class="simple">
+<li><p>Listing currently connected cameras</p></li>
+<li><p>Controlling camera features</p></li>
+<li><p>Receiving images from the camera</p></li>
+<li><p>Getting notifications about camera connections and disconnections</p></li>
+</ul>
+</section>
+</section>
+<section id="compatibility">
+<h2>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this heading"></a></h2>
+<p>Supported operating systems and cameras are listed in the Release Notes for your operating system.</p>
+<p>Compatible Python version: Python 3.7.x or higher. For 64-bit operating systems, we recommend
+using a 64-bit Python interpreter.</p>
+</section>
+<section id="installation">
+<span id="index-0"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Python is not provided with the Vimba X SDK. To use the Python API, install Python version 3.7 or higher as described below.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Updating Vimba X to a higher version does not automatically update any installed Vimba X Python site packages.
+Please install the .whl file of VmbPy as described below again manually, especially if the
+error “Invalid VmbC Version” occurs.</p>
+</div>
+</section>
+<section id="installing-python-windows">
+<h3>Installing Python - Windows<a class="headerlink" href="#installing-python-windows" title="Permalink to this heading"></a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If your system requires multiple, coexisting Python versions, consider using pyenv-win, available at
+<a class="reference external" href="https://github.com/pyenv-win/pyenv-win">https://github.com/pyenv-win/pyenv-win</a> to install and maintain multiple Python installations.</p>
+</div>
+<ol class="arabic simple">
+<li><p>Download the latest Python release from python.org, available at
+<a class="reference external" href="https://www.python.org/downloads/windows/">https://www.python.org/downloads/windows/</a>.</p></li>
+<li><p>Execute the downloaded installer and ensure that the latest pip version is installed.</p></li>
+</ol>
+<p>If you don’t have admin privileges for all directories, read the instructions for all operating
+systems below.</p>
+<p>To verify the installation, open the command prompt and enter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="o">--</span><span class="n">version</span>
+</pre></div>
+</div>
+<p>Please ensure that the Python version is 3.7 or higher and pip uses this Python version.
+Optionally, install NumPy and OpenCV as extras. NumPy enables conversion of <code class="docutils literal notranslate"><span class="pre">VmbPy.Frame</span></code>
+objects to numpy arrays. Opencv ensures that the numPy arrays are valid OpenCV images.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Python with NumPy and OpenCV export</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="s1">&#39;/path/to/vmbpy-X.Y.Z-py-none-any.whl[numpy,opencv]&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="installing-python-linux">
+<h3>Installing Python - Linux<a class="headerlink" href="#installing-python-linux" title="Permalink to this heading"></a></h3>
+<p>On Linux systems, the Python installation process depends heavily on the distribution. If python3.7 is
+not available for your distribution or your system requires multiple python versions to coexist, use
+pyenv, available at <a class="reference external" href="https://realpython.com/intro-to-pyenv/">https://realpython.com/intro-to-pyenv/</a> instead.</p>
+<p>If you don’t have admin privileges for all directories, read the instructions for all operating
+systems below.</p>
+<ol class="arabic simple">
+<li><p>Install or update python3.7 with the packet manager of your distribution.</p></li>
+<li><p>Install or update pip with the packet manager of your distribution.</p></li>
+</ol>
+<p>To verify the installation, open a console and enter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="o">--</span><span class="n">version</span>
+</pre></div>
+</div>
+<p>Optionally, install NumPy and OpenCV as extras. NumPy enables conversion of <code class="docutils literal notranslate"><span class="pre">VmbPy.Frame</span></code>
+objects to numpy arrays. Opencv ensures that the numPy arrays are valid OpenCV images.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Python with NumPy and OpenCV export</span>
+<span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="s1">&#39;/path/to/vmbpy-X.Y.Z-py-none-any.whl[numpy,opencv]&#39;</span>
+</pre></div>
+</div>
+<section id="yocto-on-nxp-i-mx8-and-opencv">
+<h4>Yocto on NXP i.MX8 and OpenCV<a class="headerlink" href="#yocto-on-nxp-i-mx8-and-opencv" title="Permalink to this heading"></a></h4>
+<p>The GPU in the i.MX8 systems requires using the system-wide opencv-python package.
+When you create the Python environment, please use the <code class="docutils literal notranslate"><span class="pre">--system-site-packages</span></code>
+flag to include the system-wide OpenCV package.</p>
+<p>If you don’t set up a separate environment, a warning is shown during the VmbPy installation.
+You can ignore this warning.</p>
+</section>
+</section>
+<section id="installing-python-macos">
+<h3>Installing Python - macOS<a class="headerlink" href="#installing-python-macos" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Download the latest Python release from python.org, available at
+<a class="reference external" href="https://www.python.org/downloads/macos/">https://www.python.org/downloads/macos/</a>.</p></li>
+<li><p>Execute the downloaded installer.</p></li>
+</ol>
+<p>Check if Python and pip are installed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">pip3</span> <span class="o">--</span><span class="n">version</span>
+</pre></div>
+</div>
+</section>
+<section id="install-vmbpy">
+<h3>Install VmbPy<a class="headerlink" href="#install-vmbpy" title="Permalink to this heading"></a></h3>
+<p>VmbPy is provided as .whl file in the Vimba X installation directory. We recommed using this fle. You can install it
+with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> (Windows) or <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span></code> (some Linux distros and macOS).</p>
+<p>pip documentation: <a class="reference external" href="https://pip.pypa.io/en/stable/cli/pip_install/">https://pip.pypa.io/en/stable/cli/pip_install/</a></p>
+<p>The sources of VmbPy are available on GitHub:</p>
+<p><a class="reference external" href="https://github.com/alliedvision/VmbPy">https://github.com/alliedvision/VmbPy</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that Allied Vision can offer
+only limited support if an application uses a modified version of the API.</p>
+</div>
+<p>Additionally, you can install VmbPy from PyPI. Note that this does not include other essential Vimba X components such
+as the transport layers and drivers.</p>
+</section>
+</section>
+<section id="general-aspects-of-the-api">
+<h2>General aspects of the API<a class="headerlink" href="#general-aspects-of-the-api" title="Permalink to this heading"></a></h2>
+<section id="entry-point">
+<span id="index-1"></span><h3>Entry point<a class="headerlink" href="#entry-point" title="Permalink to this heading"></a></h3>
+<p>The entry point of VmbPy is the Vimba X singleton representing the underlying Vimba X System.</p>
+</section>
+<section id="entity-documentation">
+<h3>Entity documentation<a class="headerlink" href="#entity-documentation" title="Permalink to this heading"></a></h3>
+<p>All entities of the Python API are documented via docstring.</p>
+</section>
+<section id="context-manager">
+<span id="index-2"></span><h3>Context manager<a class="headerlink" href="#context-manager" title="Permalink to this heading"></a></h3>
+<p>The Vimba X singleton implements a context manager. The context entry initializes:</p>
+<ul class="simple">
+<li><p>System features discovery</p></li>
+<li><p>Interface and transport layer (TL) detection</p></li>
+<li><p>Camera detection</p></li>
+</ul>
+<p>The context entry always handles:</p>
+<ul class="simple">
+<li><p>API startup (including an optional method for advanced TL configuration) and shutdown</p></li>
+<li><p>Opening and closing cameras, interfaces, and TLs</p></li>
+<li><p>Feature discovery for the opened entity</p></li>
+</ul>
+<p>Always call all methods for Camera, Feature, and Interface within the scope of a <code class="docutils literal notranslate"><span class="pre">with</span></code> statement:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vmbpy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="k">with</span> <span class="n">VmbSystem</span><span class="o">.</span><span class="n">get_instance</span><span class="p">()</span> <span class="k">as</span> <span class="n">vmb</span><span class="p">:</span>
+    <span class="n">cams</span> <span class="o">=</span> <span class="n">vmb</span><span class="o">.</span><span class="n">get_all_cameras</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For details about the optional method for advanced TL configuration, see the SDK Manual,
+chapter <a class="reference internal" href="sdkManual.html#tl-activation-and-deactivation"><span class="std std-ref">TL activation and deactivation</span></a> and the
+<em>ListCameras</em> example.</p>
+</div>
+</section>
+<section id="classes">
+<span id="index-3"></span><h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
+<p>The Camera class implements a context manager. On entering the Camera’s context, all camera features
+are detected and can be accessed only within the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement. Additionally to getting and setting
+camera features, the Camera class handles the camera access mode (default: Full Access).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For changing the pixel format, always use the convenience functions instead of the camera feature,
+see section <a class="reference internal" href="#changing-the-pixel-format"><span class="std std-ref">Changing the pixel format</span></a>.</p>
+</div>
+<p>The Frame class stores raw image data and metadata of a single frame. The Frame class implements
+deepcopy semantics. Additionally, it provides methods for pixel format conversion and ancillary data
+access. Like all objects containing Features, AncillaryData implements a context manager that must be
+entered before features can be accessed. The Frame class offers methods for NumPy and OpenCV
+export.</p>
+<p>The following code snippet shows how to:</p>
+<ul class="simple">
+<li><p>Acquire a single frame</p></li>
+<li><p>Convert the pixel format to Mono8</p></li>
+<li><p>Store it using opencv-python</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">from</span> <span class="nn">vmbpy</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">with</span> <span class="n">VmbSystem</span><span class="o">.</span><span class="n">get_instance</span><span class="p">()</span> <span class="k">as</span> <span class="n">vmb</span><span class="p">:</span>
+    <span class="n">cams</span> <span class="o">=</span> <span class="n">vmb</span><span class="o">.</span><span class="n">get_all_cameras</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">cams</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span> <span class="n">cam</span><span class="p">:</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">cam</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span>
+        <span class="n">frame</span><span class="o">.</span><span class="n">convert_pixel_format</span><span class="p">(</span><span class="n">PixelFormat</span><span class="o">.</span><span class="n">Mono8</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s1">&#39;frame.jpg&#39;</span><span class="p">,</span> <span class="n">frame</span><span class="o">.</span><span class="n">as_opencv_image</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Optionally, this transformation can use a pre allocated <cite>destination_buffer</cite> to reduce
+possible overhead from memory allocations and garbage collection (see the <em>convert_pixel_format.py</em> example).</p>
+</div>
+<p>The Interface class contains all data of detected hardware interfaces that cameras are connected to.
+An Interface has associated features. The Interfaces can be queried from the VmbSystem and Interface
+features can be accessed within the <code class="docutils literal notranslate"><span class="pre">with</span></code> scope of VmbSystem. The Interface class does not implement
+a context manager on its own. The following code snippet prints all features of the first detected Interface.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vmbpy</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">with</span> <span class="n">VmbSystem</span><span class="o">.</span><span class="n">get_instance</span><span class="p">()</span> <span class="k">as</span> <span class="n">vmb</span><span class="p">:</span>
+    <span class="n">interface</span> <span class="o">=</span> <span class="n">vmb</span><span class="o">.</span><span class="n">get_all_interfaces</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">feat</span> <span class="ow">in</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_all_features</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">feat</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="api-usage">
+<h2>API usage<a class="headerlink" href="#api-usage" title="Permalink to this heading"></a></h2>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For a quick start, we recommend using the examples.</p>
+</div>
+<section id="listing-cameras">
+<h3>Listing cameras<a class="headerlink" href="#listing-cameras" title="Permalink to this heading"></a></h3>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To list available cameras, see the <em>list_ cameras.py</em> example</p>
+</div>
+<p>Cameras are detected automatically on
+context entry of the Vimba X instance. The order in which detected cameras are listed is determined by
+the order of camera discovery and therefore not deterministic. The discovery of GigE cameras may take
+several seconds. Before opening cameras, camera objects contain all static details of a physical camera
+that do not change throughout the object’s lifetime such as the camera ID and the camera model.</p>
+<p>Cameras and hardware interfaces such as USB can be detected at runtime by registering a callback at
+the Vimba X instance. The following code snippet registers a callable, creating a log message as soon as a
+camera or an interface is connected or disconnected. It runs for 10 seconds waiting for changes of the
+connected hardware.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">vmbpy</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="nd">@ScopedLogEnable</span><span class="p">(</span><span class="n">LOG_CONFIG_INFO_CONSOLE_ONLY</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">print_device_id</span><span class="p">(</span><span class="n">dev</span> <span class="p">,</span> <span class="n">state</span> <span class="p">):</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Device: </span><span class="si">{}</span><span class="s1">, State: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dev</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span> <span class="p">))</span>
+    <span class="n">Log</span><span class="o">.</span><span class="n">get_instance</span><span class="p">()</span><span class="o">.</span> <span class="n">info</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">VmbSystem</span><span class="o">.</span><span class="n">get_instance</span><span class="p">()</span> <span class="k">as</span> <span class="n">vmb</span><span class="p">:</span>
+    <span class="n">vmb</span><span class="o">.</span><span class="n">register_camera_change_handler</span><span class="p">(</span><span class="n">print_device_id</span><span class="p">)</span>
+    <span class="n">vmb</span><span class="o">.</span><span class="n">register_interface_change_handler</span><span class="p">(</span><span class="n">print_device_id</span><span class="p">)</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="listing-features">
+<h3>Listing features<a class="headerlink" href="#listing-features" title="Permalink to this heading"></a></h3>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To list the features of a camera and its physical interface,
+see the <em>list_ features.py</em> example.</p>
+</div>
+</section>
+<section id="accessing-features">
+<h3>Accessing features<a class="headerlink" href="#accessing-features" title="Permalink to this heading"></a></h3>
+<p id="index-4">As an example for reading and writing a feature, the following code snippet reads the current exposure
+time and increases it. Depending on your camera model and camera firmware, feature naming may be
+different.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vmbpy</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">with</span> <span class="n">VmbSystem</span><span class="o">.</span><span class="n">get_instance</span><span class="p">()</span> <span class="k">as</span> <span class="n">vmb</span><span class="p">:</span>
+    <span class="n">cams</span> <span class="o">=</span> <span class="n">vmb</span><span class="o">.</span><span class="n">get_all_cameras</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">cams</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span> <span class="n">cam</span><span class="p">:</span>
+        <span class="n">exposure_time</span> <span class="o">=</span> <span class="n">cam</span><span class="o">.</span><span class="n">ExposureTime</span>
+
+        <span class="n">time</span> <span class="o">=</span> <span class="n">exposure_time</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">inc</span> <span class="o">=</span> <span class="n">exposure_time</span><span class="o">.</span><span class="n">get_increment</span><span class="p">()</span>
+
+        <span class="n">exposure_time</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">time</span> <span class="o">+</span> <span class="n">inc</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="acquiring-images">
+<h3>Acquiring images<a class="headerlink" href="#acquiring-images" title="Permalink to this heading"></a></h3>
+<p>The Camera class supports synchronous and asynchronous image acquisition. For high performance,
+acquire frames asynchronously and keep the registered callable as short as possible.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The SDK Manual, section <a class="reference internal" href="sdkManual.html#synchronous-and-asynchronous-image-acquisition"><span class="std std-ref">Synchronous and asynchronous image acquisition</span></a>,
+provides background knowledge. The C API Manual, section
+<a class="reference internal" href="cAPIManual.html#image-capture-vs-image-acquisition"><span class="std std-ref">Image Capture vs. Image Acquisition</span></a>, provides detailed information about functions of
+the underlying C API.</p>
+</div>
+<p>To activate “alloc and announce” (optional): Use the optional parameter /x to overwrite
+<code class="code docutils literal notranslate"><span class="pre">allocation_</span> <span class="pre">mode</span></code>, see the <em>AsynchronousGrab</em> example.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Synchronous grab</span>
+<span class="kn">from</span> <span class="nn">vmbpy</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">with</span> <span class="n">VmbSystem</span><span class="o">.</span><span class="n">get_instance</span><span class="p">()</span> <span class="k">as</span> <span class="n">vmb</span><span class="p">:</span>
+    <span class="n">cams</span> <span class="o">=</span> <span class="n">vmb</span><span class="o">.</span><span class="n">get_all_cameras</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">cams</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span> <span class="n">cam</span><span class="p">:</span>
+        <span class="c1"># Aquire single frame synchronously</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">cam</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span>
+
+        <span class="c1"># Aquire 10 frames synchronously</span>
+        <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">cam</span><span class="o">.</span><span class="n">get_frame_generator</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+            <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Acquire frames asychronously by registering a callable being executed with each incoming frame:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Asynchronous grab</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">vmbpy</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">frame_handler</span><span class="p">(</span><span class="n">cam</span><span class="p">:</span> <span class="n">Camera</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">Stream</span><span class="p">,</span> <span class="n">frame</span><span class="p">:</span> <span class="n">Frame</span><span class="p">):</span>
+    <span class="n">cam</span><span class="o">.</span><span class="n">queue_frame</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">VmbSystem</span><span class="o">.</span><span class="n">get_instance</span><span class="p">()</span> <span class="k">as</span> <span class="n">vmb</span><span class="p">:</span>
+    <span class="n">cams</span> <span class="o">=</span> <span class="n">vmb</span><span class="o">.</span><span class="n">get_all_cameras</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">cams</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span> <span class="n">cam</span><span class="p">:</span>
+        <span class="n">cam</span><span class="o">.</span><span class="n">start_streaming</span><span class="p">(</span><span class="n">frame_handler</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">cam</span><span class="o">.</span><span class="n">stop_streaming</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <em>asynchronous_ grab.py</em> example shows how to grab images and prints information about the
+acquired frames to the console.</p>
+<p>The <em>asynchronous_ grab_ opencv.py</em> example shows how to grab images. It runs for 5 seconds and
+displays the images via OpenCV.</p>
+</section>
+<section id="changing-the-pixel-format">
+<span id="index-5"></span><h3>Changing the pixel format<a class="headerlink" href="#changing-the-pixel-format" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Always use the convenience functions instead
+of the PixelFormat feature of the Camera.</p>
+</div>
+<p>To easily change the pixel format, always use the convenience functions instead
+of the PixelFormat feature of the Camera. The convenience function <code class="docutils literal notranslate"><span class="pre">set_pixel_format(fmt)</span></code>
+changes the Camera pixel format by passing the desired member of the <code class="docutils literal notranslate"><span class="pre">PixelFormat</span></code> enum. When
+using the PixelFormat feature (not recommended), a correctly pre-formatted string has to be used
+instead.</p>
+<p>Before image acquisition is started, you can get and set pixel formats within the Camera class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Camera class methods for getting and setting pixel formats</span>
+<span class="c1"># Apply these methods before starting image acquisition</span>
+
+<span class="n">get_pixel_formats</span><span class="p">()</span>   <span class="c1"># returns a tuple of all pixel formats supported by the camera</span>
+<span class="n">get_pixel_format</span><span class="p">()</span>    <span class="c1"># returns the current pixel format</span>
+<span class="n">set_pixel_format</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span> <span class="c1"># enables you to set a new pixel format</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The pixel format cannot be changed while the camera is acquiring images.</p>
+</div>
+<p>After image acquisition in the camera, the Frame contains the pixel format of the camera. Now you can
+convert the pixel format with the <code class="docutils literal notranslate"><span class="pre">convert_</span> <span class="pre">pixel_</span> <span class="pre">format()</span></code> method.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See the <em>AsynchronousGrab</em> example, it contains a pixel format conversion.</p>
+</div>
+</section>
+<section id="listing-chunk-data">
+<h3>Listing chunk data<a class="headerlink" href="#listing-chunk-data" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To use the <em>chunk</em> feature, make sure your camera supports it.</p>
+</div>
+<p>Chunk data are image metadata such as the exposure time that are
+available in the Frame. To activate chunk, see the user
+documentation of your camera.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Before using chunk, open your camera as usual</span>
+<span class="k">def</span> <span class="nf">chunk_callback</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">FeatureContainer</span><span class="p">):</span>
+    <span class="n">chunk_timestamp</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">ChunkTimestamp</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Chunk callback executed, ChunkTimestamp=</span><span class="si">{</span><span class="n">chunk_timestamp</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">frame_callback</span><span class="p">(</span><span class="n">cam</span><span class="p">:</span> <span class="n">Camera</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">Stream</span><span class="p">,</span> <span class="n">frame</span><span class="p">:</span> <span class="n">Frame</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Frame callback executed for </span><span class="si">{</span><span class="n">frame</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Calling this method only works if chunk mode is activated!</span>
+    <span class="n">frame</span><span class="o">.</span><span class="n">access_chunk_data</span><span class="p">(</span><span class="n">chunk_callback</span><span class="p">)</span>
+    <span class="n">stream</span><span class="o">.</span><span class="n">queue_frame</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">cam</span><span class="o">.</span><span class="n">start_streaming</span><span class="p">(</span><span class="n">frame_callback</span><span class="p">),</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">cam</span><span class="o">.</span><span class="n">stop_streaming</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The <em>list_ chunk_ data.py</em> example shows in detail how to list chunk data such
+as the frame count or feature values such as the exposure time. See
+<a class="reference internal" href="examplesOverview.html#vmbpy-list-chunk-data-label"><span class="std std-ref">List Chunk data</span></a>.</p>
+</div>
+</section>
+<section id="loading-and-saving-user-sets">
+<h3>Loading and saving user sets<a class="headerlink" href="#loading-and-saving-user-sets" title="Permalink to this heading"></a></h3>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To save the camera settings as a user set in the camera and load it, use the <em>user_ set.py</em> example.</p>
+</div>
+</section>
+<section id="loading-and-saving-settings">
+<h3>Loading and saving settings<a class="headerlink" href="#loading-and-saving-settings" title="Permalink to this heading"></a></h3>
+<p>Additionally to the user sets stored in the camera, you can save the feature values as an XML file to your
+host PC. For example, you can configure your camera with Vimba X Viewer, save the settings, and load
+them with any Vimba X API.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See the <em>load_ save_ settings.py</em> example, see
+<a class="reference internal" href="examplesOverview.html#load-and-save-settings"><span class="std std-ref">Load and save settings</span></a>.</p>
+</div>
+</section>
+<section id="software-trigger">
+<h3>Software trigger<a class="headerlink" href="#software-trigger" title="Permalink to this heading"></a></h3>
+<p>Software trigger commands are supported by all Allied Vision cameras. To get started with triggering
+and explore the possibilities, you can use Vimba X Viewer. To program a software trigger application, use
+the following code snippet.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Software trigger for continuous image acquisition</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">vmbpy</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">cam</span><span class="p">:</span> <span class="n">Camera</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">Stream</span><span class="p">,</span> <span class="n">frame</span><span class="p">:</span> <span class="n">Frame</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Frame acquired: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frame</span><span class="p">),</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">cam</span><span class="o">.</span><span class="n">queue_frame</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">VmbSystem</span><span class="o">.</span><span class="n">get_instance</span><span class="p">()</span> <span class="k">as</span> <span class="n">vmb</span><span class="p">:</span>
+        <span class="n">cam</span> <span class="o">=</span> <span class="n">vmb</span><span class="o">.</span><span class="n">get_all_cameras</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">with</span> <span class="n">cam</span><span class="p">:</span>
+            <span class="n">cam</span><span class="o">.</span><span class="n">TriggerSource</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;Software&#39;</span><span class="p">)</span>
+            <span class="n">cam</span><span class="o">.</span><span class="n">TriggerSelector</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;FrameStart&#39;</span><span class="p">)</span>
+            <span class="n">cam</span><span class="o">.</span><span class="n">TriggerMode</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;On&#39;</span><span class="p">)</span>
+            <span class="n">cam</span><span class="o">.</span><span class="n">AcquisitionMode</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;Continuous&#39;</span><span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cam</span><span class="o">.</span><span class="n">start_streaming</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">cam</span><span class="o">.</span><span class="n">TriggerSoftware</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">cam</span><span class="o">.</span><span class="n">TriggerSoftware</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">cam</span><span class="o">.</span><span class="n">TriggerSoftware</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="n">cam</span><span class="o">.</span><span class="n">stop_streaming</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="trigger-over-ethernet-action-commands">
+<h3>Trigger over Ethernet - Action Commands<a class="headerlink" href="#trigger-over-ethernet-action-commands" title="Permalink to this heading"></a></h3>
+<p>You can broadcast a trigger signal simultaneously to multiple GigE cameras via GigE cable. Action
+Commands must be set first to the camera(s) and then to the API, which sends the Action Commands to
+the camera(s).</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Find more details in the application note:
+<a class="reference external" href="https://cdn.alliedvision.com/fileadmin/content/documents/products/cameras/various/appnote/GigE/Action-Commands_Appnote.pdf">Trigger over Ethernet (ToE) - Action Commands</a></p>
+</div>
+</section>
+<section id="multithreading">
+<h3>Multithreading<a class="headerlink" href="#multithreading" title="Permalink to this heading"></a></h3>
+<p>To get started with multithreading, use the <em>multithreading_opencv.py</em> example, see
+<a class="reference internal" href="examplesOverview.html#multithreading-opencv"><span class="std std-ref">Multithreading OpenCV</span></a>. You can use the
+example with one or multiple cameras. The FrameConsumer thread displays images of the first
+detected camera via OpenCV in a window of 480 x 480 pixels, independent of the camera’s image size.
+The example automatically constructs, starts, and stops FrameProducer threads for each connected or
+disconnected camera.</p>
+</section>
+<section id="migrating-to-the-c-or-c-api">
+<h3>Migrating to the C or C++ API<a class="headerlink" href="#migrating-to-the-c-or-c-api" title="Permalink to this heading"></a></h3>
+<p>The Python API is optimized for quick and easy prototyping. To migrate to the C API, we
+recommend using VmbPy’s extensive logging capabilities. In the log file, the order of operations
+is the same as in the C API. Migrating to the C++ API is eased by similar names of the
+functions and by a similar API structure.</p>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
+<p>Frequent questions:</p>
+<ul class="simple">
+<li><p>To use the VmbPy API, the installation of a compatible C API version and Image
+Transform version is required. To check the versions, use <code class="docutils literal notranslate"><span class="pre">VmbSystem.get_</span> <span class="pre">version()</span></code>.</p></li>
+<li><p>Error: “Invalid VmbC Version” although the correct C API version is installed:
+Updating Vimba X does not automatically update any installed VmbPy site packages.
+Please perform the installation again manually.</p></li>
+<li><p>For changing the pixel format, always use the convenience functions instead of the camera feature,
+see section <a class="reference internal" href="#changing-the-pixel-format"><span class="std std-ref">Changing the pixel format</span></a>.</p></li>
+<li><p>For general issues, see <a class="reference internal" href="troubleshooting.html"><span class="doc">Troubleshooting</span></a>.</p></li>
+</ul>
+</section>
+<section id="logging">
+<span id="index-6"></span><h2>Logging<a class="headerlink" href="#logging" title="Permalink to this heading"></a></h2>
+<p>You can enable and configure logging to:</p>
+<ul class="simple">
+<li><p>Create error reports</p></li>
+<li><p>Prepare the migration to the C API or the C++ API</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you want to send a log file to our Technical Support team, always use logging
+level <em>Trace</em>.</p>
+</div>
+<section id="logging-levels">
+<h3>Logging levels<a class="headerlink" href="#logging-levels" title="Permalink to this heading"></a></h3>
+<p>The Python API offers several logging levels.
+The following code snippet shows how to enable logging with level Warning. All messages are printed to
+the console.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vmbpy</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">with</span> <span class="n">VmbSystem</span><span class="o">.</span><span class="n">get_instance</span><span class="p">()</span> <span class="k">as</span> <span class="n">vmb</span><span class="p">:</span>
+    <span class="n">vmb</span><span class="o">.</span><span class="n">enable_log</span><span class="p">(</span><span class="n">LOG_CONFIG_WARNING_CONSOLE_ONLY</span><span class="p">)</span>
+
+    <span class="n">log</span> <span class="o">=</span> <span class="n">Log</span><span class="o">.</span><span class="n">get_instance</span><span class="p">()</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;Critical, visible&#39;</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Error, visible&#39;</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Warning , visible&#39;</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Info, invisible&#39;</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="s1">&#39;Trace, invisible&#39;</span><span class="p">)</span>
+
+    <span class="n">vmb</span><span class="o">.</span><span class="n">disable_log</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The logging level <em>Trace</em> enables the most detailed reports. Additionally, you can use it to prepare the
+migration to the C API or the C++ API. <em>Trace</em> is always used with the <code class="docutils literal notranslate"><span class="pre">TraceEnable()</span></code>
+decorator. The decorator adds a log entry of level <em>Trace</em> as soon as the decorated function is called. In
+addition, a log message is added on function exit. This log message shows if the function exit occurred
+as expected or with an exception.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To create a trace log file, use the <em>create_ trace_ log.py</em> example, see
+<a class="reference internal" href="examplesOverview.html#create-trace-log"><span class="std std-ref">Create Trace Log</span></a>.</p>
+</div>
+<p>All previous examples enable and disable logging globally via the VmbSystem object. For more complex
+applications, this may cause large log files. The <code class="docutils literal notranslate"><span class="pre">ScopedLogEnable()</span></code> decorator allows enabling and
+disabling logging on function entry and exit. The following code snippet shows how to use
+<code class="docutils literal notranslate"><span class="pre">TraceEnable()</span></code> and <code class="docutils literal notranslate"><span class="pre">ScopedLogEnable()</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vmbpy</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="nd">@TraceEnable</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">traced_function</span><span class="p">():</span>
+    <span class="n">Log</span><span class="o">.</span><span class="n">get_instance</span><span class="p">()</span><span class="o">.</span> <span class="n">info</span><span class="p">(</span><span class="s1">&#39;Within Traced Function&#39;</span><span class="p">)</span>
+
+<span class="nd">@ScopedLogEnable</span><span class="p">(</span><span class="n">LOG_CONFIG_TRACE_CONSOLE_ONLY</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">logged_function</span><span class="p">():</span>
+    <span class="n">traced_function</span><span class="p">()</span>
+
+<span class="n">logged_function</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dotNetAPIManual.html" class="btn btn-neutral float-left" title=".NET API Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="imagetransformManual.html" class="btn btn-neutral float-right" title="Image Transform Manual" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

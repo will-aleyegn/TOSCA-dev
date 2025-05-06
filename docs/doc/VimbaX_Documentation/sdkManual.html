@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDK Manual &mdash; Vimba X Developer Guide 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="C API Manual" href="cAPIManual.html" />
+    <link rel="prev" title="Viewer Guide" href="viewerGuide.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Vimba X Developer Guide
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Vimba X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">System Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrationGuide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examplesOverview.html">Examples Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manuals:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="driverInstaller.html">Driver Installer Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fwUpdater.html">Firmware Updater Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="viewerGuide.html">Viewer Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SDK Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#architecture-and-apis">Architecture and APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gentl-modules">GenTL modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tl-activation-and-deactivation">TL activation and deactivation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-tl-usage">Configuring TL usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overwriting-vmbc-xml">Overwriting VmbC.xml</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#synchronous-and-asynchronous-image-acquisition">Synchronous and asynchronous image acquisition</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#buffer-management">Buffer management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#synchronous-image-acquisition">Synchronous image acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asynchronous-image-acquisition">Asynchronous image acquisition</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#notifications">Notifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-applications">Building applications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-visual-studio-for-c-and-c-projects">Setting up Visual Studio for C and C++ projects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-cmake">Using CMake</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cAPIManual.html">C API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cppAPIManual.html">CPP API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotNetAPIManual.html">.NET API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPIManual.html">Python API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagetransformManual.html">Image Transform Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help &amp; information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem.html">Vimba X Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legalInformation.html">Legal Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vimba X Developer Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SDK Manual</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sdk-manual">
+<h1>SDK Manual<a class="headerlink" href="#sdk-manual" title="Permalink to this heading"></a></h1>
+<section id="architecture-and-apis">
+<span id="index-0"></span><h2>Architecture and APIs<a class="headerlink" href="#architecture-and-apis" title="Permalink to this heading"></a></h2>
+<p>All APIs cover the following functions:</p>
+<ul class="simple">
+<li><p>Listing currently connected cameras</p></li>
+<li><p>Controlling camera features</p></li>
+<li><p>Receiving images from the camera</p></li>
+<li><p>Notifications about camera connections or disconnections</p></li>
+</ul>
+<p>The Image Transform Library converts camera images into other pixel formats
+and creates color images from raw images (debayering).</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/Architecture.png"><img alt="SDK architecture" src="_images/Architecture.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">SDK architecture</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="gentl-modules">
+<span id="index-1"></span><h2>GenTL modules<a class="headerlink" href="#gentl-modules" title="Permalink to this heading"></a></h2>
+<p>Vimba X complies with the GenTL specification. It uses the following
+GenTL modules as Entities:</p>
+<ul class="simple">
+<li><p>The <strong>VmbSystem module</strong>, which is a singleton and contains only few functions.</p></li>
+<li><p>The <strong>TLSystem</strong> modules. Each TL is represented through a System and may enumerate
+multiple corresponding interfaces, such as several NICs.</p></li>
+<li><p>The <strong>Interface</strong> modules. Each physical interface (for example, a NIC or a frame grabber)
+is represented through its own Interface module. Each Interface module enumerates
+the devices (cameras) that are connected to it.</p></li>
+<li><p>The <strong>Device module</strong>. According to the GenTL specification, the physical camera is
+a Remote Device, whereas the TL generates a Local Device as soon as a camera is open.
+The Local Device is necessary only to configure features such as GVCPTimeout or
+GevHeartbeatTimeout for GigE Cameras.</p></li>
+<li><p>The <strong>Stream</strong> module.</p></li>
+<li><p>The <strong>Buffer</strong> module. Buffer-related features can be accessed through the Frame handle.</p></li>
+</ul>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="_images/GenTL-modules.png"><img alt="GenTL modules" src="_images/GenTL-modules.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">GenTL modules</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this heading"></a></h2>
+<p>Within Vimba X, settings and options are controlled by features.
+Many features come from the camera, which provides a self-describing
+XML file. Vimba X can read and interpret the camera XML file. This
+means that Vimba X is immediately ready-to-use with all supported cameras.
+Even if the camera has a unique, vendor-specific feature, Vimba X does not
+need to be updated to use this feature because it gets all necessary
+information from the XML file. Other features are part of the Vimba X
+core and transport layers.</p>
+<p>If these features are enabled for the TL, they are valid for all
+interfaces and cameras using this TL.
+If these features are enabled for the interface (such as a NIC),
+they are valid for all interfaces.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For a quick start, use the <em>ListFeatures</em> example. More detailed information
+is provided in the API manuals.</p>
+</div>
+<p>Vimba X provides several feature types:</p>
+<ul class="simple">
+<li><p>Integer</p></li>
+<li><p>Float</p></li>
+<li><p>Enum</p></li>
+<li><p>String</p></li>
+<li><p>Command</p></li>
+<li><p>Boolean</p></li>
+<li><p>Raw data</p></li>
+</ul>
+<p>The features of Vimba X are based on the GenICam industry standard.
+Therefore, Vimba X enables using all supported cameras with GenICam-based
+third-party software.</p>
+</section>
+<section id="tl-activation-and-deactivation">
+<span id="index-2"></span><h2>TL activation and deactivation<a class="headerlink" href="#tl-activation-and-deactivation" title="Permalink to this heading"></a></h2>
+<p>The APIs use GenICam transport layer (GenTL) libraries to communicate with
+the cameras.</p>
+<p>By default, each SDK initialization uses all transport layers that come with Vimba X, as applied in VmbC.xml.
+Their display name begins with “AVT” instead of “Vimba”.</p>
+<p>Additionally, transport layers from the TKH Vision brands <a class="reference external" href="https://www.svs-vistek.com/">SVS-Vistek</a> (USB),
+<a class="reference external" href="https://euresys.com/">Euresys</a> (Coaxpress), and <a class="reference external" href="https://net-gmbh.com/">NET GmbH</a>  are loaded for usage with Vimba X (if installed).
+These transport layers do not come with Vimba X. For details, see chapter <a class="reference internal" href="ecosystem.html"><span class="doc">Vimba X Ecosystem</span></a>.</p>
+<p>You can customize TL usage to activate additional TLs or ignore TLs that you don’t need.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If many TLs are installed, loading all of them takes some time.</p>
+</div>
+<section id="configuring-tl-usage">
+<span id="index-3"></span><h3>Configuring TL usage<a class="headerlink" href="#configuring-tl-usage" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Your changes of VmbC.xml will be deleted during the Vimba X deinstallation.
+We recommend saving a copy with your changes.</p>
+</div>
+<p>With VmbC.xml, you can configure which TLs are used by Vimba X.
+The file is located in he Vimba X install directory/bin. The comments in VmbC.xml describe
+how to configure TL usage with Vimba X.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">VmbStartup</span></code> loads cti files which are located next to VmbC.dll if no cti path is provided as input.</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="_images/VmbTLLoading.png"><img alt="VmbC TL loading behavior" src="_images/VmbTLLoading.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">VmbC TL loading behavior</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="overwriting-vmbc-xml">
+<h3>Overwriting VmbC.xml<a class="headerlink" href="#overwriting-vmbc-xml" title="Permalink to this heading"></a></h3>
+<p>During SDK initialization,
+the settings of VmbC.xml are applied.
+By default, the string for path configuration is NULL and all TLs activated in
+VmbC.xml are loaded.</p>
+<p>To overwrite the TL path settings in VmbC.xml, pass a string to <code class="docutils literal notranslate"><span class="pre">VmbStartup()</span></code>
+with the path to the TL directory or file you want to load.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">VmbError_t</span><span class="w">          </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">VmbFilePathChar_t</span><span class="o">*</span><span class="w"> </span><span class="n">usbTLFilePath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;&lt;path to VimbaUSBTL.cti&gt;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">VmbFilePathChar_t</span><span class="o">*</span><span class="w"> </span><span class="n">gigeTLDirectoryPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;&lt;path to TL directory&gt;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">VmbFilePathChar_t</span><span class="o">*</span><span class="w"> </span><span class="n">multiplePaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;&lt;path 1&gt;&quot;</span><span class="p">;</span><span class="s">&quot;&lt;path 2&gt;&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbStartup</span><span class="p">(</span><span class="n">usbTLFilePath</span><span class="p">)</span>
+</pre></div>
+</div>
+<span class="target" id="index-4"></span></section>
+</section>
+<section id="synchronous-and-asynchronous-image-acquisition">
+<span id="index-5"></span><h2>Synchronous and asynchronous image acquisition<a class="headerlink" href="#synchronous-and-asynchronous-image-acquisition" title="Permalink to this heading"></a></h2>
+<p>This chapter explains the principles of synchronous and asynchronous
+image acquisition. For details, please read the API manual.
+Note that the API provides ready-made convenience
+functions for standard applications. These functions perform several
+procedures in just one step. However, for complex applications with
+special requirements, manual programming as described here is still required.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For a quick start, see the <em>AsynchronousGrab</em> example.</p>
+</div>
+<section id="buffer-management">
+<span id="index-6"></span><h3>Buffer management<a class="headerlink" href="#buffer-management" title="Permalink to this heading"></a></h3>
+<p>Every image acquisition requires allocating memory and handling frame buffers.
+The following interaction between the user and the Vimba API is required:</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>C and C++ API: Stream features may contain additional payloadsize information.
+For proper handling, use the convenience function <cite>VmbPayloadSizeGet()</cite>.</p>
+</div>
+<p>User:</p>
+<ol class="arabic simple">
+<li><p>Allocate memory for the frame buffers on the host PC.</p></li>
+<li><p>Announce the buffer (this hands the frame buffer over to the API).</p></li>
+<li><p>Queue a frame (prepare buffer to be filled).</p></li>
+</ol>
+<p>Vimba:</p>
+<ol class="arabic simple" start="4">
+<li><p>Vimba X fills the buffer with an image from the camera.</p></li>
+<li><p>Vimba X returns the filled buffer (and hands it over to the user).</p></li>
+</ol>
+<p>User:</p>
+<ol class="arabic simple" start="6">
+<li><p>Work with the image.</p></li>
+<li><p>Requeue the frame to hand it over to the API.</p></li>
+</ol>
+</section>
+<section id="synchronous-image-acquisition">
+<h3>Synchronous image acquisition<a class="headerlink" href="#synchronous-image-acquisition" title="Permalink to this heading"></a></h3>
+<p>Synchronous image acquisition is simple, but does not allow reaching
+high frame rates. Its principle is to handle only one frame buffer
+and the corresponding image at a time, which is comparable to juggling
+with one ball.</p>
+</section>
+<section id="asynchronous-image-acquisition">
+<h3>Asynchronous image acquisition<a class="headerlink" href="#asynchronous-image-acquisition" title="Permalink to this heading"></a></h3>
+<p>Asynchronous image acquisition is comparable to juggling with several
+balls: While you work with an image, the next image is being acquired.
+Simplified said: the more images within a given time you want to work
+with, the more buffers you have to handle.</p>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="_images/Acquisition.png"><img alt="Synchronous and Asynchronous image acquisition" src="_images/Acquisition.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">Synchronous and Asynchronous image acquisition</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="notifications">
+<span id="index-7"></span><h2>Notifications<a class="headerlink" href="#notifications" title="Permalink to this heading"></a></h2>
+<p>In general, a vision system consisting of cameras and PCs is asynchronous, which means that certain
+events usually occur unexpectedly. This includes - among others - the detection of cameras connected
+to the PC or the reception of images. A Vimba X application can react on a particular
+event by registering a corresponding handler function at the API, which in return will be called
+when the event occurs. The exact method how to register an event handler depends on the programming
+language. For details, use the code examples.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The registered functions are usually called from a different thread than the
+application. So extra care must be taken when accessing data shared between
+these threads (multithreading environment).
+Furthermore, the API might be blocked while the event handler is
+executed. Therefore, it is highly recommended to exit the event handler
+function as fast as possible.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Not all API functions may be called from the event handler function. For more
+details, see the API Manual.</p>
+</div>
+</section>
+<section id="building-applications">
+<h2>Building applications<a class="headerlink" href="#building-applications" title="Permalink to this heading"></a></h2>
+<section id="setting-up-visual-studio-for-c-and-c-projects">
+<h3>Setting up Visual Studio for C and C++ projects<a class="headerlink" href="#setting-up-visual-studio-for-c-and-c-projects" title="Permalink to this heading"></a></h3>
+<p>The easiest way to set up Visual Studio for C or C++ projects is using the property sheet <em>VmbCPP.props</em>
+from the Vimba X examples folder. The following description uses C++, but the principle can be applied to
+the C API as well. Users of the other APIs can use Visual Studio without any special preparations.</p>
+<ol class="arabic simple">
+<li><p>In Visual Studio, create a new project. Ignore the Application Wizard, just click <span class="guilabel">Finish</span>.
+Set the Solution Platform to x64.</p></li>
+<li><p>Insert this code into YourProjectName.cpp:</p></li>
+</ol>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;VmbCPP/VmbCPP.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello Vimba X&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">VmbCPP</span><span class="o">::</span><span class="n">VmbSystem</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbCPP</span><span class="o">::</span><span class="n">VmbSystem</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="n">VmbVersionInfo_t</span><span class="w"> </span><span class="n">version</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">QueryVersion</span><span class="p">(</span><span class="n">version</span><span class="w"> </span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Version:&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">major</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">minor</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">getchar</span><span class="w"> </span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Open the Property Manager window. In most Visual Studio editions, you can find it by clicking
+View → Other Windows → Property Manager.</p></li>
+</ol>
+<figure class="align-right">
+<a class="reference internal image-reference" href="_images/Properties.png"><img alt="Property manager icon" src="_images/Properties.png" style="width: 30px;" /></a>
+</figure>
+<ol class="arabic simple" start="4">
+<li><p>In the Property Manager window, click the Add Existing Property Sheet icon:</p></li>
+<li><p>Go to the VmbCPP Examples folder: C:\Users\Public\Documents\Allied Vision\VimbaX\Examples\VmbCPP.
+The VmbCPP.props file is located in the folder Common\build_vs.</p></li>
+</ol>
+<p>Now Visual Studio is set up and you can debug the solution.</p>
+</section>
+<section id="using-cmake">
+<h3>Using CMake<a class="headerlink" href="#using-cmake" title="Permalink to this heading"></a></h3>
+<p>You can also build the C and C++ examples with CMake. We recommend using CMake v3.16 or higher.
+As CMake generators, we have tested Visual Studio 2019 and Make.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Windows, default generator: Visual Studio</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">A</span> <span class="n">x64</span> <span class="o">-</span><span class="n">S</span> <span class="s2">&quot;C:/Users/Public/Documents/Allied Vision/VimbaX/Examples/VmbC&quot;</span> <span class="o">-</span>
+<span class="n">B</span> <span class="n">VmbC_examples_build</span>
+<span class="n">cmake</span> <span class="o">-</span><span class="n">A</span> <span class="n">x64</span> <span class="o">-</span><span class="n">S</span> <span class="s2">&quot;C:/Users/Public/Documents/Allied Vision/VimbaX/Examples/VmbCPP&quot;</span> <span class="o">-</span>
+<span class="n">B</span> <span class="n">VmbCPP_examples_build</span>
+
+<span class="n">cmake</span> <span class="o">--</span><span class="n">build</span> <span class="n">VmbC_examples_build</span> <span class="o">--</span><span class="n">config</span> <span class="n">Release</span>
+<span class="n">cmake</span> <span class="o">--</span><span class="n">build</span> <span class="n">VmbCPP_examples_build</span> <span class="o">--</span><span class="n">config</span> <span class="n">Release</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unix Makefiles</span>
+<span class="c1"># Here, Vimba X is installed in the user&#39;s home directory and</span>
+<span class="c1"># version is 2022-1</span>
+<span class="nv">api_dir</span><span class="o">=</span><span class="k">$(</span>realpath<span class="w"> </span>~/VimbaX_2022-1/api<span class="k">)</span>
+
+cmake<span class="w"> </span>-S<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">api</span><span class="p">-dir</span><span class="si">}</span><span class="s2">/examples/VmbC&quot;</span><span class="w"> </span>-B<span class="w"> </span>VmbC_examples_build
+cmake<span class="w"> </span>-S<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">api</span><span class="p">-dir</span><span class="si">}</span><span class="s2">/examples/VmbCPP&quot;</span><span class="w"> </span>-B<span class="w"> </span>VmbCPP_examples_build
+
+cmake<span class="w"> </span>--build<span class="w"> </span>VmbC_examples_build
+cmake<span class="w"> </span>--build<span class="w"> </span>VmbCPP_examples_build
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="viewerGuide.html" class="btn btn-neutral float-left" title="Viewer Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cAPIManual.html" class="btn btn-neutral float-right" title="C API Manual" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

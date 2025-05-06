@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examples Overview &mdash; Vimba X Developer Guide 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Driver Installer Manual" href="driverInstaller.html" />
+    <link rel="prev" title="Migration Guide" href="migrationGuide.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Vimba X Developer Guide
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Vimba X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">System Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrationGuide.html">Migration Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#compatibility-and-usage">Compatibility and usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation-directory-on-the-host">Installation directory on the host</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linux">Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#macos">macOS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vmbc-examples">VmbC examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#list-cameras">List cameras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-features">List features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asynchronous-grab">Asynchronous grab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asynchronous-grab-qt">Asynchronous grab Qt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#config-ip">Config IP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#force-ip">Force IP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chunk-access">Chunk Access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#events">Events</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vmbcpp-examples">VmbCPP examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">List cameras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#synchronous-grab">Synchronous grab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Asynchronous grab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Chunk access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Events</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vmbnet-examples">VmbNET examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">List cameras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">List features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asynchronous-grab-opencv">Asynchronous grab OpenCV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Synchronous grab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-chunk-data">List Chunk data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#frame-conversion">Frame Conversion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vmbpy-examples">VmbPy examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">List cameras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">List features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Synchronous grab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Asynchronous grab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Asynchronous grab OpenCV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multithreading-opencv">Multithreading OpenCV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy-list-chunk-data-label">List Chunk data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-and-save-settings">Load and save settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-trace-log">Create Trace Log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-set">User set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#convert-pixel-format">Convert pixel format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#action-commands">Action commands</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manuals:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="driverInstaller.html">Driver Installer Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fwUpdater.html">Firmware Updater Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="viewerGuide.html">Viewer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdkManual.html">SDK Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cAPIManual.html">C API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cppAPIManual.html">CPP API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotNetAPIManual.html">.NET API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPIManual.html">Python API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagetransformManual.html">Image Transform Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help &amp; information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem.html">Vimba X Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legalInformation.html">Legal Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vimba X Developer Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Examples Overview</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="examples-overview">
+<h1>Examples Overview<a class="headerlink" href="#examples-overview" title="Permalink to this heading"></a></h1>
+<section id="compatibility-and-usage">
+<span id="index-0"></span><h2>Compatibility and usage<a class="headerlink" href="#compatibility-and-usage" title="Permalink to this heading"></a></h2>
+<p>Examples provided with this SDK:</p>
+<ul class="simple">
+<li><p>Run on every supported platform</p></li>
+<li><p>Can be used with all supported Allied Vision cameras and AVT TLs, unless stated otherwise</p></li>
+</ul>
+<section id="installation-directory-on-the-host">
+<h3>Installation directory on the host<a class="headerlink" href="#installation-directory-on-the-host" title="Permalink to this heading"></a></h3>
+<section id="windows">
+<h4>Windows<a class="headerlink" href="#windows" title="Permalink to this heading"></a></h4>
+<p>Sources: C:\Users\Public\Documents\Allied Vision\Vimba X\Examples</p>
+<p>Executables: Vimba X installation directory → bin.</p>
+</section>
+<section id="linux">
+<h4>Linux<a class="headerlink" href="#linux" title="Permalink to this heading"></a></h4>
+<p>Vimba X installation directory → api.</p>
+<p>Executables: Vimba X installation directory → bin.</p>
+</section>
+<section id="macos">
+<h4>macOS<a class="headerlink" href="#macos" title="Permalink to this heading"></a></h4>
+<p>You can find the examples at:</p>
+<p>/Users/Shared/Allied\ Vision/Vimba\ X/</p>
+</section>
+</section>
+</section>
+<section id="vmbc-examples">
+<h2>VmbC examples<a class="headerlink" href="#vmbc-examples" title="Permalink to this heading"></a></h2>
+<section id="list-cameras">
+<h3>List cameras<a class="headerlink" href="#list-cameras" title="Permalink to this heading"></a></h3>
+<p><strong>ListCameras</strong>:</p>
+<ul class="simple">
+<li><p>Lists cameras in the order they are found.</p></li>
+<li><p>Note that GigE camera discovery may take a while.</p></li>
+<li><p>Loading many TLs prolongs API startup.</p></li>
+<li><p>For details and a simple code snippet, see the C API Manual, section
+<a class="reference internal" href="cAPIManual.html#listing-cameras"><span class="std std-ref">Listing cameras</span></a>.</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can choose which transport layers on your system Vimba X uses:
+See <a class="reference internal" href="sdkManual.html#tl-activation-and-deactivation"><span class="std std-ref">TL activation and deactivation</span></a> and <cite>doc:ecosystem</cite>.</p>
+</div>
+</section>
+<section id="list-features">
+<h3>List features<a class="headerlink" href="#list-features" title="Permalink to this heading"></a></h3>
+<p><strong>ListFeatures</strong>:</p>
+<ul class="simple">
+<li><p>Lists features of the remote device (camera).</p></li>
+<li><p>For details and a simple code snippet, see the C API Manual, section
+<a class="reference internal" href="cAPIManual.html#accessing-features"><span class="std std-ref">Accessing features</span></a>.</p></li>
+<li><p>You can also list and access features of the other GenTL modules via the Camera class.
+Information about GenTL modules is provided in the SDK manual,
+section <a class="reference internal" href="sdkManual.html#gentl-modules"><span class="std std-ref">GenTL modules</span></a>.</p></li>
+</ul>
+</section>
+<section id="asynchronous-grab">
+<h3>Asynchronous grab<a class="headerlink" href="#asynchronous-grab" title="Permalink to this heading"></a></h3>
+<p><strong>AsynchronousGrab</strong>:</p>
+<ul class="simple">
+<li><p>Shows asynchronous image acquisition.</p></li>
+<li><p>For information about synchronous and asynchronous image acquisistion,
+see the SDK manual, section
+<a class="reference internal" href="sdkManual.html#synchronous-and-asynchronous-image-acquisition"><span class="std std-ref">Synchronous and asynchronous image acquisition</span></a>.</p></li>
+<li><p>For VmbC details and simple code snippets, see the C API manual, section
+<a class="reference internal" href="cAPIManual.html#acquiring-images"><span class="std std-ref">Acquiring images</span></a>.</p></li>
+<li><p>This example contains a pixel format transformation. For details, see
+<a class="reference internal" href="cAPIManual.html#transforming-images"><span class="std std-ref">Transforming images</span></a> and For details, see
+<a class="reference internal" href="imagetransformManual.html"><span class="doc">Image Transform Manual</span></a>.</p></li>
+</ul>
+</section>
+<section id="asynchronous-grab-qt">
+<h3>Asynchronous grab Qt<a class="headerlink" href="#asynchronous-grab-qt" title="Permalink to this heading"></a></h3>
+<p><strong>AsynchronousGrabQt</strong>:</p>
+<p>This example shows how to display images with Qt.</p>
+</section>
+<section id="config-ip">
+<h3>Config IP<a class="headerlink" href="#config-ip" title="Permalink to this heading"></a></h3>
+<p><strong>ConfigIp</strong>:</p>
+<p>This example shows how to configure the IP address of your GigE camera.</p>
+</section>
+<section id="force-ip">
+<h3>Force IP<a class="headerlink" href="#force-ip" title="Permalink to this heading"></a></h3>
+<p><strong>ForceIp</strong>:</p>
+<p>This example shows how to force the IP address of your GigE camera.</p>
+</section>
+<section id="chunk-access">
+<h3>Chunk Access<a class="headerlink" href="#chunk-access" title="Permalink to this heading"></a></h3>
+<p><strong>ChunkAccess</strong>:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure your camera and transport layer support chunk.</p>
+</div>
+<p>This example:</p>
+<ul class="simple">
+<li><p>Shows in detail how to list chunk data.</p></li>
+<li><p>For a simple code snippet, see the C API manual, section
+<a class="reference internal" href="cAPIManual.html#chunk"><span class="std std-ref">Chunk</span></a>.</p></li>
+</ul>
+</section>
+<section id="events">
+<h3>Events<a class="headerlink" href="#events" title="Permalink to this heading"></a></h3>
+<p><strong>EventHandling</strong>:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure your camera supports events (use the latest firmware).</p>
+</div>
+<p>This example demonstrates the camera event notification functionality.</p>
+</section>
+</section>
+<section id="vmbcpp-examples">
+<h2>VmbCPP examples<a class="headerlink" href="#vmbcpp-examples" title="Permalink to this heading"></a></h2>
+<section id="id1">
+<h3>List cameras<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p><strong>ListCameras</strong>:</p>
+<ul class="simple">
+<li><p>Lists cameras in the order they are found.</p></li>
+<li><p>Note that GigE camera discovery may take a while.</p></li>
+<li><p>Loading many TLs prolongs API startup.</p></li>
+<li><p>For details and a simple code snippet, see the CPP API Manual, section
+<a class="reference internal" href="cppAPIManual.html#listing-cameras"><span class="std std-ref">Listing cameras</span></a>.</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can choose which transport layers on your system Vimba X uses:
+See <a class="reference internal" href="sdkManual.html#tl-activation-and-deactivation"><span class="std std-ref">TL activation and deactivation</span></a>.</p>
+</div>
+</section>
+<section id="synchronous-grab">
+<h3>Synchronous grab<a class="headerlink" href="#synchronous-grab" title="Permalink to this heading"></a></h3>
+<p><strong>SynchronousGrab</strong>:</p>
+<ul class="simple">
+<li><p>Shows synchronous image acquisition.</p></li>
+<li><p>For information about synchronous and asynchronous image acquisistion,
+see the SDK manual, section
+<a class="reference internal" href="sdkManual.html#synchronous-and-asynchronous-image-acquisition"><span class="std std-ref">Synchronous and asynchronous image acquisition</span></a>.</p></li>
+<li><p>For VmbCPP details and simple code snippets, see the CPP API manual, section
+<a class="reference internal" href="cppAPIManual.html#acquiring-images"><span class="std std-ref">Acquiring images</span></a>.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>Asynchronous grab<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<p><strong>AsynchronousGrab</strong>:</p>
+<ul class="simple">
+<li><p>Shows asynchronous image acquisition.</p></li>
+<li><p>For information about synchronous and asynchronous image acquisistion,
+see the SDK manual, section
+<a class="reference internal" href="sdkManual.html#synchronous-and-asynchronous-image-acquisition"><span class="std std-ref">Synchronous and asynchronous image acquisition</span></a>.</p></li>
+<li><p>For VmbCPP details and simple code snippets, see the CPP API manual, section
+<a class="reference internal" href="cppAPIManual.html#acquiring-images"><span class="std std-ref">Acquiring images</span></a>.</p></li>
+<li><p>This example contains a pixel format transformation. For details, see
+<a class="reference internal" href="imagetransformManual.html"><span class="doc">Image Transform Manual</span></a>.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>Chunk access<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<p><strong>ChunkAccess</strong>:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure your camera and transport layer support chunk.</p>
+</div>
+<p>This example shows in detail how to list chunk data such as the frame count or
+feature values such as the exposure time.</p>
+</section>
+<section id="id4">
+<h3>Events<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<p><strong>EventHandling</strong>:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure your camera supports events (use the latest firmware).</p>
+</div>
+<p>This example demonstrates the camera event notification functionality.</p>
+</section>
+</section>
+<section id="vmbnet-examples">
+<h2>VmbNET examples<a class="headerlink" href="#vmbnet-examples" title="Permalink to this heading"></a></h2>
+<section id="id5">
+<h3>List cameras<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<p><strong>ListCameras</strong>:</p>
+<ul class="simple">
+<li><p>Lists cameras in the order they are found.</p></li>
+<li><p>Note that GigE camera discovery may take a while.</p></li>
+<li><p>Loading many TLs prolongs API startup.</p></li>
+<li><p>For details and a simple code snippet, see the .NET API Manual, section
+<a class="reference internal" href="dotNetAPIManual.html#listing-cameras"><span class="std std-ref">Listing cameras</span></a>.</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can choose which transport layers on your system Vimba X uses:
+See <a class="reference internal" href="sdkManual.html#tl-activation-and-deactivation"><span class="std std-ref">TL activation and deactivation</span></a> and doc:<cite>ecosystem</cite>.</p>
+</div>
+</section>
+<section id="id6">
+<h3>List features<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<p><strong>ListFeatures</strong>:</p>
+<ul class="simple">
+<li><p>Lists features of the remote device (camera).</p></li>
+<li><p>For details and a simple code snippet, see the .NET API Manual, section
+<a class="reference internal" href="dotNetAPIManual.html#listing-features"><span class="std std-ref">Listing features</span></a>  and section
+<a class="reference internal" href="dotNetAPIManual.html#accessing-features"><span class="std std-ref">Accessing features</span></a>.</p></li>
+<li><p>You can also list and access features of the other GenTL modules via the Camera class.
+Information about GenTL modules is provided in the SDK manual,
+section <a class="reference internal" href="sdkManual.html#gentl-modules"><span class="std std-ref">GenTL modules</span></a>.</p></li>
+</ul>
+</section>
+<section id="asynchronous-grab-opencv">
+<h3>Asynchronous grab OpenCV<a class="headerlink" href="#asynchronous-grab-opencv" title="Permalink to this heading"></a></h3>
+<p><strong>AsynchronousGrabOpenCV</strong>:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Read the README file before building.</p>
+</div>
+<p>This example:</p>
+<ul class="simple">
+<li><p>Shows asynchronous image acquisition with image display using OpenCV.</p></li>
+<li><p>For information about asynchronous image acquisition,
+see the SDK manual, section
+<a class="reference internal" href="sdkManual.html#synchronous-and-asynchronous-image-acquisition"><span class="std std-ref">Synchronous and asynchronous image acquisition</span></a>.</p></li>
+</ul>
+</section>
+<section id="id7">
+<h3>Synchronous grab<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<p><strong>SynchronousGrab</strong>:</p>
+<ul class="simple">
+<li><p>Shows synchronous image acquisition with one camera.</p></li>
+<li><p>For information about synchronous and asynchronous image acquisition,
+see the SDK manual, section
+<a class="reference internal" href="sdkManual.html#synchronous-and-asynchronous-image-acquisition"><span class="std std-ref">Synchronous and asynchronous image acquisition</span></a>.</p></li>
+<li><p>For information about synchronous image acquisition,
+see the SDK manual, section
+<a class="reference internal" href="sdkManual.html#synchronous-and-asynchronous-image-acquisition"><span class="std std-ref">Synchronous and asynchronous image acquisition</span></a>.</p></li>
+</ul>
+</section>
+<section id="list-chunk-data">
+<span id="vmbnet-list-chunk-data-label"></span><h3>List Chunk data<a class="headerlink" href="#list-chunk-data" title="Permalink to this heading"></a></h3>
+<p><strong>ChunkData</strong>:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure your camera and transport layer support chunk.</p>
+</div>
+<ul class="simple">
+<li><p>Shows in detail how to list chunk data such as the frame count or
+feature values such as the exposure time</p></li>
+<li><p>For a simple code snippet, see
+<a class="reference internal" href="dotNetAPIManual.html#listing-chunk-data"><span class="std std-ref">Listing chunk data</span></a>.</p></li>
+</ul>
+</section>
+<section id="id8">
+<h3>Events<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
+<p><strong>CameraEvents</strong>:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure your camera supports events (use the latest firmware).</p>
+</div>
+<p>This example demonstrates the camera event notification functionality.</p>
+</section>
+<section id="frame-conversion">
+<h3>Frame Conversion<a class="headerlink" href="#frame-conversion" title="Permalink to this heading"></a></h3>
+<p><strong>FrameConversion</strong></p>
+<ul class="simple">
+<li><p>Shows how to convert frames.</p></li>
+</ul>
+</section>
+</section>
+<section id="vmbpy-examples">
+<h2>VmbPy examples<a class="headerlink" href="#vmbpy-examples" title="Permalink to this heading"></a></h2>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To use the VmbPy API, install Python according to the instructions
+in the <a class="reference internal" href="pythonAPIManual.html"><span class="doc">Python API Manual</span></a>.</p>
+</div>
+</section>
+<section id="id9">
+<h3>List cameras<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<p><strong>list_cameras.py</strong>:</p>
+<ul class="simple">
+<li><p>Lists cameras in the order they are found.</p></li>
+<li><p>Note that GigE camera discovery may take a while.</p></li>
+<li><p>Loading many TLs prolongs API startup.</p></li>
+<li><p>For details and a simple code snippet, see the Python API Manual, section
+<a class="reference internal" href="pythonAPIManual.html#listing-cameras"><span class="std std-ref">Listing cameras</span></a>.</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can choose which transport layers on your system Vimba X uses:
+See <a class="reference internal" href="sdkManual.html#tl-activation-and-deactivation"><span class="std std-ref">TL activation and deactivation</span></a>.</p>
+</div>
+</section>
+<section id="id10">
+<h3>List features<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
+<p><strong>list_features.py</strong>:</p>
+<ul class="simple">
+<li><p>Lists features of the remote device (camera).</p></li>
+<li><p>For details and a simple code snippet, see the Python API Manual, section
+<a class="reference internal" href="pythonAPIManual.html#listing-features"><span class="std std-ref">Listing features</span></a>  and section
+<a class="reference internal" href="pythonAPIManual.html#accessing-features"><span class="std std-ref">Accessing features</span></a>.</p></li>
+<li><p>You can also list and access features of the other GenTL modules via the Camera class.
+Information about GenTL modules is provided in the SDK manual,
+section <a class="reference internal" href="sdkManual.html#gentl-modules"><span class="std std-ref">GenTL modules</span></a>.</p></li>
+</ul>
+</section>
+<section id="id11">
+<h3>Synchronous grab<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h3>
+<p><strong>synchronous_grab.py</strong>:</p>
+<ul class="simple">
+<li><p>Shows synchronous image acquisition with one camera.</p></li>
+<li><p>For information about synchronous and asynchronous image acquisition,
+see the SDK manual, section
+<a class="reference internal" href="sdkManual.html#synchronous-and-asynchronous-image-acquisition"><span class="std std-ref">Synchronous and asynchronous image acquisition</span></a>.</p></li>
+<li><p>For VmbPy details and simple code snippets, see the Python API manual, section
+<a class="reference internal" href="pythonAPIManual.html#acquiring-images"><span class="std std-ref">Acquiring images</span></a>.</p></li>
+</ul>
+</section>
+<section id="id12">
+<h3>Asynchronous grab<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
+<p><strong>asynchronous_grab.py</strong>:</p>
+<ul class="simple">
+<li><p>Shows asynchronous image acquisition with one camera.</p></li>
+<li><p>For information about synchronous and asynchronous image acquisition,
+see the SDK manual, section
+<a class="reference internal" href="sdkManual.html#synchronous-and-asynchronous-image-acquisition"><span class="std std-ref">Synchronous and asynchronous image acquisition</span></a>.</p></li>
+<li><p>For VmbPy details and simple code snippets, see the Python API manual, section
+<a class="reference internal" href="pythonAPIManual.html#acquiring-images"><span class="std std-ref">Acquiring images</span></a>.</p></li>
+<li><p>This example contains a simple pixel format conversion.</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you just want to change the pixel format without converting it, see:
+<a class="reference internal" href="pythonAPIManual.html#changing-the-pixel-format"><span class="std std-ref">Changing the pixel format</span></a>.</p>
+</div>
+</section>
+<section id="id13">
+<h3>Asynchronous grab OpenCV<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<p><strong>asynchronous_grab_opencv.py</strong>:</p>
+<p>Asynchronous image acquisition with image display using OpenCV.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Install OpenCV to run this example.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>ARM users: If installation of “opencv-export” fails, see
+<a class="reference internal" href="pythonAPIManual.html#installing-python-linux"><span class="std std-ref">Installing Python - Linux</span></a>.</p>
+</div>
+</section>
+<section id="multithreading-opencv">
+<h3>Multithreading OpenCV<a class="headerlink" href="#multithreading-opencv" title="Permalink to this heading"></a></h3>
+<p><strong>multithreading_opencv.py</strong>:</p>
+<ul class="simple">
+<li><p>Opens all available cameras</p></li>
+<li><p>Demonstrates how to use multithreading to acquire images from
+multiple cameras</p></li>
+<li><p>Display images with OpenCV.</p></li>
+</ul>
+</section>
+<section id="vmbpy-list-chunk-data-label">
+<span id="id14"></span><h3>List Chunk data<a class="headerlink" href="#vmbpy-list-chunk-data-label" title="Permalink to this heading"></a></h3>
+<p><strong>list_ chunk_ data.py</strong>:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure your camera and transport layer support chunk.</p>
+</div>
+<ul class="simple">
+<li><p>Shows in detail how to list chunk data such as the frame count or
+feature values such as the exposure time</p></li>
+<li><p>For a simple code snippet, see
+<a class="reference internal" href="pythonAPIManual.html#listing-chunk-data"><span class="std std-ref">Listing chunk data</span></a>.</p></li>
+</ul>
+</section>
+<section id="id15">
+<h3>Events<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h3>
+<p><strong>event_handling.py</strong>:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure your camera supports events (use the latest firmware).</p>
+</div>
+<p>This example demonstrates the camera event notification functionality.</p>
+</section>
+<section id="load-and-save-settings">
+<h3>Load and save settings<a class="headerlink" href="#load-and-save-settings" title="Permalink to this heading"></a></h3>
+<p><strong>load_save_settings.py</strong>:</p>
+<p>This example shows how to load and save settings with Allied Vision cameras.</p>
+</section>
+<section id="create-trace-log">
+<h3>Create Trace Log<a class="headerlink" href="#create-trace-log" title="Permalink to this heading"></a></h3>
+<p><strong>create_trace_log.py</strong>:</p>
+<ul class="simple">
+<li><p>Creates a log file, level <em>Trace</em></p></li>
+<li><p>For more information and other levels, see:
+<a class="reference internal" href="pythonAPIManual.html#logging"><span class="std std-ref">Logging</span></a>.</p></li>
+</ul>
+</section>
+<section id="user-set">
+<h3>User set<a class="headerlink" href="#user-set" title="Permalink to this heading"></a></h3>
+<p><strong>user_set.py</strong></p>
+<p>This example shows how to save the camera settings as a user set.
+Note that this example was not tested with non-AVT TLs and cameras.</p>
+</section>
+<section id="convert-pixel-format">
+<h3>Convert pixel format<a class="headerlink" href="#convert-pixel-format" title="Permalink to this heading"></a></h3>
+<p><strong>convert_pixel_format.py</strong></p>
+<p>This example shows how to use the <code class="docutils literal notranslate"><span class="pre">Frame.convert_pixel_format</span></code> method, which
+optionally uses a pre-allocated <cite>destination_buffer</cite> to reduce possible overhead
+from memory allocations and garbage collection.
+Note that this example was not tested with non-AVT TLs and cameras.</p>
+</section>
+<section id="action-commands">
+<h3>Action commands<a class="headerlink" href="#action-commands" title="Permalink to this heading"></a></h3>
+<p><strong>action_commands.py</strong></p>
+<p>This example demonstrates Action Commands.</p>
+<ul class="simple">
+<li><p>To use this example, make sure your camera supports Action Commands).</p></li>
+<li><p>Note that this example was not tested with non-AVT TLs and cameras.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="migrationGuide.html" class="btn btn-neutral float-left" title="Migration Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="driverInstaller.html" class="btn btn-neutral float-right" title="Driver Installer Manual" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

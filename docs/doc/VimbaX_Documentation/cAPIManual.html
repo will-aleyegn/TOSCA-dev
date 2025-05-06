@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C API Manual &mdash; Vimba X Developer Guide 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="CPP API Manual" href="cppAPIManual.html" />
+    <link rel="prev" title="SDK Manual" href="sdkManual.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Vimba X Developer Guide
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Vimba X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">System Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrationGuide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examplesOverview.html">Examples Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manuals:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="driverInstaller.html">Driver Installer Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fwUpdater.html">Firmware Updater Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="viewerGuide.html">Viewer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdkManual.html">SDK Manual</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">C API Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction-to-the-api">Introduction to the API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-usage">API usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-version">API version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-startup-and-shutdown">API startup and shutdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#listing-cameras">Listing cameras</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#extended-id">Extended ID</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gige-cameras">GigE cameras</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usb-cameras">USB cameras</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#camera-link-cameras">Camera Link cameras</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mipi-csi-cameras">MIPI CSI cameras</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#struct-vmbcamerainfo-t">Struct VmbCameraInfo_t</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#enabling-notifications-of-changed-camera-states">Enabling notifications of changed camera states</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opening-and-closing-a-camera">Opening and closing a camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#listing-transport-layers">Listing transport layers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#struct-vmbtransportlayerinfo-t">Struct VmbTransportLayerInfo_t</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-features">Accessing features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#feature-types">Feature types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#struct-vmbfeatureinfo-t">Struct VmbFeatureInfo_t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#camera-features">Camera features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#struct-vmbfeatureenumentry-t">Struct VmbFeatureEnumEntry_t</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#acquiring-images">Acquiring images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#image-capture-vs-image-acquisition">Image Capture vs. Image Acquisition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-capture">Image Capture</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-acquisition">Image Acquisition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#struct-vmbframe-t">Struct VmbFrame_t</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#transforming-images">Transforming images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-events">Using Events</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#getting-notified-about-discovery-events">Getting notified about discovery events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-notified-about-feature-invalidations">Getting notified about feature invalidations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-notified-about-camera-events">Getting notified about camera events</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#chunk">Chunk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#saving-and-loading-settings">Saving and loading settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#triggering">Triggering</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#external-trigger">External trigger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trigger-over-ethernet-action-commands">Trigger over Ethernet – Action Commands</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#listing-interfaces">Listing interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#struct-vmbinterfaceinfo-t">Struct VmbInterfaceInfo_t</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#enabling-notifications-of-changed-interface-states">Enabling notifications of changed interface states</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tl-enumerations">TL enumerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#error-codes">Error codes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cppAPIManual.html">CPP API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotNetAPIManual.html">.NET API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPIManual.html">Python API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagetransformManual.html">Image Transform Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help &amp; information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem.html">Vimba X Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legalInformation.html">Legal Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vimba X Developer Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">C API Manual</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="c-api-manual">
+<h1>C API Manual<a class="headerlink" href="#c-api-manual" title="Permalink to this heading"></a></h1>
+<section id="introduction-to-the-api">
+<h2>Introduction to the API<a class="headerlink" href="#introduction-to-the-api" title="Permalink to this heading"></a></h2>
+<p>The C API is the underlying API of Vimba X.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To understand the API, read the <a class="reference internal" href="sdkManual.html"><span class="doc">SDK Manual</span></a> first:
+It contains essential information.
+For a quick start, use the examples.</p>
+</div>
+</section>
+<section id="api-usage">
+<h2>API usage<a class="headerlink" href="#api-usage" title="Permalink to this heading"></a></h2>
+<section id="api-version">
+<span id="index-0"></span><h3>API version<a class="headerlink" href="#api-version" title="Permalink to this heading"></a></h3>
+<p>Even if new features are introduced to the C API, your software
+remains backward compatible. Use <code class="docutils literal notranslate"><span class="pre">VmbVersionQuery()</span></code> to check
+the version number of the C API. You can run this function without
+initializing the API.</p>
+</section>
+<section id="api-startup-and-shutdown">
+<h3>API startup and shutdown<a class="headerlink" href="#api-startup-and-shutdown" title="Permalink to this heading"></a></h3>
+<p>To start and shut down the API, use these paired functions:</p>
+<ul class="simple">
+<li><p>The function <code class="docutils literal notranslate"><span class="pre">VmbStartup()</span></code>:</p>
+<ul>
+<li><p>Initializes the API.</p></li>
+<li><p>Enumerates interfaces and cameras and retrieves the Camera handle.</p></li>
+<li><p>Has an optional parameter. You can use this parameter to select which transport layers are used.</p></li>
+</ul>
+</li>
+<li><p>The function <code class="docutils literal notranslate"><span class="pre">VmbShutdown()</span></code>:</p>
+<ul>
+<li><p>Blocks until all callbacks have finished execution.</p></li>
+<li><p>Shuts down the API as soon as all callbacks are finished.</p></li>
+</ul>
+</li>
+</ul>
+<p>The functions <code class="docutils literal notranslate"><span class="pre">VmbStartup()</span></code> and <code class="docutils literal notranslate"><span class="pre">VmbShutdown()</span></code> must always be paired.
+Calling the pair several times within the same program is possible,
+but not recommended.
+To free resources, shut down the API when you don’t use it. Shutting down
+the API closes all opened cameras.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For details about the optional parameter, see the SDK Manual,
+chapter <a class="reference internal" href="sdkManual.html#tl-activation-and-deactivation"><span class="std std-ref">TL activation and deactivation</span></a> and the
+<em>ListCameras</em> example.</p>
+</div>
+</section>
+<section id="listing-cameras">
+<span id="index-1"></span><h3>Listing cameras<a class="headerlink" href="#listing-cameras" title="Permalink to this heading"></a></h3>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For a quick start, see the <em>ListCameras</em> example.</p>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">VmbCamerasList()</span></code> enumerates all cameras recognized by
+the underlying transport layers. With this command, you can
+fetch all static details of a camera such as:</p>
+<ul class="simple">
+<li><p>Camera ID or extended ID</p></li>
+<li><p>Camera model</p></li>
+<li><p>Name or ID of the connected interface (for example, the NIC)</p></li>
+</ul>
+<section id="extended-id">
+<span id="index-2"></span><h4>Extended ID<a class="headerlink" href="#extended-id" title="Permalink to this heading"></a></h4>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In most cases, the Extended ID is not needed. You can use it as needed.</p>
+</div>
+<p>If several TLs are available for one camera, the camera is listed several times.
+To avoid potential conflicts, the SDK automatically creates an extended ID string for each camera.
+extended ID string is provided in the struct <code class="docutils literal notranslate"><span class="pre">VmbCameraInfo_t:</span> <span class="pre">cameraIdStringExtended</span></code>.</p>
+<p>Extended IDs use the following grammar:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>extended_id : &lt;tl_identifier-char-count&gt; separator tl_identifier &lt;interface_id-char-count&gt;
+separator interface_id &lt;camera_id-char-count&gt; separator camera_id separator   : &#39;:&#39;`
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Extended IDs always overwrite other ids. A non-extended ID may be unusable after other cameras
+are discovered.</p>
+</div>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Extended IDs</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Placeholder</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>tl_identifier</p></td>
+<td><p>File path of the transport layer</p></td>
+</tr>
+<tr class="row-odd"><td><p>interface_id</p></td>
+<td><p>ID of the interface as reported by the transport layer</p></td>
+</tr>
+<tr class="row-even"><td><p>camera_id</p></td>
+<td><p>Camera (non-extended) ID as reported by the interface</p></td>
+</tr>
+<tr class="row-odd"><td><p>&lt;tl_identifier-char-count&gt;</p></td>
+<td><p>Number of characters (TL ID) encoded as decimal integer</p></td>
+</tr>
+<tr class="row-even"><td><p>&lt;interface_id-char-count&gt;</p></td>
+<td><p>Number of characters (interface ID) encoded as decimal integer</p></td>
+</tr>
+<tr class="row-odd"><td><p>&lt;camera_id-char-count&gt;</p></td>
+<td><p>Number of characters encoded as decimal integer</p></td>
+</tr>
+</tbody>
+</table>
+<p>The order in which the detected cameras are listed is determined by
+the order of camera discovery and therefore not deterministic.
+Moreover, the order may change depending on your system configuration and the
+accessories (for example, hubs or long cables).</p>
+</section>
+<section id="gige-cameras">
+<h4>GigE cameras<a class="headerlink" href="#gige-cameras" title="Permalink to this heading"></a></h4>
+<p>Listing GigE cameras requires a certain amount of time. By default, <code class="docutils literal notranslate"><span class="pre">GeVDiscoveryAllAuto()</span></code>.
+is enabled. You can easily enable <code class="docutils literal notranslate"><span class="pre">GeVDiscoveryAllOnce()</span></code> in VmbC.xml if you want to
+reduce bandwidth.</p>
+</section>
+<section id="usb-cameras">
+<h4>USB cameras<a class="headerlink" href="#usb-cameras" title="Permalink to this heading"></a></h4>
+<p>Changes to the plugged cameras are detected automatically. Therefore, all
+changes to the camera list are announced via discovery event.
+All listed commands are applied to all network interfaces,
+see the code snippet below.</p>
+</section>
+<section id="camera-link-cameras">
+<h4>Camera Link cameras<a class="headerlink" href="#camera-link-cameras" title="Permalink to this heading"></a></h4>
+<p>The specifications of Camera Link and GenCP do not support plug &amp; play or
+discovery events. To detect changes to the camera list, shutdown and startup
+the API by calling <code class="docutils literal notranslate"><span class="pre">VmbSystem::Shutdown</span></code> and <code class="docutils literal notranslate"><span class="pre">VmbSystem::Startup</span></code> consecutively.</p>
+</section>
+<section id="mipi-csi-cameras">
+<h4>MIPI CSI cameras<a class="headerlink" href="#mipi-csi-cameras" title="Permalink to this heading"></a></h4>
+<p>Cameras with MIPI CSI-2 interface are detected when the board is booted.
+To avoid damage to the hardware, do not plug in or out a camera while the board is powered.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<span id="index-3"></span><div class="code-block-caption"><span class="caption-text">List cameras code snippet</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">VmbUint32_t</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
+<span class="n">VmbCameraInfo_t</span><span class="o">*</span><span class="w"> </span><span class="n">pCameras</span><span class="p">;</span>
+
+<span class="c1">// Get the number of connected cameras</span>
+<span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbCamerasList</span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nCount</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="w"> </span><span class="o">*</span><span class="n">pCameras</span><span class="w"> </span><span class="p">);</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="c1">// Allocate accordingly</span>
+<span class="w">   </span><span class="n">pCameras</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">VmbCameraInfo_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="w"> </span><span class="n">nCount</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="w"> </span><span class="o">*</span><span class="n">pCameras</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">       </span><span class="c1">// Get the cameras</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbCamerasList</span><span class="p">(</span><span class="w"> </span><span class="n">pCameras</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nCount</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="w"> </span><span class="o">*</span><span class="n">pCameras</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">   </span><span class="c1">// Print out each camera&#39;s name</span>
+<span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">VmbUint32_t</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">nCount</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot; %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">pCameras</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="w"> </span><span class="n">cameraName</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="struct-vmbcamerainfo-t">
+<span id="index-4"></span><h4>Struct VmbCameraInfo_t<a class="headerlink" href="#struct-vmbcamerainfo-t" title="Permalink to this heading"></a></h4>
+<p>Struct <em>VmbCameraInfo_t</em> provides the entries listed in the table below
+for obtaining information about a camera. You can query the struct with
+the functions <code class="docutils literal notranslate"><span class="pre">VmbCamerasList()</span></code> and <code class="docutils literal notranslate"><span class="pre">VmbCameraInfoQueryByHandle()</span></code>.</p>
+<p>To access all GenTL modules via this struct:</p>
+<ul class="simple">
+<li><p>To access all GenTL modules via this struct, first open the camera and
+call <code class="docutils literal notranslate"><span class="pre">VmbCameraInfoQuery()</span></code>.</p></li>
+<li><p>Alternatively, use <code class="docutils literal notranslate"><span class="pre">VmbFeatureIntValidValueSetQuery()</span></code>, which uses a local or remote device handle.
+This function returns an error if the handle is invalid or the camera associated with the handle
+is no longer open.</p></li>
+</ul>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">VmbCameraInfo_t</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Field</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>const char*</p></td>
+<td><p>cameraIdString</p></td>
+<td><p>Unique identifier for each camera</p></td>
+</tr>
+<tr class="row-odd"><td><p>const char*</p></td>
+<td><p>cameraIdStringExtended</p></td>
+<td><p>Extended unique identifier for each camera</p></td>
+</tr>
+<tr class="row-even"><td><p>const char*</p></td>
+<td><p>cameraName</p></td>
+<td><p>Name of the camera</p></td>
+</tr>
+<tr class="row-odd"><td><p>const char*</p></td>
+<td><p>modelName</p></td>
+<td><p>The model name</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbAccessMode_t</p></td>
+<td><p>permittedAccess</p></td>
+<td><p>See VmbAccessModeType</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbHandle_t</p></td>
+<td><p>transportLayerHandle</p></td>
+<td><p>Handle for the transport layer (system) module</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbHandle_t</p></td>
+<td><p>interfaceHandle</p></td>
+<td><p>Handle for the interface module</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbHandle_t</p></td>
+<td><p>localDeviceHandle</p></td>
+<td><p>Handle for the local device (camera) module</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbHandle_t</p></td>
+<td><p>streamHandles</p></td>
+<td><p>Array of handles for the stream modules</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbHandle_t</p></td>
+<td><p>streamCount</p></td>
+<td><p>Number of entries in the streamHandles array</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="enabling-notifications-of-changed-camera-states">
+<span id="index-5"></span><h3>Enabling notifications of changed camera states<a class="headerlink" href="#enabling-notifications-of-changed-camera-states" title="Permalink to this heading"></a></h3>
+<p>To get notified whenever a camera is detected or disconnected, use
+<code class="docutils literal notranslate"><span class="pre">VmbFeatureInvalidationRegister()</span></code> to register the event <code class="docutils literal notranslate"><span class="pre">EventCameraDiscovery</span></code>.
+Use the global Vmb handle for registration. The function pointer to
+the callback function has to be of type <code class="docutils literal notranslate"><span class="pre">VmbInvalidationCallback()</span></code>.
+The callback gets executed on the according camera discovery event.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#getting-notified-about-discovery-events"><span class="std std-ref">Getting notified about discovery events</span></a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Functions that must not be called within the camera notification callback:</p>
+<ul class="simple">
+<li><p>VmbStartup</p></li>
+<li><p>VmbShutdown</p></li>
+<li><p>VmbCameraOpen</p></li>
+<li><p>VmbCameraClose</p></li>
+<li><p>VmbFeatureIntSet (and any other VmbFeature*Set function)</p></li>
+<li><p>VmbFeatureCommandRun</p></li>
+</ul>
+</div>
+<span class="target" id="index-6"></span><span class="target" id="index-7"></span></section>
+<section id="opening-and-closing-a-camera">
+<span id="index-8"></span><h3>Opening and closing a camera<a class="headerlink" href="#opening-and-closing-a-camera" title="Permalink to this heading"></a></h3>
+<p>A camera must be opened to control it and to capture images.
+Call <code class="docutils literal notranslate"><span class="pre">VmbCameraOpen()</span></code> and provide the ID of the camera and the desired access mode.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">VmbCameraOpen()</span></code> returns a handle to the camera only.</p>
+</div>
+<p>The API provides several access modes:</p>
+<ul class="simple">
+<li><p>VmbAccessModeFull: read and write access. Use this mode to configure the camera
+features and to acquire images (Goldeye CL cameras: configuration only).</p></li>
+<li><p>VmbAccessModeRead: read-only access. Setting features is not possible.
+However, for GigE cameras that are already in use by another application,
+the acquired images can be transferred to the API (Multicast).</p></li>
+</ul>
+<p>The enumerations are defined in VmbAccessModeType (or its VmbUint32_t representation
+VmbAccessMode_t).</p>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">Access modes</span><a class="headerlink" href="#id4" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumeration Integer   Value</p></th>
+<th class="head"><p>Integer Value</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbAccessModeNone</p></td>
+<td><p>0</p></td>
+<td><p>No access</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbAccessModeFull</p></td>
+<td><p>1</p></td>
+<td><p>Read and write access</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbAccessModeRead</p></td>
+<td><p>2</p></td>
+<td><p>Read-only access</p></td>
+</tr>
+</tbody>
+</table>
+<p>When a camera has been opened successfully, a handle for further access is returned.</p>
+<p>An example for opening a camera retrieved from the camera list is shown in
+the code snippet below.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<span id="index-9"></span><div class="code-block-caption"><span class="caption-text">Open cameras code snippet</span><a class="headerlink" href="#id5" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">VmbCameraInfo_t</span><span class="w"> </span><span class="o">*</span><span class="n">pCameras</span><span class="p">;</span>
+<span class="n">VmbHandle_t</span><span class="w"> </span><span class="n">hCamera</span><span class="p">;</span>
+
+<span class="c1">// Get all known cameras as described in chapter &quot;Listing available cameras&quot;</span>
+<span class="c1">// Open the first camera</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">VmbCameraOpen</span><span class="p">(</span><span class="w"> </span><span class="n">pCameras</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="w"> </span><span class="n">cameraIdString</span><span class="w"> </span><span class="p">,</span>
+<span class="w">     </span><span class="n">VmbAccessModeFull</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Camera opened , handle [0x%p] retrieved .</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>The code snippet below shows how to close a camera using <code class="docutils literal notranslate"><span class="pre">VmbCameraClose()</span></code>
+and the previously retrieved handle.</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<span id="index-10"></span><div class="code-block-caption"><span class="caption-text">Closing a camera code snippet</span><a class="headerlink" href="#id6" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">VmbCameraClose</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Camera closed .</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="listing-transport-layers">
+<h3>Listing transport layers<a class="headerlink" href="#listing-transport-layers" title="Permalink to this heading"></a></h3>
+<p>The function <code class="docutils literal notranslate"><span class="pre">VmbTransportLayersList()</span></code> enumerates all found TLs.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To control which TLs are loaded or ignored, see <a class="reference internal" href="sdkManual.html#tl-activation-and-deactivation"><span class="std std-ref">TL activation and deactivation</span></a>.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The AsynchrounousGrab example lists all loaded TLs.</p>
+</div>
+<section id="struct-vmbtransportlayerinfo-t">
+<span id="index-11"></span><h4>Struct VmbTransportLayerInfo_t<a class="headerlink" href="#struct-vmbtransportlayerinfo-t" title="Permalink to this heading"></a></h4>
+<p>The struct <em>VmbTransportLayerInfo_t</em> holds read-only information about a transport layer.
+You can use it to retrieve a handle to the transport layer.
+You can query the struct with the function <code class="docutils literal notranslate"><span class="pre">VmbTransportLayersList()</span></code>.</p>
+<table class="docutils align-default" id="id7">
+<caption><span class="caption-text">Struct VmbTransportLayerInfo_t</span><a class="headerlink" href="#id7" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Field</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>const char*</p></td>
+<td><p>transportLayerIdString</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbInterface_t</p></td>
+<td><p>transportLayerType</p></td>
+</tr>
+<tr class="row-even"><td><p>const char*</p></td>
+<td><p>transportLayerName</p></td>
+</tr>
+<tr class="row-odd"><td><p>const char*</p></td>
+<td><p>transportLayerPath</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbHandle_t</p></td>
+<td><p>transportLayerHandle</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="accessing-features">
+<span id="index-12"></span><h3>Accessing features<a class="headerlink" href="#accessing-features" title="Permalink to this heading"></a></h3>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To quickly learn how to list features of the GenTL modules, see the <em>ListFeatures</em> example.</p>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">VmbCameraOpen()</span></code> returns a handle to the camera, which can be used
+for accessing the camera features. The features of the other GenTL modules
+(system, interface, device, stream) can be accessed with the corresponding handle.
+These handles are part of the following structs:</p>
+<ul class="simple">
+<li><p>VmbCameraInfo_t</p></li>
+<li><p>VmbInterfaceInfo_t</p></li>
+<li><p>VmbSystemInfo_t</p></li>
+</ul>
+<section id="feature-types">
+<span id="index-13"></span><h4>Feature types<a class="headerlink" href="#feature-types" title="Permalink to this heading"></a></h4>
+<p>The C API provides several feature types, which all have their specific
+properties and functionalities.
+The  API provides its own set of access functions for every feature data type.</p>
+<table class="docutils align-default" id="id8">
+<caption><span class="caption-text">Feature types and functions for reading and writing features</span><a class="headerlink" href="#id8" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature Type</p></th>
+<th class="head"><p>Operation</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="3"><p>Enumeration</p></td>
+<td><p>Set</p></td>
+<td><p>VmbFeatureEnumSet</p></td>
+</tr>
+<tr class="row-odd"><td><p>Get</p></td>
+<td><p>Get VmbFeatureEnumGet</p></td>
+</tr>
+<tr class="row-even"><td><p>Range</p></td>
+<td><p>VmbFeatureEnumRangeQuery</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2" rowspan="4"><p>Other</p></td>
+<td><p>VmbFeatureEnumIsAvailable</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbFeatureEnumAsInt</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbFeatureEnumAsString</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbFeatureEnumEntryGet</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="4"><p>Integer</p></td>
+<td><p>Set</p></td>
+<td><p>VmbFeatureIntSet</p></td>
+</tr>
+<tr class="row-even"><td><p>Get</p></td>
+<td><p>VmbFeatureIntGet</p></td>
+</tr>
+<tr class="row-odd"><td><p>Range</p></td>
+<td><p>VmbFeatureIntRangeQuery</p></td>
+</tr>
+<tr class="row-even"><td><p>Other</p></td>
+<td><p>VmbFeatureIntIncrementQuery</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>Float</p></td>
+<td><p>Set</p></td>
+<td><p>VmbFeatureFloatSet</p></td>
+</tr>
+<tr class="row-even"><td><p>Get</p></td>
+<td><p>VmbFeatureFloatGet</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>String</p></td>
+<td><p>Set</p></td>
+<td><p>VmbFeatureStringSet</p></td>
+</tr>
+<tr class="row-even"><td><p>Get</p></td>
+<td><p>VmbFeatureStringGet</p></td>
+</tr>
+<tr class="row-odd"><td><p>Range</p></td>
+<td><p>VmbFeatureStringMaxlengthQuery</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>Boolean</p></td>
+<td><p>Set</p></td>
+<td><p>VmbFeatureBoolSet</p></td>
+</tr>
+<tr class="row-odd"><td><p>Get</p></td>
+<td><p>VmbFeatureBoolGet</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>Command</p></td>
+<td><p>Set</p></td>
+<td><p>VmbFeatureCommandRun</p></td>
+</tr>
+<tr class="row-odd"><td><p>Get</p></td>
+<td><p>VmbFeatureCommandIsDone</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>Raw data</p></td>
+<td><p>Set</p></td>
+<td><p>VmbFeatureRawSet</p></td>
+</tr>
+<tr class="row-odd"><td><p>Get</p></td>
+<td><p>VmbFeatureRawGet</p></td>
+</tr>
+<tr class="row-even"><td><p>Range</p></td>
+<td><p>VmbFeatureRawLengthQuery</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="struct-vmbfeatureinfo-t">
+<span id="index-14"></span><h4>Struct VmbFeatureInfo_t<a class="headerlink" href="#struct-vmbfeatureinfo-t" title="Permalink to this heading"></a></h4>
+<table class="docutils align-default" id="id9">
+<caption><span class="caption-text">Struct VmbFeatureInfo_t</span><a class="headerlink" href="#id9" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Struct Entry</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>const char* name</p></td>
+<td><p>Name used in the API</p></td>
+</tr>
+<tr class="row-odd"><td><p>const char* displayName</p></td>
+<td><p>Enumeration entry name to be used in GUIs</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbFeatureVisibility_t visibility</p></td>
+<td><p>GUI visibility</p></td>
+</tr>
+<tr class="row-odd"><td><p>const char* tooltip</p></td>
+<td><p>Short description, e.g. for a tooltip</p></td>
+</tr>
+<tr class="row-even"><td><p>const char* description</p></td>
+<td><p>Longer description</p></td>
+</tr>
+<tr class="row-odd"><td><p>const char* sfncNamespace n</p></td>
+<td><p>Namespace this feature resides in</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbInt64_t intValue</p></td>
+<td><p>Integer value of this enumeration entry</p></td>
+</tr>
+</tbody>
+</table>
+<span id="index-15"></span><table class="docutils align-default" id="id10">
+<caption><span class="caption-text">Enum VmbFeatureDataType is represented as VmbUint32_t through VmbFeatureData_t</span><a class="headerlink" href="#id10" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumeration</p></th>
+<th class="head"><p>Integer Value</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbFeatureDataInt</p></td>
+<td><p>1</p></td>
+<td><p>64-bit integer feature</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbFeatureDataFloat</p></td>
+<td><p>2</p></td>
+<td><p>64-bit floating point feature</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbFeatureDataEnum</p></td>
+<td><p>3</p></td>
+<td><p>Enumeration feature</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbFeatureDataString</p></td>
+<td><p>4</p></td>
+<td><p>String feature</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbFeatureDataBool</p></td>
+<td><p>5</p></td>
+<td><p>Boolean feature</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbFeatureDataCommand</p></td>
+<td><p>6</p></td>
+<td><p>Command feature</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbFeatureDataRaw</p></td>
+<td><p>7</p></td>
+<td><p>Raw (direct register access) feature</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbFeatureDataNone</p></td>
+<td><p>8</p></td>
+<td><p>Feature with no data</p></td>
+</tr>
+</tbody>
+</table>
+<span id="index-16"></span><table class="docutils align-default" id="id11">
+<caption><span class="caption-text">Enum VmbFeatureFlagsType is represented as VmbUint32_t through VmbFeatureFlags_t</span><a class="headerlink" href="#id11" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumeration</p></th>
+<th class="head"><p>Integer Value</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbFeatureFlagsRead</p></td>
+<td><p>1</p></td>
+<td><p>Static info about read access. Current status depends <br>
+on access mode, check with VmbFeatureAccessQuery()</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbFeatureFlagsWrite</p></td>
+<td><p>2</p></td>
+<td><p>Static info about write access. Current status depends <br>
+on access mode, check with VmbFeatureAccessQuery()</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbFeatureFlagsVolatile</p></td>
+<td><p>8</p></td>
+<td><p>Value may change at any time</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbFeatureFlagsModifyWrite</p></td>
+<td><p>16</p></td>
+<td><p>Value may change after a write</p></td>
+</tr>
+</tbody>
+</table>
+<span id="index-17"></span><table class="docutils align-default" id="id12">
+<caption><span class="caption-text">Enum VmbFeatureVisibilityType is represented as VmbUint32_t through VmbFeatureVisibility_t</span><a class="headerlink" href="#id12" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumeration</p></th>
+<th class="head"><p>Integer value</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbFeatureVisibilityUnknown</p></td>
+<td><p>0</p></td>
+<td><p>Feature visibility is not known</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbFeatureVisibilityBeginner</p></td>
+<td><p>1</p></td>
+<td><p>Feature is visible in feature list (beginner)</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbFeatureVisibilityExpert</p></td>
+<td><p>2</p></td>
+<td><p>Feature is visible in feature list (expert level)</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbFeatureVisibilityGuru</p></td>
+<td><p>3</p></td>
+<td><p>Feature is visible in feature list (guru level)</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbFeatureVisibilityInvisible</p></td>
+<td><p>4</p></td>
+<td><p>Feature is hidden</p></td>
+</tr>
+</tbody>
+</table>
+<div class="literal-block-wrapper docutils container" id="id13">
+<span id="index-18"></span><div class="code-block-caption"><span class="caption-text">Get features code snippet</span><a class="headerlink" href="#id13" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">VmbFeatureInfo_t</span><span class="w"> </span><span class="o">*</span><span class="n">pFeatures</span><span class="p">;</span>
+<span class="n">VmbUint32_t</span><span class="w"> </span><span class="n">nCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">VmbHandle_t</span><span class="w"> </span><span class="n">hCamera</span><span class="p">;</span>
+
+<span class="c1">// Open the camera as shown in chapter &quot;Opening and closing a camera&quot;</span>
+
+<span class="c1">// Get the number of features</span>
+<span class="n">VmbError_t</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbFeaturesList</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nCount</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="w"> </span><span class="o">*</span><span class="n">pFeatures</span><span class="w"> </span><span class="p">);</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nCount</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="c1">// Allocate accordingly</span>
+<span class="w">   </span><span class="n">pFeatures</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">VmbFeatureInfo_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="w"> </span><span class="n">nCount</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="w"> </span><span class="o">*</span><span class="n">pFeatures</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">   </span><span class="c1">// Get the features</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbFeaturesList</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">pFeatures</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nCount</span><span class="w"> </span><span class="p">,</span>
+<span class="w">   </span><span class="k">sizeof</span><span class="w"> </span><span class="o">*</span><span class="n">pFeatures</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">   </span><span class="c1">// Print out their name and data type</span>
+<span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">nCount</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Feature &#39;%s&#39; of type: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">pFeatures</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span><span class="w"> </span><span class="p">,</span>
+<span class="w">   </span><span class="n">pFeatures</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="w"> </span><span class="n">featureDataType</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id14">
+<span id="index-19"></span><div class="code-block-caption"><span class="caption-text">Reading a camera feature code snippet</span><a class="headerlink" href="#id14" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">VmbHandle_t</span><span class="w"> </span><span class="n">hCamera</span><span class="p">;</span>
+
+<span class="c1">// Open the camera as shown in chapter &quot;Opening a camera&quot;</span>
+<span class="n">VmbInt64_t</span><span class="w"> </span><span class="n">nWidth</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">VmbFeatureIntGet</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Width&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nWidth</span><span class="w"> </span><span class="p">))</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Width: %ld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nWidth</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-text">Writing features and running command features</span><a class="headerlink" href="#id15" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">VmbHandle_t</span><span class="w"> </span><span class="n">hCamera</span><span class="p">;</span>
+
+<span class="c1">// Open the camera as shown in chapter &quot;Opening a camera&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">VmbFeatureEnumSet</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;AcquisitionMode&quot;</span><span class="p">,</span>
+<span class="w">                                           </span><span class="s">&quot;Continuous&quot;</span><span class="w"> </span><span class="p">))</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbFeatureCommandRun</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;AcquisitionStart&quot;</span><span class="w"> </span><span class="p">))</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Acquisition successfully started</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="camera-features">
+<h4>Camera features<a class="headerlink" href="#camera-features" title="Permalink to this heading"></a></h4>
+<p id="index-20">To query all available features of a camera, use <code class="docutils literal notranslate"><span class="pre">VmbFeaturesList()</span></code>.
+This list does not change while the camera is opened.
+Information about enumeration features, such as string and integer representation,
+is held in struct <em>VmbFeatureEnumEntry_t</em>.</p>
+</section>
+<section id="struct-vmbfeatureenumentry-t">
+<span id="index-21"></span><h4>Struct VmbFeatureEnumEntry_t<a class="headerlink" href="#struct-vmbfeatureenumentry-t" title="Permalink to this heading"></a></h4>
+<table class="docutils align-default" id="id16">
+<caption><span class="caption-text">Struct VmbFeatureEnumEntry_t</span><a class="headerlink" href="#id16" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Struct entry</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>const char* name</p></td>
+<td><p>Name used in the API</p></td>
+</tr>
+<tr class="row-odd"><td><p>const char* displayName</p></td>
+<td><p>Enumeration entry name to be used in GUIs</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbFeatureVisibility_t visibility</p></td>
+<td><p>GUI visibility</p></td>
+</tr>
+<tr class="row-odd"><td><p>const char* tooltip</p></td>
+<td><p>Short description, e.g. for a tooltip</p></td>
+</tr>
+<tr class="row-even"><td><p>const char* description</p></td>
+<td><p>Longer description</p></td>
+</tr>
+<tr class="row-odd"><td><p>const char* sfncNamespace</p></td>
+<td><p>Namespace this feature resides in</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbInt64_t intValue</p></td>
+<td><p>Integer value of this enumeration entry</p></td>
+</tr>
+</tbody>
+</table>
+<p>The C API provides separate access to the feature lists of all GenTL modules.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some features aren’t always available. For example, some features
+cannot be accessed while the camera is acquiring images. To query the
+current accessibility of a feature, call <code class="docutils literal notranslate"><span class="pre">VmbFeatureAccessQuery()</span></code>.</p>
+</div>
+<p>The following table shows basic features of all cameras. A feature has a name, a type, and access flags such
+as read-permitted and write-permitted.</p>
+<table class="docutils align-default" id="id17">
+<caption><span class="caption-text">Basic features on all cameras</span><a class="headerlink" href="#id17" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature Type</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Access flags</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AcquisitionMode</p></td>
+<td><p>Enumeration</p></td>
+<td><p>R/W</p></td>
+<td><p>Acquisition mode of the camera. Value <br>
+set: Continuous, SingleFrame, MultiFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p>AcquisitionStart</p></td>
+<td><p>Command</p></td>
+<td></td>
+<td><p>Start acquiring images.</p></td>
+</tr>
+<tr class="row-even"><td><p>AcquisitionStop</p></td>
+<td><p>Command</p></td>
+<td></td>
+<td><p>Stop acquiring images.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PixelFormat</p></td>
+<td><p>Enumeration</p></td>
+<td><p>R/W</p></td>
+<td><p>The image format (Mono8 etc.)</p></td>
+</tr>
+<tr class="row-even"><td><p>Width</p></td>
+<td></td>
+<td><p>Uint32</p></td>
+<td><p>Image width, in pixels.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Height</p></td>
+<td></td>
+<td><p>Uint32</p></td>
+<td><p>Image height, in pixels.</p></td>
+</tr>
+<tr class="row-even"><td><p>PayloadSize <br>
+(do not use)</p></td>
+<td></td>
+<td><p>Uint32</p></td>
+<td><p>Recommendation: Use VmbPayloadSizeGet() <br>
+instead of this feature <br></p></td>
+</tr>
+</tbody>
+</table>
+<p>To get notified whenever a feature value changes, use <code class="docutils literal notranslate"><span class="pre">VmbFeatureInvalidationRegister()</span></code> to
+register a callback that gets executed on the according event. For camera features, use the camera
+handle for registration. The function pointer to the callback function has to be of type
+<code class="docutils literal notranslate"><span class="pre">VmbInvalidationCallback*()</span></code>.</p>
+</section>
+</section>
+<section id="acquiring-images">
+<span id="index-22"></span><h3>Acquiring images<a class="headerlink" href="#acquiring-images" title="Permalink to this heading"></a></h3>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The <a class="reference internal" href="sdkManual.html"><span class="doc">SDK Manual</span></a> describes synchronous and asynchronous image acquisition.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For a quick start, see the <em>SynchronousGrab</em> example.</p>
+</div>
+<section id="image-capture-vs-image-acquisition">
+<h4>Image Capture vs. Image Acquisition<a class="headerlink" href="#image-capture-vs-image-acquisition" title="Permalink to this heading"></a></h4>
+<p>Image capture and image acquisition are two independent operations:
+The API captures images, the camera acquires images. To obtain an image
+from your camera, setup the API to capture images
+before starting the acquisition on the camera:</p>
+<figure class="align-default" id="id18">
+<a class="reference internal image-reference" href="_images/VmbC_asynchronous.png"><img alt="Typical asynchronous application using VmbC" src="_images/VmbC_asynchronous.png" style="width: 1000px;" /></a>
+<figcaption>
+<p><span class="caption-text">Typical asynchronous application using VmbC</span><a class="headerlink" href="#id18" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="image-capture">
+<h4>Image Capture<a class="headerlink" href="#image-capture" title="Permalink to this heading"></a></h4>
+<p>To enable image capture, frame buffers must be allocated and the API must
+be prepared for incoming frames.</p>
+<p>Optionally, you can activate the <em>alloc and announce</em> functionality for more efficient buffer allocation.
+To do this, use the optional parameter /x.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>CSI-2 cameras only</strong>:</p>
+<p>We recommend using <em>alloc and announce</em>. If you want to use the <em>announce mode</em> with the CSI TL,
+you must take care of the buffer alignment (which is not necessary when using
+<em>alloc and announce</em>). To do this:</p>
+<ol class="arabic simple">
+<li><p>Query the required buffer alignment using the <em>StreamBufferAlignment</em>
+feature of the Stream module.</p></li>
+<li><p>Use the returned value for buffer allocation, for example, with the function
+<code class="docutils literal notranslate"><span class="pre">aligned_alloc</span></code>.</p></li>
+<li><p>Announce buffers as usual, see the description below.</p></li>
+</ol>
+</div>
+<p>To capture images sent by the camera, follow these steps:</p>
+<ol class="arabic simple">
+<li><p>Open the camera as described in chapter Opening and closing a camera.</p></li>
+<li><p>Query the necessary buffer size through the convenience function <code class="docutils literal notranslate"><span class="pre">VmbPayloadSizeGet()</span></code>
+(to avoid errors, do not use the <code class="docutils literal notranslate"><span class="pre">PayloadSize()</span></code> function).</p></li>
+<li><p>Announce the frame buffers. If you announce NULL buffers, the TL announces buffers with a suitable value.</p></li>
+<li><p>Start the capture engine.</p></li>
+<li><p>Queue the frame you have just created with <code class="docutils literal notranslate"><span class="pre">VmbCaptureFrameQueue()</span></code>,
+so that the buffer can be filled when the acquisition has started.</p></li>
+</ol>
+<p>The API is now ready. Start and stop image acquisition on the camera as
+described in chapter Image Acquisition. How you
+proceed depends on the acquisition model you need:</p>
+<ul class="simple">
+<li><p>Synchronous: Use VmbCaptureFrameWait to receive an image frame while
+blocking your execution thread.</p></li>
+<li><p>Asynchronous: Register a callback that gets executed when capturing
+is complete. Use the camera handle for registration. The function pointer
+to the callback function has to be of type <code class="docutils literal notranslate"><span class="pre">VmbFrameCallback*`()</span></code>.
+Within the callback routine, queue the frame again after you have processed it.</p></li>
+</ul>
+<ol class="arabic simple" start="6">
+<li><p>Stop the capture engine and discard all pending callbacks with <code class="docutils literal notranslate"><span class="pre">VmbCaptureEnd()</span></code>.</p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">VmbCaptureQueueFlush()</span></code> to cancel all frames on the queue.</p></li>
+<li><p>Revoke the frames with <code class="docutils literal notranslate"><span class="pre">VmbFrameRevokeAll()</span></code> to clear the buffers.</p></li>
+</ol>
+<p>To assure correct continuous image capture, queue at least two or three frames.
+The appropriate number of frames to be queued in your application depends on
+the frames per second the camera delivers and on the speed with which you are
+able to re-queue frames (also depending on the load of your operating system).
+The image frames are filled in the same order in which they were queued.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Always check that <em>VmbFrame_t.receiveStatus</em> equals
+<em>VmbFrameStatusComplete</em> when a frame is returned to ensure
+the data is valid.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Functions that must not be called within the Frame callback routine:</p>
+<ul class="simple">
+<li><p>VmbStartup</p></li>
+<li><p>VmbShutdown</p></li>
+<li><p>VmbCameraOpen</p></li>
+<li><p>VmbCameraClose</p></li>
+<li><p>VmbFrameAnnounce</p></li>
+<li><p>VmbFrameRevoke</p></li>
+<li><p>VmbFrameRevokeAll</p></li>
+<li><p>VmbCaptureStart</p></li>
+<li><p>VmbCaptureEnd</p></li>
+</ul>
+</div>
+</section>
+<section id="image-acquisition">
+<h4>Image Acquisition<a class="headerlink" href="#image-acquisition" title="Permalink to this heading"></a></h4>
+<p>As soon as the API is prepared (see <a class="reference internal" href="#image-capture"><span class="std std-ref">Image Capture</span></a>, you can start
+image acquisition on your camera:</p>
+<ol class="arabic simple">
+<li><p>Set the feature <em>AcquisitionMode</em> (for example, Continuous).</p></li>
+<li><p>Run the command <strong class="command">AcquisitionStart</strong>.</p></li>
+<li><p>To stop image acquisition, run command <strong class="command">AcquisitionStop</strong>.</p></li>
+</ol>
+<div class="literal-block-wrapper docutils container" id="id19">
+<span id="index-23"></span><div class="code-block-caption"><span class="caption-text">Image streaming code snippet</span><a class="headerlink" href="#id19" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define FRAME_COUNT 3 </span><span class="c1">// We choose to use 3 frames</span>
+<span class="n">VmbError_t</span><span class="w"> </span><span class="n">err</span><span class="p">;</span><span class="w">                  </span><span class="c1">// Functions return an error code to</span>
+<span class="w">                                 </span><span class="c1">// check for VmbErrorSuccess</span>
+<span class="n">VmbHandle_t</span><span class="w"> </span><span class="n">hCamera</span><span class="w">              </span><span class="c1">// A handle to our opened camera</span>
+<span class="n">VmbFrame_t</span><span class="w"> </span><span class="n">frames</span><span class="p">[</span><span class="n">FRAME_COUNT</span><span class="w"> </span><span class="p">];</span><span class="w"> </span><span class="c1">// A list of frames for streaming</span>
+<span class="n">VmbUInt64_t</span><span class="w"> </span><span class="n">nPLS</span><span class="p">;</span><span class="w">                </span><span class="c1">// The payload size of one frame</span>
+
+<span class="c1">// The callback that gets executed on every filled frame</span>
+<span class="c1">// For smooth image acquisition, perform the callback as fast as possible</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">VMB_CALL</span><span class="w"> </span><span class="nf">FrameDoneCallback</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">VmbHandle_t</span><span class="w"> </span><span class="n">hCamera</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">VmbHandle_t</span><span class="w"> </span><span class="n">hStream</span><span class="p">,</span><span class="w"> </span><span class="n">VmbFrame_t</span><span class="w"> </span><span class="o">*</span><span class="n">pFrame</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">VmbFrameStatusComplete</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pFrame</span><span class="w"> </span><span class="o">-&gt;</span><span class="n">receiveStatus</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Frame successfully received</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">   </span><span class="k">else</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Error receiving frame</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">   </span><span class="n">VmbCaptureFrameQueue</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">pFrame</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">FrameDoneCallback</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Get all known cameras, see chapter &quot;List available cameras&quot;</span>
+<span class="c1">// and open the camera as shown in chapter &quot;Opening a camera&quot;</span>
+
+<span class="c1">// Get the required size for one image</span>
+<span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbPayloadSizeGet</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nPLS</span><span class="w"> </span><span class="p">);</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">FRAME_COUNT</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="c1">// Allocate accordingly</span>
+<span class="w">   </span><span class="n">frames</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="w"> </span><span class="n">nPLS</span><span class="w"> </span><span class="p">);</span><span class="w"> </span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+<span class="w">   </span><span class="n">frames</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="w"> </span><span class="n">bufferSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nPLS</span><span class="p">;</span><span class="w"> </span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+<span class="w">   </span><span class="c1">// Anounce the frame</span>
+<span class="w">   </span><span class="n">VmbFrameAnnounce</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">frames</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">VmbFrame_t</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Start capture engine on the host</span>
+<span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbCaptureStart</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">);</span>
+
+<span class="c1">// Queue frames and register callback</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">FRAME_COUNT</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">VmbCaptureFrameQueue</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">frames</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+<span class="w">                         </span><span class="n">FrameDoneCallback</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Start acquisition on the camera</span>
+<span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbFeatureCommandRun</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;AcquisitionStart&quot;</span><span class="w"> </span><span class="p">);</span>
+
+<span class="c1">// Program runtime ...</span>
+
+<span class="c1">// When finished , tear down the acquisition chain , close the camera and Vimba X.</span>
+<span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbFeatureCommandRun</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;AcquisitionStop&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbCaptureEnd</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">);</span>
+<span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbCaptureQueueFlush</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">);</span>
+<span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbFrameRevokeAll</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">);</span>
+<span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbCameraClose</span><span class="p">(</span><span class="w"> </span><span class="n">hCamera</span><span class="w"> </span><span class="p">);</span>
+<span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbShutdown</span><span class="w"> </span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="struct-vmbframe-t">
+<span id="index-24"></span><h4>Struct VmbFrame_t<a class="headerlink" href="#struct-vmbframe-t" title="Permalink to this heading"></a></h4>
+<p>The struct <em>VmbFrame_t</em> represents not only the actual image data, but also
+additional information. You can find the referenced data types in the tables
+below.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The field “void* buffer” of the struct can be NULL when the struct ist passed to
+<code class="docutils literal notranslate"><span class="pre">VmbFrameAnnounce</span></code>. In this case, the “alloc and announce” function of the TL
+allocates buffer memory.</p>
+</div>
+<table class="docutils align-default" id="id20">
+<caption><span class="caption-text">VmbFrame_t</span><a class="headerlink" href="#id20" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Struct entry</p></th>
+<th class="head"><p>Type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>void* buffer</p></td>
+<td><p>Pointer to the actual image data <br>
+including chunk data. Can be NULL.</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbUint32_t bufferSize</p></td>
+<td><p>Size of the data buffer</p></td>
+</tr>
+<tr class="row-even"><td><p>void* context[4]</p></td>
+<td><p>4 void pointers that can be employed by the <br>
+user (e.g., for storing handles)</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbFrameStatus_t receiveStatus</p></td>
+<td><p>Resulting status of the receive operation</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbFrameFlags_t receiveFlags</p></td>
+<td><p>Flags indicating which additional frame <br>
+information is available</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbUint32_t chunkSize</p></td>
+<td><p>Size of the chunk data inside the data buffer</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbPixelFormat_t pixelFormat</p></td>
+<td><p>Pixel format of the image</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbUint32_t width</p></td>
+<td><p>Width of an image</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbUint32_t height</p></td>
+<td><p>Height of an image</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbUint32_t offsetX</p></td>
+<td><p>Horizontal offset of an image</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbUint32_t offsetY</p></td>
+<td><p>Vertical offset of an image</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbUint64_t frameID</p></td>
+<td><p>Unique ID of this frame in this stream</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbUint64_t timestamp</p></td>
+<td><p>Timestamp set by the camera</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default" id="id21">
+<caption><span class="caption-text">Enum <em>VmbFrameStatusType</em> is represented as VmbInt32_t through VmbFrameStatus_t</span><a class="headerlink" href="#id21" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumeration</p></th>
+<th class="head"><p>Integer Value</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbFrameStatusComplete</p></td>
+<td><p>0</p></td>
+<td><p>Frame was completed without errors</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbFrameStatusIncomplete</p></td>
+<td><p>-1</p></td>
+<td><p>Frame could not be filled to the end</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbFrameStatusInvalid</p></td>
+<td><p>-3</p></td>
+<td><p>Frame buffer was invalid</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default" id="id22">
+<caption><span class="caption-text">Enum VmbFrameFlagsType is represented as VmbUint32_t through VmbFrameFlags_t</span><a class="headerlink" href="#id22" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumeration</p></th>
+<th class="head"><p>Integer Value</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbFrameFlagsNone</p></td>
+<td><p>0</p></td>
+<td><p>No additional information is provided</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbFrameFlagsDimension</p></td>
+<td><p>1</p></td>
+<td><p>Frame’s dimension is provided</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbFrameFlagsOffset</p></td>
+<td><p>2</p></td>
+<td><p>Frame’s offset is provided (ROI)</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbFrameFlagsFrameID</p></td>
+<td><p>4</p></td>
+<td><p>Frame’s ID is provided</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbFrameFlagsTimestamp</p></td>
+<td><p>8</p></td>
+<td><p>Frame’s timestamp is provided</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="transforming-images">
+<h3>Transforming images<a class="headerlink" href="#transforming-images" title="Permalink to this heading"></a></h3>
+<p>To transform images received via the API into
+common image formats, use the Image Transform Library.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For a quick start, see the <em>AsynchrounousGrab</em> example,
+which contains an image transformation.</p>
+</div>
+</section>
+<section id="using-events">
+<span id="index-25"></span><h3>Using Events<a class="headerlink" href="#using-events" title="Permalink to this heading"></a></h3>
+<p>Events serve many purposes and can have several origins such as generic
+camera events or just feature changes.
+All of these cases are handled in the C API uniformly with the same
+mechanism: You simply register a notification callback with
+<code class="docutils literal notranslate"><span class="pre">VmbFeatureInvalidationRegister()</span></code> for the feature of your
+choice which gets called when there is a change to that feature.</p>
+<p>Three examples are listed in this chapter:</p>
+<ul class="simple">
+<li><p>Camera list notifications</p></li>
+<li><p>Camera event features</p></li>
+<li><p>Tracking invalidations of features</p></li>
+</ul>
+<section id="getting-notified-about-discovery-events">
+<h4>Getting notified about discovery events<a class="headerlink" href="#getting-notified-about-discovery-events" title="Permalink to this heading"></a></h4>
+<div class="literal-block-wrapper docutils container" id="id23">
+<span id="index-26"></span><div class="code-block-caption"><span class="caption-text">Camera list notifications code snippet</span><a class="headerlink" href="#id23" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// 1. define callback function</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">VMB_CALL</span><span class="w"> </span><span class="nf">CameraListCB</span><span class="p">(</span><span class="w"> </span><span class="n">VmbHandle_t</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="kt">char</span><span class="w"> </span><span class="n">cameraName</span><span class="w"> </span><span class="p">[</span><span class="mi">255</span><span class="p">];</span>
+<span class="w">   </span><span class="n">VmbUint32_t</span><span class="w"> </span><span class="n">sizeFilled</span><span class="p">;</span>
+<span class="w">   </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">callbackReason</span><span class="p">;</span>
+
+<span class="w">   </span><span class="c1">// Get the name of the camera due to which the callback was triggered</span>
+<span class="w">   </span><span class="n">VmbFeatureStringGet</span><span class="p">(</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EventCameraDiscoveryCameraID&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cameraName</span><span class="p">,</span>
+<span class="w">                        </span><span class="k">sizeof</span><span class="p">(</span><span class="n">cameraName</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sizeFilled</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">   </span><span class="c1">// Get the reason why the callback was triggered. Possible values:</span>
+<span class="w">   </span><span class="c1">// Missing (0), a known camera disappeared from the bus</span>
+<span class="w">   </span><span class="c1">// Detected (1), a new camera was discovered</span>
+<span class="w">   </span><span class="c1">// Reachable (2), a known camera can be accessed</span>
+<span class="w">   </span><span class="c1">// Unreachable (3), a known camera cannot be accessed anymore</span>
+<span class="w">   </span><span class="n">VmbFeatureEnumGet</span><span class="p">(</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EventCameraDiscoveryType&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">callbackReason</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Event was fired by camera %s because %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cameraName</span><span class="w"> </span><span class="p">,</span>
+<span class="w">           </span><span class="n">callbackReason</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 2. register the callback for that event</span>
+<span class="n">VmbFeatureInvalidationRegister</span><span class="p">(</span><span class="w"> </span><span class="n">gVmbHandle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EventCameraDiscovery&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">CameraListCB</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Per default, camera discovery events are only effective for the known
+interfaces. If you want to get notified about new cameras from a new
+interface we recommend registering the event <code class="docutils literal notranslate"><span class="pre">EventInterfaceDiscovery</span></code>,
+which will make sure that new interfaces are discovered.</p>
+</div>
+</section>
+<section id="getting-notified-about-feature-invalidations">
+<h4>Getting notified about feature invalidations<a class="headerlink" href="#getting-notified-about-feature-invalidations" title="Permalink to this heading"></a></h4>
+<div class="literal-block-wrapper docutils container" id="id24">
+<span id="index-27"></span><div class="code-block-caption"><span class="caption-text">Notifications about feature invalidations code snippet</span><a class="headerlink" href="#id24" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// 1. define callback function</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">VMB_CALL</span><span class="w"> </span><span class="n">WidthChangeCB</span><span class="p">(</span><span class="w"> </span><span class="n">VmbHandle_t</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="p">)</span>
+
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Feature changed: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 2. register callback for changes to Width</span>
+<span class="n">VmbFeatureInvalidationRegister</span><span class="p">(</span><span class="w"> </span><span class="n">cameraHandle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Width&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">WidthChangeCB</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">);</span>
+
+<span class="c1">// as an example , binning is changed , so the callback will be run</span>
+<span class="n">VmbFeatureIntegerSet</span><span class="p">(</span><span class="w"> </span><span class="n">cameraHandle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Binning&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="getting-notified-about-camera-events">
+<h4>Getting notified about camera events<a class="headerlink" href="#getting-notified-about-camera-events" title="Permalink to this heading"></a></h4>
+<div class="literal-block-wrapper docutils container" id="id25">
+<span id="index-28"></span><div class="code-block-caption"><span class="caption-text">Getting notified about camera events code snippet</span><a class="headerlink" href="#id25" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// 1. define callback function</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">VMB_CALL</span><span class="w"> </span><span class="nf">EventCB</span><span class="p">(</span><span class="w"> </span><span class="n">VmbHandle_t</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Event was fired: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// 2. select &quot;AcquisitionStart&quot; event</span>
+<span class="n">VmbFeatureEnumSet</span><span class="p">(</span><span class="w"> </span><span class="n">cameraHandle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EventSelector&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;AcquisitionStart&quot;</span><span class="w"> </span><span class="p">);</span>
+
+<span class="c1">// 3. switch on the event notification</span>
+<span class="n">VmbFeatureEnumSet</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">cameraHandle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EventNotification&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;On&quot;</span><span class="w"> </span><span class="p">);</span>
+
+<span class="c1">// 4. register the callback for that event</span>
+<span class="n">VmbFeatureInvalidationRegister</span><span class="p">(</span><span class="w"> </span><span class="n">cameraHandle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EventAcquisitionStart&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">EventCB</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="chunk">
+<span id="index-29"></span><h3>Chunk<a class="headerlink" href="#chunk" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To use the <em>chunk</em> feature, make sure your camera supports it.
+To activate the chunk camera feature, see the user documentation of your camera.</p>
+</div>
+<p>Chunk data are image metadata such as the exposure time that are available in the Frame
+that contains the chunk data.
+To access chunk data, use <code class="docutils literal notranslate"><span class="pre">VmbChunkAccessCallback</span></code>.</p>
+<p>Required parameters:</p>
+<ul class="simple">
+<li><p>The frame handle that contains the chunk data (VmbFrame_t)</p></li>
+<li><p>Callback to access the chunk data</p></li>
+<li><p>Pointer for passing custom data in and out the function</p></li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id26">
+<span id="index-30"></span><div class="code-block-caption"><span class="caption-text">Chunk code snippet</span><a class="headerlink" href="#id26" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Data structure for passing Chunk data values to and from the Chunk Data Access Callback function</span>
+<span class="c1">// This should be adjusted for the Chunk features that are available for a specific camera</span>
+<span class="c1">// In this example, the camera supports the Chunk features:</span>
+<span class="c1">// ChunkWidth, ChunkHeight, ChunkOffsetX, ChunkOffsetY</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">VmbInt64_t</span><span class="w"> </span><span class="n">m_width</span><span class="p">;</span>
+<span class="w">  </span><span class="n">VmbInt64_t</span><span class="w"> </span><span class="n">m_height</span><span class="p">;</span>
+<span class="w">  </span><span class="n">VmbInt64_t</span><span class="w"> </span><span class="n">m_offsetX</span><span class="p">;</span>
+<span class="w">  </span><span class="n">VmbInt64_t</span><span class="w"> </span><span class="n">m_offsetY</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">ChunkData</span><span class="p">;</span>
+
+<span class="c1">// We may use custom error codes as return values for the Chunk Data Access Callback function</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">VmbError_t</span><span class="w"> </span><span class="n">ChunkOffsetAccessError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbErrorCustom</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">VmbError_t</span><span class="w"> </span><span class="n">ChunkSizeAccessError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbErrorCustom</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">// Chunk features are only accessible in the Chunk Data Access Callback function</span>
+<span class="n">VmbError_t</span><span class="w"> </span><span class="n">VMB_CALL</span><span class="w"> </span><span class="n">MyChunkDataAccessCallback</span><span class="p">(</span><span class="n">VmbHandle_t</span><span class="w"> </span><span class="n">featureAccessHandle</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">userContext</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">ChunkData</span><span class="o">*</span><span class="w"> </span><span class="n">chunkData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">ChunkData</span><span class="o">*</span><span class="p">)(</span><span class="n">userContext</span><span class="p">));</span>
+
+<span class="w">  </span><span class="c1">// With the featureAccessHandle, Chunk features can be accessed like any other camera feature</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">VmbFeatureIntGet</span><span class="p">(</span><span class="n">featureAccessHandle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ChunkWidth&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">chunkData</span><span class="p">.</span><span class="n">m_width</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="p">)</span>
+<span class="w">      </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">VmbFeatureIntGet</span><span class="p">(</span><span class="n">featureAccessHandle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ChunkHeight&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">chunkData</span><span class="p">.</span><span class="n">m_height</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">ChunkSizeAccessError</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">VmbFeatureIntGet</span><span class="p">(</span><span class="n">featureAccessHandle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ChunkOffsetX&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">chunkData</span><span class="p">.</span><span class="n">m_offsetX</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="p">)</span>
+<span class="w">      </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">VmbFeatureIntGet</span><span class="p">(</span><span class="n">featureAccessHandle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ChunkOffsetY&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">chunkData</span><span class="p">.</span><span class="n">m_offsetY</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">ChunkOffsetAccessError</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">VMB_CALL</span><span class="w"> </span><span class="n">MyFrameCallback</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">VmbHandle_t</span><span class="w"> </span><span class="n">cameraHandle</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">VmbHandle_t</span><span class="w"> </span><span class="n">streamHandle</span><span class="p">,</span><span class="w"> </span><span class="n">VmbFrame_t</span><span class="o">*</span><span class="w"> </span><span class="n">frame</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">frame</span><span class="o">-&gt;</span><span class="n">chunkDataPresent</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ChunkData</span><span class="w"> </span><span class="n">chunkData</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// The function VmbChunkDataAccess will prepare the Chunk data access for the current frame</span>
+<span class="w">    </span><span class="c1">// The Chunk features can be accessed in the passed Chunk Data Access Callback function</span>
+<span class="w">    </span><span class="c1">// Chunk feature values are passed in the ChunkData struct</span>
+<span class="w">    </span><span class="n">VmbError_t</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbChunkDataAccess</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span><span class="w"> </span><span class="n">MyChunkDataAccessCallback</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">chunkData</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// Print the Chunk features for the current frame</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Frame received: FrameId=%llu; Width=%lld; Height=%lld; OffsetX=%lld; OffsetY=%lld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">frame</span><span class="o">-&gt;</span><span class="n">frameID</span><span class="p">,</span><span class="w"> </span><span class="n">chunkData</span><span class="p">.</span><span class="n">m_width</span><span class="p">,</span><span class="w"> </span><span class="n">chunkData</span><span class="p">.</span><span class="n">m_height</span><span class="p">,</span><span class="w"> </span><span class="n">chunkData</span><span class="p">.</span><span class="n">m_offsetX</span><span class="p">,</span><span class="w"> </span><span class="n">chunkData</span><span class="p">.</span><span class="n">m_offsetY</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// Error handling</span>
+<span class="w">      </span><span class="c1">// VmbChunkDataAccess returns the same error value as the Chunk Data Access Callback function,</span>
+<span class="w">      </span><span class="c1">// e.g. our custom error codes ChunkSizeAccessError and ChunkOffsetAccessError</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">VmbCaptureFrameQueue</span><span class="p">(</span><span class="n">cameraHandle</span><span class="p">,</span><span class="w"> </span><span class="n">frame</span><span class="p">,</span><span class="w"> </span><span class="n">MyFrameCallback</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<span class="target" id="index-31"></span></section>
+<section id="saving-and-loading-settings">
+<span id="index-32"></span><h3>Saving and loading settings<a class="headerlink" href="#saving-and-loading-settings" title="Permalink to this heading"></a></h3>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For a quick start, see the <em>LoadSaveSettings</em> example.</p>
+</div>
+<p>Additionally to the user sets stored inside the cameras, you can save the
+feature values of the GenTL modules as an XML file to your host PC. To do this, use the functions
+<code class="docutils literal notranslate"><span class="pre">VmbSettingsLoad</span></code> and <code class="docutils literal notranslate"><span class="pre">VmbSettingsSave</span></code>.</p>
+<p>To control which features are saved, use the (optional) flags and struct listed below.
+You can manually edit the XML file if you want only certain features
+to be restored.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Saving and loading all features including look-up tables may take several
+minutes.</p>
+</div>
+<p>The API supports saving and loading settings for every GenTL module.
+To specify which settings are saved and loaded when passing a camera handle,
+the API contains a set of (optional) flags.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A settings XML file can only contain features for one instance of a module.</p>
+</div>
+<p>The struct <em>VmbFeaturePersistSettings_t</em> contains the optional member
+<em>cameraPersistFlags</em>. It is only evaluated if a cameraHandle is passed to the
+load/save functions and ignored for the other module handles.</p>
+<span id="index-33"></span><table class="docutils align-default" id="id27">
+<caption><span class="caption-text">Struct VmbFeaturePersistSettings_t</span><a class="headerlink" href="#id27" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Struct Entry</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbFeaturePersist_t persistType</p></td>
+<td><p>Controls which features are saved. Valid values: <br>
+<em>VmbFeaturePersistAll</em> (all features) <br>
+<em>VmbFeaturePersistStreamable</em> (streamable features <br>
+only, excluding look-up tables <br>
+<em>VmbFeaturePersistNoLUT</em> (default, all features <br>
+except look-up tables</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbCameraPersistFlags_t</p></td>
+<td><p>Optional flags, see above</p></td>
+</tr>
+<tr class="row-even"><td><p>Vmbuint32_t maxIterations</p></td>
+<td><p>Number of iterations. LoadCameraSettings iterates <br>
+through all given features of the XML file and tries <br>
+to set each value to the camera. Because of complex <br>
+feature dependencies, writing a feature value may <br>
+impact another feature that has already been set by <br>
+LoadCameraSettings. To ensure all values are written <br>
+as desired, the feature list can be looped several <br>
+times, given by this parameter. <br>
+Default value: 5, valid values: 1…10 <br></p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbUint32_t</p></td>
+<td><p>Logging level</p></td>
+</tr>
+</tbody>
+</table>
+<span id="index-34"></span><table class="docutils align-default" id="id28">
+<caption><span class="caption-text">Enum VmbCameraPersistFlagsType is represented as VmbUint32_t through VmbCameraPersistFlags_t</span><a class="headerlink" href="#id28" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>VmbCameraPersistFlagsNone</p></th>
+<th class="head"><p>0x00</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbCameraPersistFlagsTransportLayer</p></td>
+<td><p>0x01</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbCameraPersistFlagsInterface</p></td>
+<td><p>0x02</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbCameraPersistFlagsRemoteDevice</p></td>
+<td><p>0x04</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbCameraPersistFlagsLocalDevice</p></td>
+<td><p>0x08</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbCameraPersistFlagsStreams</p></td>
+<td><p>0x10</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbCameraPersistFlagsAll</p></td>
+<td><p>0ff</p></td>
+</tr>
+</tbody>
+</table>
+<p>If the flags are not set (=VmbCameraPersistFlagsNone), the default behavior is
+to only save/load the remote device features. The same behavior is applied if
+no <em>VmbFeaturePersistSettings_t</em> parameter is passed to the save/load functions.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you pass a camera handle and activate all flags, the features of all
+GenTL modules including the transport layer and the interface are saved.</p>
+</div>
+</section>
+<section id="triggering">
+<h3>Triggering<a class="headerlink" href="#triggering" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before triggering, startup the API and open the camera(s).</p>
+</div>
+<section id="external-trigger">
+<h4>External trigger<a class="headerlink" href="#external-trigger" title="Permalink to this heading"></a></h4>
+<p id="index-35">The following code snippet shows how to trigger your camera with an
+external device.</p>
+<div class="literal-block-wrapper docutils container" id="id29">
+<div class="code-block-caption"><span class="caption-text">External trigger code snippet</span><a class="headerlink" href="#id29" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Startup Vimba X, get cameras and open cameras as usual</span>
+<span class="c1">// Trigger cameras according to their interface</span>
+<span class="c1">// Configure trigger input line and selector , switch trigger on</span>
+<span class="k">switch</span><span class="p">(</span><span class="w"> </span><span class="n">pInterfacetype</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="no">VmbInterfaceEthernet</span><span class="p">:</span>
+<span class="w">   </span><span class="n">VmbFeatureEnumSet</span><span class="p">(</span><span class="w"> </span><span class="n">pCameraHandle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TriggerSelector&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;FrameStart&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">VmbFeatureEnumSet</span><span class="p">(</span><span class="w"> </span><span class="n">pCameraHandle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TriggerSource&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Line1&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">VmbFeatureEnumSet</span><span class="p">(</span><span class="w"> </span><span class="n">pCameraHandle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TriggerMode&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;On&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="k">break</span><span class="p">;</span>
+
+<span class="c1">// USB: VmbInterfaceUsb</span>
+<span class="c1">// CSI-2: VmbInterfaceCSI2</span>
+
+<span class="k">case</span><span class="w"> </span><span class="no">VmbInterfaceUsb</span><span class="p">:</span>
+<span class="w">   </span><span class="n">VmbFeatureEnumSet</span><span class="p">(</span><span class="w"> </span><span class="n">pCameraHandle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;LineSelector&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Line0&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">VmbFeatureEnumSet</span><span class="p">(</span><span class="w"> </span><span class="n">pCameraHandle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;LineMode&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Input&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">VmbFeatureEnumSet</span><span class="p">(</span><span class="w"> </span><span class="n">pCameraHandle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TriggerSelector&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;FrameStart&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">VmbFeatureEnumSet</span><span class="p">(</span><span class="w"> </span><span class="n">pCameraHandle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TriggerSource&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Line0&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">VmbFeatureEnumSet</span><span class="p">(</span><span class="w"> </span><span class="n">pCameraHandle</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TriggerMode&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;On&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<span class="target" id="index-36"></span></section>
+<section id="trigger-over-ethernet-action-commands">
+<span id="index-37"></span><h4>Trigger over Ethernet – Action Commands<a class="headerlink" href="#trigger-over-ethernet-action-commands" title="Permalink to this heading"></a></h4>
+<p>Triggering via the <code class="docutils literal notranslate"><span class="pre">AcquisitionStart</span></code> command is supported by all cameras.
+However, it is less precise than triggering with an external device connected
+to the camera’s I/O port. Some GigE cameras additionally support Action Commands.
+With Action Commands, you can broadcast a trigger signal simultaneously to
+multiple GigE cameras via GigE cable.
+Action Commands must be set first to the camera(s) and then to the TL,
+which sends the Action Commands to the camera(s). As trigger source,
+select Action0 or Action1.</p>
+<p><strong>ActionControl parameters</strong></p>
+<p>The following ActionControl parameters must be configured on the camera(s)
+and on the TL.</p>
+<ul class="simple">
+<li><p><em>ActionDeviceKey</em> must be equal on the camera and on the host PC. Before a
+camera accepts an Action Command, it verifies if the received key is
+identical with its configured key. Note that <em>ActionDeviceKey</em> must be set
+each time the camera is opened.
+Range (camera and host PC): 0 to 4294967295</p></li>
+<li><p><em>ActionGroupKey</em> means that each camera can be assigned to exactly one
+group for Action0 and a different group for Action1. All grouped cameras
+perform an action at the same time. If this key is identical on the sender
+and the receiving camera, the camera performs the assigned action.
+Range (camera and host PC): 0 to 4294967295</p></li>
+<li><p><em>ActionGroupMask</em> serves as filter that specifies which cameras within a
+group react on an Action Command. It can be used to create sub-groups.
+Range (camera): 0 to 4294967295
+Range (host PC): 1 to 4294967295</p></li>
+</ul>
+<p>Executing the feature <em>ActionCommands</em> sends the ActionControl
+parameters to the cameras and triggers the assigned action, for example,
+image acquisition. Before an Action Command is executed, each camera validates
+the received ActionControl parameter values against its configured values.
+If they are not equal, the camera ignores the command.</p>
+<div class="literal-block-wrapper docutils container" id="id30">
+<div class="code-block-caption"><span class="caption-text">Action Commands code snippet</span><a class="headerlink" href="#id30" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Additionally to this code snippet:</span>
+<span class="c1">// Configure the trigger settings and add image streaming</span>
+
+<span class="n">VmbUint32_t</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="n">VmbCameraInfo_t</span><span class="o">*</span><span class="w"> </span><span class="n">cameras</span><span class="p">;</span>
+<span class="n">VmbHandle_t</span><span class="o">*</span><span class="w"> </span><span class="n">handles</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">deviceKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="n">groupKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="n">groupMask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">33</span><span class="p">;</span>
+
+<span class="c1">// Start Vimba and discover GigE cameras</span>
+<span class="n">VmbStartup</span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">);</span>
+
+<span class="c1">// Get cameras</span>
+<span class="n">VmbCamerasList</span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">cameras</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+<span class="n">cameras</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">VmbCameraInfo_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">cameras</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+<span class="n">VmbCamerasList</span><span class="p">(</span><span class="w"> </span><span class="n">cameras</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">cameras</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+
+<span class="c1">// Allocate space for handles</span>
+<span class="n">handles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">VmbHandle_t</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">VmbHandle_t</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+
+<span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">count</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">cameraId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cameras</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">cameraIdString</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Open camera</span>
+<span class="w">    </span><span class="n">VmbCameraOpen</span><span class="p">(</span><span class="w"> </span><span class="n">cameraId</span><span class="p">,</span><span class="w"> </span><span class="n">VmbAccessModeFull</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">handles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Set device key, group key and group mask</span>
+<span class="w">    </span><span class="c1">// Configure trigger settings (see programming example)</span>
+<span class="w">    </span><span class="n">VmbFeatureIntSet</span><span class="p">(</span><span class="w"> </span><span class="n">handles</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;ActionDeviceKey&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">deviceKey</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="n">VmbFeatureIntSet</span><span class="p">(</span><span class="w"> </span><span class="n">handles</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;ActionGroupKey&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">groupKey</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="n">VmbFeatureIntSet</span><span class="p">(</span><span class="w"> </span><span class="n">handles</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;ActionGroupMask&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">groupMask</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Set Action Command to API</span>
+<span class="c1">// Allocate buffers and enable streaming (see programming example)</span>
+<span class="n">VmbFeatureIntSet</span><span class="p">(</span><span class="w"> </span><span class="n">gVmbHandle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ActionDeviceKey&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">deviceKey</span><span class="w"> </span><span class="p">);</span>
+<span class="n">VmbFeatureIntSet</span><span class="p">(</span><span class="w"> </span><span class="n">gVmbHandle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ActionGroupKey&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">groupKey</span><span class="w"> </span><span class="p">);</span>
+<span class="n">VmbFeatureIntSet</span><span class="p">(</span><span class="w"> </span><span class="n">gVmbHandle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ActionGroupMask&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">groupMask</span><span class="w"> </span><span class="p">);</span>
+
+<span class="c1">// Send Action Command</span>
+<span class="n">VmbFeatureCommandRun</span><span class="p">(</span><span class="w"> </span><span class="n">gVmbHandle</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ActionCommand&quot;</span><span class="w"> </span><span class="p">);</span>
+
+<span class="c1">// If no further Actions will be applied: close cameras, shutdown API, and</span>
+<span class="c1">// free allocated space as usual</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="listing-interfaces">
+<h3>Listing interfaces<a class="headerlink" href="#listing-interfaces" title="Permalink to this heading"></a></h3>
+<p>You can list all found interfaces such as frame grabbers or NICs.
+<code class="docutils literal notranslate"><span class="pre">VmbInterfacesList()</span></code> enumerates all interfaces recognized
+by the underlying transport layers.</p>
+<div class="literal-block-wrapper docutils container" id="id31">
+<div class="code-block-caption"><span class="caption-text">List interfaces code snippet</span><a class="headerlink" href="#id31" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">VmbUint32_t</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
+<span class="n">VmbInterfaceInfo_t</span><span class="w"> </span><span class="o">*</span><span class="n">pInterfaces</span><span class="p">;</span>
+
+<span class="c1">// Get the number of connected interfaces</span>
+<span class="n">VmbInterfacesList</span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nCount</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="w"> </span><span class="o">*</span><span class="n">pInterfaces</span><span class="w"> </span><span class="p">);</span>
+
+<span class="c1">// Allocate accordingly</span>
+<span class="n">pInterfaces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">VmbInterfaceInfo_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="w"> </span><span class="n">nCount</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="w"> </span><span class="o">*</span><span class="n">pInterfaces</span><span class="w"> </span><span class="p">);</span>
+
+<span class="c1">// Get the interfaces</span>
+<span class="n">VmbInterfacesList</span><span class="p">(</span><span class="w"> </span><span class="n">pCameras</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nCount</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="w"> </span><span class="o">*</span><span class="n">pInterfaces</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<section id="struct-vmbinterfaceinfo-t">
+<span id="index-38"></span><h4>Struct VmbInterfaceInfo_t<a class="headerlink" href="#struct-vmbinterfaceinfo-t" title="Permalink to this heading"></a></h4>
+<p>Struct <em>VmbInterfaceInfo_t</em> provides the entries listed in the table below
+for obtaining read-only information about an interface.</p>
+<table class="docutils align-default" id="id32">
+<caption><span class="caption-text">VmbInterfaceInfo_t</span><a class="headerlink" href="#id32" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Field</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>const char*</p></td>
+<td><p>interfaceIdString</p></td>
+<td><p>Unique identifier for each interface</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbTransportLayerType_t</p></td>
+<td><p>interfaceType</p></td>
+<td><p>See VmbTransportLayerType</p></td>
+</tr>
+<tr class="row-even"><td><p>const char*</p></td>
+<td><p>interfaceName</p></td>
+<td><p>Given by the TL</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbHandle_t</p></td>
+<td><p>transportLayerHandle</p></td>
+<td><p>For TL system module feature access</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbHandle_t</p></td>
+<td><p>interfaceHandle</p></td>
+<td><p>For interface module feature access</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="enabling-notifications-of-changed-interface-states">
+<span id="index-39"></span><h3>Enabling notifications of changed interface states<a class="headerlink" href="#enabling-notifications-of-changed-interface-states" title="Permalink to this heading"></a></h3>
+<p>To get notified whenever an interface is detected or disconnected, use
+<code class="docutils literal notranslate"><span class="pre">VmbFeatureInvalidationRegister()</span></code> to register the event <code class="docutils literal notranslate"><span class="pre">EventInterfaceDiscovery</span></code>.
+Use the global Vmb handle for registration. The function pointer to
+the callback function has to be of type <code class="docutils literal notranslate"><span class="pre">VmbInvalidationCallback()</span></code>.
+The callback gets executed on the according interface discovery event.</p>
+<section id="tl-enumerations">
+<span id="index-40"></span><h4>TL enumerations<a class="headerlink" href="#tl-enumerations" title="Permalink to this heading"></a></h4>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The CSI TL is listed as <em>VmbTransportLayerTypeCustom</em>.</p>
+</div>
+<table class="docutils align-default" id="id33">
+<caption><span class="caption-text">Enum VmbTransportLayerType is represented as VmbUint32_t through VmbInterfaceInfo_t</span><a class="headerlink" href="#id33" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumeration</p></th>
+<th class="head"><p>Integer Value</p></th>
+<th class="head"><p>Interface</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbTransportLayerTypeUnknown</p></td>
+<td><p>0</p></td>
+<td><p>Interface is not known to the API</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbTransportLayerTypeGEV</p></td>
+<td><p>1</p></td>
+<td><p>GigE Vision</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbTransportLayerTypeCL</p></td>
+<td><p>2</p></td>
+<td><p>Camera Link</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbTransportLayerTypeIIDC</p></td>
+<td><p>3</p></td>
+<td><p>IIDC 1394</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbTransportLayerTypeUVC</p></td>
+<td><p>4</p></td>
+<td><p>USB video class</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbTransportLayerTypeCXP</p></td>
+<td><p>5</p></td>
+<td><p>CoaXPress</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbTransportLayerTypeCLHS</p></td>
+<td><p>6</p></td>
+<td><p>Camera Link HS</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbTransportLayerTypeU3V</p></td>
+<td><p>7</p></td>
+<td><p>USB3 Vision Standard</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbTransportLayerTypeEthernet</p></td>
+<td><p>8</p></td>
+<td><p>Generic Ethernet</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbTransportLayerTypePCI</p></td>
+<td><p>9</p></td>
+<td><p>PCI / PCIe</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbTransportLayerTypeCustom</p></td>
+<td><p>10</p></td>
+<td><p>Non standard</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbTransportLayerTypeMixed</p></td>
+<td><p>11</p></td>
+<td><p>Mixed (System module only)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Functions that must not be called be called within the callback routine:</p>
+<ul class="simple">
+<li><p>VmbStartup</p></li>
+<li><p>VmbShutdown</p></li>
+<li><p>VmbFeatureIntSet (and any other VmbFeature*Set function)</p></li>
+<li><p>VmbFeatureCommandRun</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="error-codes">
+<h3>Error codes<a class="headerlink" href="#error-codes" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default" id="id34">
+<caption><span class="caption-text">Error codes</span><a class="headerlink" href="#id34" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Error Code</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbErrorSuccess</p></td>
+<td><p>0</p></td>
+<td><p>No error</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorInternalFault</p></td>
+<td><p>-1</p></td>
+<td><p>Unexpected fault in Vmb or driver</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorApiNotStarted</p></td>
+<td><p>-2</p></td>
+<td><p>VmbStartup was not called before the current command</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorNotFound</p></td>
+<td><p>-3</p></td>
+<td><p>The designated instance (camera, feature, etc.) cannot be found</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorBadHandle</p></td>
+<td><p>-4</p></td>
+<td><p>The given handle is not valid</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorDeviceNotOpen</p></td>
+<td><p>-5</p></td>
+<td><p>Device was not opened for usage</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorInvalidAccess</p></td>
+<td><p>-6</p></td>
+<td><p>Operation is invalid with the current access mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorBadParameter</p></td>
+<td><p>-7</p></td>
+<td><p>One of the parameters is invalid (usually an illegal pointer)</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorStructSize</p></td>
+<td><p>-8</p></td>
+<td><p>The given struct size is not valid for this version of the API</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorMoreData</p></td>
+<td><p>-9</p></td>
+<td><p>More data available in a string/list than space is provided</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorWrongType</p></td>
+<td><p>-10</p></td>
+<td><p>Wrong feature type for this access function</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorInvalidValue</p></td>
+<td><p>-11</p></td>
+<td><p>The value is not valid; either out of bounds or not an <br>
+increment of the minimum</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorTimeout</p></td>
+<td><p>-12</p></td>
+<td><p>Timeout during wait</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorOther</p></td>
+<td><p>-13</p></td>
+<td><p>Other error</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorResources</p></td>
+<td><p>-14</p></td>
+<td><p>Resources not available (e.g., memory)</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorInvalidCall</p></td>
+<td><p>-15</p></td>
+<td><p>Call is invalid in the current context (e.g. callback)</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorNoTL</p></td>
+<td><p>-16</p></td>
+<td><p>No transport layers are found</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorNotImplemented</p></td>
+<td><p>-17</p></td>
+<td><p>API feature is not implemented</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorNotSupported</p></td>
+<td><p>-18</p></td>
+<td><p>API feature is not supported</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorIncomplete</p></td>
+<td><p>-19</p></td>
+<td><p>The current operation was not completed (e.g. a multiple <br>
+registers read or write)</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorIO</p></td>
+<td><p>-20</p></td>
+<td><p>There was an error during read or write with devices <br>
+(camera or disk)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>If your TL or camera is not found or if you experience other issues, see <a class="reference internal" href="troubleshooting.html"><span class="doc">Troubleshooting</span></a>.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sdkManual.html" class="btn btn-neutral float-left" title="SDK Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cppAPIManual.html" class="btn btn-neutral float-right" title="CPP API Manual" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

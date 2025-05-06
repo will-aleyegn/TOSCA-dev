@@ -24,31 +24,29 @@ from PyQt6.QtGui import QImage, QPixmap
 
 # Import our camera controllers
 from src.hardware.vmpy_camera import VMPyCameraController
-from src.image_processing.camera import CameraController
 
 logger = logging.getLogger(__name__)
 
 class CameraDisplayWidget(QWidget):
     """
     Widget for displaying camera frames and controlling camera functions.
-    This widget can work with either the standard OpenCV camera interface
-    or the VMPy interface for Allied Vision cameras.
+    This widget only supports the VMPy interface for Allied Vision cameras.
     """
     
     # Signal emitted when a new frame is available
     frame_available = pyqtSignal(np.ndarray)
     
-    def __init__(self, parent=None, use_vmpy=True):
+    def __init__(self, parent=None, vmb=None):
         """
         Initialize the camera display widget.
         
         Args:
             parent (QWidget): Parent widget
-            use_vmpy (bool): Whether to use VMPy camera interface (True) or OpenCV (False)
+            vmb (VmbSystem): An active VmbSystem instance (from a context manager)
         """
         super().__init__(parent)
         
-        self.use_vmpy = use_vmpy
+        self.vmb = vmb
         self.camera_controller = None
         self.current_frame = None
         self.frame_lock = Lock()
@@ -75,12 +73,6 @@ class CameraDisplayWidget(QWidget):
         
         # Camera selection row
         camera_row = QHBoxLayout()
-        self.camera_type_combo = QComboBox()
-        self.camera_type_combo.addItem("VMPy (Allied Vision)", True)
-        self.camera_type_combo.addItem("OpenCV (Standard)", False)
-        self.camera_type_combo.setCurrentIndex(0 if self.use_vmpy else 1)
-        self.camera_type_combo.currentIndexChanged.connect(self._on_camera_type_changed)
-        
         self.camera_id_combo = QComboBox()
         self.camera_id_combo.addItem("Default/Auto-detect", None)
         self.camera_id_combo.addItem("Camera 0", 0)
@@ -96,8 +88,6 @@ class CameraDisplayWidget(QWidget):
         self.disconnect_btn.clicked.connect(self.on_disconnect_camera)
         self.disconnect_btn.setEnabled(False)
         
-        camera_row.addWidget(QLabel("Camera Type:"))
-        camera_row.addWidget(self.camera_type_combo)
         camera_row.addWidget(QLabel("Camera ID:"))
         camera_row.addWidget(self.camera_id_combo)
         camera_row.addWidget(self.auto_connect_checkbox)
@@ -152,22 +142,6 @@ class CameraDisplayWidget(QWidget):
         status_layout.addWidget(self.status_label)
         layout.addLayout(status_layout)
     
-    def _on_camera_type_changed(self, index):
-        """Handle camera type selection change."""
-        self.use_vmpy = self.camera_type_combo.currentData()
-        
-        # Update camera ID options based on type
-        self.camera_id_combo.clear()
-        self.camera_id_combo.addItem("Default/Auto-detect", None)
-        
-        if self.use_vmpy:
-            # VMPy cameras typically use string IDs
-            pass  # We'll keep it simple for now with the default option
-        else:
-            # OpenCV cameras use numeric indices
-            for i in range(5):  # Add cameras 0-4
-                self.camera_id_combo.addItem(f"Camera {i}", i)
-    
     def on_connect_camera(self):
         """Connect to the camera."""
         try:
@@ -178,63 +152,19 @@ class CameraDisplayWidget(QWidget):
             camera_id = self.camera_id_combo.currentData()
             
             # Create the appropriate camera controller
-            if self.use_vmpy:
-                try:
-                    self.camera_controller = VMPyCameraController(camera_id=camera_id)
-                    self.status_label.setText("Connecting to VMPy camera...")
-                    
-                    # Initialize the camera
-                    success = self.camera_controller.initialize()
-                    if not success:
-                        # If initialization failed, check if we should fall back to OpenCV
-                        logger.info("VMPy camera initialization failed, falling back to OpenCV")
-                        self.status_label.setText("VMPy failed, trying OpenCV camera...")
-                        self.use_vmpy = False
-                        self.camera_type_combo.setCurrentIndex(1)  # Switch to OpenCV in dropdown
-                        
-                        # Create OpenCV camera controller instead
-                        self.camera_controller = CameraController(camera_id=camera_id if camera_id is not None else 0)
-                        success = self.camera_controller.initialize()
-                        if not success:
-                            QMessageBox.critical(
-                                self, "Camera Error", 
-                                "Failed to initialize camera with both VMPy and OpenCV. Check connections and try again."
-                            )
-                            self.camera_controller = None
-                            self.status_label.setText("Camera initialization failed")
-                            return
-                except Exception as e:
-                    logger.error(f"Failed to create VMPy camera controller: {str(e)}")
-                    # Fall back to OpenCV
-                    self.use_vmpy = False
-                    self.camera_type_combo.setCurrentIndex(1)  # Switch to OpenCV in dropdown
-                    self.status_label.setText("VMPy failed, trying OpenCV camera...")
-                    
-                    # Create OpenCV camera controller instead
-                    self.camera_controller = CameraController(camera_id=camera_id if camera_id is not None else 0)
-                    success = self.camera_controller.initialize()
-                    if not success:
-                        QMessageBox.critical(
-                            self, "Camera Error", 
-                            "Failed to initialize camera with both VMPy and OpenCV. Check connections and try again."
-                        )
-                        self.camera_controller = None
-                        self.status_label.setText("Camera initialization failed")
-                        return
-            else:
-                self.camera_controller = CameraController(camera_id=camera_id if camera_id is not None else 0)
-                self.status_label.setText("Connecting to OpenCV camera...")
-                
-                # Initialize the camera
-                success = self.camera_controller.initialize()
-                if not success:
-                    QMessageBox.critical(
-                        self, "Camera Error", 
-                        "Failed to initialize OpenCV camera. Check connections and try again."
-                    )
-                    self.camera_controller = None
-                    self.status_label.setText("Camera initialization failed")
-                    return
+            self.camera_controller = VMPyCameraController(vmb=self.vmb, camera_id=camera_id)
+            self.status_label.setText("Connecting to VMPy camera...")
+            
+            # Initialize the camera
+            success = self.camera_controller.initialize()
+            if not success:
+                QMessageBox.critical(
+                    self, "Camera Error", 
+                    "Failed to initialize VMPy camera. Check connections and try again."
+                )
+                self.camera_controller = None
+                self.status_label.setText("Camera initialization failed")
+                return
             
             # Update UI elements
             self.connect_btn.setEnabled(False)
@@ -242,8 +172,7 @@ class CameraDisplayWidget(QWidget):
             self.start_stream_btn.setEnabled(True)
             self.capture_btn.setEnabled(True)
             
-            camera_type = "VMPy" if self.use_vmpy else "OpenCV"
-            self.status_label.setText(f"{camera_type} camera connected successfully")
+            self.status_label.setText("VMPy camera connected successfully")
             
             # Optionally start streaming immediately
             self.on_start_stream()

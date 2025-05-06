@@ -1,17 +1,35 @@
-# VmbPy SDK Summary
+# Allied Vision VmbPy SDK Documentation and Examples Summary
 
 ## Overview
-VmbPy is the Python API for Vimba X SDK, providing access to Allied Vision cameras in a Pythonic way.
 
-## Installation
-- Requires Python 3.7+
-- Install using provided `.whl` file: `pip install docs/vmpy/vmbpy-1.1.0-py3-none-win_amd64.whl`
-- Two types of wheel files:
-  - With VmbC libs (platform tag e.g., `win_amd64`): No need for pre-existing Vimba installation
-  - Without libs (platform tag `any`): Requires pre-existing Vimba X installation
-- Optional dependencies can be installed: `pip install 'file.whl[numpy,opencv]'`
+VmbPy is the Python API of the Allied Vision Vimba X SDK. It provides a pythonic interface to access the full functionality of the Vimba X SDK, which is the successor to the Vimba SDK. VmbPy is fully GenICam compliant, allowing for rapid development of camera control applications.
 
-## Basic Usage
+## Installation Requirements
+
+- Python 3.7 or higher
+- Installation via provided `.whl` file from either:
+  - Vimba X installation package
+  - Allied Vision GitHub release page
+- Two `.whl` types available:
+  - Recommended: With included VmbC libs (platform tag e.g., `win_amd64`)
+  - Alternative: Without included VmbC libs (platform tag `any`) - requires pre-existing Vimba X installation
+
+## Optional Dependencies
+
+VmbPy defines several optional dependency packages:
+- **numpy**: Enables conversion of `VmbPy.Frame` objects to NumPy arrays
+- **opencv**: Ensures NumPy arrays are valid OpenCV images
+- **test**: Tools for executing the test suite (flake8, mypy, coverage)
+
+## Usage Principles
+
+VmbPy follows these design principles:
+1. Uses Python context managers for setup and teardown
+2. Resembles VmbCPP design for easy migration
+3. Manages resources correctly, even when errors occur
+
+### Basic Usage Example
+
 ```python
 import vmbpy
 
@@ -22,100 +40,78 @@ with vmb:
         print(cam)
 ```
 
-## Important Concepts
-1. **Context Managers**: VmbPy relies on context managers for setup/teardown
-2. **Exception Handling**: Main exception types:
-   - `vmbpy.VmbFeatureError`: For feature-related errors
-   - Regular Python exceptions are used (no VmbCError exists)
-3. **Camera Interface**: Accessed through context managers
+## Configuration
 
-## Camera Control Examples
+- Uses the `VmbC.xml` configuration file
+- Default configuration loads Transport Layers from the `GENICAM_GENTL64_PATH` environment variable
+- Configuration location:
+  - For `.whl` with included libs: `/site-packages/vmbpy/c_binding/lib`
+  - For `.whl` without included libs: `/api/bin` in Vimba X installation
+- Custom configuration possible via `VmbSystem.set_path_configuration`
 
-### Finding and Connecting to a Camera
-```python
-import vmbpy
+## SDK Examples
 
-try:
-    # Get Vimba instance
-    vmb = vmbpy.VmbSystem.get_instance()
-    with vmb:
-        # List available cameras
-        cameras = vmb.get_all_cameras()
-        if not cameras:
-            print("No cameras found")
-            exit(1)
-            
-        # Access first camera
-        with cameras[0] as cam:
-            # Get camera ID
-            print(f"Using camera: {cam.get_id()}")
-            
-            # Set features
-            try:
-                cam.get_feature_by_name("ExposureTime").set_value(10000)  # 10ms
-            except Exception as e:
-                print(f"Could not set exposure: {str(e)}")
-                
-            # Capture a frame
-            frame = cam.get_frame()
-            print(f"Got frame: {frame}")
-            
-except Exception as e:
-    print(f"Error: {str(e)}")
-```
+### 1. Single Frame Capture (`single_frame_capture.py`)
 
-### Continuous Frame Acquisition
-```python
-import vmbpy
-import time
+Demonstrates how to:
+- Connect to a camera
+- Configure basic settings (exposure)
+- Capture a single frame
+- Convert the frame to OpenCV format
+- Save and display the captured image
 
-def frame_handler(cam, frame):
-    print(f"Got frame: {frame}")
-    
-    # Important: Queue the frame back to the camera
-    cam.queue_frame(frame)
+Key functions:
+- `vmb.get_all_cameras()` - Lists available cameras
+- `camera.get_frame()` - Captures a single frame
+- `frame.as_opencv_image()` - Converts to OpenCV format
 
-try:
-    with vmbpy.VmbSystem.get_instance() as vmb:
-        with vmb.get_all_cameras()[0] as cam:
-            # Start streaming with the frame handler
-            cam.start_streaming(frame_handler)
-            
-            # Stream for 10 seconds
-            time.sleep(10)
-            
-            # Stop streaming
-            cam.stop_streaming()
-            
-except Exception as e:
-    print(f"Error: {str(e)}")
-```
+### 2. Continuous Streaming (`streaming_example.py`)
 
-## Exception Handling Tips
-1. Always use context managers to ensure proper resource cleanup
-2. Handle expected exceptions specifically
-3. Use a catch-all Exception handler for unexpected issues
-4. Common exceptions:
-   - Feature setting errors (invalid values, unsupported features)
-   - Frame errors (timeout, buffer underruns)
-   - Connection issues (camera disconnection, transport layer errors)
+Demonstrates how to:
+- Configure camera settings (exposure, gain)
+- Set up continuous streaming with a callback
+- Handle frames in real-time
+- Display the live video feed
 
-## Useful Debugging
-- Set up proper logging
-- VmbPy outputs logs with the logger name 'vmbpyLog'
-- Check for transport layer errors at startup
+Key components:
+- Frame callback function with the signature: `frame_handler(camera, stream, frame)`
+- Frame queue management with `cam.queue_frame(frame)`
+- Stream control with `start_streaming()` and `stop_streaming()`
 
-## Common Issues
-1. Transport Layer errors: Make sure Vimba X is installed with proper drivers
-2. Camera not found: Check camera connection and power
-3. Frame errors: Ensure frames are always queued back to the camera
-4. Feature errors: Check feature names and valid value ranges
+### 3. Camera Features Access (`camera_features.py`)
 
-## Important Methods on Camera objects
-- `get_id()`: Get camera identifier
-- `get_name()`: Get camera name
-- `get_feature_by_name()`: Access camera features
-- `get_frame()`: Capture a single frame
-- `start_streaming()`: Begin continuous acquisition
-- `stop_streaming()`: End continuous acquisition
-- `queue_frame()`: Required in continuous acquisition to return frames to camera 
+Shows how to:
+- Access camera features (parameters)
+- Get information about feature types, ranges, and available values
+- Read current values
+- Modify camera settings
+- Handle camera-specific feature variations
+
+Feature types demonstrated:
+- Integer features (with min, max, increment)
+- Float features (with min, max)
+- Enumeration features (with available options)
+
+## Best Practices
+
+1. Always use context managers (`with` statements) for proper resource management
+2. Queue frames back to the camera during streaming
+3. Handle exceptions appropriately for camera-specific features
+4. Check feature availability before attempting to access or modify
+5. Consider camera feature dependencies when setting parameters
+
+## Testing
+
+The SDK includes a comprehensive test suite that can be run using:
+- Python's unittest discovery mechanism
+- The provided `run_tests.py` script
+
+## Compatibility
+
+VmbPy is the successor to VimbaPython, with some significant differences. A migration guide is available in the Vimba X SDK documentation.
+
+## Note for Production Use
+
+- VmbPy aims to be performant but may not be fast enough for performance-critical applications
+- For high-performance requirements, consider migrating to VmbCPP
+- Beta versions are available for testing but not recommended for production 

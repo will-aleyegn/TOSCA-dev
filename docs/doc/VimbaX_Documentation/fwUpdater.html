@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Firmware Updater Manual &mdash; Vimba X Developer Guide 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Viewer Guide" href="viewerGuide.html" />
+    <link rel="prev" title="Driver Installer Manual" href="driverInstaller.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Vimba X Developer Guide
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Vimba X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">System Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrationGuide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examplesOverview.html">Examples Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manuals:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="driverInstaller.html">Driver Installer Manual</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Firmware Updater Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#firmware-updater">Firmware Updater</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uploading-firmware">Uploading firmware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aborting-a-firmware-upload">Aborting a firmware upload</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-line-firmware-updater">Command line Firmware Updater</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="viewerGuide.html">Viewer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdkManual.html">SDK Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cAPIManual.html">C API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cppAPIManual.html">CPP API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotNetAPIManual.html">.NET API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPIManual.html">Python API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagetransformManual.html">Image Transform Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help &amp; information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem.html">Vimba X Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legalInformation.html">Legal Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vimba X Developer Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Firmware Updater Manual</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="firmware-updater-manual">
+<h1>Firmware Updater Manual<a class="headerlink" href="#firmware-updater-manual" title="Permalink to this heading"></a></h1>
+<section id="firmware-updater">
+<h2>Firmware Updater<a class="headerlink" href="#firmware-updater" title="Permalink to this heading"></a></h2>
+<p>Vimba X Firmware Updater supports firmware uploads to Allied Vision USB, MIPI, and Goldeye CL cameras.
+New firmware for each connected camera is automatically detected and selected. You can update
+several cameras in one step. Uploading older firmware to the camera is also possible.
+If you prefer to upload firmware via command line, see <a class="reference internal" href="#command-line-firmware-updater"><span class="std std-ref">Command line Firmware Updater</span></a>.</p>
+<p>On Windows and Linux, Vimba X Firmware Updater is available in the Vimba X install directory/bin.</p>
+<p>On macOS, Firmware Updater is available as Vimba X Firmware Updater app.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<div class="line-block">
+<div class="line">Download the latest firmware from our website:</div>
+<div class="line"><a class="reference external" href="https://www.alliedvision.com/en/support/firmware.html">https://www.alliedvision.com/en/support/firmware.html</a></div>
+</div>
+</div>
+<section id="uploading-firmware">
+<h3>Uploading firmware<a class="headerlink" href="#uploading-firmware" title="Permalink to this heading"></a></h3>
+<p>To upload new firmware to your cameras, perform the following steps:</p>
+<ol class="arabic simple">
+<li><p>Connect your Allied Vision cameras and start Vimba X Firmware Updater.</p></li>
+<li><p>Click <strong>Open</strong> and select a firmware container file.
+Optional: Click <strong>Info</strong> to get details about the selected firmware.</p></li>
+<li><p>Click <strong>Update cameras</strong> to upload the automatically selected firmware to your cameras.</p></li>
+</ol>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/FW-Updater.png"><img alt="Firmware Updater" src="_images/FW-Updater.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">Firmware Updater</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>If the firmware has a lower version number, Vimba X Firmware Updater interprets this as a older version
+and doesn’t update the firmware automatically.</p>
+<p>To select the new firmware manually, go to the <em>New firmware</em> drop-down list.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="_images/FW-Update.png"><img alt="Select firmware" src="_images/FW-Update.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">Select firmware</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="aborting-a-firmware-upload">
+<h3>Aborting a firmware upload<a class="headerlink" href="#aborting-a-firmware-upload" title="Permalink to this heading"></a></h3>
+<p>The firmware upload to several cameras takes some time. During the upload, <span class="guilabel">Abort</span> finishes
+the upload to the current camera, but does not upload firmware to the next models.</p>
+</section>
+<section id="troubleshooting">
+<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h3>
+<p>If your camera is not detected or the firmware cannot be updated:</p>
+<ul class="simple">
+<li><p>Make sure no other application uses the camera.</p></li>
+<li><p>Check if the camera works with Vimba X Viewer.</p></li>
+<li><p>Reboot the system.</p></li>
+<li><p>Start the firmware upload again. If it does not work, start the
+command line Firmware Updater and use repair mode or contact our support team:
+<a class="reference external" href="https://www.alliedvision.com/support">https://www.alliedvision.com/support</a></p></li>
+<li><p>Windows only: with USB cameras, start Vimba Driver Installer and make sure the Vimba USB driver is in use.</p></li>
+<li><p>If you connected your USB camera to a hub, unplug the hub from the PC and disconnect its power
+supply. Reconnect it and try again.</p></li>
+<li><p>Connect your USB camera to a different USB 3.0 input or a different hub.</p></li>
+</ul>
+</section>
+<section id="command-line-firmware-updater">
+<h3>Command line Firmware Updater<a class="headerlink" href="#command-line-firmware-updater" title="Permalink to this heading"></a></h3>
+<p>On Windows and Linux, Vimba X Firmware Updater Console is available in the Vimba X install directory/bin.</p>
+<p>On macOS, it is available at
+/Applications/Vimba\ X/Firmware\ Updater.app/Contents/bin/VimbaXFirmwareUpdaterConsole.</p>
+<p>To update firmware via command line, use FWUpdaterConsole.exe. This tool provides two main
+functionalities:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--show</span></code> or <code class="docutils literal notranslate"><span class="pre">-s</span></code> displays information about camera firmware or a firmware file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--write</span></code> or <code class="docutils literal notranslate"><span class="pre">-w</span></code> performs the actual update.</p></li>
+</ul>
+<p>See the following list of use cases:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Use case</p></th>
+<th class="head"><p>Parameters</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Show device info for list of   cameras</p></td>
+<td><p>--show --device “list of ids”</p></td>
+</tr>
+<tr class="row-odd"><td><p>Show a list of matching firmware sets <br>
+for all cameras</p></td>
+<td><p>--show --container “file” --device all</p></td>
+</tr>
+<tr class="row-even"><td><p>Show detailed info about matching <br>
+firmware sets for one camera</p></td>
+<td><p>--show --container “file” --device “id”</p></td>
+</tr>
+<tr class="row-odd"><td><p>Show firmware set info for one set</p></td>
+<td><p>--show --container “file” --index “index”</p></td>
+</tr>
+<tr class="row-even"><td><p>Show firmware set info for list of sets</p></td>
+<td><p>--show --container “file” --index <br>
+“list of indices”</p></td>
+</tr>
+<tr class="row-odd"><td><p>Show firmware set info for whole container</p></td>
+<td><p>--show --container “file”</p></td>
+</tr>
+<tr class="row-even"><td><p>Write one firmware set to one camera</p></td>
+<td><p>--write --container “file” --device <br>
+“id” --index “index”</p></td>
+</tr>
+<tr class="row-odd"><td><p>Write ‘best’ (latest) firmware set to list <br>
+of cameras</p></td>
+<td><p>--write --container “file” --device <br>
+“list of ids”</p></td>
+</tr>
+<tr class="row-even"><td><p>Write ‘best’ (latest) firmware set to <br>
+all cameras</p></td>
+<td><p>--write --container “file” --device all</p></td>
+</tr>
+<tr class="row-odd"><td><p>Write one firmware set to one camera <br>
+in repair mode</p></td>
+<td><p>--write --repair --container “file” <br>
+--device “id” --index “index”</p></td>
+</tr>
+</tbody>
+</table>
+<p>The following options may be added to the “show” or ” the “write” functionality:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Option</p></td>
+<td><p>Parameters</p></td>
+</tr>
+<tr class="row-even"><td><p>Show full information</p></td>
+<td><p>--verbose, -v</p></td>
+</tr>
+<tr class="row-odd"><td><p>Force writing</p></td>
+<td><p>--force, -f</p></td>
+</tr>
+<tr class="row-even"><td><p>Repair device firmware during write</p></td>
+<td><p>--repair, -r</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>By calling <code class="code docutils literal notranslate"><span class="pre">FWUpdaterConsole</span> <span class="pre">--help</span> <span class="pre">[command/option]</span></code>, you get more details
+about the tool or its parameters.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="driverInstaller.html" class="btn btn-neutral float-left" title="Driver Installer Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="viewerGuide.html" class="btn btn-neutral float-right" title="Viewer Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

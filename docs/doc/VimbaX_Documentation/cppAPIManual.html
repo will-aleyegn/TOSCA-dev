@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CPP API Manual &mdash; Vimba X Developer Guide 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title=".NET API Manual" href="dotNetAPIManual.html" />
+    <link rel="prev" title="C API Manual" href="cAPIManual.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Vimba X Developer Guide
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Vimba X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">System Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrationGuide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examplesOverview.html">Examples Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manuals:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="driverInstaller.html">Driver Installer Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fwUpdater.html">Firmware Updater Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="viewerGuide.html">Viewer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdkManual.html">SDK Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cAPIManual.html">C API Manual</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CPP API Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction-to-the-api">Introduction to the API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#compatibility">Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-api-diagram">C++ API diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shared-pointers">Shared pointers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#general-aspects">General aspects</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#api-usage">API usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#entry-point">Entry point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-version">API version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-startup-and-shutdown">API startup and shutdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#listing-cameras">Listing cameras</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gige-cameras">GigE cameras</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usb-cameras">USB cameras</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#camera-link-cameras">Camera Link cameras</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mipi-csi-cameras">MIPI CSI cameras</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#extended-id">Extended ID</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notifications-of-changed-camera-states">Notifications of changed camera states</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#opening-and-closing-a-camera">Opening and closing a camera</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#accessing-features">Accessing features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#feature-types">Feature types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#acquiring-images">Acquiring images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#image-capture-vs-image-acquisition">Image Capture vs. Image Acquisition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#asynchronous-image-acquisition">Asynchronous image acquisition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-capture">Image capture</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-acquisition">Image Acquisition</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#transforming-images">Transforming images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-events">Using Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chunk">Chunk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#saving-and-loading-settings">Saving and loading settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#triggering">Triggering</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#external-trigger">External trigger</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#listing-interfaces">Listing interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-codes">Error codes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dotNetAPIManual.html">.NET API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPIManual.html">Python API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagetransformManual.html">Image Transform Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help &amp; information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem.html">Vimba X Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legalInformation.html">Legal Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vimba X Developer Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CPP API Manual</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cpp-api-manual">
+<h1>CPP API Manual<a class="headerlink" href="#cpp-api-manual" title="Permalink to this heading"></a></h1>
+<section id="introduction-to-the-api">
+<h2>Introduction to the API<a class="headerlink" href="#introduction-to-the-api" title="Permalink to this heading"></a></h2>
+<p>The C++ API has an elaborate class architecture. It is designed as a highly efficient and sophisticated
+API for advanced object-oriented programming including the STL (standard template library), shared
+pointers, and interface classes. If you prefer an API with less design patterns, we recommend using the
+C API.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To understand the API, read the <a class="reference internal" href="sdkManual.html"><span class="doc">SDK Manual</span></a> first:
+It contains essential information.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For more information about design patterns, we recommend the book
+<em>Design Patterns. Elements of Reusable Object-Oriented Software</em>.</p>
+<p>To get the best possible performance, you need knowledge about
+multithreading. We recommend the book <em>C++ Concurrency in Action</em>.</p>
+</div>
+<section id="compatibility">
+<h3>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this heading"></a></h3>
+<p>The C++ API release build is compatible with
+Visual Studio 2017. If you use a higher version, we recommend you to
+rebuild the C++ API by compiling the source files with your
+Visual Studio version. You can also use other IDEs that implement the C++11 standard
+(or higher) if you compile the C++ API source files with these IDEs.</p>
+</section>
+<section id="c-api-diagram">
+<h3>C++ API diagram<a class="headerlink" href="#c-api-diagram" title="Permalink to this heading"></a></h3>
+<p>The image below shows a simplified C++ API UML diagram. To ease understanding
+the concept, only the most important items are listed. For classes that you
+access through their pointers, the diagram shows these pointers instead of the
+corresponding class names.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="graphics/CPP-UML.svg"><img alt="Simplified UML diagram" src="graphics/CPP-UML.svg" width="1000" /></a>
+<figcaption>
+<p><span class="caption-text">Simplified UML diagram</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="shared-pointers">
+<h3>Shared pointers<a class="headerlink" href="#shared-pointers" title="Permalink to this heading"></a></h3>
+<section id="general-aspects">
+<h4>General aspects<a class="headerlink" href="#general-aspects" title="Permalink to this heading"></a></h4>
+<p>A shared pointer is an object that wraps any regular pointer variable to control its lifetime. Besides
+wrapping the underlying raw pointer, it keeps track of the number of copies of itself. By doing so, it
+ensures that it will not release the wrapped raw pointer until its reference count (the number of copies)
+has dropped to zero. A shared pointer automatically deletes the wrapped pointer when the last shared
+pointer to it is destroyed. Though giving away the responsibility for deallocation, the programmer can
+still work on the very same objects.</p>
+<p>Because of the mentioned advantages, the C++ API makes heavy use of shared pointers while not
+relying on a specific implementation.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">Shared pointers code snippet</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// This declares an empty shared pointer that can wrap a pointer of</span>
+<span class="w">  </span><span class="c1">// type Camera</span>
+<span class="w">  </span><span class="n">CameraPtr</span><span class="w"> </span><span class="n">sp1</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// The reset member function tells the shared pointer to</span>
+<span class="w">  </span><span class="c1">// wrap the provided raw pointer</span>
+<span class="w">  </span><span class="c1">// sp1 now has a reference count of 1</span>
+<span class="w">  </span><span class="n">sp1</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Camera</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">);</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// In this new scope we declare another shared pointer</span>
+<span class="w">      </span><span class="n">CameraPtr</span><span class="w"> </span><span class="n">sp2</span><span class="p">;</span>
+
+<span class="w">      </span><span class="c1">// By assigning sp1 to it the reference count of both (!) is set to 2</span>
+<span class="w">      </span><span class="n">sp2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sp1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">// When sp2 goes out of scope the reference count drops back to 1</span>
+<span class="p">}</span>
+<span class="c1">// Now that sp1 has gone out of scope its reference count has dropped</span>
+<span class="c1">// to 0 and it has released the underlying raw pointer on destruction</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="api-usage">
+<h2>API usage<a class="headerlink" href="#api-usage" title="Permalink to this heading"></a></h2>
+<section id="entry-point">
+<span id="index-0"></span><h3>Entry point<a class="headerlink" href="#entry-point" title="Permalink to this heading"></a></h3>
+<p>The entry point to the C++ API is the VmbSystem singleton. To obtain a
+reference to it, call the static function <code class="docutils literal notranslate"><span class="pre">VmbSystem::GetInstance</span></code>. All
+C++ classes reside in the namespace VmbCPP, so employ the using
+declaration <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">VmbCPP</span></code>.</p>
+</section>
+<section id="api-version">
+<span id="index-1"></span><h3>API version<a class="headerlink" href="#api-version" title="Permalink to this heading"></a></h3>
+<p>Even if new features are introduced to the C++ API, your software
+remains backward compatible. Use <code class="docutils literal notranslate"><span class="pre">VmbSystem::QueryVersion</span></code> to check
+the version number of the API. You can run this function without
+initializing the API.</p>
+</section>
+<section id="api-startup-and-shutdown">
+<h3>API startup and shutdown<a class="headerlink" href="#api-startup-and-shutdown" title="Permalink to this heading"></a></h3>
+<p>To start and shut down the C++ API, use these paired functions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">VmbSystem::Startup()</span></code> initializes the API, the TLs, and Interfaces. With the optional
+parameter <code class="docutils literal notranslate"><span class="pre">pathConfiguration</span></code>, you can select which transport layers are used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VmbSystem::Shutdown()</span></code> shuts down the API and destroys all used objects in
+the API (when all observers have finished execution).</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">VmbSystem::Startup</span></code> and <code class="docutils literal notranslate"><span class="pre">VmbSystem::Shutdown</span></code> must always be paired.
+Calling the pair several times within the same program is possible,
+but not recommended.
+Successive calls of <code class="docutils literal notranslate"><span class="pre">VmbSystem::Startup</span></code> or <code class="docutils literal notranslate"><span class="pre">VmbSystem::Shutdown</span></code> are
+ignored and the first <code class="docutils literal notranslate"><span class="pre">VmbSystem::Shutdown</span></code> after a <code class="docutils literal notranslate"><span class="pre">VmbSystem::Startup</span></code>
+closes the API.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Always shut down the API when your application closes. Shutting down the API
+is necessary under all circumstances to unload the transport layers. If they still
+are loaded although the application is closed, they access invalid memory.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">VmbSystem::Shutdown</span></code> blocks until all callbacks have finished execution.</p>
+</div>
+</section>
+<section id="listing-cameras">
+<span id="index-2"></span><h3>Listing cameras<a class="headerlink" href="#listing-cameras" title="Permalink to this heading"></a></h3>
+<p>The function <code class="docutils literal notranslate"><span class="pre">VmbSystem::GetCameras</span></code> enumerates all cameras recognized by the underlying transport layers.
+With this command, you can fetch the list of all connected camera objects. Before opening
+cameras, camera objects contain all static details of a physical camera that do not change throughout
+the object’s lifetime such as the camera id and the camera model.</p>
+<p>The order in which the detected cameras are listed is determined by
+the order of camera discovery and therefore not deterministic.
+Moreover, the order may change depending on your system configuration and the
+accessories (for example, hubs or long cables).</p>
+<section id="gige-cameras">
+<h4>GigE cameras<a class="headerlink" href="#gige-cameras" title="Permalink to this heading"></a></h4>
+<p>For GigE cameras, discovery has to be initiated by the host software.
+This is done automatically if you register a camera list observer of
+type <code class="docutils literal notranslate"><span class="pre">ICameraListObserver</span></code> with VmbSystem.</p>
+<p>In this case, a call to <code class="docutils literal notranslate"><span class="pre">VmbSystem::GetCameras</span></code> or
+<code class="docutils literal notranslate"><span class="pre">VmbSystem::GetCameraByID</span></code> returns immediately.
+If no camera list observer is registered, a call to
+<code class="docutils literal notranslate"><span class="pre">VmbSystem::GetCameras</span></code> or
+<code class="docutils literal notranslate"><span class="pre">VmbSystem::GetCameraByID</span></code> takes some time because the responses to
+the initiated discovery command must be waited for.</p>
+</section>
+<section id="usb-cameras">
+<h4>USB cameras<a class="headerlink" href="#usb-cameras" title="Permalink to this heading"></a></h4>
+<p>Changes to the plugged cameras are detected automatically. Consequently,
+any changes to the camera list are announced via discovery events and
+the call to <code class="docutils literal notranslate"><span class="pre">VmbSystem::GetCameras</span></code> returns immediately.</p>
+</section>
+<section id="camera-link-cameras">
+<h4>Camera Link cameras<a class="headerlink" href="#camera-link-cameras" title="Permalink to this heading"></a></h4>
+<p>The specifications of Camera Link and GenCP do not support plug &amp; play or
+discovery events. To detect changes to the camera list, shutdown and startup
+the API by calling <code class="docutils literal notranslate"><span class="pre">VmbSystem::Shutdown</span></code> and <code class="docutils literal notranslate"><span class="pre">VmbSystem::Startup</span></code> consecutively.</p>
+</section>
+<section id="mipi-csi-cameras">
+<h4>MIPI CSI cameras<a class="headerlink" href="#mipi-csi-cameras" title="Permalink to this heading"></a></h4>
+<p>Cameras with MIPI CSI-2 interface are detected when the board is booted.
+To avoid damage to the hardware, do not plug in or out a camera while the board is powered.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<span id="index-3"></span><div class="code-block-caption"><span class="caption-text">Getting the camera list code snippet</span><a class="headerlink" href="#id3" title="Permalink to this code"></a></div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="n">CameraPtrVector</span><span class="w"> </span><span class="n">cameras</span><span class="p">;</span>
+<span class="n">VmbSystem</span><span class="o">&amp;</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbSystem</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">();</span>
+<span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">Startup</span><span class="p">()</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">GetCameras</span><span class="p">(</span><span class="w"> </span><span class="n">cameras</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">CameraPtrVector</span><span class="o">::</span><span class="n">iterator</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cameras</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<span class="w">             </span><span class="n">cameras</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">iter</span><span class="p">;</span>
+<span class="w">             </span><span class="o">++</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetName</span><span class="p">(</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<span id="index-4"></span><table class="docutils align-default" id="id4">
+<caption><span class="caption-text">Basic functions of the Camera class</span><a class="headerlink" href="#id4" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function <br>
+returning VmbErrorType</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GetID( std::string&amp; ) const</p></td>
+<td><p>Unique ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetName( std::string&amp; ) const</p></td>
+<td><p>Name</p></td>
+</tr>
+<tr class="row-even"><td><p>GetModel( std::string&amp; ) const</p></td>
+<td><p>Model name</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetSerialNumber( std::string&amp; )   const</p></td>
+<td><p>Serial number</p></td>
+</tr>
+<tr class="row-even"><td><p>GetPermittedAccess(   VmbAccessModeType&amp; ) const</p></td>
+<td><p>Mode to open the camera</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetInterfaceID( std::string&amp; )   const</p></td>
+<td><p>ID of the interface the camera is connected to</p></td>
+</tr>
+</tbody>
+</table>
+<p>The following table lists additional functions of the Camera class.</p>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-text">Additional functions of the Camera class</span><a class="headerlink" href="#id5" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Camera class member functions</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GetInterface()</p></td>
+<td><p>Access the Interface and its features</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetTransportLayer()</p></td>
+<td><p>Access the TL and its features</p></td>
+</tr>
+<tr class="row-even"><td><p>GetLocalDevice()</p></td>
+<td><p>Access local device features</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetStreams()</p></td>
+<td><p>Enumerate camera streams</p></td>
+</tr>
+<tr class="row-even"><td><p>GetExtendedID()</p></td>
+<td><p>Get the Extended ID (if available)</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetLocalDevice()</p></td>
+<td><p>Access local device features</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="extended-id">
+<span id="index-5"></span><h4>Extended ID<a class="headerlink" href="#extended-id" title="Permalink to this heading"></a></h4>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In most cases, the Extended ID is not needed.</p>
+</div>
+<p>If several TLs are available for one camera, the camera is listed several times.
+To avoid potential conflicts, the SDK automatically creates an extended ID string for each camera.
+The extended ID string is provided in the struct <code class="docutils literal notranslate"><span class="pre">VmbCameraInfo_t:</span> <span class="pre">cameraIdStringExtended</span></code>.</p>
+<p>Extended IDs use the following grammar:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>extended_id : &lt;tl_identifier-char-count&gt; separator tl_identifier &lt;interface_id-char-count&gt;
+separator interface_id &lt;camera_id-char-count&gt; separator camera_id separator   : &#39;:&#39;`
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Extended IDs always overwrite other ids. A non-extended ID may be unusable after other cameras
+are discovered.</p>
+</div>
+<table class="docutils align-default" id="id6">
+<caption><span class="caption-text">Extended IDs</span><a class="headerlink" href="#id6" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Placeholder</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>tl_identifier</p></td>
+<td><p>File path of the transport layer</p></td>
+</tr>
+<tr class="row-odd"><td><p>interface_id</p></td>
+<td><p>ID of the interface as reported by the transport layer</p></td>
+</tr>
+<tr class="row-even"><td><p>camera_id</p></td>
+<td><p>Camera (non-extended) ID as reported by the interface</p></td>
+</tr>
+<tr class="row-odd"><td><p>&lt;tl_identifier-char-count&gt;</p></td>
+<td><p>Number of characters (TL ID) encoded as decimal integer</p></td>
+</tr>
+<tr class="row-even"><td><p>&lt;interface_id-char-count&gt;</p></td>
+<td><p>Number of characters (interface ID) encoded as decimal integer</p></td>
+</tr>
+<tr class="row-odd"><td><p>&lt;camera_id-char-count&gt;</p></td>
+<td><p>Number of characters encoded as decimal integer</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notifications-of-changed-camera-states">
+<h4>Notifications of changed camera states<a class="headerlink" href="#notifications-of-changed-camera-states" title="Permalink to this heading"></a></h4>
+<p>For being notified whenever a camera is detected, disconnected, or changes its open state, use
+<code class="docutils literal notranslate"><span class="pre">VmbSystem::RegisterCameraListObserver</span></code> (GigE and USB only). This call registers a
+camera list observer (of type <code class="docutils literal notranslate"><span class="pre">ICameraListObserver</span></code>) with the VmbSystem that gets executed on the
+according event. The observer function to be registered has to be of type <code class="docutils literal notranslate"><span class="pre">ICameraListObserver*</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Functions that must not be called within your camera list observer:</p>
+<ul class="simple">
+<li><p>VmbSystem::Startup</p></li>
+<li><p>VmbSystem::Shutdown</p></li>
+<li><p>VmbSystem::GetCameras</p></li>
+<li><p>VmbSystem::GetCameraByID</p></li>
+<li><p>VmbSystem::RegisterCameraListObserver</p></li>
+<li><p>VmbSystem::UnregisterCameraListObserver</p></li>
+<li><p>Feature::SetValue</p></li>
+<li><p>Feature::RunCommand</p></li>
+</ul>
+</div>
+<span class="target" id="index-6"></span><span class="target" id="index-7"></span></section>
+</section>
+<section id="opening-and-closing-a-camera">
+<span id="index-8"></span><h3>Opening and closing a camera<a class="headerlink" href="#opening-and-closing-a-camera" title="Permalink to this heading"></a></h3>
+<p>A camera must be opened to control it and to capture images.
+Call <code class="docutils literal notranslate"><span class="pre">Camera::Open</span></code> with the camera list entry of your choice, or use the function
+<code class="docutils literal notranslate"><span class="pre">VmbSystem::OpenCameraByID</span></code> with the ID of the camera. In both cases, also provide the desired
+access mode for the camera.</p>
+<p>The API provides several access modes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">VmbAccessModeFull</span></code>: read and write access. Use this mode to configure the camera
+features and to acquire images (Goldeye CL cameras: configuration only).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VmbAccessModeRead</span></code>: read-only access. Setting features is not possible.
+However, for GigE cameras that are already in use by another application,
+the acquired images can be transferred to the API (Multicast).</p></li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id7">
+<span id="index-9"></span><div class="code-block-caption"><span class="caption-text">Open cameras code snippet</span><a class="headerlink" href="#id7" title="Permalink to this code"></a></div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">CameraPtrVector</span><span class="w"> </span><span class="n">cameras</span><span class="p">;</span>
+<span class="n">VmbSystem</span><span class="o">&amp;</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbSystem</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">();</span>
+
+<span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">Startup</span><span class="p">()</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">GetCameras</span><span class="p">(</span><span class="w"> </span><span class="n">cameras</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">CameraPtrVector</span><span class="o">::</span><span class="n">iterator</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cameras</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<span class="w">             </span><span class="n">cameras</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">iter</span><span class="p">;</span>
+<span class="w">             </span><span class="o">++</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Open</span><span class="p">(</span><span class="w"> </span><span class="n">VmbAccessModeFull</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Camera opened&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>The following code snippet shows how to open a GigE camera by its IP address.
+Opening the camera by its serial number or MAC address is also possible.</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">Open Camera by IP code snippet</span><a class="headerlink" href="#id8" title="Permalink to this code"></a></div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">CameraPtr</span><span class="w"> </span><span class="n">camera</span><span class="p">;</span>
+<span class="n">VmbSystem</span><span class="o">&amp;</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbSystem</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">();</span>
+<span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">Startup</span><span class="p">()</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">OpenCameraByID</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;192.168.0.42&quot;</span><span class="p">,</span>
+<span class="w">                                                  </span><span class="n">VmbAccessModeFull</span><span class="p">,</span>
+<span class="w">                                                  </span><span class="n">camera</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Camera opened&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p id="index-10">The following code snippet shows how to close a camera using <code class="docutils literal notranslate"><span class="pre">Camera::Close</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">Closing a camera code snippet</span><a class="headerlink" href="#id9" title="Permalink to this code"></a></div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// The &quot;camera&quot; object points to an opened camera</span>
+<span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">Close</span><span class="p">()</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Camera closed&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<section id="accessing-features">
+<span id="index-11"></span><h4>Accessing features<a class="headerlink" href="#accessing-features" title="Permalink to this heading"></a></h4>
+<p>The function <code class="docutils literal notranslate"><span class="pre">Camera::Open</span></code> provides access to the features of the Remote Device module.
+To access features of the interface, you can retrieve the pointer to the Interface instance
+via the member function <code class="docutils literal notranslate"><span class="pre">Camera::GetInterface()</span></code>. For accessing the features of the
+Transport Layer <code class="docutils literal notranslate"><span class="pre">Camera::GetTransportLayer()</span></code> can be used.</p>
+</section>
+<section id="feature-types">
+<span id="index-12"></span><h4>Feature types<a class="headerlink" href="#feature-types" title="Permalink to this heading"></a></h4>
+<p>The C++ API provides several feature types, which all have their specific
+properties and functionalities.
+The  API provides its own set of access functions for every feature data type.</p>
+<table class="docutils align-default" id="id10">
+<caption><span class="caption-text">Functions for reading and writing a feature</span><a class="headerlink" href="#id10" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Set</p></th>
+<th class="head"><p>Get</p></th>
+<th class="head"><p>Range/Increment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Enum</p></td>
+<td><p>SetValue( string )</p></td>
+<td><p>GetValue( string&amp; )</p></td>
+<td><p>GetValues( StringVector&amp; )</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>SetValue( int )</p></td>
+<td><p>GetValue( int&amp; )</p></td>
+<td><p>GetValues( IntVector&amp; )</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>GetEntry( EnumEntry&amp; )</p></td>
+<td><p>GetEntries( EntryVector&amp; )</p></td>
+</tr>
+<tr class="row-odd"><td><p>Int</p></td>
+<td><p>SetValue( int )</p></td>
+<td><p>GetValue( int&amp; )</p></td>
+<td><p>GetRange( int&amp;, int&amp; )</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+<td><p>GetIncrement( int&amp; )</p></td>
+</tr>
+<tr class="row-odd"><td><p>Float</p></td>
+<td><p>SetValue( double )</p></td>
+<td><p>GetValue( double&amp; )</p></td>
+<td><p>GetRange( double&amp;, double&amp; )</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+<td><p>GetIncrement( double&amp; )</p></td>
+</tr>
+<tr class="row-odd"><td><p>String</p></td>
+<td><p>SetValue( string )</p></td>
+<td><p>GetValue( string&amp; )</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Bool</p></td>
+<td><p>SetValue( bool )</p></td>
+<td><p>GetValue( bool&amp; )</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Command</p></td>
+<td><p>RunCommand( )</p></td>
+<td><p>IsCommandDone( bool&amp; )</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Raw</p></td>
+<td><p>SetValue( uchar )</p></td>
+<td><p>GetValue( UcharVector&amp; )</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>With the member function <code class="docutils literal notranslate"><span class="pre">GetValue</span></code>, a feature’s value can be queried.
+With the member function <code class="docutils literal notranslate"><span class="pre">SetValue</span></code>, a feature’s value can be set.</p>
+<p>Integer and double features support <code class="docutils literal notranslate"><span class="pre">GetRange</span></code>. These functions return
+the minimum and maximum value that a feature can have. Integer features
+also support the <code class="docutils literal notranslate"><span class="pre">GetIncrement</span></code> function to query the step size of
+feature changes. Valid values for integer features are <em>min &lt;= val &lt;= min +
+[(max-min)/increment] * increment</em> (the maximum value might not be valid).</p>
+<p>Enumeration features support <code class="docutils literal notranslate"><span class="pre">GetValues</span></code> that returns a vector of valid
+enumerations as strings or integers. These values can be used to set the
+feature according to the result of <code class="docutils literal notranslate"><span class="pre">IsValueAvailable</span></code>. If a non-empty
+vector is supplied, the original content is overwritten and the size of
+the vector is adjusted to fit all elements. An enumeration feature can
+also be used in a similar way as an integer feature.</p>
+<p>Since not all the features are available all the time, the current
+accessibility of features may be queried via <code class="docutils literal notranslate"><span class="pre">IsReadable()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">IsWritable()</span></code>, and the availability of Enum values can be queried
+with <code class="docutils literal notranslate"><span class="pre">IsValueAvailable(</span> <span class="pre">string</span> <span class="pre">)</span></code>  or <code class="docutils literal notranslate"><span class="pre">IsValueAvailable(</span> <span class="pre">int</span> <span class="pre">)</span></code> .</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">Camera::GetFeatures</span></code>, you can list all features available for a camera.
+This list remains static while the camera is opened. The Feature class
+of the entries in this list also provides information about the features
+that always stay the same for this camera. Use the member
+functions of the class <code class="docutils literal notranslate"><span class="pre">Feature</span></code> to access them as shown in the following
+code snippets:</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<span id="index-13"></span><div class="code-block-caption"><span class="caption-text">Reading a camera feature code snippet</span><a class="headerlink" href="#id11" title="Permalink to this code"></a></div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">FeaturePtr</span><span class="w"> </span><span class="n">feature</span><span class="p">;</span>
+<span class="n">VmbInt64_t</span><span class="w"> </span><span class="n">width</span><span class="p">;</span>
+
+<span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Width&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">GetValue</span><span class="p">(</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">out</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p id="index-14">Writing features to a camera and running a command feature:</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">Writing features and running command features code snippet</span><a class="headerlink" href="#id12" title="Permalink to this code"></a></div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">FeaturePtr</span><span class="w"> </span><span class="n">feature</span><span class="p">;</span>
+
+<span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;AcquisitionMode&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">SetValue</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Continuous&quot;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;AcquisitionStart&quot;</span><span class="p">,</span>
+<span class="w">                                                         </span><span class="n">feature</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">RunCommand</span><span class="p">()</span><span class="w"> </span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Acquisition started&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>The following table introduces the basic features of all cameras.
+A feature has a name, a type, and access flags such
+as read-permitted and write-permitted.
+To get notified when a feature’s value changes use <code class="docutils literal notranslate"><span class="pre">Feature::RegisterObserver</span></code>
+(see section <a class="reference internal" href="#using-events"><span class="std std-ref">Using Events</span></a>). The observer to be registered has to implement
+the interface <code class="docutils literal notranslate"><span class="pre">IFeatureObserver</span></code>. This interface declares the member function
+<code class="docutils literal notranslate"><span class="pre">FeatureChanged</span></code>. In the implementation of this function, you can react on
+updated feature values as it will get called by the API on the according event.</p>
+<table class="docutils align-default" id="id13">
+<caption><span class="caption-text">Functions for accessing static properties of a feature</span><a class="headerlink" href="#id13" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function <br>
+returning VmbErrorType</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GetName( std::string&amp; )</p></td>
+<td><p>Name of the feature</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetDisplayName( std::string&amp; )</p></td>
+<td><p>Name to display in GUI</p></td>
+</tr>
+<tr class="row-even"><td><p>GetDataType( VmbFeatureDataType&amp; )</p></td>
+<td><p>Data type of the feature. Gives information <br>
+about the available functions for the feature.</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetFlags( VmbFeatureFlagsType&amp; )</p></td>
+<td><p>Static feature flags, containing information  <br>
+about the actions available for a feature: <br>
+Read an Write, Volatile (changes with every <br>
+Read possible).
+ModifyWrite features are adjusted to <br>
+valid values.</p></td>
+</tr>
+<tr class="row-even"><td><p>GetCategory( std::string&amp; )</p></td>
+<td><p>Category the feature belongs to, used for <br>
+structuring the features</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetPollingTime( VmbUint32_t&amp; )</p></td>
+<td><p>The suggested time to poll the feature</p></td>
+</tr>
+<tr class="row-even"><td><p>GetUnit( std::string&amp; )</p></td>
+<td><p>The unit of the feature, if available</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetRepresentation( std::string&amp; )</p></td>
+<td><p>The scale to represent the feature, used <br>
+as a hint for feature control</p></td>
+</tr>
+<tr class="row-even"><td><p>GetVisibility( VmbFeatureVisibilityType&amp; )</p></td>
+<td><p>The audience the feature is for</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetToolTip( std::string&amp; )</p></td>
+<td><p>Short description of the feature, used <br>
+for bubble help</p></td>
+</tr>
+<tr class="row-even"><td><p>GetDescription( std::string&amp; )</p></td>
+<td><p>Description of the feature, used <br>
+as extended explanation</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetSFNCNamespace( std::string&amp; )</p></td>
+<td><p>The SFNC namespace of the feature</p></td>
+</tr>
+<tr class="row-even"><td><p>GetAffectedFeatures( FeaturePtrVector&amp; )</p></td>
+<td><p>Features that change if the feature is changed</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetSelectedFeatures( FeaturePtrVector&amp; )</p></td>
+<td><p>Features that are selected by the feature</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default" id="id14">
+<caption><span class="caption-text">Functions for accessing static properties of a feature</span><a class="headerlink" href="#id14" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Access</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AcquisitionMode</p></td>
+<td><p>Enumeration</p></td>
+<td><p>R/W</p></td>
+<td><p>Values: Continuous, <br>
+SingleFrame, MultiFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p>AcquisitionStart</p></td>
+<td><p>Command</p></td>
+<td></td>
+<td><p>Start acquiring images.</p></td>
+</tr>
+<tr class="row-even"><td><p>AcquisitionStop</p></td>
+<td><p>Command</p></td>
+<td></td>
+<td><p>Stop acquiring images.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PixelFormat</p></td>
+<td><p>Enumeration</p></td>
+<td><p>R/W</p></td>
+<td><p>Image format (Mono8 etc.)</p></td>
+</tr>
+<tr class="row-even"><td><p>Width</p></td>
+<td><p>Uint32</p></td>
+<td><p>R/W</p></td>
+<td><p>Image width, in pixels.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Height</p></td>
+<td><p>Uint32</p></td>
+<td><p>R/W</p></td>
+<td><p>Image height, in pixels.</p></td>
+</tr>
+<tr class="row-even"><td><p>PayloadSize</p></td>
+<td><p>Uint32</p></td>
+<td><p>R</p></td>
+<td><p>Use VmbPayloadSizeGet()</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Functions that must not be called within the feature observer:</p>
+<ul class="simple">
+<li><p>VmbSystem::Startup</p></li>
+<li><p>VmbSystem::Shutdown</p></li>
+<li><p>VmbSystem::GetCameras</p></li>
+<li><p>VmbSystem::GetCameraByID</p></li>
+<li><p>VmbSystem::RegisterCameraListObserver</p></li>
+<li><p>VmbSystem::UnregisterCameraListObserver</p></li>
+<li><p>Feature::SetValue</p></li>
+<li><p>Feature::RunCommand</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="acquiring-images">
+<span id="index-15"></span><h3>Acquiring images<a class="headerlink" href="#acquiring-images" title="Permalink to this heading"></a></h3>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The <a class="reference internal" href="sdkManual.html"><span class="doc">SDK Manual</span></a> describes synchronous and asynchronous image acquisition.</p>
+</div>
+<section id="image-capture-vs-image-acquisition">
+<h4>Image Capture vs. Image Acquisition<a class="headerlink" href="#image-capture-vs-image-acquisition" title="Permalink to this heading"></a></h4>
+<p>Image capture and image acquisition are two independent operations:
+The API captures images, the camera acquires images. To obtain an image
+from your camera, setup the API to capture images
+before starting the acquisition on the camera:</p>
+<figure class="align-default" id="id15">
+<a class="reference internal image-reference" href="_images/VmbCPP_asynchronous.png"><img alt="Typical asynchronous application using VmbCPP" src="_images/VmbCPP_asynchronous.png" style="width: 1000px;" /></a>
+<figcaption>
+<p><span class="caption-text">Typical asynchronous application using VmbCPP</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="asynchronous-image-acquisition">
+<h4>Asynchronous image acquisition<a class="headerlink" href="#asynchronous-image-acquisition" title="Permalink to this heading"></a></h4>
+<p>The following code snippet is a minimalistic example of asynchronous image acquisition. It uses the convenience functions</p>
+<div class="literal-block-wrapper docutils container" id="id16">
+<span id="index-16"></span><div class="code-block-caption"><span class="caption-text">Simple image streaming code snippet</span><a class="headerlink" href="#id16" title="Permalink to this code"></a></div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;VmbCPP/VmbCpp.h&quot;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">VmbCPP</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FrameObserver</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">IFrameObserver</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">   </span><span class="n">FrameObserver</span><span class="p">(</span><span class="w"> </span><span class="n">CameraPtr</span><span class="w"> </span><span class="n">pCamera</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">FrameReceived</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">FramePtr</span><span class="w"> </span><span class="n">pFrame</span><span class="w"> </span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Constructor for the FrameObserver class</span>
+<span class="n">FrameObserver</span><span class="w"> </span><span class="nf">::FrameObserver</span><span class="p">(</span><span class="w"> </span><span class="n">CameraPtr</span><span class="w"> </span><span class="n">pCamera</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">IFrameObserver</span><span class="p">(</span><span class="w"> </span><span class="n">pCamera</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="c1">// Frame callback notifies about incoming frames</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">FrameObserver::FrameReceived</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">FramePtr</span><span class="w"> </span><span class="n">pFrame</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="c1">// Send notification to working thread</span>
+<span class="w">   </span><span class="c1">// Do not apply image processing within this callback (performance)</span>
+<span class="w">   </span><span class="c1">// When the frame has been processed, requeue it</span>
+<span class="w">   </span><span class="n">m_pCamera</span><span class="o">-&gt;</span><span class="n">QueueFrame</span><span class="p">(</span><span class="w"> </span><span class="n">pFrame</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">VmbErrorType</span><span class="w"> </span><span class="n">err</span><span class="p">;</span><span class="w"> </span><span class="c1">// Every Vimba X function returns an error code that</span>
+<span class="w">                     </span><span class="c1">// should always be checked for VmbErrorSuccess (not done here for brevity)</span>
+<span class="w">   </span><span class="n">VmbSystem</span><span class="o">&amp;</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbSystem</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">();</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">Startup</span><span class="p">();</span>
+
+<span class="w">   </span><span class="c1">// Listing available cameras and selecting the one to use</span>
+<span class="w">   </span><span class="n">CameraPtrVector</span><span class="w"> </span><span class="n">cameras</span><span class="p">;</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">GetCameras</span><span class="p">(</span><span class="w"> </span><span class="n">cameras</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">CameraPtr</span><span class="w"> </span><span class="n">camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cameras</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">);</span><span class="w"> </span><span class="c1">// For this example we just use the first listed camera</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">Open</span><span class="p">(</span><span class="w"> </span><span class="n">VmbAccessModeFull</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">   </span><span class="c1">// Starting the acquisition</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">StartContinuousImageAcquisition</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">IFrameObserverPtr</span><span class="p">(</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FrameObserver</span><span class="p">(</span><span class="w"> </span><span class="n">camera</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">   </span><span class="c1">// The camera is now acquiring images and for every recorded frame the</span>
+<span class="w">   </span><span class="c1">// `FrameObserver::FrameReceived` function above is called.</span>
+
+<span class="w">   </span><span class="c1">// Stopping the acquisition and shutting down the API</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">StopContinuousImageAcquisition</span><span class="p">();</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">Shutdown</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="image-capture">
+<h4>Image capture<a class="headerlink" href="#image-capture" title="Permalink to this heading"></a></h4>
+<p>To enable image capture, frame buffers must be allocated and the API must be
+prepared for incoming frames. This is done in the convenience function
+<code class="docutils literal notranslate"><span class="pre">Camera::StartContinuousAcquisition</span></code> (<code class="docutils literal notranslate"><span class="pre">Camera::StopContinuousAcquisition</span></code>
+stops acquisition). Note that these convenience functions perform all steps
+shown in section <a class="reference internal" href="#image-capture-vs-image-acquisition"><span class="std std-ref">Image Capture vs. Image Acquisition</span></a> for each single image. Therefore, they do not
+provide best performance if your vision application requires frequently
+starting and stopping image acquisition. In this case, it is unnecessary
+to prepare image acquisition and to clean up for each image. Instead, you
+can prepare image acquisition once, toggle between the start and stop
+functions, and clean up after your images are captured.</p>
+<p>Optionally, you can activate the alloc and announce functionality for more efficient buffer allocation.
+To do this, use the optional parameter /x.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>CSI-2 cameras only</strong>:</p>
+<p>We recommend using <em>alloc and announce</em>. If you want to use the <em>announce mode</em> with the CSI TL,
+<strong>without using the Convenience functions</strong> <code class="docutils literal notranslate"><span class="pre">AcquireSingleImage()</span></code>, <code class="docutils literal notranslate"><span class="pre">AcquireMultipleImages()</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">StartContinuousImageAcquisition()</span></code>, make sure you pass the <em>StreamBufferAlignment</em>
+within the Frame Constructor.</p>
+</div>
+<p>Asynchronous image capture step by step:</p>
+<ol class="arabic simple">
+<li><p>Open the camera as described in chapter <a class="reference internal" href="#opening-and-closing-a-camera"><span class="std std-ref">Opening and closing a camera</span></a>.</p></li>
+<li><p>Query the necessary buffer size through the convenience function <code class="docutils literal notranslate"><span class="pre">VmbPayloadsizeGet()</span></code>.</p></li>
+<li><p>Allocate frames of this size.</p></li>
+<li><p>Announce the frames.</p></li>
+<li><p>Start the capture engine.</p></li>
+<li><p>Queue the frame you have just created with <code class="docutils literal notranslate"><span class="pre">Camera::QueueFrame</span></code>, so that
+the buffer can be filled when the acquisition has started.</p></li>
+</ol>
+<p>The API is now ready. Start and stop image acquisition on the camera as
+described in section <a class="reference internal" href="#acquiring-images"><span class="std std-ref">Acquiring images</span></a>.</p>
+<p>Register a frame observer that gets executed when capturing is complete.
+The frame observer has to be of type <code class="docutils literal notranslate"><span class="pre">IFrameObserver</span></code>. Within the frame
+observer, queue the frame again after you have processed it.</p>
+<ol class="arabic simple" start="7">
+<li><p>Stop the capture engine and discard all pending callbacks with <code class="docutils literal notranslate"><span class="pre">Camera::EndCapture</span></code>.</p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">Camera::FlushQueue</span></code> to cancel all frames on the queue.
+If the API has done the memory allocation, this memory is not released
+until <code class="docutils literal notranslate"><span class="pre">RevokeAllFrames</span></code>, <code class="docutils literal notranslate"><span class="pre">RevokeFrame</span></code>, <code class="docutils literal notranslate"><span class="pre">EndCapture</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">Close</span></code> functions have been called.</p></li>
+<li><p>Revoke the frames with <code class="docutils literal notranslate"><span class="pre">Camera::RevokeAllFrames</span></code> to clear the buffers.</p></li>
+</ol>
+<p>To synchronously capture images (blocking your execution thread), follow these steps:</p>
+<ol class="arabic simple">
+<li><p>Open the camera as described in section <a class="reference internal" href="#opening-and-closing-a-camera"><span class="std std-ref">Opening and closing a camera</span></a>.</p></li>
+<li><p>How you proceed depends on the number of frames and the performance you need:</p>
+<ul class="simple">
+<li><p>Single frame: You can use the convenience function <code class="docutils literal notranslate"><span class="pre">Camera::AcquireSingleImage</span></code>
+to receive one image frame.</p></li>
+<li><p>Multiple frames: You can use the convenience function
+<code class="docutils literal notranslate"><span class="pre">Camera::AcquireMultipleImages</span></code> to receive several image frames (determined by the
+size of your vector of FramePtrs).</p></li>
+</ul>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If your application requires a low CPU load or exact triggering, we recommend a
+different approach: Set the feature <em>AcquisitionMode</em> to MultiFrame or Continuous
+and run the command <em>AcquisitionStart</em> (see section <a class="reference internal" href="#acquiring-images"><span class="std std-ref">Acquiring images</span></a>).</p>
+</div>
+<p>To assure correct continuous image capture, use at least two or three frames.
+The appropriate number of frames to be queued in your application depends on
+the frames per second the camera delivers and on the speed with which you are
+able to re-queue frames (also taking into consideration the operating
+system load). The image frames are filled in the same order in which they
+were queued.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Always check that <code class="docutils literal notranslate"><span class="pre">Frame::GetReceiveStatus</span></code> returns
+<code class="docutils literal notranslate"><span class="pre">VmbFrameStatusComplete</span></code> when a frame is returned to ensure
+the data is valid.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Functions that must not be called within the frame observer:</p>
+<ul class="simple">
+<li><p>VmbSystem::Startup</p></li>
+<li><p>VmbSystem::Shutdown</p></li>
+<li><p>VmbSystem::OpenCameraByID</p></li>
+<li><p>Camera::Open</p></li>
+<li><p>Camera::Close</p></li>
+<li><p>Camera::AcquireSingleImage</p></li>
+<li><p>Camera::AcquireMultipleImages</p></li>
+<li><p>Camera::StartContinuousImageAcquisition</p></li>
+<li><p>Camera::StopContinuousImageAcquisition</p></li>
+<li><p>Camera::StartCapture</p></li>
+<li><p>Camera::EndCapture</p></li>
+<li><p>Camera::AnnounceFrame</p></li>
+<li><p>Camera::RevokeFrame</p></li>
+<li><p>Stream::Open</p></li>
+<li><p>Stream::Close</p></li>
+<li><p>Stream::AcquireSingleImage</p></li>
+<li><p>Stream::AcquireMultipleImages</p></li>
+<li><p>Stream::StartCapture</p></li>
+<li><p>Stream::EndCapture</p></li>
+<li><p>Stream::AnnounceFrame</p></li>
+<li><p>Stream::RevokeFrame</p></li>
+<li><p>Stream::RevokeAllFrames</p></li>
+</ul>
+</div>
+</section>
+<section id="image-acquisition">
+<h4>Image Acquisition<a class="headerlink" href="#image-acquisition" title="Permalink to this heading"></a></h4>
+<p>If you have decided to use one of the convenience functions
+<code class="docutils literal notranslate"><span class="pre">Camera::AcquireSingleImage</span></code>, <code class="docutils literal notranslate"><span class="pre">Camera::AcquireMultipleImages</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">Camera::StartContinuousImageAcquisition</span></code>, no further actions are necessary.</p>
+<p>Only if you wish to setup capture step by step as described in section
+<a class="reference internal" href="#image-capture"><span class="std std-ref">Image capture</span></a>, you have to start image acquisition on your camera:</p>
+<ol class="arabic simple">
+<li><p>Set the feature <em>AcquisitionMode</em> (for example, to Continuous).</p></li>
+<li><p>Run the command <em>AcquisitionStart</em>.</p></li>
+</ol>
+<p>To stop image acquisition, run command <em>AcquisitionStop</em>.
+The code snippet below shows a modification of the main function of
+the simple image streaming example above.</p>
+<div class="literal-block-wrapper docutils container" id="id17">
+<div class="code-block-caption"><span class="caption-text">Image streaming code snippet</span><a class="headerlink" href="#id17" title="Permalink to this code"></a></div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">VmbErrorType</span><span class="w"> </span><span class="n">err</span><span class="p">;</span><span class="w"> </span><span class="c1">// Every Vimba X function returns an error code that</span>
+<span class="w">                     </span><span class="c1">// should always be checked for VmbErrorSuccess (not done here for brevity)</span>
+<span class="w">   </span><span class="n">VmbSystem</span><span class="o">&amp;</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbSystem</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">();</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">Startup</span><span class="p">();</span>
+
+<span class="w">   </span><span class="c1">// Listing available cameras and selecting the one to use</span>
+<span class="w">   </span><span class="n">CameraPtrVector</span><span class="w"> </span><span class="n">cameras</span><span class="p">;</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">GetCameras</span><span class="p">(</span><span class="w"> </span><span class="n">cameras</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">CameraPtr</span><span class="w"> </span><span class="n">camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cameras</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">);</span><span class="w"> </span><span class="c1">// For this example we just use the first listed camera</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">Open</span><span class="p">(</span><span class="w"> </span><span class="n">VmbAccessModeFull</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">   </span><span class="n">FramePtrVector</span><span class="w"> </span><span class="n">frames</span><span class="p">(</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">);</span><span class="w"> </span><span class="c1">// A list of frames for streaming. We chose to queue 5 frames.</span>
+<span class="w">   </span><span class="n">IFrameObserverPtr</span><span class="w"> </span><span class="n">observer</span><span class="p">(</span>
+<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="n">FrameObserver</span><span class="p">(</span><span class="w"> </span><span class="n">camera</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"> </span><span class="c1">// Our implementation of a frame observer</span>
+<span class="w">   </span><span class="n">FeaturePtr</span><span class="w"> </span><span class="n">feature</span><span class="p">;</span><span class="w">                </span><span class="c1">// Variable to hold features that need to be used</span>
+<span class="w">   </span><span class="n">VmbUint32_t</span><span class="w"> </span><span class="n">payloadSize</span><span class="p">;</span><span class="w">           </span><span class="c1">// The payload size of one frame</span>
+
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">GetPayloadSize</span><span class="p">(</span><span class="w"> </span><span class="n">payloadSize</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">   </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">FramePtrVector</span><span class="o">::</span><span class="n">iterator</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">frames</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">frames</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">iter</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">      </span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="w"> </span><span class="p">).</span><span class="n">reset</span><span class="p">(</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Frame</span><span class="p">(</span><span class="w"> </span><span class="n">payloadSize</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+<span class="w">      </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span><span class="o">-&gt;</span><span class="n">RegisterObserver</span><span class="p">(</span><span class="w"> </span><span class="n">observer</span><span class="w"> </span><span class="p">);</span>
+<span class="w">      </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">AnnounceFrame</span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">StartCapture</span><span class="p">();</span>
+
+<span class="w">   </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">FramePtrVector</span><span class="w"> </span><span class="o">::</span><span class="n">iterator</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">frames</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">frames</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">iter</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">      </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">QueueFrame</span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;AcquisitionMode&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">SetValue</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Continuous&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;AcquisitionStart&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">RunCommand</span><span class="p">();</span>
+
+<span class="w">   </span><span class="c1">// Program runtime ...</span>
+<span class="w">   </span><span class="c1">// When finished , tear down the acquisition chain , close camera and API</span>
+
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;AcquisitionStop&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">RunCommand</span><span class="p">();</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">EndCapture</span><span class="p">();</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">FlushQueue</span><span class="p">();</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">RevokeAllFrames</span><span class="p">();</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">Close</span><span class="p">();</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">Shutdown</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="transforming-images">
+<h3>Transforming images<a class="headerlink" href="#transforming-images" title="Permalink to this heading"></a></h3>
+<p>To transform images received via the API into
+common image formats, use the Image Transform Library.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For a quick start, see the <em>AsynchrounousGrab</em> example,</p>
+</div>
+</section>
+<section id="using-events">
+<span id="index-17"></span><h3>Using Events<a class="headerlink" href="#using-events" title="Permalink to this heading"></a></h3>
+<p>Events serve a multitude of purposes and can have several origins such as
+VmbSystem, Interface, and Cameras.</p>
+<p>In the C++ API, notifications are issued as a result to a feature invalidation
+of either its value or its state. Consequently, to get notified about any
+feature change, register an observer of the desired type
+(<code class="docutils literal notranslate"><span class="pre">ICameraListObserver</span></code>, <code class="docutils literal notranslate"><span class="pre">IInterfaceListObserver</span></code>, or <code class="docutils literal notranslate"><span class="pre">IFeatureObserver</span></code>)
+with the appropriate <code class="docutils literal notranslate"><span class="pre">RegisterXXXObserver</span></code> method (<code class="docutils literal notranslate"><span class="pre">RegisterCameraListObserver</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RegisterInterfaceListObserver</span></code>, or <code class="docutils literal notranslate"><span class="pre">RegisterObserver</span></code>), which gets called
+if there is a change to that feature.</p>
+<p>Three examples are listed in this chapter:</p>
+<ul class="simple">
+<li><p>Camera list notifications</p></li>
+<li><p>Tracking invalidations of features</p></li>
+<li><p>Explicit camera event features</p></li>
+</ul>
+<p>For camera list notifications, see the code snippet below:</p>
+<div class="literal-block-wrapper docutils container" id="id18">
+<span id="index-18"></span><div class="code-block-caption"><span class="caption-text">Getting notified about camera list changes code snippet</span><a class="headerlink" href="#id18" title="Permalink to this code"></a></div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// 1. define observer that reacts on camera list changes</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CamObserver</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">ICameraListObserver</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="c1">// ...</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">CameraListChanged</span><span class="p">(</span><span class="w"> </span><span class="n">CameraPtr</span><span class="w"> </span><span class="n">pCam</span><span class="p">,</span><span class="w"> </span><span class="n">UpdateTriggerType</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// Next to the camera pointer a reason why the observer&#39;s function was triggered</span>
+<span class="w">      </span><span class="c1">// is passed in. Possible values are:</span>
+<span class="w">      </span><span class="c1">// UpdateTriggerPluggedIn (0), a new camera was discovered</span>
+<span class="w">      </span><span class="c1">// UpdateTriggerPluggedOut (1), a known camera disappeared from the bus</span>
+<span class="w">      </span><span class="c1">// UpdateTriggerOpenStateChanged (3), a known camera was opened or closed</span>
+<span class="w">      </span><span class="c1">// by another application</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">UpdateTriggerPluggedIn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">UpdateTriggerPluggedOut</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="p">)</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Put your code here to react on the changed camera list</span>
+<span class="w">            </span><span class="c1">// E.g., by sending a Windows event message or</span>
+<span class="w">            </span><span class="c1">// triggering a Qt or boost signal to update your view</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">else</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// React on a changed open state</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">VmbErrorType</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="w">   </span><span class="n">VmbSystem</span><span class="o">&amp;</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbSystem</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">();</span>
+<span class="w">   </span><span class="n">FeaturePtr</span><span class="w"> </span><span class="n">pFeature</span><span class="p">;</span>
+
+<span class="w">   </span><span class="c1">// 2. Register the observer; automatic discovery for GigE is turned on</span>
+<span class="w">   </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">RegisterCameraListObserver</span><span class="p">(</span><span class="w"> </span><span class="n">ICameraListObserverPtr</span><span class="p">(</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CamObserver</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id19">
+<span id="index-19"></span><div class="code-block-caption"><span class="caption-text">Getting notified about feature list changes</span><a class="headerlink" href="#id19" title="Permalink to this code"></a></div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// 1. define observer</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WidthObserver</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">IFeatureObserver</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="c1">// ...</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">FeatureChanged</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">FeaturePtr</span><span class="o">&amp;</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">nullptr</span><span class="w"> </span><span class="p">)</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">            </span><span class="n">VmbError_t</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">strName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">            </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">GetDisplayName</span><span class="p">(</span><span class="w"> </span><span class="n">strName</span><span class="w"> </span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">strName</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; changed&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="c1">// Assuming an opened camera instance</span>
+<span class="w">   </span><span class="n">VmbErrorType</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">   </span><span class="n">FeaturePtr</span><span class="w"> </span><span class="n">feature</span><span class="p">;</span>
+<span class="w">   </span><span class="c1">// 2. register the observer for the camera event</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Width&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">RegisterObserver</span><span class="p">(</span><span class="w"> </span><span class="n">IFeatureObserverPtr</span><span class="p">(</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WidthObserver</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">   </span><span class="c1">// As an example , binning is changed , so the observer will be run</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;BinningHorizontal&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">SetValue</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;8&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id20">
+<span id="index-20"></span><div class="code-block-caption"><span class="caption-text">Getting notified about camera events</span><a class="headerlink" href="#id20" title="Permalink to this code"></a></div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// 1. define observer</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">EventObserver</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">IFeatureObserver</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="c1">//...</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">FeatureChanged</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">FeaturePtr</span><span class="o">&amp;</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">nullptr</span><span class="w"> </span><span class="p">)</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">            </span><span class="n">VmbErrorType</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">strName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">GetDisplayName</span><span class="p">(</span><span class="w"> </span><span class="n">strName</span><span class="w"> </span><span class="p">);</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Event &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">strName</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; occurred&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">   </span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="c1">// Assuming an opened camera instance</span>
+<span class="w">   </span><span class="n">VmbErrorType</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">   </span><span class="n">FeaturePtr</span><span class="w"> </span><span class="n">feature</span><span class="p">;</span>
+<span class="w">   </span><span class="c1">// 2. register the observer for the camera event</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;EventAcquisitionStart&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">RegisterObserver</span><span class="p">(</span><span class="w"> </span><span class="n">IFeatureObserverPtr</span><span class="p">(</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EventObserver</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">   </span><span class="c1">// 3. select &quot;AcquisitionStart&quot; (or a different) event</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;EventSelector&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">SetValue</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;AcquisitionStart&quot;</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">   </span><span class="c1">// 4. switch on the event notification (or switch it off with &quot;Off&quot;)</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;EventNotification&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">);</span>
+<span class="w">   </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">SetValue</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;On&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="chunk">
+<span id="index-21"></span><h3>Chunk<a class="headerlink" href="#chunk" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To use the <em>chunk</em> feature, make sure your camera supports it.</p>
+</div>
+<p>Chunk data are image metadata such as the exposure time that are available in the Frame.
+To activate chunk, see the user documentation of your camera.</p>
+<p>To access the chunk feature, call <code class="docutils literal notranslate"><span class="pre">Frame::AccessChunkData()</span></code>
+from <code class="docutils literal notranslate"><span class="pre">FrameObserver::FrameReceived()</span></code>.
+Within this function, you can access chunk features via the <code class="docutils literal notranslate"><span class="pre">FeatureContainerPtr</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See the <em>ChunkAccess</em> example.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For user defined error codes, see the code snippet in section
+<a class="reference internal" href="cAPIManual.html#chunk"><span class="std std-ref">Chunk</span></a> in the C API Manual.</p>
+</div>
+<span class="target" id="index-22"></span></section>
+<section id="saving-and-loading-settings">
+<span id="index-23"></span><h3>Saving and loading settings<a class="headerlink" href="#saving-and-loading-settings" title="Permalink to this heading"></a></h3>
+<p>Additionally to the user sets stored inside the cameras, you can save the
+feature values of the GenTL modules as an XML file to your host PC.</p>
+<div class="literal-block-wrapper docutils container" id="id21">
+<div class="code-block-caption"><span class="caption-text">Saving and loading settings</span><a class="headerlink" href="#id21" title="Permalink to this code"></a></div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;filesystem&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;VmbCPP/VmbCPP.h&gt;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">VmbCPP</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">VmbSystem</span><span class="o">&amp;</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbSystem</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">();</span>
+<span class="w">   </span><span class="n">CameraPtrVector</span><span class="w"> </span><span class="n">cameras</span><span class="p">;</span>
+
+<span class="w">   </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">Startup</span><span class="p">()</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">GetCameras</span><span class="p">(</span><span class="w"> </span><span class="n">cameras</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">cameras</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">               </span><span class="n">CameraPtr</span><span class="w"> </span><span class="n">camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cameras</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">);</span>
+<span class="w">               </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">Open</span><span class="p">(</span><span class="w"> </span><span class="n">VmbAccessModeFull</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">               </span><span class="p">{</span>
+<span class="w">                  </span><span class="n">std</span><span class="o">::</span><span class="n">filesystem</span><span class="o">::</span><span class="n">path</span><span class="w"> </span><span class="n">xmlFile</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;camera_0_settings.xml&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">                  </span><span class="n">VmbFeaturePersistSettings_t</span><span class="w"> </span><span class="n">settingsStruct</span><span class="p">;</span>
+<span class="w">                  </span><span class="n">settingsStruct</span><span class="p">.</span><span class="n">loggingLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                  </span><span class="n">settingsStruct</span><span class="p">.</span><span class="n">maxIterations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">                  </span><span class="n">settingsStruct</span><span class="p">.</span><span class="n">persistType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbFeaturePersistNoLUT</span><span class="p">;</span>
+<span class="w">                  </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">SaveSettings</span><span class="p">(</span><span class="w"> </span><span class="n">xmlFile</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">settingsStruct</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Could not save camera settings to &#39;&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">xmlFile</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;&#39;&quot;</span>
+<span class="w">                                 </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">                  </span><span class="n">camera</span><span class="o">-&gt;</span><span class="n">Close</span><span class="p">();</span>
+<span class="w">               </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="n">system</span><span class="p">.</span><span class="n">Shutdown</span><span class="p">();</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Logging levels:</p>
+<ul class="simple">
+<li><p>0: Info only</p></li>
+<li><p>1: With errors</p></li>
+<li><p>2: With warnings</p></li>
+<li><p>3: Debug</p></li>
+<li><p>4: Trace</p></li>
+</ul>
+<p>Iterations: Several iterations may be needed to catch all feature dependencies
+(compare desired value with camera value and write it to camera).</p>
+<p>To control which features are saved, see the C API Manual, chapter <a class="reference internal" href="cAPIManual.html#saving-and-loading-settings"><span class="std std-ref">Saving and loading settings</span></a>.</p>
+</section>
+<section id="triggering">
+<h3>Triggering<a class="headerlink" href="#triggering" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before triggering, startup the API and open the camera(s).</p>
+</div>
+<section id="external-trigger">
+<h4>External trigger<a class="headerlink" href="#external-trigger" title="Permalink to this heading"></a></h4>
+<p id="index-24">The following code snippet shows how to trigger your camera with an
+external device.</p>
+<div class="literal-block-wrapper docutils container" id="id22">
+<div class="code-block-caption"><span class="caption-text">External trigger code snippet</span><a class="headerlink" href="#id22" title="Permalink to this code"></a></div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Startup the API, get cameras and open cameras as usual</span>
+<span class="c1">// Trigger cameras according to their interface</span>
+<span class="c1">// Configure trigger input line and selector , switch trigger on</span>
+<span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">CameraPtrVector</span><span class="o">::</span><span class="n">iterator</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cameras</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">cameras</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">iter</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">VmbTransportLayerType</span><span class="w"> </span><span class="n">inter</span><span class="p">;</span>
+<span class="w">    </span><span class="n">FeaturePtr</span><span class="w"> </span><span class="n">feature</span><span class="p">;</span>
+<span class="w">    </span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetInterfaceType</span><span class="p">(</span><span class="w"> </span><span class="n">inter</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="w"> </span><span class="n">inter</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">VmbTransportLayerTypeGEV</span><span class="p">:</span>
+<span class="w">        </span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;TriggerSelector&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">SetValue</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;FrameStart&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;TriggerSource&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">SetValue</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Line1&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;TriggerMode&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">SetValue</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;On&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">VmbTransportLayerTypeU3V</span><span class="p">:</span>
+<span class="w">        </span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;LineSelector&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">SetValue</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Line0&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;LineMode&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">SetValue</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Input&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;TriggerSource&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">SetValue</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Line0&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetFeatureByName</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;TriggerMode&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="n">feature</span><span class="o">-&gt;</span><span class="n">SetValue</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;On&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="listing-interfaces">
+<span id="index-25"></span><h3>Listing interfaces<a class="headerlink" href="#listing-interfaces" title="Permalink to this heading"></a></h3>
+<p>You can list all found interfaces such as frame grabbers or NICs.
+<code class="docutils literal notranslate"><span class="pre">VmbSystem::GetInterfaces</span></code> enumerates all interfaces recognized by
+the underlying transport layers.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id23">
+<div class="code-block-caption"><span class="caption-text">Get interfaces code snippet</span><a class="headerlink" href="#id23" title="Permalink to this code"></a></div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="n">InterfacePtrVector</span><span class="w"> </span><span class="n">interfaces</span><span class="p">;</span>
+<span class="n">VmbSystem</span><span class="o">&amp;</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbSystem</span><span class="o">::</span><span class="n">GetInstance</span><span class="p">();</span>
+<span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">Startup</span><span class="p">()</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">GetInterfaces</span><span class="p">(</span><span class="w"> </span><span class="n">interfaces</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">InterfacePtrVector</span><span class="o">::</span><span class="n">iterator</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interfaces</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<span class="w">             </span><span class="n">interfaces</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">iter</span><span class="p">;</span>
+<span class="w">             </span><span class="o">++</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">VmbErrorSuccess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="w"> </span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetName</span><span class="p">(</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p>The Interface class provides the member functions to obtain information
+about an interface listed in the following table.</p>
+<span id="index-26"></span><table class="docutils align-default" id="id24">
+<caption><span class="caption-text">Basic functions of the Interface class</span><a class="headerlink" href="#id24" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function (returning   VmbErrorType)</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GetID( std::string&amp; ) const</p></td>
+<td><p>The unique ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetName( std::string&amp; ) const The name</p></td>
+<td><p>The name</p></td>
+</tr>
+<tr class="row-even"><td><p>GetType( VmbInterfaceType&amp; ) const</p></td>
+<td><p>The camera interface type</p></td>
+</tr>
+<tr class="row-odd"><td><p>GetSerialNumber( std::string&amp; ) const</p></td>
+<td><p>The serial number (not in use)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="error-codes">
+<h3>Error codes<a class="headerlink" href="#error-codes" title="Permalink to this heading"></a></h3>
+<p>For error codes and other technical issues, see <a class="reference internal" href="troubleshooting.html"><span class="doc">Troubleshooting</span></a>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cAPIManual.html" class="btn btn-neutral float-left" title="C API Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dotNetAPIManual.html" class="btn btn-neutral float-right" title=".NET API Manual" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

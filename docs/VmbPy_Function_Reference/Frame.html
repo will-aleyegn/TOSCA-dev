@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frame &mdash; VmbPy 1.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=cbcdba59"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Feature" href="Feature.html" />
+    <link rel="prev" title="LocalDevice" href="LocalDevice.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            VmbPy
+          </a>
+              <div class="version">
+                1.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="VmbSystem.html">VmbSystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TransportLayer.html">TransportLayer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Camera.html">Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stream.html">Stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocalDevice.html">LocalDevice</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Frame</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#vmbpy.Frame"><code class="docutils literal notranslate"><span class="pre">Frame</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.access_chunk_data"><code class="docutils literal notranslate"><span class="pre">Frame.access_chunk_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.as_numpy_ndarray"><code class="docutils literal notranslate"><span class="pre">Frame.as_numpy_ndarray()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.as_opencv_image"><code class="docutils literal notranslate"><span class="pre">Frame.as_opencv_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.contains_chunk_data"><code class="docutils literal notranslate"><span class="pre">Frame.contains_chunk_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.convert_pixel_format"><code class="docutils literal notranslate"><span class="pre">Frame.convert_pixel_format()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.get_buffer"><code class="docutils literal notranslate"><span class="pre">Frame.get_buffer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.get_buffer_size"><code class="docutils literal notranslate"><span class="pre">Frame.get_buffer_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.get_height"><code class="docutils literal notranslate"><span class="pre">Frame.get_height()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.get_id"><code class="docutils literal notranslate"><span class="pre">Frame.get_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.get_offset_x"><code class="docutils literal notranslate"><span class="pre">Frame.get_offset_x()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.get_offset_y"><code class="docutils literal notranslate"><span class="pre">Frame.get_offset_y()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.get_payload_type"><code class="docutils literal notranslate"><span class="pre">Frame.get_payload_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.get_pixel_format"><code class="docutils literal notranslate"><span class="pre">Frame.get_pixel_format()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.get_status"><code class="docutils literal notranslate"><span class="pre">Frame.get_status()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.get_timestamp"><code class="docutils literal notranslate"><span class="pre">Frame.get_timestamp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Frame.get_width"><code class="docutils literal notranslate"><span class="pre">Frame.get_width()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vmbpy.FrameStatus"><code class="docutils literal notranslate"><span class="pre">FrameStatus</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.FrameStatus.Complete"><code class="docutils literal notranslate"><span class="pre">FrameStatus.Complete</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.FrameStatus.Incomplete"><code class="docutils literal notranslate"><span class="pre">FrameStatus.Incomplete</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.FrameStatus.TooSmall"><code class="docutils literal notranslate"><span class="pre">FrameStatus.TooSmall</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.FrameStatus.Invalid"><code class="docutils literal notranslate"><span class="pre">FrameStatus.Invalid</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vmbpy.AllocationMode"><code class="docutils literal notranslate"><span class="pre">AllocationMode</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.AllocationMode.AnnounceFrame"><code class="docutils literal notranslate"><span class="pre">AllocationMode.AnnounceFrame</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.AllocationMode.AllocAndAnnounceFrame"><code class="docutils literal notranslate"><span class="pre">AllocationMode.AllocAndAnnounceFrame</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vmbpy.PixelFormat"><code class="docutils literal notranslate"><span class="pre">PixelFormat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Mono8"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Mono8</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Mono10"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Mono10</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Mono10p"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Mono10p</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Mono12"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Mono12</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Mono12Packed"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Mono12Packed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Mono12p"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Mono12p</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Mono14"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Mono14</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Mono16"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Mono16</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerGR8"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerGR8</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerRG8"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerRG8</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerGB8"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerGB8</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerBG8"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerBG8</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerGR10"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerGR10</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerRG10"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerRG10</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerGB10"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerGB10</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerBG10"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerBG10</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerGR12"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerGR12</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerRG12"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerRG12</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerGB12"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerGB12</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerBG12"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerBG12</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerGR12Packed"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerGR12Packed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerRG12Packed"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerRG12Packed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerGB12Packed"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerGB12Packed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerBG12Packed"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerBG12Packed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerGR10p"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerGR10p</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerRG10p"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerRG10p</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerGB10p"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerGB10p</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerBG10p"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerBG10p</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerGR12p"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerGR12p</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerRG12p"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerRG12p</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerGB12p"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerGB12p</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerBG12p"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerBG12p</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerGR16"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerGR16</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerRG16"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerRG16</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerGB16"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerGB16</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.BayerBG16"><code class="docutils literal notranslate"><span class="pre">PixelFormat.BayerBG16</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Rgb8"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Rgb8</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Bgr8"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Bgr8</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Rgb10"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Rgb10</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Bgr10"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Bgr10</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Rgb12"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Rgb12</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Bgr12"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Bgr12</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Rgb14"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Rgb14</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Bgr14"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Bgr14</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Rgb16"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Rgb16</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Bgr16"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Bgr16</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Rgba8"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Rgba8</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Bgra8"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Bgra8</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Argb8"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Argb8</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Rgba10"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Rgba10</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Bgra10"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Bgra10</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Rgba12"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Rgba12</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Bgra12"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Bgra12</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Rgba14"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Rgba14</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Bgra14"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Bgra14</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Rgba16"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Rgba16</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Bgra16"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Bgra16</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Yuv411"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Yuv411</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Yuv422"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Yuv422</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.Yuv444"><code class="docutils literal notranslate"><span class="pre">PixelFormat.Yuv444</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.YCbCr411_8_CbYYCrYY"><code class="docutils literal notranslate"><span class="pre">PixelFormat.YCbCr411_8_CbYYCrYY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.YCbCr422_8_CbYCrY"><code class="docutils literal notranslate"><span class="pre">PixelFormat.YCbCr422_8_CbYCrY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.PixelFormat.YCbCr8_CbYCr"><code class="docutils literal notranslate"><span class="pre">PixelFormat.YCbCr8_CbYCr</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vmbpy.intersect_pixel_formats"><code class="docutils literal notranslate"><span class="pre">intersect_pixel_formats()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Feature.html">Feature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Error.html">Error</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">VmbPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Frame</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="frame">
+<h1>Frame<a class="headerlink" href="#frame" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="vmbpy.Frame">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vmbpy.</span></span><span class="sig-name descname"><span class="pre">Frame</span></span><a class="headerlink" href="#vmbpy.Frame" title="Permalink to this definition"></a></dt>
+<dd><p>This class allows access to Frames acquired by a camera. The Frame is basically
+a buffer that wraps image data and some metadata.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.access_chunk_data">
+<span class="sig-name descname"><span class="pre">access_chunk_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">FeatureContainer</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#vmbpy.Frame.access_chunk_data" title="Permalink to this definition"></a></dt>
+<dd><p>Access chunk data for a frame.</p>
+<p>This function blocks until the user supplied callback has been executed. It may only be
+called inside a frame callback.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – A callback function that takes one argument. That argument will be a populated
+<code class="docutils literal notranslate"><span class="pre">FeatureContainer</span></code> instance. Only inside this callback is it possible to access
+the chunk features of the <code class="docutils literal notranslate"><span class="pre">Frame</span></code> instance.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Any Exception</strong> – Any Exception raised in the user supplied callback</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbFrameError" title="vmbpy.VmbFrameError"><strong>VmbFrameError</strong></a> – If the frame does not contain any chunk data</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbChunkError" title="vmbpy.VmbChunkError"><strong>VmbChunkError</strong></a> – If some other error occurred during chunk handling</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.as_numpy_ndarray">
+<span class="sig-name descname"><span class="pre">as_numpy_ndarray</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#vmbpy.Frame.as_numpy_ndarray" title="Permalink to this definition"></a></dt>
+<dd><p>Construct <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> view on VmbCFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> on internal image buffer.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ImportError</strong> – If numpy is not installed.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbFrameError" title="vmbpy.VmbFrameError"><strong>VmbFrameError</strong></a> – If current PixelFormat can’t be converted to a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.as_opencv_image">
+<span class="sig-name descname"><span class="pre">as_opencv_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#vmbpy.Frame.as_opencv_image" title="Permalink to this definition"></a></dt>
+<dd><p>Construct OpenCV compatible view on VmbCFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>OpenCV compatible <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ImportError</strong> – If numpy is not installed.</p></li>
+<li><p><strong>ValueError</strong> – If current pixel format is not compatible with opencv. Compatible formats are listed
+    in <code class="docutils literal notranslate"><span class="pre">OPENCV_PIXEL_FORMATS</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.contains_chunk_data">
+<span class="sig-name descname"><span class="pre">contains_chunk_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#vmbpy.Frame.contains_chunk_data" title="Permalink to this definition"></a></dt>
+<dd><p>Does the frame contain chunk data?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if frame contains chunk data, <code class="docutils literal notranslate"><span class="pre">False</span></code> if frame does not contain chunk data.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> if this information is not provided by the underlying Transport Layer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.convert_pixel_format">
+<span class="sig-name descname"><span class="pre">convert_pixel_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_fmt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#vmbpy.PixelFormat" title="vmbpy.c_binding.wrapped_types.PixelFormat"><span class="pre">PixelFormat</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">debayer_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Debayer</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination_buffer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">memoryview</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#vmbpy.Frame" title="vmbpy.frame.Frame"><span class="pre">Frame</span></a></span></span><a class="headerlink" href="#vmbpy.Frame.convert_pixel_format" title="Permalink to this definition"></a></dt>
+<dd><p>Return a converted version of the frame in the given format.</p>
+<p>This method always returns a new frame object and leaves the original instance unchanged.
+The returned frame object does not include the chunk data associated with the original
+instance. The original instance may for example be used for future frame transmissions.</p>
+<p>Note: This method allocates a new buffer for the returned image data leading to some runtime
+overhead. For performance reasons, it might be better to set the value of the camera’s
+<code class="docutils literal notranslate"><span class="pre">PixelFormat</span></code> feature instead. In addition, a non-default debayer mode can be specified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_fmt</strong> – PixelFormat to convert to.</p></li>
+<li><p><strong>debayer_mode</strong> – Non-default algorithm used to debayer images in Bayer Formats. If no mode is
+specified, default debayering mode of the image transform library is applied. If the
+current format is not a Bayer format, this parameter is silently ignored.</p></li>
+<li><p><strong>destination_buffer</strong> – A buffer that the transformation result should be written to. The buffer must be
+large enough to hold the transformation result, writeable and be contiguous in
+memory. The recommended way to create a compatible buffer is to let
+<code class="docutils literal notranslate"><span class="pre">convert_pixel_format</span></code> perform a conversion <em>without</em> a <code class="docutils literal notranslate"><span class="pre">destination_buffer</span></code> and
+reuse the memory that was allocated for that transformation on future calls to
+<code class="docutils literal notranslate"><span class="pre">convert_pixel_format</span></code>. See the <cite>convert_pixel_format.py</cite> example.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint. ValueError if the current format can’t
+    be converted into <code class="docutils literal notranslate"><span class="pre">target_fmt</span></code>. Convertible Formats can be queried via
+    <code class="docutils literal notranslate"><span class="pre">get_convertible_formats()</span></code> of <code class="docutils literal notranslate"><span class="pre">PixelFormat</span></code>.</p></li>
+<li><p><strong>AssertionError</strong> – If image width or height can’t be determined.</p></li>
+<li><p><strong>BufferError</strong> – If user supplied <code class="docutils literal notranslate"><span class="pre">destination_buffer</span></code> is too small, not writeable, or not
+    contiguous in memory.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.get_buffer">
+<span class="sig-name descname"><span class="pre">get_buffer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Array</span></span></span><a class="headerlink" href="#vmbpy.Frame.get_buffer" title="Permalink to this definition"></a></dt>
+<dd><p>Get internal buffer object containing image data and (if existent) chunk data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.get_buffer_size">
+<span class="sig-name descname"><span class="pre">get_buffer_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#vmbpy.Frame.get_buffer_size" title="Permalink to this definition"></a></dt>
+<dd><p>Get byte size of internal buffer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.get_height">
+<span class="sig-name descname"><span class="pre">get_height</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#vmbpy.Frame.get_height" title="Permalink to this definition"></a></dt>
+<dd><p>Get image height in pixels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Image height in pixels if dimension data is provided by the camera. <code class="docutils literal notranslate"><span class="pre">None</span></code> if
+dimension data is not provided by the camera.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.get_id">
+<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#vmbpy.Frame.get_id" title="Permalink to this definition"></a></dt>
+<dd><p>Get Frame ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Frame ID if the id is provided by the camera. <code class="docutils literal notranslate"><span class="pre">None</span></code> if frame id is not provided by
+the camera.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.get_offset_x">
+<span class="sig-name descname"><span class="pre">get_offset_x</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#vmbpy.Frame.get_offset_x" title="Permalink to this definition"></a></dt>
+<dd><p>Get horizontal offset in pixels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Horizontal offset in pixel if offset data is provided by the camera. <code class="docutils literal notranslate"><span class="pre">None</span></code> if offset
+data is not provided by the camera.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.get_offset_y">
+<span class="sig-name descname"><span class="pre">get_offset_y</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#vmbpy.Frame.get_offset_y" title="Permalink to this definition"></a></dt>
+<dd><p>Get vertical offset in pixels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Vertical offset in pixels if offset data is provided by the camera. <code class="docutils literal notranslate"><span class="pre">None</span></code> if offset
+data is not provided by the camera.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.get_payload_type">
+<span class="sig-name descname"><span class="pre">get_payload_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PayloadType</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#vmbpy.Frame.get_payload_type" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the frame’s payload type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.get_pixel_format">
+<span class="sig-name descname"><span class="pre">get_pixel_format</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#vmbpy.PixelFormat" title="vmbpy.c_binding.wrapped_types.PixelFormat"><span class="pre">PixelFormat</span></a></span></span><a class="headerlink" href="#vmbpy.Frame.get_pixel_format" title="Permalink to this definition"></a></dt>
+<dd><p>Get format of the acquired image data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.get_status">
+<span class="sig-name descname"><span class="pre">get_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#vmbpy.FrameStatus" title="vmbpy.c_binding.wrapped_types.FrameStatus"><span class="pre">FrameStatus</span></a></span></span><a class="headerlink" href="#vmbpy.Frame.get_status" title="Permalink to this definition"></a></dt>
+<dd><p>Returns current frame status.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.get_timestamp">
+<span class="sig-name descname"><span class="pre">get_timestamp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#vmbpy.Frame.get_timestamp" title="Permalink to this definition"></a></dt>
+<dd><p>Get Frame timestamp.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Timestamp if provided by the camera. <code class="docutils literal notranslate"><span class="pre">None</span></code> if timestamp is not provided by the
+camera.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Frame.get_width">
+<span class="sig-name descname"><span class="pre">get_width</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#vmbpy.Frame.get_width" title="Permalink to this definition"></a></dt>
+<dd><p>Get image width in pixels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Image width in pixels if dimension data is provided by the camera. <code class="docutils literal notranslate"><span class="pre">None</span></code> if dimension
+data is not provided by the camera.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vmbpy.FrameStatus">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vmbpy.</span></span><span class="sig-name descname"><span class="pre">FrameStatus</span></span><a class="headerlink" href="#vmbpy.FrameStatus" title="Permalink to this definition"></a></dt>
+<dd><p>Enum specifying the current status of internal Frame data.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.FrameStatus.Complete">
+<span class="sig-name descname"><span class="pre">Complete</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#vmbpy.FrameStatus.Complete" title="Permalink to this definition"></a></dt>
+<dd><p>Frame data is complete without errors</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.FrameStatus.Incomplete">
+<span class="sig-name descname"><span class="pre">Incomplete</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#vmbpy.FrameStatus.Incomplete" title="Permalink to this definition"></a></dt>
+<dd><p>Frame could not be filled to the end</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.FrameStatus.TooSmall">
+<span class="sig-name descname"><span class="pre">TooSmall</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-2</span></em><a class="headerlink" href="#vmbpy.FrameStatus.TooSmall" title="Permalink to this definition"></a></dt>
+<dd><p>Frame buffer was too small</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.FrameStatus.Invalid">
+<span class="sig-name descname"><span class="pre">Invalid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-3</span></em><a class="headerlink" href="#vmbpy.FrameStatus.Invalid" title="Permalink to this definition"></a></dt>
+<dd><p>Frame buffer was invalid</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vmbpy.AllocationMode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vmbpy.</span></span><span class="sig-name descname"><span class="pre">AllocationMode</span></span><a class="headerlink" href="#vmbpy.AllocationMode" title="Permalink to this definition"></a></dt>
+<dd><p>Enum specifying the supported frame allocation modes.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.AllocationMode.AnnounceFrame">
+<span class="sig-name descname"><span class="pre">AnnounceFrame</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#vmbpy.AllocationMode.AnnounceFrame" title="Permalink to this definition"></a></dt>
+<dd><p>The buffer is allocated by vmbpy</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.AllocationMode.AllocAndAnnounceFrame">
+<span class="sig-name descname"><span class="pre">AllocAndAnnounceFrame</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#vmbpy.AllocationMode.AllocAndAnnounceFrame" title="Permalink to this definition"></a></dt>
+<dd><p>The buffer is allocated by the Transport Layer</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vmbpy.</span></span><span class="sig-name descname"><span class="pre">PixelFormat</span></span><a class="headerlink" href="#vmbpy.PixelFormat" title="Permalink to this definition"></a></dt>
+<dd><p>Enum specifying all PixelFormats. Note: Not all Cameras support all Pixelformats.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Mono8">
+<span class="sig-name descname"><span class="pre">Mono8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17301505</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Mono8" title="Permalink to this definition"></a></dt>
+<dd><p>Monochrome, 8 bits (PFNC Mono8)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Mono10">
+<span class="sig-name descname"><span class="pre">Mono10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825795</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Mono10" title="Permalink to this definition"></a></dt>
+<dd><p>Monochrome, 10 bits in 16 bits (PFNC Mono10)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Mono10p">
+<span class="sig-name descname"><span class="pre">Mono10p</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17432646</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Mono10p" title="Permalink to this definition"></a></dt>
+<dd><p>Monochrome, 4x10 bits continuously packed in 40 bits (PFNC Mono10p)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Mono12">
+<span class="sig-name descname"><span class="pre">Mono12</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825797</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Mono12" title="Permalink to this definition"></a></dt>
+<dd><p>Monochrome, 12 bits in 16 bits (PFNC Mono12)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Mono12Packed">
+<span class="sig-name descname"><span class="pre">Mono12Packed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17563654</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Mono12Packed" title="Permalink to this definition"></a></dt>
+<dd><p>Monochrome, 2x12 bits in 24 bits (GEV Mono12Packed)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Mono12p">
+<span class="sig-name descname"><span class="pre">Mono12p</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17563719</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Mono12p" title="Permalink to this definition"></a></dt>
+<dd><p>Monochrome, 2x12 bits continuously packed in 24 bits (PFNC Mono12p)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Mono14">
+<span class="sig-name descname"><span class="pre">Mono14</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825829</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Mono14" title="Permalink to this definition"></a></dt>
+<dd><p>Monochrome, 14 bits in 16 bits (PFNC Mono14)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Mono16">
+<span class="sig-name descname"><span class="pre">Mono16</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825799</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Mono16" title="Permalink to this definition"></a></dt>
+<dd><p>Monochrome, 16 bits (PFNC Mono16)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerGR8">
+<span class="sig-name descname"><span class="pre">BayerGR8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17301512</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerGR8" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 8 bits, starting with GR line (PFNC BayerGR8)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerRG8">
+<span class="sig-name descname"><span class="pre">BayerRG8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17301513</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerRG8" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 8 bits, starting with RG line (PFNC BayerRG8)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerGB8">
+<span class="sig-name descname"><span class="pre">BayerGB8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17301514</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerGB8" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 8 bits, starting with GB line (PFNC BayerGB8)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerBG8">
+<span class="sig-name descname"><span class="pre">BayerBG8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17301515</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerBG8" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 8 bits, starting with BG line (PFNC BayerBG8)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerGR10">
+<span class="sig-name descname"><span class="pre">BayerGR10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825804</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerGR10" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 10 bits in 16 bits, starting with GR line (PFNC BayerGR10)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerRG10">
+<span class="sig-name descname"><span class="pre">BayerRG10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825805</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerRG10" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 10 bits in 16 bits, starting with RG line (PFNC BayerRG10)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerGB10">
+<span class="sig-name descname"><span class="pre">BayerGB10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825806</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerGB10" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 10 bits in 16 bits, starting with GB line (PFNC BayerGB10)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerBG10">
+<span class="sig-name descname"><span class="pre">BayerBG10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825807</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerBG10" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 10 bits in 16 bits, starting with BG line (PFNC BayerBG10)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerGR12">
+<span class="sig-name descname"><span class="pre">BayerGR12</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825808</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerGR12" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 12 bits in 16 bits, starting with GR line (PFNC BayerGR12)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerRG12">
+<span class="sig-name descname"><span class="pre">BayerRG12</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825809</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerRG12" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 12 bits in 16 bits, starting with RG line (PFNC BayerRG12)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerGB12">
+<span class="sig-name descname"><span class="pre">BayerGB12</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825810</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerGB12" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 12 bits in 16 bits, starting with GB line (PFNC BayerGB12)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerBG12">
+<span class="sig-name descname"><span class="pre">BayerBG12</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825811</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerBG12" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 12 bits in 16 bits, starting with BG line (PFNC BayerBG12)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerGR12Packed">
+<span class="sig-name descname"><span class="pre">BayerGR12Packed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17563690</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerGR12Packed" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 2x12 bits in 24 bits, starting with GR line (GEV BayerGR12Packed)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerRG12Packed">
+<span class="sig-name descname"><span class="pre">BayerRG12Packed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17563691</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerRG12Packed" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 2x12 bits in 24 bits, starting with RG line (GEV BayerRG12Packed)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerGB12Packed">
+<span class="sig-name descname"><span class="pre">BayerGB12Packed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17563692</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerGB12Packed" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 2x12 bits in 24 bits, starting with GB line (GEV BayerGB12Packed)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerBG12Packed">
+<span class="sig-name descname"><span class="pre">BayerBG12Packed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17563693</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerBG12Packed" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 2x12 bits in 24 bits, starting with BG line (GEV BayerBG12Packed)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerGR10p">
+<span class="sig-name descname"><span class="pre">BayerGR10p</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17432662</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerGR10p" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 4x10 bits continuously packed in 40 bits, starting with GR line (PFNC BayerGR10p)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerRG10p">
+<span class="sig-name descname"><span class="pre">BayerRG10p</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17432664</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerRG10p" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 4x10 bits continuously packed in 40 bits, starting with RG line (PFNC BayerRG10p)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerGB10p">
+<span class="sig-name descname"><span class="pre">BayerGB10p</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17432660</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerGB10p" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 4x10 bits continuously packed in 40 bits, starting with GB line (PFNC BayerGB10p)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerBG10p">
+<span class="sig-name descname"><span class="pre">BayerBG10p</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17432658</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerBG10p" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 4x10 bits continuously packed in 40 bits, starting with BG line (PFNC BayerBG10p)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerGR12p">
+<span class="sig-name descname"><span class="pre">BayerGR12p</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17563735</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerGR12p" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 2x12 bits continuously packed in 24 bits, starting with GR line (PFNC BayerGR12p)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerRG12p">
+<span class="sig-name descname"><span class="pre">BayerRG12p</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17563737</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerRG12p" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 2x12 bits continuously packed in 24 bits, starting with RG line (PFNC BayerRG12p)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerGB12p">
+<span class="sig-name descname"><span class="pre">BayerGB12p</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17563733</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerGB12p" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 2x12 bits continuously packed in 24 bits, starting with GB line (PFNC BayerGB12p)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerBG12p">
+<span class="sig-name descname"><span class="pre">BayerBG12p</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17563731</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerBG12p" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 2x12 bits continuously packed in 24 bits, starting with BG line (PFNC BayerBG12p)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerGR16">
+<span class="sig-name descname"><span class="pre">BayerGR16</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825838</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerGR16" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 16 bits, starting with GR line (PFNC BayerGR16)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerRG16">
+<span class="sig-name descname"><span class="pre">BayerRG16</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825839</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerRG16" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 16 bits, starting with RG line (PFNC BayerRG16)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerGB16">
+<span class="sig-name descname"><span class="pre">BayerGB16</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825840</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerGB16" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 16 bits, starting with GB line (PFNC BayerGB16)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.BayerBG16">
+<span class="sig-name descname"><span class="pre">BayerBG16</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17825841</span></em><a class="headerlink" href="#vmbpy.PixelFormat.BayerBG16" title="Permalink to this definition"></a></dt>
+<dd><p>Bayer-color, 16 bits, starting with BG line (PFNC BayerBG16)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Rgb8">
+<span class="sig-name descname"><span class="pre">Rgb8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">35127316</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Rgb8" title="Permalink to this definition"></a></dt>
+<dd><p>RGB, 8 bits x 3 (PFNC RGB8)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Bgr8">
+<span class="sig-name descname"><span class="pre">Bgr8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">35127317</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Bgr8" title="Permalink to this definition"></a></dt>
+<dd><p>BGR, 8 bits x 3 (PFNC Bgr8)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Rgb10">
+<span class="sig-name descname"><span class="pre">Rgb10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">36700184</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Rgb10" title="Permalink to this definition"></a></dt>
+<dd><p>RGB, 10 bits in 16 bits x 3 (PFNC RGB10)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Bgr10">
+<span class="sig-name descname"><span class="pre">Bgr10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">36700185</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Bgr10" title="Permalink to this definition"></a></dt>
+<dd><p>BGR, 10 bits in 16 bits x 3 (PFNC BGR10)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Rgb12">
+<span class="sig-name descname"><span class="pre">Rgb12</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">36700186</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Rgb12" title="Permalink to this definition"></a></dt>
+<dd><p>RGB, 12 bits in 16 bits x 3 (PFNC RGB12)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Bgr12">
+<span class="sig-name descname"><span class="pre">Bgr12</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">36700187</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Bgr12" title="Permalink to this definition"></a></dt>
+<dd><p>BGR, 12 bits in 16 bits x 3 (PFNC BGR12)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Rgb14">
+<span class="sig-name descname"><span class="pre">Rgb14</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">36700254</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Rgb14" title="Permalink to this definition"></a></dt>
+<dd><p>RGB, 14 bits in 16 bits x 3 (PFNC RGB14)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Bgr14">
+<span class="sig-name descname"><span class="pre">Bgr14</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">36700234</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Bgr14" title="Permalink to this definition"></a></dt>
+<dd><p>BGR, 14 bits in 16 bits x 3 (PFNC BGR14)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Rgb16">
+<span class="sig-name descname"><span class="pre">Rgb16</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">36700211</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Rgb16" title="Permalink to this definition"></a></dt>
+<dd><p>RGB, 16 bits x 3 (PFNC RGB16)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Bgr16">
+<span class="sig-name descname"><span class="pre">Bgr16</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">36700235</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Bgr16" title="Permalink to this definition"></a></dt>
+<dd><p>BGR, 16 bits x 3 (PFNC BGR16)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Rgba8">
+<span class="sig-name descname"><span class="pre">Rgba8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">35651606</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Rgba8" title="Permalink to this definition"></a></dt>
+<dd><p>ARGB, 8 bits x 4 (PFNC RGBa8)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Bgra8">
+<span class="sig-name descname"><span class="pre">Bgra8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">35651607</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Bgra8" title="Permalink to this definition"></a></dt>
+<dd><p>RGBA, 8 bits x 4, legacy name</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Argb8">
+<span class="sig-name descname"><span class="pre">Argb8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">35651606</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Argb8" title="Permalink to this definition"></a></dt>
+<dd><p>BGRA, 8 bits x 4 (PFNC BGRa8)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Rgba10">
+<span class="sig-name descname"><span class="pre">Rgba10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">37748831</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Rgba10" title="Permalink to this definition"></a></dt>
+<dd><p>RGBA, 10 bits in 16 bits x 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Bgra10">
+<span class="sig-name descname"><span class="pre">Bgra10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">37748812</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Bgra10" title="Permalink to this definition"></a></dt>
+<dd><p>BGRA, 10 bits in 16 bits x 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Rgba12">
+<span class="sig-name descname"><span class="pre">Rgba12</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">37748833</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Rgba12" title="Permalink to this definition"></a></dt>
+<dd><p>RGBA, 12 bits in 16 bits x 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Bgra12">
+<span class="sig-name descname"><span class="pre">Bgra12</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">37748814</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Bgra12" title="Permalink to this definition"></a></dt>
+<dd><p>BGRA, 12 bits in 16 bits x 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Rgba14">
+<span class="sig-name descname"><span class="pre">Rgba14</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">37748835</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Rgba14" title="Permalink to this definition"></a></dt>
+<dd><p>RGBA, 14 bits in 16 bits x 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Bgra14">
+<span class="sig-name descname"><span class="pre">Bgra14</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">37748816</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Bgra14" title="Permalink to this definition"></a></dt>
+<dd><p>BGRA, 14 bits in 16 bits x 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Rgba16">
+<span class="sig-name descname"><span class="pre">Rgba16</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">37748836</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Rgba16" title="Permalink to this definition"></a></dt>
+<dd><p>RGBA, 16 bits x 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Bgra16">
+<span class="sig-name descname"><span class="pre">Bgra16</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">37748817</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Bgra16" title="Permalink to this definition"></a></dt>
+<dd><p>BGRA, 16 bits x 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Yuv411">
+<span class="sig-name descname"><span class="pre">Yuv411</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">34340894</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Yuv411" title="Permalink to this definition"></a></dt>
+<dd><p>YUV 411 with 8 bits (GEV YUV411Packed)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Yuv422">
+<span class="sig-name descname"><span class="pre">Yuv422</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">34603039</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Yuv422" title="Permalink to this definition"></a></dt>
+<dd><p>YUV 422 with 8 bits (GEV YUV422Packed)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.Yuv444">
+<span class="sig-name descname"><span class="pre">Yuv444</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">35127328</span></em><a class="headerlink" href="#vmbpy.PixelFormat.Yuv444" title="Permalink to this definition"></a></dt>
+<dd><p>YUV 444 with 8 bits (GEV YUV444Packed)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.YCbCr411_8_CbYYCrYY">
+<span class="sig-name descname"><span class="pre">YCbCr411_8_CbYYCrYY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">34340924</span></em><a class="headerlink" href="#vmbpy.PixelFormat.YCbCr411_8_CbYYCrYY" title="Permalink to this definition"></a></dt>
+<dd><p>YCbCr 411 with 8 bits (PFNC YCbCr411_8_CbYYCrYY) - identical to Yuv411</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.YCbCr422_8_CbYCrY">
+<span class="sig-name descname"><span class="pre">YCbCr422_8_CbYCrY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">34603075</span></em><a class="headerlink" href="#vmbpy.PixelFormat.YCbCr422_8_CbYCrY" title="Permalink to this definition"></a></dt>
+<dd><p>YCbCr 422 with 8 bits (PFNC YCbCr422_8_CbYCrY) - identical to Yuv422</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.PixelFormat.YCbCr8_CbYCr">
+<span class="sig-name descname"><span class="pre">YCbCr8_CbYCr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">35127354</span></em><a class="headerlink" href="#vmbpy.PixelFormat.YCbCr8_CbYCr" title="Permalink to this definition"></a></dt>
+<dd><p>YCbCr 444 with 8 bits (PFNC YCbCr8_CbYCr) - identical to Yuv444</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="vmbpy.intersect_pixel_formats">
+<span class="sig-prename descclassname"><span class="pre">vmbpy.</span></span><span class="sig-name descname"><span class="pre">intersect_pixel_formats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmts1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#vmbpy.PixelFormat" title="vmbpy.c_binding.wrapped_types.PixelFormat"><span class="pre">PixelFormat</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmts2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#vmbpy.PixelFormat" title="vmbpy.c_binding.wrapped_types.PixelFormat"><span class="pre">PixelFormat</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#vmbpy.PixelFormat" title="vmbpy.c_binding.wrapped_types.PixelFormat"><span class="pre">PixelFormat</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.intersect_pixel_formats" title="Permalink to this definition"></a></dt>
+<dd><p>Build intersection of two sets containing PixelFormat.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fmts1</strong> – PixelFormats to intersect with fmts2</p></li>
+<li><p><strong>fmts2</strong> – PixelFormats to intersect with fmts1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Set of PixelFormats that occur in <code class="docutils literal notranslate"><span class="pre">fmts1</span></code> and <code class="docutils literal notranslate"><span class="pre">fmts2</span></code></p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>TypeError</strong> – If parameters do not match their type hint.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="LocalDevice.html" class="btn btn-neutral float-left" title="LocalDevice" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Feature.html" class="btn btn-neutral float-right" title="Feature" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Settings &mdash; Vimba X Developer Guide 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Migration Guide" href="migrationGuide.html" />
+    <link rel="prev" title="About Vimba X" href="about.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Vimba X Developer Guide
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Vimba X</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">System Settings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#all-operating-systems">All operating systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gige-cameras">GigE cameras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usb-cameras">USB cameras</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#linux-and-arm">Linux and ARM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">USB cameras</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#increase-the-usbfs-buffer-size-permanently">Increase the USBFS buffer size permanently</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">GigE cameras</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#optimizing-your-som">Optimizing your SOM</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#macos">macOS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">USB cameras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">GigE cameras</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mtu-size-and-speed">MTU size and Speed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#increase-the-gige-receive-buffer-size">Increase the GigE receive buffer size</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="migrationGuide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examplesOverview.html">Examples Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manuals:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="driverInstaller.html">Driver Installer Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fwUpdater.html">Firmware Updater Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="viewerGuide.html">Viewer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdkManual.html">SDK Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cAPIManual.html">C API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cppAPIManual.html">CPP API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotNetAPIManual.html">.NET API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPIManual.html">Python API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagetransformManual.html">Image Transform Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help &amp; information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem.html">Vimba X Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legalInformation.html">Legal Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vimba X Developer Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">System Settings</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="system-settings">
+<h1>System Settings<a class="headerlink" href="#system-settings" title="Permalink to this heading"></a></h1>
+<p>For best possible performance, machine vision cameras require suitable accessories
+and a proper setup of your system.</p>
+<p>Find tested accessories for you Allied Vision camera on our website: <a class="reference external" href="https://www.alliedvision.com/en/products/accessories/">https://www.alliedvision.com/en/products/accessories/</a></p>
+<section id="all-operating-systems">
+<h2>All operating systems<a class="headerlink" href="#all-operating-systems" title="Permalink to this heading"></a></h2>
+<section id="gige-cameras">
+<h3>GigE cameras<a class="headerlink" href="#gige-cameras" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Use Category 6 or higher rated Ethernet cables</p></li>
+<li><p>Use only one camera per Ethernet port</p></li>
+</ul>
+<p>Optimize the NIC settings:</p>
+<ul class="simple">
+<li><p>Disable all unused NIC services and protocols (for example, activate
+only filter drivers for IPv4 and GigE on Windows)</p></li>
+<li><p>Enable Auto Negotiation (not Fixed Link Speed)</p></li>
+<li><p>Windows only: Use the Filter Driver provided with Vimba X</p></li>
+<li><p>Windows: Enable Jumbo Frames on your NIC</p></li>
+<li><p>Detailed information is availabe in the User Guide for your camera, chapters
+<em>Configuring the host computer</em> and <em>Performance and troubleshooting</em>, availabe at:
+<a class="reference external" href="https://www.alliedvision.com/en/support/technical-documentation/">https://www.alliedvision.com/en/support/technical-documentation/</a></p></li>
+</ul>
+</section>
+<section id="usb-cameras">
+<h3>USB cameras<a class="headerlink" href="#usb-cameras" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>For best possible bandwidth with multiple cameras, don’t use a hub</p></li>
+<li><p>Note that some 4-port PCIe cards have limitations, they use shared resources</p></li>
+<li><p>Use USB host adapter cards and USB PCIe host controllers with a high performance,
+see <a class="reference external" href="https://www.alliedvision.com/en/products/accessories">https://www.alliedvision.com/en/products/accessories</a></p></li>
+<li><p>For detailed information, see the User Guide for your camera, chapter <em>Performance
+and troubleshooting</em> and the Application Note
+<a class="reference external" href="https://cdn.alliedvision.com/fileadmin/content/documents/products/cameras/various/appnote/USB/Setting_Up_USB_Vision_Systems.pdf">Considerations for Setting Up USB Vision Systems</a></p></li>
+</ul>
+</section>
+</section>
+<section id="linux-and-arm">
+<h2>Linux and ARM<a class="headerlink" href="#linux-and-arm" title="Permalink to this heading"></a></h2>
+<p>Additionally to the topics mentioned above, consider the following recommendations.</p>
+<section id="id1">
+<h3>USB cameras<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p><strong>Increasing the USBFS buffer size:</strong></p>
+<p>By default, the USBFS buffer size may be 16 MB. This value is too low for image sizes &gt; 2 MB or high frame rates.
+Check the USBFS buffer size:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">module</span><span class="o">/</span><span class="n">usbcore</span><span class="o">/</span><span class="n">parameters</span><span class="o">/</span><span class="n">usbfs_memory_mb</span>
+</pre></div>
+</div>
+<p>Increase the USBFS buffer size until the next reboot (here: example value 1000):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;echo 1000 &gt; /sys/module/usbcore/parameters/usbfs_memory_mb&#39;</span>
+</pre></div>
+</div>
+<section id="increase-the-usbfs-buffer-size-permanently">
+<h4>Increase the USBFS buffer size permanently<a class="headerlink" href="#increase-the-usbfs-buffer-size-permanently" title="Permalink to this heading"></a></h4>
+<p>To increase the buffer size permanently, add the kernel parameter usbcore.usbfs_memory_mb=1000
+the bootloader configuration. If and how this is possible depends on the bootloader on your system.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before changing the bootloader configuration, create a backup of your system.</p>
+</div>
+<p>A faulty bootloader may cause that your system doesn’t start up. A fix might require an external boot media
+or reinstallation of the system. Note that changing the bootloader configuration is at your own risk.</p>
+<p>Syslinux:
+Edit /boot/extlinux/extlinux.conf, add usbcore.usbfs_memory_mb=1000 to the APPEND line, and reboot the
+system.</p>
+<p>If you have installed GRUB 2:</p>
+<ol class="arabic simple">
+<li><p>Open /etc/default/grub. Replace: GRUB_CMDLINE_LINUX_DEFAULT=”quiet splash” (or other
+contents within the quotation marks depending on your system) with:
+GRUB_CMDLINE_LINUX_DEFAULT=”quiet splash usbcore.usbfs_memory_mb=1000”</p></li>
+<li><p>Update grub: sudo update-grub and reboot the system.</p></li>
+</ol>
+<p>Other bootloaders:
+To configure additional kernel parameters of other bootloaders, please see the manual of your bootloader.</p>
+</section>
+</section>
+<section id="id2">
+<h3>GigE cameras<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<p><strong>Setting the MTU of the internal host adapter:</strong>
+Set the MTU of the internal host adapter, assuming the camera is connected to Ethernet port eth0:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">ip</span> <span class="n">link</span> <span class="nb">set</span> <span class="n">eth0</span> <span class="n">down</span>
+<span class="n">sudo</span> <span class="n">ip</span> <span class="n">link</span> <span class="nb">set</span> <span class="n">eth0</span> <span class="n">mtu</span> <span class="mi">9000</span>
+<span class="n">sudo</span> <span class="n">ip</span> <span class="n">link</span> <span class="nb">set</span> <span class="n">eth0</span> <span class="n">up</span>
+</pre></div>
+</div>
+<p>Additionally, set the feature <em>GVSPBurstSize</em> to 32 or higher for usage with 5GigE cameras.</p>
+<p><strong>Increasing the OS receive buffer size:</strong></p>
+<p>If your use case requires high bandwidth, we recommend increasing the OS receive buffer size (these
+settings affect all types of connections on the system):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">w</span> <span class="n">net</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">rmem_max</span><span class="o">=</span><span class="mi">33554432</span>
+<span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">w</span> <span class="n">net</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">wmem_max</span><span class="o">=</span><span class="mi">33554432</span>
+<span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">w</span> <span class="n">net</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">rmem_default</span><span class="o">=</span><span class="mi">33554432</span>
+<span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">w</span> <span class="n">net</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">wmem_default</span><span class="o">=</span><span class="mi">33554432</span>
+</pre></div>
+</div>
+<section id="optimizing-your-som">
+<h4>Optimizing your SOM<a class="headerlink" href="#optimizing-your-som" title="Permalink to this heading"></a></h4>
+<p>To optimize your NVIDIA Jetson SOM, read:
+<a class="reference external" href="https://cdn.alliedvision.com/fileadmin/content/documents/products/software/software/embedded/Optimizing-Performance-Jetson_appnote.pdf">https://cdn.alliedvision.com/fileadmin/content/documents/products/software/software/embedded/Optimizing-Performance-Jetson_appnote.pdf</a></p>
+</section>
+</section>
+</section>
+<section id="macos">
+<h2>macOS<a class="headerlink" href="#macos" title="Permalink to this heading"></a></h2>
+<p>Additionally to the topics mentioned above, consider the following recommendations.</p>
+<section id="id3">
+<h3>USB cameras<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<p>For best performance on MacMini, use the USB ports. They have a higher performance than
+the Thunderbolt ports combined with a USB adapter.</p>
+</section>
+<section id="id4">
+<h3>GigE cameras<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<section id="mtu-size-and-speed">
+<h4>MTU size and Speed<a class="headerlink" href="#mtu-size-and-speed" title="Permalink to this heading"></a></h4>
+<p>Check and set the MTU size and Speed:</p>
+<ul class="simple">
+<li><p>Open <em>System Settings</em></p></li>
+<li><p>Go to <em>Network</em></p></li>
+<li><p>Select the relevant interface and select <em>Details</em>.</p></li>
+<li><p>Set MTU size to Jumbo Frames and set the highest possible speed for your interface.</p></li>
+</ul>
+</section>
+<section id="increase-the-gige-receive-buffer-size">
+<h4>Increase the GigE receive buffer size<a class="headerlink" href="#increase-the-gige-receive-buffer-size" title="Permalink to this heading"></a></h4>
+<p>Display the current settings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Display current settings</span>
+<span class="c1"># Current UDP receive buffer size</span>
+<span class="n">sysctl</span> <span class="o">-</span><span class="n">n</span> <span class="n">net</span><span class="o">.</span><span class="n">inet</span><span class="o">.</span><span class="n">udp</span><span class="o">.</span><span class="n">recvspace</span>
+<span class="c1"># Default: 131.072</span>
+
+<span class="c1"># Current TCP receive buffer size</span>
+<span class="n">sysctl</span> <span class="o">-</span><span class="n">n</span> <span class="n">net</span><span class="o">.</span><span class="n">inet</span><span class="o">.</span><span class="n">tcp</span><span class="o">.</span><span class="n">recvspace</span>
+<span class="c1"># Default: 131.072</span>
+
+<span class="c1"># Current TCP send buffer size</span>
+<span class="n">sysctl</span> <span class="o">-</span><span class="n">n</span> <span class="n">net</span><span class="o">.</span><span class="n">inet</span><span class="o">.</span><span class="n">tcp</span><span class="o">.</span><span class="n">sendspace</span>
+<span class="c1"># Default: 131.072</span>
+
+<span class="c1"># The buffer sizes are limited by the maxsockbuf value</span>
+<span class="n">sysctl</span> <span class="o">-</span><span class="n">a</span> <span class="o">|</span> <span class="n">egrep</span> <span class="n">nmbcl</span>\<span class="o">|</span><span class="n">maxsockb</span>
+<span class="c1"># Default:</span>
+<span class="c1"># maxsockbuf=8.388.608</span>
+<span class="c1"># nmbclusters=262.144</span>
+
+<span class="c1"># recvspace + sendspace &lt; maxsockbuf</span>
+<span class="c1"># maxsockbuf = (nmbclusters*2048)/16</span>
+</pre></div>
+</div>
+<p>Note that after rebooting with a new nmbclusters /ncl value, the maxsockbufs value is not necessarily adjusted to
+its maximum automatically. You can adjust the value via sysctl -w as described below.</p>
+<p>Prepare increasing the receive buffer size (requires disabling System Integrity Protection):</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Disabling  SIP (System Integrity Protection) fully or partly is done at your own risk.
+Without SIP, your computer is vulnerable to malicious code.
+Disabling System Integrity Protection might lead to unknown system behavior.</p>
+</div>
+<ol class="arabic">
+<li><p>While turning on your Mac, press and hold the power button until the boot menu appears.</p></li>
+<li><p>Select <em>Utilities</em> and launch the Terminal.</p></li>
+<li><p>To <strong>disable System Integrity Protection at your own risk</strong>, run:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">csrutil</span> <span class="n">disable</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Reboot your Mac as usual.</p></li>
+<li><p>Open a Terminal window and run the commands:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo nvram boot-args=&quot;ncl=524288&quot;
+sudo shutdown -r now`
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>After the reboot is complete, the next steps are different for non-persistent and persistent changes.</p>
+<p><strong>Non-persistent changes</strong>:</p>
+<p>Open a Terminal window and run the commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">w</span> <span class="n">kern</span><span class="o">.</span><span class="n">ipc</span><span class="o">.</span><span class="n">maxsockbuf</span><span class="o">=</span><span class="mi">67108864</span>
+<span class="n">sudo</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">w</span> <span class="n">net</span><span class="o">.</span><span class="n">inet</span><span class="o">.</span><span class="n">udp</span><span class="o">.</span><span class="n">recvspace</span><span class="o">=</span><span class="mi">33554432</span>
+</pre></div>
+</div>
+<p><strong>Persistent changes</strong>:</p>
+<p>Open a Terminal window and run the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">LaunchDaemons</span><span class="o">/</span><span class="n">AlliedVision</span><span class="o">.</span><span class="n">sysctl</span><span class="o">.</span><span class="n">plist</span>
+</pre></div>
+</div>
+<p>Paste the following lines into the editor and save the file:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;dict&gt;
+    &lt;key&gt;Label&lt;/key&gt;
+    &lt;string&gt;sysctl&lt;/string&gt;
+    &lt;key&gt;ProgramArguments&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;/usr/sbin/sysctl&lt;/string&gt;
+        &lt;string&gt;-w&lt;/string&gt;
+        &lt;string&gt;kern.ipc.maxsockbuf=67108864&lt;/string&gt;
+        &lt;string&gt;net.inet.udp.recvspace=33554432&lt;/string&gt;
+    &lt;/array&gt;
+    &lt;key&gt;RunAtLoad&lt;/key&gt;
+    &lt;true/&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</pre></div>
+</div>
+</div></blockquote>
+<p>Because changes to the boot arguments were made, SIP (System Integrity Protection)
+cannot fully be enabled again, because this would remove the boot-arg and therefore
+also reset the depending receive buffer size to its default value.</p>
+<p><strong>Leave SIP disabled:</strong>
+If you do nothing, SIP is disabled.</p>
+<p><strong>Partly enable SIP:</strong></p>
+<ol class="arabic">
+<li><p>While turning on your Mac, press and hold the power button until the boot menu appears.</p></li>
+<li><p>Select <em>Utilities</em> and launch the Terminal. Run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">csrutil</span> <span class="n">enable</span> <span class="o">--</span><span class="n">without</span> <span class="n">nvram</span>
+</pre></div>
+</div>
+</li>
+<li><p>Restart your Mac.</p></li>
+</ol>
+<p><strong>Restore default values</strong>:</p>
+<ol class="arabic">
+<li><p>Temporarily disable System Integrity Protection (see above).</p></li>
+<li><p>Open a terminal window and run the commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">nvram</span> <span class="n">boot</span><span class="o">-</span><span class="n">args</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="n">sudo</span> <span class="n">shutdown</span> <span class="o">-</span><span class="n">r</span> <span class="n">now</span>
+</pre></div>
+</div>
+</li>
+<li><p>Enable System Integrity Protection again (see above).</p></li>
+</ol>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="about.html" class="btn btn-neutral float-left" title="About Vimba X" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="migrationGuide.html" class="btn btn-neutral float-right" title="Migration Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

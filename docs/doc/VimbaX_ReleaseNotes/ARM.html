@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vimba X for ARM64 Release Notes &mdash; Vimba X Release Notes 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Vimba GigE TL Release Notes" href="GigETL.html" />
+    <link rel="prev" title="Vimba X for Linux x86_64 Release Notes" href="Linux.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Vimba X Release Notes
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Windows.html">Vimba X for Windows Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Linux.html">Vimba X for Linux x86_64 Release Notes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Vimba X for ARM64 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-requirements">Hardware requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gige-cameras">GigE cameras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#allied-vision-usb-cameras">Allied Vision USB cameras</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tested-platforms">Tested platforms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gige-and-usb-tl">GigE and USB TL:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csi-tl">CSI TL:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#known-issues">Known issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changes-and-release-history">Changes and release history</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-vimba-x-2025-1">Changes in Vimba X 2025-1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-vimba-x-2024-1">Changes in Vimba X 2024-1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-vimba-x-2023-4">Changes in Vimba X 2023-4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-vimba-x-2023-2">Changes in Vimba X 2023-2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-vimba-x-2022-1">Changes in Vimba X 2022-1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="GigETL.html">Vimba GigE TL Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USBTL.html">Vimba USB TL Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSITL.html">Vimba CSI TL Release Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vimba X Release Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Vimba X for ARM64 Release Notes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vimba-x-for-arm64-release-notes">
+<h1>Vimba X for ARM64 Release Notes<a class="headerlink" href="#vimba-x-for-arm64-release-notes" title="Permalink to this heading"></a></h1>
+<p>Version: 2025-1</p>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading"></a></h2>
+<p>Main changes in this release:</p>
+<ul class="simple">
+<li><p>New API: VmbNET</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Transport Layer</p></th>
+<th class="head"><p>Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GigE Transport Layer (VimbaGigETL.cti)</p></td>
+<td><p>1.10.1*</p></td>
+</tr>
+<tr class="row-odd"><td><p>USB Transport Layer (VimbaUSBTL.cti)</p></td>
+<td><p>1.5.0</p></td>
+</tr>
+<tr class="row-even"><td><p>CSI Transport Layer (VimbaCSITL.cti)</p></td>
+<td><p>2.1.0*</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>APIs</p></th>
+<th class="head"><p>Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbC API (libVmbC.dll)</p></td>
+<td><p>1.0.7*</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbCPP API (libVmbCPP.dll)</p></td>
+<td><p>1.0.7*</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbNET API</p></td>
+<td><p>1.1.0*</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbPy API</p></td>
+<td><p>1.1.0*</p></td>
+</tr>
+<tr class="row-even"><td><p>Image Transform Library (libVmbImageTransform.dll)</p></td>
+<td><p>2.2.0*</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tools</p></th>
+<th class="head"><p>Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Vimba X Viewer</p></td>
+<td><p>1.4.1*</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vimba X Firmware Updater</p></td>
+<td><p>2.0.4</p></td>
+</tr>
+</tbody>
+</table>
+<p>* Changed in this release of Vimba X</p>
+</section>
+<section id="hardware-requirements">
+<h2>Hardware requirements<a class="headerlink" href="#hardware-requirements" title="Permalink to this heading"></a></h2>
+<p>ARM board with ARMv8-compatible 64-bit processor</p>
+<section id="gige-cameras">
+<h3>GigE cameras<a class="headerlink" href="#gige-cameras" title="Permalink to this heading"></a></h3>
+<p>A built-in Gigabit Ethernet network interface or Gigabit Ethernet network
+card (one or more) is required.</p>
+<p><strong>Note for IP configuration</strong>:
+By default, IP Configuration Mode is set to DHCP.
+You can use the IP Configuration dialog of Vimba X Viewer to apply changes or
+to force the IP address.</p>
+</section>
+<section id="allied-vision-usb-cameras">
+<h3>Allied Vision USB cameras<a class="headerlink" href="#allied-vision-usb-cameras" title="Permalink to this heading"></a></h3>
+<p>A built-in USB 3.0 (or higher) controller for PCI Express bus is required.</p>
+<p>Testing has been performed on host controllers that are based on Asmedia chip sets. The driver may run on host controllers that are based on chip sets from other vendors, too.
+If there are any problems please feel free to contact our Technical Support.</p>
+</section>
+</section>
+<section id="tested-platforms">
+<h2>Tested platforms<a class="headerlink" href="#tested-platforms" title="Permalink to this heading"></a></h2>
+<section id="gige-and-usb-tl">
+<h3>GigE and USB TL:<a class="headerlink" href="#gige-and-usb-tl" title="Permalink to this heading"></a></h3>
+<p>Vimba X was tested with NVIDIA JetPack 6.2 (Jetson Linux 36.4.3) on on the following Jetson SOM:</p>
+<ul class="simple">
+<li><p>AGX Orin Developer Kit</p></li>
+</ul>
+</section>
+<section id="csi-tl">
+<h3>CSI TL:<a class="headerlink" href="#csi-tl" title="Permalink to this heading"></a></h3>
+<p>Vimba X was tested with NVIDIA JetPack 6.2 (Jetson Linux 36.4.3) on on the following Jetson SOMs:</p>
+<ul class="simple">
+<li><p>AGX Orin Developer Kit</p></li>
+<li><p>Orin Nano 8GB Developer Kit</p></li>
+<li><p>Orin NX 16GB + forecr carrier board</p></li>
+<li><p>Orin Nano 4GB + forecr carrier board</p></li>
+</ul>
+<p>For supported camera models, the latest known issues, and other useful information, see:
+<a class="reference external" href="https://cdn.alliedvision.com/fileadmin/content/documents/products/software/software/Vimba/appnote/Getting_started_with_GenICam_for_CSI-2_VimbaX.pdf">Getting Started with GenICam for CSI-2</a></p>
+</section>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<p>To install Vimba X:</p>
+<ul class="simple">
+<li><p>Uncompress the archive with the command tar -xf ./VimbaX.tgz to a
+directory you have writing privileges for like /opt. Under this directory,
+Vimba X will be installed in its own folder. In the following, we will refer
+to this path as [InstallDir].</p></li>
+<li><p>Go to [InstallDir]/cti/and call (as needed, using sudo) Install_GenTL_Path.sh.</p></li>
+<li><p>Reboot your system.</p></li>
+<li><p>If you have issues, see the Developer Guide, section Troubleshooting.</p></li>
+</ul>
+<p><strong>Vimba X Viewer</strong>:
+Vimba X Viewer can be found in[InstallDir]/bin/.</p>
+<p><strong>Examples</strong>:
+Vimba X includes precompiled examples that you can find in:
+[InstallDir]/bin. Uncompiled examples are located in:
+[InstallDir]/api/examples.</p>
+<p><strong>Uninstalling Vimba X</strong>:
+To uninstall Vimba X, go to [InstallDir]/bin and run the uninstall scripts as super user. This prevents any GenTL consumer from loading the
+Vimba Transport Layers. Then remove the
+installation directory.</p>
+</section>
+<section id="known-issues">
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
+<p>The following issues are known:</p>
+<ul class="simple">
+<li><p>When experiencing trouble with image acquisition, try to increase the priority
+of your application with “sudo -E nice -n -20 <command>”.</p></li>
+</ul>
+<p>Camera detection:</p>
+<ul class="simple">
+<li><p>If multiple IP addresses are configured on one physical Ethernet adapter,
+then Vimba X sends GVCP discovery requests only to the last added IP address.
+Therefore, the camera is detected only if its IP address was added last.</p></li>
+</ul>
+<p>Vimba X Viewer:</p>
+<ul class="simple">
+<li><p>With some camera models, the message “Vimba X Viewer is not responding” appears for a few seconds when the camera is opened.</p></li>
+<li><p>If the IP address is changed within the same network, the camera list doesn’t update automatically. Please
+click the Refresh button.</p></li>
+<li><p>Sporadic issue: If a GigE camera was opened and then closed with Vimba X Viewer,
+it is displayed as locked and Vimba X Viewer does not open it again.
+Workaround: Close and open Vimba X Viewer.</p></li>
+<li><p>With CSI-2 cameras, the Trigger IO tab is unavailable.</p></li>
+<li><p>Goldeye cameras: No inputs and outputs are shown on the Trigger IO tab.</p></li>
+</ul>
+<p>GigE Transport Layer:</p>
+<ul class="simple">
+<li><p>A change of the available camera access modes cannot be reported for cameras
+in different subnets or with malconfigured IP addresses.</p></li>
+<li><p>Not all ARM boards come with a GigE network interface. When acquiring images
+with only 100 Mbit/s, make sure to set the “StreamBytesPerSecond” feature to
+a reasonable small value (12 400 000). This adjustment is done automatically
+when the camera is connected directly to a 100 Mbit/s interface.</p></li>
+<li><p>GigE cameras may be listed on a wrong Ethernet interface.</p></li>
+<li><p>If many dropped frames occur especially with a small ROI, set GVSP Timeout to a higher value.</p></li>
+</ul>
+<p>Vimba X APIs:</p>
+<ul class="simple">
+<li><p>When API startup and shutdown is performed excessively within the same process,
+camera initialization may fail sporadically, which may cause exceptions.
+We recommend to have only one API session during one process.</p></li>
+<li><p>Load/Save Settings: Not all LUT settings are saved.</p></li>
+</ul>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>If a camera is already open, sometimes a misleading error message occurs (“Bad parameter”).</p></li>
+<li><p>The ListFeatures example does not list all Interface features.</p></li>
+<li><p>Sporadic issue of the AsynchronousGrab and Chunk example: stopping the stream causes an exception.</p></li>
+</ul>
+<p>Camera detection:</p>
+<ul class="simple">
+<li><p>If multiple IP addresses are configured on one physical Ethernet adapter,
+then Vimba X sends GVCP discovery requests only to the last added IP address.
+Therefore, the camera is detected only if its IP address was added last.</p></li>
+</ul>
+<p>CSI-2:</p>
+<ul class="simple">
+<li><p>For the latest known issues, see <a class="reference external" href="https://cdn.alliedvision.com/fileadmin/content/documents/products/software/software/Vimba/appnote/Getting_started_with_GenICam_for_CSI-2_VimbaX.pdf">Getting Started with GenICam for CSI-2</a></p></li>
+<li><p>If your application causes dropped frames, try to increase the number of frame buffers to approximately 7.</p></li>
+<li><p>Switching the camera from GenICam for CSI-2 to V4L2 or vice versa requires rebooting the board.</p></li>
+<li><p>Exposure times greater than approx. 1 second: Stopping acquisition may cause an error. Please close and open the camera to start streaming again.</p></li>
+</ul>
+</section>
+<section id="changes-and-release-history">
+<h2>Changes and release history<a class="headerlink" href="#changes-and-release-history" title="Permalink to this heading"></a></h2>
+<section id="changes-in-vimba-x-2025-1">
+<h3>Changes in Vimba X 2025-1<a class="headerlink" href="#changes-in-vimba-x-2025-1" title="Permalink to this heading"></a></h3>
+<p>VmbC:</p>
+<ul class="simple">
+<li><p>Minor bugfixes</p></li>
+</ul>
+<p>VmbCPP:</p>
+<ul class="simple">
+<li><p>Minor bugfixes</p></li>
+</ul>
+<p>VmbNET:</p>
+<ul class="simple">
+<li><p>New API</p></li>
+</ul>
+<p>VmbPy:</p>
+<ul class="simple">
+<li><p>VmbC (+ GenAPI dependencies) included in Python wheel to make VmbPy self-contained</p></li>
+</ul>
+<p>Image Transform Library:</p>
+<ul class="simple">
+<li><p>Exported new function VmbGetCompatiblePixelFormat</p></li>
+</ul>
+<p>GigETL:</p>
+<ul class="simple">
+<li><p>Adjustments for support of future cameras</p></li>
+</ul>
+<p>CSITL:</p>
+<ul class="simple">
+<li><p>Bug fixes</p></li>
+<li><p>JetPack 6 support</p></li>
+</ul>
+<p>Vimba X Viewer:</p>
+<ul class="simple">
+<li><p>Minor bug fixes</p></li>
+</ul>
+</section>
+<section id="changes-in-vimba-x-2024-1">
+<h3>Changes in Vimba X 2024-1<a class="headerlink" href="#changes-in-vimba-x-2024-1" title="Permalink to this heading"></a></h3>
+<p>VmbC:</p>
+<ul class="simple">
+<li><p>Loads transport layers found in the same directory as VmbC.dll</p></li>
+<li><p>Improved logging</p></li>
+</ul>
+<p>VmbCPP:</p>
+<ul class="simple">
+<li><p>Minor bug fixes</p></li>
+</ul>
+<p>VmbPy:</p>
+<ul class="simple">
+<li><p>Minor Bugfixes</p></li>
+<li><p>VmbPy type hint improvements for better autocompletion in IDEs</p></li>
+</ul>
+<p>GigETL:</p>
+<ul class="simple">
+<li><p>Breaks compatibility with Vimba 6 (Vimba 6 Config mode not working anymore with latest Vimba X GigETL)</p></li>
+<li><p>Cameras from SVS-Vistek are enabled by default</p></li>
+<li><p>Marked old statistic features as “deprecated”</p></li>
+<li><p>Minor bug fixes</p></li>
+</ul>
+<p>USBTL:</p>
+<ul class="simple">
+<li><p>Added new GenTL Buffer Info “BUFFER_INFO_DATA_SIZE”</p></li>
+<li><p>Updated uriparser to 0.9.8</p></li>
+</ul>
+<p>Vimba X Viewer:</p>
+<ul class="simple">
+<li><p>“Image Format tab” including Multi ROI</p></li>
+<li><p>Event Viewer window access has moved to icons above the image</p></li>
+<li><p>Image Processing tab:</p>
+<ul>
+<li><p>Sobel horizontal/vertical was interchanged in the camera firmware until firmware 13.x and the Viewer GUI compensated for that. With firmware 14, this is corrected in the camera and aligned to firmware 14 in the Viewer GUI.</p></li>
+</ul>
+</li>
+<li><p>Better performance when using high frame rates &gt; 1000 fps</p></li>
+<li><p>Minor bugfixes</p></li>
+</ul>
+<p>Firmware Updater:</p>
+<ul class="simple">
+<li><p>Fixed: With some Alvium camera models, the firmware update may take up to 5 minutes.</p></li>
+</ul>
+<p>Image Transform Library:</p>
+<ul class="simple">
+<li><p>Added support for 3x3 debayering of packed formats</p></li>
+</ul>
+</section>
+<section id="changes-in-vimba-x-2023-4">
+<h3>Changes in Vimba X 2023-4<a class="headerlink" href="#changes-in-vimba-x-2023-4" title="Permalink to this heading"></a></h3>
+<p>VmbC:</p>
+<ul class="simple">
+<li><p>Added macOS support</p></li>
+</ul>
+<p>VmbCPP:</p>
+<ul class="simple">
+<li><p>Added macOS support</p></li>
+</ul>
+<p>VmbPy:</p>
+<ul class="simple">
+<li><p>Added macOS support</p></li>
+</ul>
+<p>ImageTransform:</p>
+<ul class="simple">
+<li><p>Added macOS support</p></li>
+</ul>
+<p>USBTL:</p>
+<ul class="simple">
+<li><p>Added macOS support</p></li>
+<li><p>Added Event support</p></li>
+</ul>
+<p>Vimba X Viewer:</p>
+<ul class="simple">
+<li><p>Added macOS support</p></li>
+<li><p>Added Sequencer tab</p></li>
+</ul>
+<p>Vimba X Firmware Updater:</p>
+<ul class="simple">
+<li><p>Added macOS support</p></li>
+</ul>
+<p>GigETL:</p>
+<ul class="simple">
+<li><p>Improved Adjust PacketSize</p></li>
+</ul>
+</section>
+<section id="changes-in-vimba-x-2023-2">
+<h3>Changes in Vimba X 2023-2<a class="headerlink" href="#changes-in-vimba-x-2023-2" title="Permalink to this heading"></a></h3>
+<p>VmbC:</p>
+<ul class="simple">
+<li><p>Fixed: Open camera by IP may take 15s</p></li>
+<li><p>Added Exclusive Access mode</p></li>
+</ul>
+<p>VmbCPP:</p>
+<ul class="simple">
+<li><p>Fixed: Open camera by IP may take 15s</p></li>
+</ul>
+<p>VmbPy:</p>
+<ul class="simple">
+<li><p>Fixed: Open camera by IP may take 15s</p></li>
+<li><p>Fixed type hints for Python &lt;=3.7.5 and =3.8.0</p></li>
+<li><p>Updated AccessMode enum for consistency with VmbC</p></li>
+<li><p>Added option for visibility level to list_features.py</p></li>
+</ul>
+<p>USBTL:</p>
+<ul class="simple">
+<li><p>Improved: standard conformity of resend for control channel commands</p></li>
+</ul>
+</section>
+<section id="changes-in-vimba-x-2022-1">
+<h3>Changes in Vimba X 2022-1<a class="headerlink" href="#changes-in-vimba-x-2022-1" title="Permalink to this heading"></a></h3>
+<p>VmbC:</p>
+<ul class="simple">
+<li><p>New API (similar, but not compatible to VimbaC)</p></li>
+</ul>
+<p>VmbCPP:</p>
+<ul class="simple">
+<li><p>New API (similar, but not compatible to VimbaCPP)</p></li>
+</ul>
+<p>VmbPy:</p>
+<ul class="simple">
+<li><p>New API (similar, but not compatible to VimbaPython)</p></li>
+</ul>
+<p>Image Transform:</p>
+<ul class="simple">
+<li><p>Added supported transformations (supports pixel formats of NET cameras)</p></li>
+<li><p>Renamed VmbGetVersion to VmbGetImageTransformVersion</p></li>
+<li><p>VmbSetImageInfoFromString: removed stringLength parameter</p></li>
+</ul>
+<p>Vimba X Viewer:</p>
+<ul class="simple">
+<li><p>New Viewer (based on Vimba Viewer)</p></li>
+<li><p>Additional features: Chunk support, 5x5 Matrix,  Scheduled Action commands</p></li>
+</ul>
+<p>GigETL:</p>
+<ul class="simple">
+<li><p>Display name: AVT GigE TL (instead of Vimba GigE TL)</p></li>
+<li><p>Scheduled Action Commands support</p></li>
+<li><p>Chunk support</p></li>
+<li><p>Pending_Ack support</p></li>
+</ul>
+<p>USBTL:</p>
+<ul class="simple">
+<li><p>Display name: AVT USB TL (instead of Vimba USB TL)</p></li>
+<li><p>No functional changes, version was incremented because of internal changes</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h2>Known issues<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>The following issues are known:</p>
+<ul class="simple">
+<li><p>Load/Save settings:
+We recommend using FeaturePersistType Streamable.
+Loading settings may cause errors when FeaturePersistTypes All or NoLUT were selected.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Linux.html" class="btn btn-neutral float-left" title="Vimba X for Linux x86_64 Release Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="GigETL.html" class="btn btn-neutral float-right" title="Vimba GigE TL Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

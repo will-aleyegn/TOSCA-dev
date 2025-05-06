@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vimba GigE TL Release Notes &mdash; Vimba X Release Notes 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Vimba USB TL Release Notes" href="USBTL.html" />
+    <link rel="prev" title="Vimba X for ARM64 Release Notes" href="ARM.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Vimba X Release Notes
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Windows.html">Vimba X for Windows Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Linux.html">Vimba X for Linux x86_64 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ARM.html">Vimba X for ARM64 Release Notes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Vimba GigE TL Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#components-and-version-reference">Components and Version Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#correlations-with-other-allied-vision-software-packages">Correlations with other Allied Vision Software Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#known-issues">Known Issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changes-and-release-history">Changes and release history</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-10-1">Changes in version 1.10.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-10-0">Changes in version 1.10.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-9-5">Changes in version 1.9.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-9-3">Changes in version 1.9.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-9-2">Changes in version 1.9.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-9-1">Changes in version 1.9.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-9-0">Changes in version 1.9.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-8-2">Changes in version 1.8.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-8-1">Changes in version 1.8.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-8-0">Changes in version 1.8.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-7-1">Changes in version 1.7.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-7-0">Changes in version 1.7.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-6-0">Changes in version 1.6.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-5-0">Changes in version 1.5.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-4-4">Changes in version 1.4.4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-4-2">Changes in version 1.4.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-4-1">Changes in version 1.4.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-3-1">Changes in version 1.3.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-2-0">Changes in version 1.2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-1-0">Changes in version 1.1.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="USBTL.html">Vimba USB TL Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CSITL.html">Vimba CSI TL Release Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vimba X Release Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Vimba GigE TL Release Notes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vimba-gige-tl-release-notes">
+<h1>Vimba GigE TL Release Notes<a class="headerlink" href="#vimba-gige-tl-release-notes" title="Permalink to this heading"></a></h1>
+<p>Version: 1.10.1</p>
+<section id="components-and-version-reference">
+<h2>Components and Version Reference<a class="headerlink" href="#components-and-version-reference" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GigE Transport Layer (VimbaGigETL.cti)</p></td>
+<td><p>1.10.1*</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vimba GigE Filter Driver</p></td>
+<td><p>2.5.12</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="hardware-requirements">
+<h2>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>PC or laptop with 1 GHz x86 processor or better.</p></li>
+<li><p>ARMv8-compatible 64-bit embedded system, for example, Jetson Xavier.</p></li>
+<li><p>MacBookPro or Mac mini with M2 chip</p></li>
+</ul>
+<p>Remark (for macOS, see the macOS release notes):</p>
+<p>When using Allied Vision GigE cameras, a built-in Gigabit Ethernet network interface or
+Gigabit Ethernet network card (one or more) is required.</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<p>The Vimba GigE Transport Layer is part of the Vimba X SDK.
+Linux: For instructions on how to install this module, please refer to the
+Vimba X for Linux or ARM64 Release Notes.</p>
+</section>
+<section id="correlations-with-other-allied-vision-software-packages">
+<h2>Correlations with other Allied Vision Software Packages<a class="headerlink" href="#correlations-with-other-allied-vision-software-packages" title="Permalink to this heading"></a></h2>
+<p>You can install and use Vimba and Vimba X on the same host.
+Windows: We recommend using our GigE filter driver with Vimba X or Vimba only.</p>
+</section>
+<section id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>When experiencing trouble with image acquisition on Linux, try to increase the
+priority of your application with “sudo -E nice -n -20 <command>”.</p></li>
+<li><p>A change of the available camera access modes cannot be reported for cameras
+in different subnets or with misconfigured IP addresses.</p></li>
+<li><p>GigE cameras may be listed on a wrong Ethernet interface.</p></li>
+<li><p>If many dropped frames occur especially with a small ROI, set GVSP Timeout to a higher value.</p></li>
+</ul>
+<p>GigE Filter Driver:</p>
+<ul class="simple">
+<li><p>If Vimba and Vimba X are installed on the same system: The Filter Driver provided with Vimba X overwrites Vimba’s Filter Driver. If you still work with Vimba: Use the included Driver Installer to deactivate and activate the correct Filter Driver.</p></li>
+<li><p>Using other filter drivers additionally to the included GigE Filter Driver (including the Filter Driver of the Vimba SDK) may cause issues, even a blue screen.</p></li>
+<li><p>Disabling the Vimba GigE Filter Driver while it is in use might lead to
+unexpected behavior up to blue screen.</p></li>
+</ul>
+</section>
+<section id="changes-and-release-history">
+<h2>Changes and release history<a class="headerlink" href="#changes-and-release-history" title="Permalink to this heading"></a></h2>
+<section id="changes-in-version-1-10-1">
+<h3>Changes in version 1.10.1<a class="headerlink" href="#changes-in-version-1-10-1" title="Permalink to this heading"></a></h3>
+<p>GigETL:</p>
+<ul class="simple">
+<li><p>Adjustments for support of future cameras</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-10-0">
+<h3>Changes in version 1.10.0<a class="headerlink" href="#changes-in-version-1-10-0" title="Permalink to this heading"></a></h3>
+<p>GigETL:</p>
+<ul class="simple">
+<li><p>Breaks compatibility with Vimba 6 (Vimba 6 Config mode not working anymore with latest Vimba X GigETL)</p></li>
+<li><p>Cameras from SVS-Vistek are enabled by default</p></li>
+<li><p>Marked old statistic features as “deprecated”</p></li>
+<li><p>Minor bug fixes</p></li>
+</ul>
+<p>Filter driver:</p>
+<ul class="simple">
+<li><p>Minor bugfixes</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-9-5">
+<h3>Changes in version 1.9.5<a class="headerlink" href="#changes-in-version-1-9-5" title="Permalink to this heading"></a></h3>
+<p>GigETL</p>
+<ul class="simple">
+<li><p>Improved Adjust PacketSize</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-9-3">
+<h3>Changes in version 1.9.3<a class="headerlink" href="#changes-in-version-1-9-3" title="Permalink to this heading"></a></h3>
+<p>GigETL</p>
+<ul class="simple">
+<li><p>Added Event support</p></li>
+</ul>
+<p>Filter Driver:</p>
+<ul class="simple">
+<li><p>Bug fixes</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-9-2">
+<h3>Changes in version 1.9.2<a class="headerlink" href="#changes-in-version-1-9-2" title="Permalink to this heading"></a></h3>
+<p>GigETL</p>
+<ul class="simple">
+<li><p>Fixed: Vimba X freezes if the NIC is disabled during image acquisition</p></li>
+<li><p>Set camera to Extended ID mode if supported</p></li>
+<li><p>Support Extended Status Codes Packet Resend</p></li>
+</ul>
+<p>GigE Filter Driver:</p>
+<ul class="simple">
+<li><p>Supports extended status codes packet resend</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-9-1">
+<h3>Changes in version 1.9.1<a class="headerlink" href="#changes-in-version-1-9-1" title="Permalink to this heading"></a></h3>
+<p>GigETL</p>
+<ul class="simple">
+<li><p>Display name: AVT GigE TL (instead of Vimba GigE TL)</p></li>
+<li><p>Scheduled Action Commands support</p></li>
+<li><p>Chunk support</p></li>
+</ul>
+<p>Filter Driver</p>
+<ul class="simple">
+<li><p>Chunk Support</p></li>
+<li><p>Bug fixes</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-9-0">
+<h3>Changes in version 1.9.0<a class="headerlink" href="#changes-in-version-1-9-0" title="Permalink to this heading"></a></h3>
+<p>GigETL</p>
+<ul class="simple">
+<li><p>Changed behaviour of endianess handling (values must match host endianness in little-endian),
+for better compatibility with third-party software.
+Affected features that now have a changed byte order:</p>
+<ul>
+<li><p>Config Mode</p></li>
+<li><p>IP-related features including MulticastIPAddress</p></li>
+<li><p>Action Commands</p></li>
+</ul>
+</li>
+<li><p>New feature DeviceUpdateTimeout (only applicable of GigE discovery is switched to Broadcast)</p></li>
+<li><p>New GVSPMaxLookBack default value (0 instead of 1) for improved packet resend handling</p></li>
+<li><p>Fixed: High memory usage during performance bottleneck (Nonpaged pool growing with multiple GigE cameras)</p></li>
+<li><p>Fixed: Action commands caused an error message in the console log</p></li>
+<li><p>Fixed: MulticastIPAdress range, better compatibility with third-party software</p></li>
+</ul>
+<p>GigE Filter Driver</p>
+<ul class="simple">
+<li><p>Reduced memory allocations</p></li>
+<li><p>Hidden statistics</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-8-2">
+<h3>Changes in version 1.8.2<a class="headerlink" href="#changes-in-version-1-8-2" title="Permalink to this heading"></a></h3>
+<p>GigETL and GigE Filter Driver</p>
+<ul class="simple">
+<li><p>Fixed: Vimba Viewer did not show single frame acquisitions (5 GigE)</p></li>
+<li><p>Improved timeout handling (5 GigE)</p></li>
+<li><p>Fixed limitations of certain GVSPPacketSize values</p></li>
+<li><p>New GigETL feature: GVSPHostReceiveBufferSize (SO_RCVBUF,  usable with
+the socket driver only) replaces GVSPHostReceiveBuffers (which is still
+usable in existing applications).</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-8-1">
+<h3>Changes in version 1.8.1<a class="headerlink" href="#changes-in-version-1-8-1" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Prepared for use with 5 GigE Vision cameras</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-8-0">
+<h3>Changes in version 1.8.0<a class="headerlink" href="#changes-in-version-1-8-0" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Standard-compliant ForceIP features instead of Allied Vision custom features</p></li>
+<li><p>Prepared for use with extended IDs</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-7-1">
+<h3>Changes in version 1.7.1<a class="headerlink" href="#changes-in-version-1-7-1" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Improved resend handling</p></li>
+<li><p>By default, packet resends are enabled</p></li>
+<li><p>Other bug fixes</p></li>
+</ul>
+<p>Vimba Driver Installer</p>
+<ul class="simple">
+<li><p>Internal changes</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-7-0">
+<h3>Changes in version 1.7.0<a class="headerlink" href="#changes-in-version-1-7-0" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>GenTL 1.5 support</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-6-0">
+<h3>Changes in version 1.6.0<a class="headerlink" href="#changes-in-version-1-6-0" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Fixed: GVSPPacketSize now updates as expected (Linux)</p></li>
+<li><p>Other minor bug fixes</p></li>
+</ul>
+<p>Vimba GigE Filter Driver</p>
+<ul class="simple">
+<li><p>Windows 10: Improved compatibility and performance with third-party filter drivers.</p></li>
+</ul>
+<p>Installer and driver</p>
+<ul class="simple">
+<li><p>New certificates for installer and driver (Windows 7, Windows 8, and Windows 8.1)</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-5-0">
+<h3>Changes in version 1.5.0<a class="headerlink" href="#changes-in-version-1-5-0" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Added functionality for Action Commands</p></li>
+<li><p>Fixed sending packet request after invalid timeout on Linux</p></li>
+<li><p>The parameter BUFFER_INFO_DELIVERED_IMAGEHEIGHT is filled correctly</p></li>
+<li><p>VimbaGigEFilter (Windows 10 x64/x86 only):</p>
+<ul>
+<li><p>Fixed incompatibility with Intel 10 Gbit Ethernet cards (520/540/710)</p></li>
+<li><p>Changed buffer list handling, driver removes streaming packets from buffer list:</p>
+<ul>
+<li><p>Decreases system load formerly caused by stream packet duplication</p></li>
+<li><p>Prevents additional system load when firewall is enabled</p></li>
+<li><p>Does not allow Wireshark to see stream packets</p></li>
+</ul>
+</li>
+<li><p>Packet resend system load minimized</p></li>
+<li><p>Fixed missing filterclass in driver inf</p></li>
+<li><p>Fixed double counting of received packets</p></li>
+<li><p>Fixed incompatibility with wireless network cards (removed binding to WAN)</p></li>
+<li><p>Fixed incompatibilities with VPN connections (filter now optional)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="changes-in-version-1-4-4">
+<h3>Changes in version 1.4.4<a class="headerlink" href="#changes-in-version-1-4-4" title="Permalink to this heading"></a></h3>
+<p>-Bug fixes</p>
+</section>
+<section id="changes-in-version-1-4-2">
+<h3>Changes in version 1.4.2<a class="headerlink" href="#changes-in-version-1-4-2" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Bug fixes</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-4-1">
+<h3>Changes in version 1.4.1<a class="headerlink" href="#changes-in-version-1-4-1" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Solved cases where network problems led to a lost camera</p></li>
+<li><p>Fixed range of GevHeartbeatInterval and GevHeartbeatTimeout</p></li>
+<li><p>Bug fixes for multi-camera usage and missing cleanup</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-3-1">
+<h3>Changes in version 1.3.1<a class="headerlink" href="#changes-in-version-1-3-1" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Support of GenICam GenTL standard 1.3</p></li>
+<li><p>New GenTL SFNC feature categories BufferHandlingMode and StreamInformation</p></li>
+<li><p>Separate features for heartbeat timeout and heartbeat interval</p></li>
+<li><p>Adjustable device discovery waiting time</p></li>
+<li><p>Fixed issues with alike serial numbers</p></li>
+<li><p>Fixed issues with many network interfaces on Linux</p></li>
+<li><p>Small bug-fixes to the Driver Installer</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-2-0">
+<h3>Changes in version 1.2.0<a class="headerlink" href="#changes-in-version-1-2-0" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Improved performance in case of many events</p></li>
+<li><p>Restriction to eight cameras removed</p></li>
+<li><p>Corrected Heartbeat feature</p></li>
+<li><p>Fixed support for small packets</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-1-0">
+<h3>Changes in version 1.1.0<a class="headerlink" href="#changes-in-version-1-1-0" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Added feature DiscoveryBroadcastMode to the Interface module</p></li>
+<li><p>Changed the documentation format to PDF</p></li>
+<li><p>Slight changes for Linux compatibility</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ARM.html" class="btn btn-neutral float-left" title="Vimba X for ARM64 Release Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="USBTL.html" class="btn btn-neutral float-right" title="Vimba USB TL Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

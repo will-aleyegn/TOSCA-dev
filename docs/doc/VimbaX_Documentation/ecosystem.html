@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vimba X Ecosystem &mdash; Vimba X Developer Guide 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Legal Information" href="legalInformation.html" />
+    <link rel="prev" title="Troubleshooting" href="troubleshooting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Vimba X Developer Guide
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Vimba X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">System Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrationGuide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examplesOverview.html">Examples Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manuals:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="driverInstaller.html">Driver Installer Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fwUpdater.html">Firmware Updater Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="viewerGuide.html">Viewer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdkManual.html">SDK Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cAPIManual.html">C API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cppAPIManual.html">CPP API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotNetAPIManual.html">.NET API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPIManual.html">Python API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagetransformManual.html">Image Transform Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help &amp; information:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Vimba X Ecosystem</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#vimba-x-bridge-for-open-evision">Vimba X Bridge for Open eVision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#camera-adapter-for-micro-manager">Camera Adapter for Micro-Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vimba-x-ros2-driver">Vimba X ROS2 driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gstreamer-plugin">GStreamer plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#defective-pixel-manager">Defective Pixel Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vimba-x-cognex-adapter">Vimba X Cognex Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compatible-transport-layers-and-hardware">Compatible transport layers and hardware</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="legalInformation.html">Legal Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vimba X Developer Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Vimba X Ecosystem</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vimba-x-ecosystem">
+<h1>Vimba X Ecosystem<a class="headerlink" href="#vimba-x-ecosystem" title="Permalink to this heading"></a></h1>
+<p>As an addition to Vimba X, you can use the following software for special use cases
+and to optimize your camera.</p>
+<section id="vimba-x-bridge-for-open-evision">
+<h2>Vimba X Bridge for Open eVision<a class="headerlink" href="#vimba-x-bridge-for-open-evision" title="Permalink to this heading"></a></h2>
+<p>The Vimba X Bridge for Open eVision gives you easy access to image analysis libraries and software tools:</p>
+<ul class="simple">
+<li><p>EasyImage, EasyGauge, EasyFind, EasyMatch, EasyObject, EasyColor, EasyOCR, EasyOCR2, EasyBarCode, EasyMatrixCode and EasyQRCode</p></li>
+<li><p>3D and Deep Learning libraries</p></li>
+</ul>
+<p>As of version 23.12, Open eVision contains the Vimba X Bridge, which takes images from Vimba X and uses them for image processing and analysis.</p>
+<p>You can find more information on our website:</p>
+<p><a class="reference external" href="https://www.alliedvision.com/en/products/software/vimba-x-sdk/vimba-x-bridge-for-open-evision/">https://www.alliedvision.com/en/products/software/vimba-x-sdk/vimba-x-bridge-for-open-evision/</a></p>
+</section>
+<section id="camera-adapter-for-micro-manager">
+<h2>Camera Adapter for Micro-Manager<a class="headerlink" href="#camera-adapter-for-micro-manager" title="Permalink to this heading"></a></h2>
+<p>Micro-Manager (also known as µManager) is an open source software for control
+and automation of microscope hardware.
+You can use all cameras supported by Vimba X with Micro-Manager.</p>
+<div class="line-block">
+<div class="line">Details about the Allied Vision Camera Adapter for Micro-Manager:</div>
+<div class="line"><a class="reference external" href="https://micro-manager.org/AlliedVisionCamera">https://micro-manager.org/AlliedVisionCamera</a></div>
+</div>
+</section>
+<section id="vimba-x-ros2-driver">
+<h2>Vimba X ROS2 driver<a class="headerlink" href="#vimba-x-ros2-driver" title="Permalink to this heading"></a></h2>
+<p>Find the Vimba X ROS2 driver on GitHub: <a class="reference external" href="https://github.com/alliedvision/vimbax_ros2_driver">https://github.com/alliedvision/vimbax_ros2_driver</a></p>
+</section>
+<section id="gstreamer-plugin">
+<h2>GStreamer plugin<a class="headerlink" href="#gstreamer-plugin" title="Permalink to this heading"></a></h2>
+<p>GStreamer is a powerful multimedia framework. With the GStreamer plugin, a wide variety
+of use cases is available. For example, you can stream, display, and record images
+and encode them to a video format.</p>
+<div class="line-block">
+<div class="line">We provide the plugin and an extensive Readme on GitHub:</div>
+<div class="line"><a class="reference external" href="https://github.com/alliedvision/gst-vmbsrc">https://github.com/alliedvision/gst-vmbsrc</a></div>
+</div>
+</section>
+<section id="defective-pixel-manager">
+<h2>Defective Pixel Manager<a class="headerlink" href="#defective-pixel-manager" title="Permalink to this heading"></a></h2>
+<p>Vimba X Defective Pixel Manager enables you to use the on-board pixel
+correction features of your Alvium camera.
+Selected Manta and Mako G cameras are supported as well.</p>
+<div class="line-block">
+<div class="line">Download Vimba X Defective Pixel Manager from our website:</div>
+<div class="line"><a class="reference external" href="https://www.alliedvision.com/en/support/software-downloads/#c1548">https://www.alliedvision.com/en/support/software-downloads/#c1548</a></div>
+</div>
+</section>
+<section id="vimba-x-cognex-adapter">
+<h2>Vimba X Cognex Adapter<a class="headerlink" href="#vimba-x-cognex-adapter" title="Permalink to this heading"></a></h2>
+<p>Vimba X Cognex Adapter enables you to use Cognex VisionPro:</p>
+<div class="line-block">
+<div class="line">Download Vimba X Cognex Adapter from our website:</div>
+<div class="line"><a class="reference external" href="https://www.alliedvision.com/en/support/software-downloads/">https://www.alliedvision.com/en/support/software-downloads/</a></div>
+</div>
+</section>
+<section id="compatible-transport-layers-and-hardware">
+<h2>Compatible transport layers and hardware<a class="headerlink" href="#compatible-transport-layers-and-hardware" title="Permalink to this heading"></a></h2>
+<p>Additionally to the TLs that come with Vimba X, some TLs and hardware of other TKH Vision brands
+were tested for compatibility with Vimba X APIs.</p>
+<p>Scope of the compatibility tests:</p>
+<ul class="simple">
+<li><p>Performance: The non-AVT camera, used with the TL of its manufacturer,
+reaches the framerates specified in its datasheet.
+Within one hour, no dropped frames occur.</p></li>
+<li><p>API compatibility: Essential API functions were tested.</p></li>
+</ul>
+<p>Out of scope of the compatibility tests:</p>
+<ul class="simple">
+<li><p>API tests do not cover the complete functionality.</p></li>
+<li><p>Vimba X Viewer tabs are optimized for Alvium cameras.
+If a Viewer tab doesn’t work as expected with another camera,
+please use the feature tree available in the <em>All</em> tab.</p></li>
+<li><p>Vimba X code examples requiring special camera features, such as loading and saving settings,
+can be used with Allied Vision cameras and transport layers only.</p></li>
+</ul>
+<p>The table below shows tested TL/camera combinations:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Tested transport layer / camera combinations</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>TL ↓ camera →</p></th>
+<th class="head"><p>AVT GigE</p></th>
+<th class="head"><p>AVT USB</p></th>
+<th class="head"><p>SVS FXO GigE</p></th>
+<th class="head"><p>SVS Exo USB</p></th>
+<th class="head"><p>SVS FXO CXP</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AVT GigE</p></td>
+<td><p>Yes</p></td>
+<td></td>
+<td><p>Yes*</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>AVT USB</p></td>
+<td></td>
+<td><p>Yes</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>SVS GigE</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>SVS USB</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>Yes</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>NET GigEPRO</p></td>
+<td><p>Yes</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Euresys CXP</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Chromasens CXP</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td colspan="6"><p>*incl. Vimba GigE Filter Driver</p></td>
+</tr>
+</tbody>
+</table>
+<p>The table below shows tested hardware:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Interface</p></th>
+<th class="head"><p>Camera</p></th>
+<th class="head"><p>Firmware</p></th>
+<th class="head"><p>TL</p></th>
+<th class="head"><p>Additional hardware</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GigE</p></td>
+<td><p>fxo45MXGE (10G)</p></td>
+<td><p>1.7.2 Build 3090 2023-09-19</p></td>
+<td><p>AVT GigE TL</p></td>
+<td><p>Intel X550</p></td>
+</tr>
+<tr class="row-odd"><td><p>GigE</p></td>
+<td><p>GigEPRO</p></td>
+<td><p>1.12.008.00</p></td>
+<td><p>AVT GigE TL</p></td>
+<td><p>N/A</p></td>
+</tr>
+<tr class="row-even"><td><p>USB</p></td>
+<td><p>exo264CU3</p></td>
+<td><p>1.7.2 Build 2990 2023-04-03</p></td>
+<td><p>SVS TL, USB, Version 2.5.5</p></td>
+<td><p>N/A</p></td>
+</tr>
+<tr class="row-odd"><td><p>CoaXPress</p></td>
+<td><p>fxo530CCX12-2C</p></td>
+<td><p>fxo53xxCX12-2C_v1.7.2_b3011 2023-04-03</p></td>
+<td><p>eGrabber 24.04</p></td>
+<td><p>Euresys Framegrabber, CXP 12</p></td>
+</tr>
+<tr class="row-even"><td><p>CoaXPress</p></td>
+<td><p>allPIXA evo 8k</p></td>
+<td><p>6.2.0</p></td>
+<td><p>Euresys Coaxlink-24.04.0.2</p></td>
+<td><p>Euresys Framegrabber, CXP 12</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To obtain technical support, please always contact the camera manufacturer.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="troubleshooting.html" class="btn btn-neutral float-left" title="Troubleshooting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="legalInformation.html" class="btn btn-neutral float-right" title="Legal Information" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

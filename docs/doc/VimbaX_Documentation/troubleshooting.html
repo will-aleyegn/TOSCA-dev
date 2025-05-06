@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Troubleshooting &mdash; Vimba X Developer Guide 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/tabs.js?v=3030b3cb"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Vimba X Ecosystem" href="ecosystem.html" />
+    <link rel="prev" title="Image Transform Manual" href="imagetransformManual.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Vimba X Developer Guide
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Vimba X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">System Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrationGuide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examplesOverview.html">Examples Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manuals:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="driverInstaller.html">Driver Installer Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fwUpdater.html">Firmware Updater Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="viewerGuide.html">Viewer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdkManual.html">SDK Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cAPIManual.html">C API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cppAPIManual.html">CPP API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotNetAPIManual.html">.NET API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPIManual.html">Python API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagetransformManual.html">Image Transform Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help &amp; information:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#error-codes">Error codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#general-issues">General issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#transport-layer-not-found">Transport layer not found</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#feature-not-usable">Feature not usable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#payloadsize-issue">Payloadsize issue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vimba-system-functions">Vimba system functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#devicereset">DeviceReset</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#issues-by-camera-interface">Issues by camera interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gige-cameras">GigE cameras</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gige-vision-cameras">5 GigE Vision cameras</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#packetsize">PacketSize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-issues">Other issues</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#usb-cameras">USB cameras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mipi-csi-2-cameras">MIPI CSI-2 cameras</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#compatible-boards-and-driver">Compatible boards and driver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#camera-list">Camera list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-acquisition">Image acquisition</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#typical-linux-issues">Typical Linux issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transport-layers-not-found">Transport layers not found</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compiling">Compiling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#typical-macos-issues">Typical macOS issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tl-not-found">TL not found</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#safari">Safari</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#technical-support">Technical support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem.html">Vimba X Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legalInformation.html">Legal Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vimba X Developer Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Troubleshooting</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h1>
+<section id="error-codes">
+<h2>Error codes<a class="headerlink" href="#error-codes" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Error codes</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Error Code</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbErrorSuccess</p></td>
+<td><p>0</p></td>
+<td><p>No error</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorInternalFault</p></td>
+<td><p>-1</p></td>
+<td><p>Unexpected fault in VmbC or driver</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorApiNotStarted</p></td>
+<td><p>-2</p></td>
+<td><p>VmbStartup() was not called before the current command</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorNotFound</p></td>
+<td><p>-3</p></td>
+<td><p>The designated instance (camera, feature, etc.) <br>
+cannot be found</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorBadHandle</p></td>
+<td><p>-4</p></td>
+<td><p>The given handle is not valid</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorDeviceNotOpen</p></td>
+<td><p>-5</p></td>
+<td><p>Device was not opened for usage</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorInvalidAccess</p></td>
+<td><p>-6</p></td>
+<td><p>Operation is invalid with the current access mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorBadParameter</p></td>
+<td><p>-7</p></td>
+<td><p>One of the parameters is invalid (usually an illegal pointer)</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorStructSize</p></td>
+<td><p>-8</p></td>
+<td><p>Given struct size is not valid for this API version</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorMoreData</p></td>
+<td><p>-9</p></td>
+<td><p>More data available in a string/list than space is provided</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorWrongType</p></td>
+<td><p>-10</p></td>
+<td><p>Wrong feature type for this access function</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorInvalidValue</p></td>
+<td><p>-11</p></td>
+<td><p>The value is not valid; either out of bounds or not an <br>
+increment of the minimum</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorTimeout</p></td>
+<td><p>-12</p></td>
+<td><p>Timeout during wait</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorOther</p></td>
+<td><p>-13</p></td>
+<td><p>Other error</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorResources</p></td>
+<td><p>-14</p></td>
+<td><p>Resources not available (e.g. memory)</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorInvalidCall</p></td>
+<td><p>-15</p></td>
+<td><p>Call is invalid in the current context (e.g. callback)</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorNoTL</p></td>
+<td><p>-16</p></td>
+<td><p>No transport layers are found</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorNotImplemented</p></td>
+<td><p>-17</p></td>
+<td><p>API feature is not implemented</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorNotSupported</p></td>
+<td><p>-18</p></td>
+<td><p>API feature is not supported</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorIncomplete</p></td>
+<td><p>-19</p></td>
+<td><p>The current operation was not completed (e.g. a multiple <br>
+registers read or write)</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorIO</p></td>
+<td><p>-20</p></td>
+<td><p>Low level IO error in transport layer</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorValid <br>
+ValueSetNotPresent</p></td>
+<td><p>-21</p></td>
+<td><p>The valid value set could not be retrieved, <br>
+since the feature does not provide this property</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbError      <br>
+GenTLUnspecified</p></td>
+<td><p>-22</p></td>
+<td><p>Unspecified GenTL runtime error</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorUnspecified</p></td>
+<td><p>-23</p></td>
+<td><p>Unspecified runtime error</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorBusy</p></td>
+<td><p>-24</p></td>
+<td><p>The responsible module/entity is busy executing actions</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorNoData</p></td>
+<td><p>-25</p></td>
+<td><p>The function has no data to work on</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorParsing <br>
+ChunkData</p></td>
+<td><p>-26</p></td>
+<td><p>Unspecified GenTL runtime error   <br>
+An error occurred parsing a buffer containing chunk data</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorInUse</p></td>
+<td><p>-27</p></td>
+<td><p>Something is already in use</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorUnknown</p></td>
+<td><p>-28</p></td>
+<td><p>Error condition unknown</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorXml</p></td>
+<td><p>-29</p></td>
+<td><p>Error parsing XML</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorNotAvailable</p></td>
+<td><p>-30</p></td>
+<td><p>Something is not available</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorNotInitialized</p></td>
+<td><p>-31</p></td>
+<td><p>Something is not initialized</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorInvalidAddress</p></td>
+<td><p>-32</p></td>
+<td><p>Given address is out of range or invalid for internal reasons</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorAlready</p></td>
+<td><p>-33</p></td>
+<td><p>Something has already been done</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorNoChunkData</p></td>
+<td><p>-34</p></td>
+<td><p>A frame expected to contain chunk data does not contain it</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorUser <br>
+CallbackException</p></td>
+<td><p>-35</p></td>
+<td><p>A callback provided by the user threw an exception</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbError <br>
+FeaturesUnavailable</p></td>
+<td><p>-36</p></td>
+<td><p>The XML for the module is currently not loaded; the module <br>
+could be in the wrong state or the XML could not  <br>
+be retrieved or could not be parsed properly</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorTLNotFound</p></td>
+<td><p>-37</p></td>
+<td><p>A required transport layer could not be found or loaded</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbErrorAmbiguous</p></td>
+<td><p>-38</p></td>
+<td><p>An entity cannot be uniquely identified based on  <br>
+the information provided</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorRetriesExceeded</p></td>
+<td><p>-39</p></td>
+<td><p>Something could not be accomplished  <br>
+with a given number of retries</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbError  <br>
+InsufficientBufferCount</p></td>
+<td><p>-40</p></td>
+<td><p>The operation requires more buffers</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbErrorCustom</p></td>
+<td><p>1</p></td>
+<td><p>The minimum error code to use for user defined error codes <br>
+to avoid conflict with existing error codes</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="general-issues">
+<h2>General issues<a class="headerlink" href="#general-issues" title="Permalink to this heading"></a></h2>
+<section id="transport-layer-not-found">
+<h3>Transport layer not found<a class="headerlink" href="#transport-layer-not-found" title="Permalink to this heading"></a></h3>
+<p>If the transport layer cannot be found:</p>
+<ul class="simple">
+<li><p>Check if the transport layer is deactivated, see the SDK Manual,
+chapter <a class="reference internal" href="sdkManual.html#tl-activation-and-deactivation"><span class="std std-ref">TL activation and deactivation</span></a>.</p></li>
+<li><p>Check the string of <code class="docutils literal notranslate"><span class="pre">ctiPathsAndSettingsUsage()</span></code></p></li>
+<li><p>Linux: see <a class="reference internal" href="#typical-linux-issues"><span class="std std-ref">Typical Linux issues</span></a></p></li>
+</ul>
+</section>
+<section id="feature-not-usable">
+<h3>Feature not usable<a class="headerlink" href="#feature-not-usable" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Install the latest camera firmware.</p></li>
+<li><p>Vimba X only supports GenICam-compliant features, see <a class="reference internal" href="about.html"><span class="doc">About Vimba X</span></a>.</p></li>
+</ul>
+</section>
+<section id="payloadsize-issue">
+<h3>Payloadsize issue<a class="headerlink" href="#payloadsize-issue" title="Permalink to this heading"></a></h3>
+<p>Stream features may contain additional Payloadsize information. For proper handling,
+use convenience function VmbPayloadSizeGet().</p>
+</section>
+<section id="vimba-system-functions">
+<h3>Vimba system functions<a class="headerlink" href="#vimba-system-functions" title="Permalink to this heading"></a></h3>
+<p>Vimba - Vimba X migration: To ensure GenICam compliance of Vimba X,
+most system functions of the Vimba SDK (such as GEV discovery, ForceIP, and Action Commands)
+are now TL (system) functions in Vimba X.</p>
+</section>
+<section id="devicereset">
+<h3>DeviceReset<a class="headerlink" href="#devicereset" title="Permalink to this heading"></a></h3>
+<p>Some cameras provide the <em>DeviceReset</em> feature. After each Device Reset, a device discovery
+is necessary.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">C</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">C++</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">C#</button><button aria-controls="panel-0-0-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-3" name="0-3" role="tab" tabindex="-1">Python</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>After executing the <em>DeviceReset</em> command feature, the Camera handle and the related stream
+and local device handles become invalid.
+To reopen the camera and get a new valid handle, call <code class="docutils literal notranslate"><span class="pre">VmbCameraClose()</span></code> for this camera and
+call <code class="docutils literal notranslate"><span class="pre">VmbCameraOpen()</span></code>.</p>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>After executing the <em>DeviceReset</em> command feature, the Camera object and the related stream
+and local device objects become invalid.
+To reopen the camera and get a new valid Camera object, call <code class="docutils literal notranslate"><span class="pre">Close()</span></code> for the invalid Camera
+object and query a new Camera object from the API.</p>
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><p>After executing the <em>DeviceReset</em> command feature, the IOpenCamera object and the ICamera and IStream
+objects become invalid. To reopen the camera and get a new valid ICamera object, close the IOpenCamera
+object and query a new ICamera object. You can, for example, use <code class="docutils literal notranslate"><span class="pre">IVmbSystem.GetCameraByID()</span></code>.</p>
+</div><div aria-labelledby="tab-0-0-3" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-3" name="0-3" role="tabpanel" tabindex="0"><p>After executing the <em>DeviceReset</em> command feature, the Camera object and the related stream
+and local device objects become invalid.
+To reopen the camera, close the Camera context and query a new Camera instance from VmbSystem.</p>
+</div></div>
+<p>All APIs:</p>
+<ul class="simple">
+<li><p>It may take a few seconds until the device reset is completed and the camera can be
+discovered again.</p></li>
+<li><p>The Extended ID of a camera remains the same, no matter how many times the camera has
+been reopened with VmbCameraClose and VmbCameraOpen.</p></li>
+<li><p>GigE: The corresponding interface handle (or object)
+may become invalid. If you work with the Interface GenTL module, you need to query
+the current handle (or object) from the API.</p></li>
+<li><p>MIPI CSI-2: In some cases, rebooting the board is necessary.</p></li>
+</ul>
+<p>VmbPy and VmbNET:</p>
+<ul class="simple">
+<li><p>In VmbPy and in VmbNET, accessing Chunk Data introduces some additional overhead. This can become an issue if
+many frames per second need to be processed. If Chunk data is enabled and frames are missing,
+try reducing the number of frames that need to be processed. If that is not possible,
+your use case might require a programming language that is designed for higher performance.
+Please use the C or C++ API.</p></li>
+</ul>
+</section>
+</section>
+<section id="issues-by-camera-interface">
+<h2>Issues by camera interface<a class="headerlink" href="#issues-by-camera-interface" title="Permalink to this heading"></a></h2>
+<section id="gige-cameras">
+<h3>GigE cameras<a class="headerlink" href="#gige-cameras" title="Permalink to this heading"></a></h3>
+<p>If the camera is not listed: See <a class="reference internal" href="viewerGuide.html#camera-not-detected"><span class="std std-ref">Camera not detected</span></a>.</p>
+<p>To use your GigE camera with best possible performance, follow the instructions in the User Guide
+of your camera.</p>
+<p>We recommend using the Filter Driver of Vimba X. To check if the correct Filter driver
+is in use:</p>
+<ol class="arabic simple">
+<li><p>Open your camera with Vimba X Viewer.</p></li>
+<li><p>Open the <span class="guilabel">All</span> tab and expand <em>Stream 0</em>.</p></li>
+<li><p>In the Settings, check that GVSP Driver Selector uses <em>Filter</em>.</p></li>
+<li><p>Expand <em>Info</em> and check that GVSP Filter Compatibility is “Matching”. If it is not <em>Matching</em>,
+use Vimba Driver Installer in the Vimba X install directory to install the latest Fiter Driver.</p></li>
+</ol>
+<section id="gige-vision-cameras">
+<h4>5 GigE Vision cameras<a class="headerlink" href="#gige-vision-cameras" title="Permalink to this heading"></a></h4>
+<p>To get your 5 GigE Vision camera up and running, see the user guide/manual for your
+camera.</p>
+</section>
+<section id="packetsize">
+<h4>PacketSize<a class="headerlink" href="#packetsize" title="Permalink to this heading"></a></h4>
+<p>Make sure to set the PacketSize feature of GigE cameras to a value supported by
+your network card. If you use more than one camera on one interface, the
+available bandwidth has to be shared between the cameras.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GVSPAdjustPacketSize</span></code> configures GigE cameras to use the largest
+possible packets.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DeviceThroughputLimit</span></code> enables to configure the individual bandwidth
+if multiple cameras are used.</p></li>
+<li><p>The maximum packet size might not be available on all connected cameras.
+Try to reduce the packet size.</p></li>
+</ul>
+</section>
+<section id="other-issues">
+<h4>Other issues<a class="headerlink" href="#other-issues" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p>Access Mode “Config” is not available in this SDK. Please use IP Config instead.</p></li>
+<li><p>By default, the Allied Vision GigE TL is set to <em>Broadcast</em> (instead of <em>Discovery Once</em>),
+which constantly consumes bandwidth. For a higher bandwidth, use <em>Discovery Once</em> every time
+you connect a GigE camera.</p></li>
+<li><p>If the GigE Filter Driver installation via Driver Installer is not possible, please install
+it manually to your NIC.</p></li>
+</ul>
+</section>
+</section>
+<section id="usb-cameras">
+<h3>USB cameras<a class="headerlink" href="#usb-cameras" title="Permalink to this heading"></a></h3>
+<p>Under Windows, make sure the correct driver is applied.</p>
+</section>
+<section id="mipi-csi-2-cameras">
+<h3>MIPI CSI-2 cameras<a class="headerlink" href="#mipi-csi-2-cameras" title="Permalink to this heading"></a></h3>
+<section id="compatible-boards-and-driver">
+<h4>Compatible boards and driver<a class="headerlink" href="#compatible-boards-and-driver" title="Permalink to this heading"></a></h4>
+<p>The camera driver must be installed before using Vimba. It is available for selected ARM boards
+and SOMS at <a class="reference external" href="https://github.com/alliedvision">https://github.com/alliedvision</a></p>
+</section>
+<section id="camera-list">
+<h4>Camera list<a class="headerlink" href="#camera-list" title="Permalink to this heading"></a></h4>
+<p>MIPI CSI-2 is not a plug and play interface. To update the cameras list, reboot the board.</p>
+</section>
+<section id="image-acquisition">
+<h4>Image acquisition<a class="headerlink" href="#image-acquisition" title="Permalink to this heading"></a></h4>
+<p>Make sure you use the latest firmware version. If you already have installed Vimba, you can
+use the included Firmware Updater. Or download it from <a class="reference external" href="https://www.alliedvision.com/en/support/software-downloads/">https://www.alliedvision.com/en/support/software-downloads/</a></p>
+</section>
+</section>
+</section>
+<section id="typical-linux-issues">
+<h2>Typical Linux issues<a class="headerlink" href="#typical-linux-issues" title="Permalink to this heading"></a></h2>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h3>
+<p>Installation instructions are listed in doc:<cite>about</cite>.
+Note that the script for installing the transport layers has changed.</p>
+<p>To install Vimba X for Linux, you need tar and the C runtime library
+glibc6 (version 2.27 or higher).</p>
+</section>
+<section id="transport-layers-not-found">
+<h3>Transport layers not found<a class="headerlink" href="#transport-layers-not-found" title="Permalink to this heading"></a></h3>
+<p>Note that the script for installing the transport layers has changed.
+Read the installation instructions in doc:<cite>about</cite>.</p>
+<p>In most cases, Install.sh automatically registers the GENICAM_GENTL64_PATH
+environment variables in /etc/profile.d, so that every GenICam GenTL consumer
+can access the Vimba transport layers. If the transport layers are not found:</p>
+<ul class="simple">
+<li><p>If multiple users work with the system, make sure all users can access /etc/profile.d.</p></li>
+<li><p>If your display manager doesn’t support the install script (for example, lightdm and wdm):
+Please add the required environment variables to the /etc/environment file.</p></li>
+<li><p>If login shell is not supported, Install.sh in /etc/profile.d will not be
+loaded for X-Session. In this case, please copy the following line into the  ~/.bashrc
+file and reboot. <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">GENICAM_GENTL64_PATH=$GENICAM_GENTL64_PATH:</span> <span class="pre">&quot;/PATH_TO_VIMBAXFOLDER/cti/Set_GenTL_Path.sh&quot;</span></code></p></li>
+</ul>
+</section>
+<section id="compiling">
+<h3>Compiling<a class="headerlink" href="#compiling" title="Permalink to this heading"></a></h3>
+<p>To compile the examples and the C++ API, you need:</p>
+<ul class="simple">
+<li><p>CMake (&gt;= 3.21)</p></li>
+<li><p>make</p></li>
+<li><p>g++ (&gt;= 8.4.0)</p></li>
+<li><p>Qt (5.15.x)</p></li>
+</ul>
+</section>
+</section>
+<section id="typical-macos-issues">
+<h2>Typical macOS issues<a class="headerlink" href="#typical-macos-issues" title="Permalink to this heading"></a></h2>
+<section id="id1">
+<h3>Installation<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>Vimba X comes as a .dmg file.
+Do <strong>not</strong> drag &amp; drop it into the Applications folder.</p>
+<p>To install Vimba X:</p>
+<ol class="arabic simple">
+<li><p>Double-click the .dmg file to mount it.</p></li>
+<li><p>Open Vimba X installer.pkg and follow the instructions. If you get an error message,
+go to Settings → Privacy &amp; Security, select “App Store and identified developers” and
+click “Open Anyway” for “Vimba X Installer.pkg”.</p></li>
+<li><p>Please log out and then log in again. Please make sure to quit the
+Terminal app if it is still open, so that it can find the new environment
+variable when you open it again. Opening a new Terminal window without
+quitting the application is not sufficient.</p></li>
+</ol>
+</section>
+<section id="tl-not-found">
+<h3>TL not found<a class="headerlink" href="#tl-not-found" title="Permalink to this heading"></a></h3>
+<p>Before rebooting, please close all Vimba X related applications and Terminal windows.</p>
+</section>
+<section id="safari">
+<h3>Safari<a class="headerlink" href="#safari" title="Permalink to this heading"></a></h3>
+<p>Safari has built-in security policies that prevent using the “back” button from external URLs.
+As a workaround, click “back” twice or open links in a separate tab.
+Or use another browser (for example, Chrome or Firefox).</p>
+</section>
+</section>
+<section id="technical-support">
+<h2>Technical support<a class="headerlink" href="#technical-support" title="Permalink to this heading"></a></h2>
+<p>Allied Vision provides technical support if you use Allied Vision cameras.
+We don’t offer technical support if a non-Allied Vision camera or a non-Allied Vision TL is used.</p>
+<p>To get technical support for your Allied Vision camera, please go to:</p>
+<p><a class="reference external" href="https://www.alliedvision.com/en/about-us/contact-us/technical-support-repair-/-rma/">https://www.alliedvision.com/en/about-us/contact-us/technical-support-repair-/-rma/</a></p>
+<p>To get technical support for cameras from other manufacturers, please address the camera manufacturer.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="imagetransformManual.html" class="btn btn-neutral float-left" title="Image Transform Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ecosystem.html" class="btn btn-neutral float-right" title="Vimba X Ecosystem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

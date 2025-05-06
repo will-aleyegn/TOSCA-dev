@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viewer Guide &mdash; Vimba X Developer Guide 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SDK Manual" href="sdkManual.html" />
+    <link rel="prev" title="Firmware Updater Manual" href="fwUpdater.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Vimba X Developer Guide
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Vimba X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">System Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrationGuide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examplesOverview.html">Examples Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manuals:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="driverInstaller.html">Driver Installer Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fwUpdater.html">Firmware Updater Manual</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Viewer Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quick-start">Quick start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#camera-not-detected">Camera not detected</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#usb-camera">USB camera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gige-camera">GigE camera</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#viewer-tabs-concept">Viewer tabs concept</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#finding-features-in-the-all-tab">Finding features in the All tab</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#starting-and-stopping-image-acquisition">Starting and stopping image acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-and-saving-settings">Loading and saving settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-saved-settings-files-with-vimba-x-api">Using saved settings files with Vimba X API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#saving-images">Saving images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#saving-one-image">Saving one image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#saving-an-image-series">Saving an image series</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#saving-16-bit-images">Saving 16-bit images</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bandwidth-manager">Bandwidth Manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#purpose-and-scope">Purpose and scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#first-steps">First steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-bandwidth-optimization">Automatic bandwidth optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-your-camera">Setting up your camera</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#brightness-tab">Brightness tab</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#exposure-and-gain">Exposure and Gain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-auto-exposure-and-auto-gain">Using auto exposure and auto gain</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#image-format-tab">Image Format tab</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pixel-format">Pixel format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#binning">Binning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reversex-y">ReverseX/Y</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#select-an-image">Select an image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#roi">ROI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autofunction-roi">Autofunction ROI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multi-roi">Multi ROI</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#trigger-io-tab">Trigger IO tab</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#trigger-io-overview">Trigger IO overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#presets">Presets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trigger-over-ethernet-action-commands">Trigger over Ethernet - Action Commands</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#color-tab">Color tab</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#auto-white-balance">Auto white balance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hue-and-saturation">Hue and Saturation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#color-transformation-matrix">Color transformation matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#color-correction">Color correction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#image-processing-tab">Image Processing tab</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#default-functionalities">Default functionalities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-convolution">Custom Convolution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sequencer-tab">Sequencer tab</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sequencer-overview">Sequencer overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sequence-configurator">Sequence Configurator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-json-files-for-sequences">Using JSON files for sequences</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sdkManual.html">SDK Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cAPIManual.html">C API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cppAPIManual.html">CPP API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotNetAPIManual.html">.NET API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPIManual.html">Python API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagetransformManual.html">Image Transform Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help &amp; information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem.html">Vimba X Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legalInformation.html">Legal Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vimba X Developer Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Viewer Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="viewer-guide">
+<h1>Viewer Guide<a class="headerlink" href="#viewer-guide" title="Permalink to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>This document guides you through the basic camera setup with Vimba X Viewer.
+You will learn how to select, control, and save settings such as image size, exposure time, and color display.</p>
+<p>For Allied Vision GigE and USB cameras, the <a class="reference internal" href="#bandwidth-manager"><span class="std std-ref">Bandwidth Manager</span></a> tool is available.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For information on camera and driver installation and a detailed feature description,
+download the corresponding
+<a class="reference external" href="https://www.alliedvision.com/en/support/technical-documentation.html">documents for your camera.</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Depending on the camera model, different features are available.
+The screenshots and examples in this document are generic.</p>
+</div>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h3>
+<p>This manual assumes you have already installed and configured the host adapter card or
+frame grabber according to the
+<a class="reference external" href="https://www.alliedvision.com/en/support/technical-documentation/">instructions for your camera.</a></p>
+</section>
+<section id="quick-start">
+<h3>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h3>
+<p>You can access Vimba X Viewer from the Windows Start menu or in the Vimba X install directory /bin.</p>
+<p>To use the Viewer:</p>
+<ol class="arabic simple">
+<li><p>Connect the camera to the host.</p></li>
+<li><p>Start Vimba X Viewer.</p></li>
+<li><p>Make sure to select the AVT transport layers on top of the list.</p></li>
+<li><p>Click the camera you want to open.</p></li>
+</ol>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="_images/TL-list.png"><img alt="Select the AVT TLs and open a camera" src="_images/TL-list.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">Select the AVT TLs and open a camera</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The main window opens.</p>
+<ol class="arabic simple" start="4">
+<li><p>To start image acquisition, click <span class="guilabel">Freerun</span>.</p></li>
+</ol>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="_images/Freerun.png"><img alt="Freerun" src="_images/Freerun.png" style="width: 350px;" /></a>
+<figcaption>
+<p><span class="caption-text">Start continuous image acquisition (freerun)</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="camera-not-detected">
+<h3>Camera not detected<a class="headerlink" href="#camera-not-detected" title="Permalink to this heading"></a></h3>
+<section id="usb-camera">
+<h4>USB camera<a class="headerlink" href="#usb-camera" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p>Unplug the camera and plug in the camera again.</p></li>
+<li><p>Windows only: Check with the Vimba X Driver Installer if the driver is installed.</p></li>
+</ul>
+</section>
+<section id="gige-camera">
+<h4>GigE camera<a class="headerlink" href="#gige-camera" title="Permalink to this heading"></a></h4>
+<p>If the camera is connected to a switch, make sure that the switch is in the same subnet as the camera.</p>
+<p>If the problem persists, Vimba X Viewer offers several possibilities:</p>
+<p><strong>Open camera by…</strong></p>
+<p>Click <span class="guilabel">Open camera…</span>, which opens the camera if you type in the
+IP address, Camera ID, or MAC address. Each Alvium camera has its MAC address printed on the housing.
+It looks like this: 000A47000CA2. In this dialog, please use this format without colons.</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="_images/OpenCamera-dialog.png"><img alt="Open camera by..." src="_images/OpenCamera-dialog.png" style="width: 350px;" /></a>
+<figcaption>
+<p><span class="caption-text">Open camera by…</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>Configure IP</strong>:</p>
+<p>Click <span class="guilabel">ConfigureIP</span>. The screenshot shows a configuration example.
+In this dialog, please use the MAC address format with colons, as shown in the screenshot.</p>
+<figure class="align-default" id="id6">
+<a class="reference internal image-reference" href="_images/ForceIp-example.png"><img alt="Force IP configuration example" src="_images/ForceIp-example.png" style="width: 350px;" /></a>
+<figcaption>
+<p><span class="caption-text">Force IP configuration example</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Configure IP dialog doesn’t update the camera list.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For smooth operation and best performance of your GigE camera, follow the
+<a class="reference external" href="https://www.alliedvision.com/en/support/technical-documentation/">instructions for your camera.</a></p>
+</div>
+<p>CSI camera:</p>
+<ul class="simple">
+<li><p>Before using Vimba X, install the driver. It is provided at <a class="reference external" href="https://github.com/alliedvision">https://github.com/alliedvision</a>.</p></li>
+<li><p>CSI-2 is not a plug and play interface. To update the camera list, reboot the board.</p></li>
+</ul>
+</section>
+</section>
+<section id="viewer-tabs-concept">
+<h3>Viewer tabs concept<a class="headerlink" href="#viewer-tabs-concept" title="Permalink to this heading"></a></h3>
+<p>To select and configure settings, Vimba X Viewer provides tabs with basic grouped
+camera features and the <span class="guilabel">All</span> tab, which contains a list of both the basic
+features and advanced features.</p>
+<figure class="align-default" id="id7">
+<a class="reference internal image-reference" href="_images/Tabs.png"><img alt="Viewer tabs" src="_images/Tabs.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Viewer tabs</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>To quickly set up your camera, we recommend going through the tabs from left to
+right. The basic features can be adjusted either on the
+<span class="guilabel">All</span> tab or on the other tabs, whereas advanced features are available on the <span class="guilabel">All</span> tab only.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <span class="guilabel">Color</span> tab is available for color cameras only.</p>
+</div>
+<section id="finding-features-in-the-all-tab">
+<h4>Finding features in the All tab<a class="headerlink" href="#finding-features-in-the-all-tab" title="Permalink to this heading"></a></h4>
+<p>To quickly find features from the other tabs in the <span class="guilabel">All</span> tab, enter their first letters in the Search field.</p>
+<p>The <span class="guilabel">All</span> tab provides tooltips and an optional feature description window.
+The description also lists which other features are affected by the selected feature.</p>
+<figure class="align-default" id="id8">
+<a class="reference internal image-reference" href="_images/Tooltip.png"><img alt="Tooltips" src="_images/Tooltip.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Tooltips</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="starting-and-stopping-image-acquisition">
+<h3>Starting and stopping image acquisition<a class="headerlink" href="#starting-and-stopping-image-acquisition" title="Permalink to this heading"></a></h3>
+<p>To start and stop image acquisition, click <span class="guilabel">Freerun</span>.</p>
+<figure class="align-default" id="id9">
+<a class="reference internal image-reference" href="_images/Freerun.png"><img alt="Freerun" src="_images/Freerun.png" style="width: 350px;" /></a>
+<figcaption>
+<p><span class="caption-text">Freerun</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="loading-and-saving-settings">
+<h3>Loading and saving settings<a class="headerlink" href="#loading-and-saving-settings" title="Permalink to this heading"></a></h3>
+<p>Additionally to the user sets stored inside the camera, you can save the feature
+values as an XML file to your host PC. You can load this camera settings XML file
+to a camera or use the XML file with the Vimba X APIs. To load or save a settings file,
+click <span class="guilabel">Load</span> and <span class="guilabel">Save</span>.</p>
+<figure class="align-default" id="id10">
+<a class="reference internal image-reference" href="_images/LoadSave.png"><img alt="Load and save settings" src="_images/LoadSave.png" style="width: 160px;" /></a>
+<figcaption>
+<p><span class="caption-text">Load and save settings</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="using-saved-settings-files-with-vimba-x-api">
+<h4>Using saved settings files with Vimba X API<a class="headerlink" href="#using-saved-settings-files-with-vimba-x-api" title="Permalink to this heading"></a></h4>
+<p>To use a saved settings file with Vimba X API:</p>
+<ol class="arabic simple">
+<li><p>Set up your camera with Vimba X Viewer.</p></li>
+<li><p>Save the settings.</p></li>
+<li><p>Load the settings with the API (see the example and the API manuals).</p></li>
+</ol>
+</section>
+</section>
+<section id="saving-images">
+<h3>Saving images<a class="headerlink" href="#saving-images" title="Permalink to this heading"></a></h3>
+<section id="saving-one-image">
+<h4>Saving one image<a class="headerlink" href="#saving-one-image" title="Permalink to this heading"></a></h4>
+<p>In the File menu, click <em>Save Image As…</em></p>
+<figure class="align-default" id="id11">
+<a class="reference internal image-reference" href="_images/File.png"><img alt="File menu" src="_images/File.png" style="width: 190px;" /></a>
+<figcaption>
+<p><span class="caption-text">File menu</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The <em>Save Image</em> window opens and you can save one image.</p>
+<p>You can save the current image while the camera is running
+or you can save the current image displayed in Vimba X Viewer
+while the camera is stopped.</p>
+</section>
+<section id="saving-an-image-series">
+<h4>Saving an image series<a class="headerlink" href="#saving-an-image-series" title="Permalink to this heading"></a></h4>
+<ol class="arabic simple">
+<li><p>If the camera is running, stop image acquisition.</p></li>
+<li><p>In the File menu shown above, click <em>Image Series Options…</em>.</p></li>
+<li><p>The <em>Saving Options</em> window opens. In the dialog, make sure the Number Of Images is &gt; 0,
+select the other options, and click OK.</p></li>
+<li><p>Now <em>Save Image Series</em> is active. Clicking it triggers acquiring and saving the
+defined number of images. You can also use the icon:</p></li>
+</ol>
+<figure class="align-default" id="id12">
+<a class="reference internal image-reference" href="_images/Image-series-button.png"><img alt="Save image series" src="_images/Image-series-button.png" style="width: 150px;" /></a>
+<figcaption>
+<p><span class="caption-text">Save image series</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>If the icon is grayed out, make sure that image acquisition is stopped and
+the selected number of images is &gt; 0.</p>
+</section>
+<section id="saving-16-bit-images">
+<h4>Saving 16-bit images<a class="headerlink" href="#saving-16-bit-images" title="Permalink to this heading"></a></h4>
+<p>By default, Vimba X Viewer saves 8-bit images, regardless of the selected pixel format
+or file format. Optionally, all images with mono or Bayer pixel formats
+&gt; 8-bit per channel (e.g., Mono10, BayerRG12Packed, Mono14) can be saved
+as 16-bit TIFF. To enable this option, select <em>Allow 16-Bit TIFF Saving</em>.</p>
+<figure class="align-default" id="id13">
+<a class="reference internal image-reference" href="_images/File.png"><img alt="16-Bit Tiff" src="_images/File.png" style="width: 190px;" /></a>
+<figcaption>
+<p><span class="caption-text">Save 16-Bit Tiff</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The option for saving 16-bit image files is not optimized for performance.
+Therefore, it is deselected by default when a camera is opened.
+We recommend selecting it on demand.</p>
+</div>
+<p>16-bit image files are saved if these conditions are true:</p>
+<ul class="simple">
+<li><p><em>Allow 16-Bit TIFF Saving</em> is checked.</p></li>
+<li><p><em>TIFF</em> or <em>TIF</em> is the selected file format for image (series) saving.</p></li>
+<li><p>The camera’s current pixel format is a mono or Bayer format &gt; 8 bits per channel.</p></li>
+</ul>
+</section>
+</section>
+<section id="options">
+<h3>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h3>
+<p>Go to <strong>View</strong> → <strong>Options</strong> to:</p>
+<ul class="simple">
+<li><p>Display every completed frame (increases CPU load, not recommended for most use cases)</p></li>
+<li><p>Change the number of used frame buffers</p></li>
+<li><p>Enable or disable Alloc and Announce, which may optimize buffer allocation (depending on your use case).</p></li>
+</ul>
+</section>
+</section>
+<section id="bandwidth-manager">
+<h2>Bandwidth Manager<a class="headerlink" href="#bandwidth-manager" title="Permalink to this heading"></a></h2>
+<section id="purpose-and-scope">
+<h3>Purpose and scope<a class="headerlink" href="#purpose-and-scope" title="Permalink to this heading"></a></h3>
+<p>The Bandwidth Manager is available for Allied Vision GigE and USB cameras and their transport layers
+provided with Vimba X.</p>
+<p>It is intended mainly for multi-camera applications, but you can also use it for a single camera.
+You can use the Bandwidth Manager as a starting point for best possible bandwidth allocation.
+The exact values for your use case depend on the camera settings, whether or not an image is displayed,
+and of course your hardware.</p>
+</section>
+<section id="first-steps">
+<h3>First steps<a class="headerlink" href="#first-steps" title="Permalink to this heading"></a></h3>
+<p>The Bandwidth Manager is accessible from the Viewer main window:</p>
+<figure class="align-default" id="id14">
+<a class="reference internal image-reference" href="_images/open-bw-manager.png"><img alt="Open Bandwidth Manager" src="_images/open-bw-manager.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Open Bandwidth Manager</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id15">
+<a class="reference internal image-reference" href="_images/bw-manager.png"><img alt="Bandwidth Manager" src="_images/bw-manager.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Bandwidth Manager</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use the tooltips to get quick information about the functionality.</p>
+</div>
+<p>First, select the interface whose bandwidth you want to manage:</p>
+<figure class="align-default" id="id16">
+<a class="reference internal image-reference" href="_images/bw-manager-select-interface.png"><img alt="Select interface" src="_images/bw-manager-select-interface.png" style="width: 200px;" /></a>
+<figcaption>
+<p><span class="caption-text">Select the interface</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You cannot select multiple interfaces, each interface requires a separate bandwidth management.</p>
+</div>
+<p>Start image acquisition to obtain statistics. Optionally, enter enter a value for the duration of the image acquisition.
+If you entered a value, a countdown is shown.</p>
+<figure class="align-default" id="id17">
+<a class="reference internal image-reference" href="_images/bw-manager-start.png"><img alt="Start acquiring images and statistics" src="_images/bw-manager-start.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">Start acquiring images and statistics</span><a class="headerlink" href="#id17" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>With the slider or by entering a value, you can change the bandwidth of each selected and unlocked
+camera manually and observe in the statistics if frames got lost or are incomplete.</p>
+<ul class="simple">
+<li><p>Alvium and Goldeye cameras: DeviceLinkThroughputLimit determines the camera bandwidth.</p></li>
+<li><p>Other Allied Vision cameras: StreamBytesPerSecond determines the camera bandwidth.</p></li>
+</ul>
+<p>Note that for a consistent appearance each slider has the same length, but each camera may have different
+min and max values. The lowest possible value of a slider represents the lowest possible value of its camera and not zero:</p>
+<figure class="align-default" id="id18">
+<a class="reference internal image-reference" href="_images/bw-manager-slider.png"><img alt="Slider - min and max camera value%" src="_images/bw-manager-slider.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">Slider - min and max camera value</span><a class="headerlink" href="#id18" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Please also note that the displayed values are rounded.</p>
+<p>To exclude a camera from the statistics collection, uncheck it.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Changing the throughput limit may affect sensor timings like line time, jitter, and exposure start delay.
+Please consider this if your use case has special timing requirements.</p>
+</div>
+<p>Note that the displayed maximal value of the interface represents the value reported by the system,
+not the available bandwidth for camera images.</p>
+<p>The value of the interface bandwidth cannot exceed 100%. Therefore, 100% can be displayed either yellow or red.
+The color representing the interface bandwidth also depends on the safety margins in the Auto Set settings
+(see next section below). Green or yellow color indicates that the interface bandwidth is within the safety margins.</p>
+<figure class="align-default" id="id19">
+<a class="reference internal image-reference" href="_images/bw-manager-100.png"><img alt="Interface bandwidth - max 100%" src="_images/bw-manager-100.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">Interface bandwidth - max 100%</span><a class="headerlink" href="#id19" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="automatic-bandwidth-optimization">
+<h3>Automatic bandwidth optimization<a class="headerlink" href="#automatic-bandwidth-optimization" title="Permalink to this heading"></a></h3>
+<p>Click <span class="guilabel">Auto Set</span> to let Bandwidth Manager optimize the bandwidth for the selected interface or
+for cameras on the selected interface.
+The resulting values are calculated from bandwidth relevant features (for example, frame rate and pixel format).</p>
+<figure class="align-default" id="id20">
+<a class="reference internal image-reference" href="_images/bw-manager-autoset.png"><img alt="Interface bandwidth - max 100%" src="_images/bw-manager-autoset.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">Auto set for interface or camera</span><a class="headerlink" href="#id20" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The <span class="guilabel">Auto Set</span> algorithm allocates available bandwidth evenly between all cameras on the selected
+interface regardless of their maximum possible values. You can manually apply a different value with
+the slider or by entering the desired value and exclude these cameras
+from Auto Set by locking them.</p>
+<p>If you want to prioritize a camera, adjust its bandwidth manually and then click the <span class="guilabel">Lock</span> icon.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To prevent lost frames, the calculated bandwidth includes a safety margin.</p>
+</div>
+<p>Click <span class="guilabel">Settings…</span> to ajdust Auto Set. Note that the Settings only apply to the Auto Set procedure.
+Without clicking <span class="guilabel">Auto Set</span>,
+the Settings dialog has no effect.</p>
+<p>Interface margin: The margin is substracted from the available interface bandwidth.</p>
+<p>Camera margin: The required bandwidth is calculated and after that the camera safety
+margin is added to make sure that enough bandwidth is assigned.</p>
+<figure class="align-default" id="id21">
+<a class="reference internal image-reference" href="_images/bw-manager-autosetSettings.png"><img alt="Auto Set Settings" src="_images/bw-manager-autosetSettings.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">Settings to customize Auto Set</span><a class="headerlink" href="#id21" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>To access the Feature Tree, select the camera whose features you want to access.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/bw-manager-featuretree.png"><img alt="Feature tree" src="_images/bw-manager-featuretree.png" style="width: 500px;" /></a>
+</figure>
+<p>To access all features, uncheck <em>Show only bandwidth related features</em>.</p>
+<figure class="align-default" id="id22">
+<a class="reference internal image-reference" href="_images/bw-manager-feature-tree.png"><img alt="Features" src="_images/bw-manager-feature-tree.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Features</span><a class="headerlink" href="#id22" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="troubleshooting">
+<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h3>
+<p>Troubleshooting:</p>
+<ul class="simple">
+<li><p>For best possible performance, the camera list is not updated automatically. To update the camera list,
+click <span class="guilabel">Refresh camera tree</span>. We recommend connecting all cameras before using Bandwidth Manager.
+If a camera is grayed out after refreshing, please wait a few seconds and then refresh again.</p></li>
+<li><p>For the recommended hardware setup, read the User Guide for your camera.</p></li>
+<li><p>Click <span class="guilabel">Show Logging</span> to expand the logging window.</p></li>
+<li><p>Note that the Bandwidth Manager can provide a good starting point, but the best
+possible settings always depend on your use case.</p></li>
+</ul>
+</section>
+</section>
+<section id="setting-up-your-camera">
+<h2>Setting up your camera<a class="headerlink" href="#setting-up-your-camera" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Available features and appearance GUI elements vary depending on camera interface and camera model.</p>
+</div>
+<section id="brightness-tab">
+<h3>Brightness tab<a class="headerlink" href="#brightness-tab" title="Permalink to this heading"></a></h3>
+<p>The <span class="guilabel">Brightness</span> tab contains features for controlling exposure, gain, black level, and gamma.</p>
+<figure class="align-default" id="id23">
+<a class="reference internal image-reference" href="_images/Brightness.png"><img alt="Brightness tab" src="_images/Brightness.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Brightness tab</span><a class="headerlink" href="#id23" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="exposure-and-gain">
+<h4>Exposure and Gain<a class="headerlink" href="#exposure-and-gain" title="Permalink to this heading"></a></h4>
+<p>To change the exposure time, either move the Exposure slider or enter a value and
+press the ENTER key. To enter exposure times in s, ms, and μs, click <strong>More</strong>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If your camera does not reach the maximum frame rate, check if the exposure time is
+short enough. Example: If the exposure time is 100 ms, the camera cannot acquire more
+than approximately 10 fps.</p>
+</div>
+<p>To change the gain value, either move the Gain slider or enter a value and press the
+ENTER key. Your entry is automatically rounded up or down to the next possible value.</p>
+</section>
+<section id="using-auto-exposure-and-auto-gain">
+<h4>Using auto exposure and auto gain<a class="headerlink" href="#using-auto-exposure-and-auto-gain" title="Permalink to this heading"></a></h4>
+<p>The purpose of auto functions is to automatically compensate for changes of the
+lighting intensity. They use information from the camera’s current image and apply
+the optimized settings to the next image. Therefore, they can control values only
+if the camera is running. Large changes in scene lighting may require several frames
+for the algorithm to stabilize. The auto functions can be applied either once or continuously.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In most cases, you reach the best possible image quality by setting gain to the lowest
+possible value and increasing the exposure time as needed. The reason is that gain
+amplifies all image contents including noise.</p>
+</div>
+<p>If both auto features are used simultaneously, Exposure Auto has priority until
+ExposureAutoMax is reached. Then Gain Auto takes over priority.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For a feature description, see the <em>features reference</em> document for your camera.</p>
+</div>
+</section>
+</section>
+<section id="image-format-tab">
+<h3>Image Format tab<a class="headerlink" href="#image-format-tab" title="Permalink to this heading"></a></h3>
+<p>On the Image Format tab, you can access:</p>
+<ul class="simple">
+<li><p>Pixel format, binning, ReverseX/Y</p></li>
+<li><p>ROI (Region Of Interest)</p></li>
+<li><p>Autoregion ROI</p></li>
+<li><p>Multi-ROI</p></li>
+</ul>
+<figure class="align-default" id="id24">
+<a class="reference internal image-reference" href="_images/ImageFormat.png"><img alt="Image Format tab" src="_images/ImageFormat.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Image Format tab</span><a class="headerlink" href="#id24" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For a feature description, see the <em>Features Reference</em> document for your camera.</p>
+</div>
+<section id="pixel-format">
+<h4>Pixel format<a class="headerlink" href="#pixel-format" title="Permalink to this heading"></a></h4>
+<p>Select a pixel format of your choice.
+Note that Bayer pixel formats cannot be combined with white balance, color interpolation, and convolution mode.
+You can find information on pixel formats in the PFNC (Pixel Format Naming Convention):
+<a class="reference external" href="https://www.emva.org/wp-content/uploads/GenICam_PFNC_2_4.pdf">https://www.emva.org/wp-content/uploads/GenICam_PFNC_2_4.pdf</a>.</p>
+</section>
+<section id="binning">
+<h4>Binning<a class="headerlink" href="#binning" title="Permalink to this heading"></a></h4>
+<p>Binning combines neighboring pixels into one pixel. This decreases resolution and
+increases light sensitivity. Depending on the camera model, binning may increase the
+frame rate.
+You can activate binning by selecting a value
+greater than 1 (binning = 1 does not affect the image).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Alvium cameas: Binning cannot be used together with Multiple Regions.</p>
+</div>
+</section>
+<section id="reversex-y">
+<h4>ReverseX/Y<a class="headerlink" href="#reversex-y" title="Permalink to this heading"></a></h4>
+<p>ReverseX/Y flips the image horizontally/vertically.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Alvium cameas: ReverseX/Y cannot be used together with Multiple Regions.</p>
+</div>
+</section>
+<section id="select-an-image">
+<h4>Select an image<a class="headerlink" href="#select-an-image" title="Permalink to this heading"></a></h4>
+<p>Optionally, you can select an image shown in the drag areas of the ROI tabs:</p>
+<figure class="align-default" id="id25">
+<a class="reference internal image-reference" href="_images/select-image.png"><img alt="Select an image" src="_images/select-image.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Select an image</span><a class="headerlink" href="#id25" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>If you use binning or change the ROI, do this before selecting an image.</p>
+</section>
+<section id="roi">
+<h4>ROI<a class="headerlink" href="#roi" title="Permalink to this heading"></a></h4>
+<p>Selecting a ROI (Region Of Interest) enables working with a reduced image
+resolution to save bandwidth, achieve a higher frame rate (depending on the sensor),
+or crop the image according to your needs.</p>
+<p>To select a ROI, either click in the blue ROI area and scale or move it with
+the mouse or enter values into the ROI fields.
+The buttons <span class="guilabel">Full</span>, <span class="guilabel">1/4</span>, and <span class="guilabel">1/16</span> evoke a centered ROI of the full or partial image.</p>
+<figure class="align-default" id="id26">
+<a class="reference internal image-reference" href="_images/ROI.png"><img alt="ROI" src="_images/ROI.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">ROI</span><a class="headerlink" href="#id26" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="autofunction-roi">
+<h4>Autofunction ROI<a class="headerlink" href="#autofunction-roi" title="Permalink to this heading"></a></h4>
+<p>Autofunction ROI means that the auto functions react to lighting changes
+only within the selected image section.</p>
+<figure class="align-default" id="id27">
+<a class="reference internal image-reference" href="_images/Auto-ROI.png"><img alt="Autofunction ROI" src="_images/Auto-ROI.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Autofunction ROI</span><a class="headerlink" href="#id27" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Autofunction ROI is active as
+soon as auto exposure or auto gain are switched on. Therefore, click <span class="guilabel">Full</span> if you want to apply
+auto gain and auto exposure to the whole image.</p>
+<p>To change Autofunction ROI, either click in the green ROI area and drag it
+or enter values.</p>
+<p>The buttons <span class="guilabel">Full</span>, <span class="guilabel">1/4</span>, and <span class="guilabel">1/16</span> evoke a centered ROI of the full or partial image.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Exposure Auto controls the minimum and maximum exposure time values in μs. If you want
+to reach the minimum frame rate, limit the exposure time accordingly.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Alvium cameras: If Multiple Regions are used, Autofunction ROI uses Region0 only.
+Camera firmware issue: In Free mode, Autofunction ROI only works if Region0 is
+located above the other regions.</p>
+</div>
+</section>
+<section id="multi-roi">
+<h4>Multi ROI<a class="headerlink" href="#multi-roi" title="Permalink to this heading"></a></h4>
+<p>Multi ROI provides access to <em>Multiple Region Control</em> camera features. Multiple region
+features can be used to assign different image settings to sections
+of an image, or to exclude irrelevant contents from the image output. In some
+cases, frame rates can be increased as well.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For a description of the Multiple Region Control camera features, see:
+<a class="reference external" href="https://cdn.alliedvision.com/fileadmin/content/documents/products/cameras/various/features/Alvium_Features_Reference.pdf">Alvium Features Reference</a>,
+<a class="reference external" href="https://cdn.alliedvision.com/fileadmin/content/documents/products/cameras/Goldeye_2/appnote/Goldeye-Multi-ROI_AppNote.pdf">Multiple Regions of Interest for Goldeye</a></p>
+</div>
+<p>To work with multiple regions:</p>
+<div class="line-block">
+<div class="line"><strong>1</strong> To scroll less, collapse <span class="guilabel">Image Format</span>.</div>
+<div class="line"><strong>2</strong> Optionally, select an image to easily configure ROI-related features.</div>
+<div class="line"><strong>3</strong> Check <span class="guilabel">MultipleRegionEnable</span> to see multiple regions during image acquisition.</div>
+<div class="line"><strong>4</strong> <span class="guilabel">Load Defaults</span> is a convenience function within the Viewer GUI to enable quick configuration with the mouse.</div>
+<div class="line"><strong>5</strong> The numbers represent the regions and their current values for X/Y Offset, Height, and Width.</div>
+<div class="line"><strong>6</strong> In the drag area, you can move and resize the regions with the mouse. Click a region or move a contraint line.</div>
+<div class="line"><strong>7</strong> You can access all MultipleRegions features in the table.</div>
+</div>
+<figure class="align-default" id="id28">
+<a class="reference internal image-reference" href="_images/multi-roi-default.png"><img alt="Multi ROI Tile Default" src="_images/multi-roi-default.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Multi ROI Horizontal Default</span><a class="headerlink" href="#id28" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>Multi ROI Troubleshooting</strong>:</p>
+<ul class="simple">
+<li><p>Note that Alvium cameras automatically deactivate Regions with invalid values.</p></li>
+<li><p>Some cameras have quite large minimum values for the Width (such as 264).</p></li>
+<li><p>For an easy start with valid values, use <span class="guilabel">Load Defaults</span>, which is a convenience function of the Multi ROI tab.</p></li>
+<li><p>To activate a Region with valid values, click the red outlined circle in the table header.</p></li>
+</ul>
+<figure class="align-default" id="id29">
+<a class="reference internal image-reference" href="_images/multi-roi-invalid.png"><img alt="Invalid values and deactivated Regions are red" src="_images/multi-roi-invalid.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Invalid values and deactivated Regions are red</span><a class="headerlink" href="#id29" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Goldeye: The Multi ROI tab does not support the combination of binning/decimation with Multiple Regions.</p>
+</div>
+</section>
+</section>
+<section id="trigger-io-tab">
+<h3>Trigger IO tab<a class="headerlink" href="#trigger-io-tab" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unsuitable connections may damage the camera or cause electrical shock.
+Before connecting external devices, read the
+<a class="reference external" href="https://www.alliedvision.com/en/support/technical-documentation/">instructions for your camera.</a></p>
+</div>
+<section id="trigger-io-overview">
+<h4>Trigger IO overview<a class="headerlink" href="#trigger-io-overview" title="Permalink to this heading"></a></h4>
+<p>Optionally, image acquisition can be started and stopped by a trigger signal from an
+external device or as a software command.
+Moreover, control signals can be transferred to external devices or additional cameras.</p>
+<p>To trigger your cameras, you can use the presets as a start and modify them according
+to your use case. To configure trigger features such as Counters and Timers,
+open the Advanced Trigger dialog.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you change trigger features in the All tab, the Trigger IO tab preset doesn’t change to <em>Custom</em>.</p>
+</div>
+<figure class="align-default" id="id30">
+<a class="reference internal image-reference" href="_images/Trigger.png"><img alt="Trigger IO tab" src="_images/Trigger.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Trigger IO tab, click Open Dialog for advanced settings</span><a class="headerlink" href="#id30" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>In the I/O configuration table, a green status indicates <em>true</em> and a gray status indicates <em>false</em>.</p>
+<p>The <strong>Advanced Trigger</strong> dialog provides access to all trigger-related features:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>I/O configuration: Set debouncing (<em>Configure inputs and outputs</em> table)</dt><dd><ul>
+<li><p><em>Debounce Mode</em> Delay: LineDebounceDuration controls how long the signal level
+must be sustained for before it is accepted.</p></li>
+<li><p><em>Debounce Mode</em> Stall: LineDebounceDuration controls the intensity duration
+after the falling edge of the signal.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Action Commands (including PTP)</p></li>
+<li><p>Software signal</p></li>
+<li><p>Counter and Timer</p></li>
+</ul>
+</div></blockquote>
+<figure class="align-default" id="id31">
+<a class="reference internal image-reference" href="_images/Trigger_advanced.png"><img alt="Advanced Trigger IO dialog" src="_images/Trigger_advanced.png" style="width: 1200px;" /></a>
+<figcaption>
+<p><span class="caption-text">Advanced Trigger IO dialog</span><a class="headerlink" href="#id31" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="presets">
+<h4>Presets<a class="headerlink" href="#presets" title="Permalink to this heading"></a></h4>
+<section id="turn-off-all">
+<h5>Turn Off All<a class="headerlink" href="#turn-off-all" title="Permalink to this heading"></a></h5>
+<p>Turns off all triggers and trigger sources, so that you can start image acquisition without using a trigger source.
+Other trigger settings like delay values keep their current settings.</p>
+</section>
+<section id="reset-all">
+<h5>Reset All<a class="headerlink" href="#reset-all" title="Permalink to this heading"></a></h5>
+<p>Resets all trigger features to default values. Other features such as white balance
+are not changed by this preset.</p>
+</section>
+<section id="custom">
+<h5>Custom<a class="headerlink" href="#custom" title="Permalink to this heading"></a></h5>
+<p>This preset becomes active when you apply changes to trigger features in the trigger IO tab.</p>
+</section>
+<section id="frame-trigger-software">
+<h5>Frame Trigger Software<a class="headerlink" href="#frame-trigger-software" title="Permalink to this heading"></a></h5>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The camera does not react immediately on a software trigger because a
+computer needs some time (latency) to process it. Since the CPU load varies
+all the time, the latency varies as well. If your application requires
+triggering with high precision, use a hardware device or, if your camera supports it, Trigger over Ethernet.</p>
+</div>
+<p>Trigger the camera by software:</p>
+<ul class="simple">
+<li><p>Software trigger</p></li>
+<li><p>FrameStart</p></li>
+<li><p>RisingEdge</p></li>
+<li><p>Continuous acquisition</p></li>
+<li><p>Exposure mode: timed</p></li>
+</ul>
+<p>To execute a software trigger, click <span class="guilabel">Execute SW Trigger</span>.</p>
+</section>
+<section id="frame-trigger-io-line0-edge">
+<h5>Frame Trigger IO Line0 Edge<a class="headerlink" href="#frame-trigger-io-line0-edge" title="Permalink to this heading"></a></h5>
+<p>Trigger the camera on rising edge:</p>
+<ul class="simple">
+<li><p>FrameStart</p></li>
+<li><p>RisingEdge</p></li>
+<li><p>Line0</p></li>
+<li><p>Continuous acquisition</p></li>
+<li><p>Exposure mode: timed</p></li>
+<li><p>Line0 (input)</p></li>
+</ul>
+</section>
+<section id="frame-trigger-io-line0-level">
+<h5>Frame Trigger IO Line0 Level<a class="headerlink" href="#frame-trigger-io-line0-level" title="Permalink to this heading"></a></h5>
+<p>Control the exposure time through an external device:</p>
+<ul class="simple">
+<li><p>FrameStart</p></li>
+<li><p>LevelHigh</p></li>
+<li><p>Line0</p></li>
+<li><p>Continuous acquisition</p></li>
+<li><p>Exposure mode: trigger width</p></li>
+<li><p>Line0 (input)</p></li>
+</ul>
+<p>The camera exposes as long as the signal level from the trigger device is high.</p>
+</section>
+<section id="frame-trigger-io-line0-bulk">
+<h5>Frame Trigger IO Line0 Bulk<a class="headerlink" href="#frame-trigger-io-line0-bulk" title="Permalink to this heading"></a></h5>
+<p>Acquire an image series of <em>n</em> frames with a single trigger signal:</p>
+<ul class="simple">
+<li><p>FrameStart</p></li>
+<li><p>RisingEdge</p></li>
+<li><p>Line0 (input)</p></li>
+<li><p>MultiFrame, AcquisitionFrameCount: 10</p></li>
+<li><p>Exposure mode: timed</p></li>
+</ul>
+</section>
+<section id="pwm-io-line1-timer0-1khz-50">
+<h5>PWM IO Line1 timer0 1khz 50%<a class="headerlink" href="#pwm-io-line1-timer0-1khz-50" title="Permalink to this heading"></a></h5>
+<p>Pulse Width Modulation with 1 kHz and 50% Duty Cycle:</p>
+<ul class="simple">
+<li><p>Timer0, TimerDelay: 500, TimerDuration: 500</p></li>
+<li><p>FallingEdge</p></li>
+<li><p>Timer0Active</p></li>
+<li><p>Line1 (output, source: Timer0Active)</p></li>
+<li><p>Execute: TimerReset</p></li>
+</ul>
+</section>
+<section id="counter-io-line0">
+<h5>Counter IO Line0<a class="headerlink" href="#counter-io-line0" title="Permalink to this heading"></a></h5>
+<p>Count RisingEdge occurrences on Line0:</p>
+<ul class="simple">
+<li><p>Counter0, CounterDuration: max</p></li>
+<li><p>CounterEventActivation: RisingEdge</p></li>
+<li><p>CounterEventSource: Line0, CounterResetSource: Off, CounterTriggerSource: Off</p></li>
+<li><p>Line0 (input)</p></li>
+<li><p>Execute: CounterReset</p></li>
+</ul>
+</section>
+</section>
+<section id="trigger-over-ethernet-action-commands">
+<h4>Trigger over Ethernet - Action Commands<a class="headerlink" href="#trigger-over-ethernet-action-commands" title="Permalink to this heading"></a></h4>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you use an Ethernet router, make sure all cameras are in the same subnet.
+Using a switch does not affect Action Commands.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For detailed information, read the
+<a class="reference external" href="https://cdn.alliedvision.com/fileadmin/content/documents/products/cameras/various/appnote/GigE/Action-Commands_Appnote.pdf">Action Commands application note</a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>According to the GenICam standard, <em>ActionDeviceKey</em> is write-only.
+Reading the value from the camera is not possible (if the camera firmware
+complies to the standard).</p>
+<p><em>Queue Size</em> is read-only.</p>
+</div>
+<p>Using Action Commands requires configuring them first on the camera and then on the host PC.</p>
+<p>To configure Action Commands on the camera:</p>
+<ol class="arabic simple">
+<li><p>In the Advanced Trigger IO dialog, select the desired values for the camera.
+If you want to use Scheduled Action Commands, select <em>PTP Enable</em>.</p></li>
+<li><p>Adjust the other trigger parameters as required by your use case.</p></li>
+<li><p>Click <span class="guilabel">Freerun</span>.</p></li>
+</ol>
+<figure class="align-default" id="id32">
+<a class="reference internal image-reference" href="_images/action-advanced.png"><img alt="Autofunction ROI tab" src="_images/action-advanced.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Action Commands - camera features</span><a class="headerlink" href="#id32" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>To configure Action Commands on the host PC:</p>
+<ol class="arabic simple">
+<li><p>While the camera window remains open, go to the main window
+and click <span class="guilabel">Action Commands</span>.</p></li>
+</ol>
+<figure class="align-default" id="id33">
+<a class="reference internal image-reference" href="_images/action-button.png"><img alt="Action" src="_images/action-button.png" style="width: 190px;" /></a>
+<figcaption>
+<p><span class="caption-text">Trigger over Ethernet - Action commands</span><a class="headerlink" href="#id33" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The <em>Trigger over Ethernet - Action Commands</em> window opens.</p>
+<figure class="align-default" id="id34">
+<a class="reference internal image-reference" href="_images/action-commands.png"><img alt="Trigger over Ethernet - Action commands window" src="_images/action-commands.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Trigger over Ethernet - Action commands window</span><a class="headerlink" href="#id34" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="2">
+<li><p>Select the host adapter your cameras are connected to or select <em>All interfaces</em>.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All Gigabit Ethernet adapters with a connected device are shown, even if the device
+does not support Action Commands.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <em>Send Action Commands</em> window does not reload when you plug in or out a camera.
+If you plug in GigE cameras while the <em>Send Action Commands</em> window is open, close the
+window, wait until the device is detected, an then reopen the window.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Select the desired interface. To trigger a single device, check <em>Single Device</em>
+and enter the device’s IP address.</p></li>
+<li><p>Use the values for Device Key, Group Key, and Group Mask from the camera
+settings for the empty fields to configure them on the host PC.</p></li>
+<li><p>To execute an Action Command, click <span class="guilabel">Send</span>. The Command log shows
+successfully sent Action Commands.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Action Device Key must be set each time a camera was opened.</p>
+</div>
+<p><strong>Scheduled Action commands</strong>:</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Check if your camera firmware supports Scheduled Action commands.</p>
+</div>
+<p>To use Scheduled Action commands, activate PTP for all cameras that receive the command.</p>
+<p><strong>Delay</strong>: The Action Command is scheduled after a user defined time interval in ms.
+Minimum value: 20 ms.</p>
+<p><strong>Action Time</strong>: Copy the timestamp latch value (in ns) from the camera and add the desired time (in ns).</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For a feature description, see the <em>GigE Features Reference</em>. See also the
+<strong>technical manual</strong> or <strong>user guide</strong>
+of your GigE camera, chapter <em>Camera interfaces</em> for advanced settings.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information on triggering, read our
+<a class="reference external" href="https://www.alliedvision.com/en/support/faqs-application-notes/">application notes</a>.</p>
+</div>
+</section>
+</section>
+<section id="color-tab">
+<h3>Color tab<a class="headerlink" href="#color-tab" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <span class="guilabel">Color</span> tab is available for color cameras only.</p>
+</div>
+<p>The <span class="guilabel">Color</span> tab contains features for controlling white balance, hue, and saturation
+as well as a color transformation matrix.</p>
+<figure class="align-default" id="id35">
+<a class="reference internal image-reference" href="_images/Color.png"><img alt="Color tab" src="_images/Color.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Color tab</span><a class="headerlink" href="#id35" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Hue, Saturation, and Color Transformation have no effect if you select
+any Bayer pixel format.</p>
+</div>
+<section id="auto-white-balance">
+<h4>Auto white balance<a class="headerlink" href="#auto-white-balance" title="Permalink to this heading"></a></h4>
+<p>Auto white balance automatically compensates for changes of the lighting source
+spectrum, for example, if artificial illumination is switched on and off additionally
+to daylight.
+Auto white balance uses information from the camera’s current image and applies the
+optimized settings to the next image. Therefore, it can control values only if
+the camera is running. Large changes in scene lighting may require several frames
+for the algorithm to stabilize.
+Auto white balance can be applied either once or continuously.</p>
+</section>
+<section id="hue-and-saturation">
+<h4>Hue and Saturation<a class="headerlink" href="#hue-and-saturation" title="Permalink to this heading"></a></h4>
+<p>In the color circle, hue is represented by the outer ring and saturation by the inner ring.</p>
+<p>To change hue, click between the two small circles in the outer ring of the color circle
+(white circle: valid value, black circle: invalid value) or use the <em>Hue</em> box.
+To change saturation, click in the inner ring of the color circle or use the
+Saturation box or slider.</p>
+</section>
+<section id="color-transformation-matrix">
+<h4>Color transformation matrix<a class="headerlink" href="#color-transformation-matrix" title="Permalink to this heading"></a></h4>
+<p>The color transformation matrix enables you to adapt the color reproduction.</p>
+</section>
+<section id="color-correction">
+<h4>Color correction<a class="headerlink" href="#color-correction" title="Permalink to this heading"></a></h4>
+<p>Color correction compensates the overlap in the color channels. For example,
+a certain amount of blue light is “seen” not only by the blue pixels, but also
+by the red and green pixels. Depending on the spectrum of the light source and
+the sensor’s spectral response, different values are required to adjust the
+overlap and thus achieve the desired color reproduction.</p>
+<p>In the color transformation matrix, Crr, Cgg, and Cbb represent the primary colors
+red (of the red pixel), green (of the green pixel), and blue (of the blue pixel).</p>
+<p>For example, Crr represents red color of the red pixel. Increasing or decreasing Crr amplifies
+or attenuates red image components.</p>
+<p>Values with two colors mean that the first color is mapped to the pixel of the
+second color. For example, Cgr means that green is mapped to the red pixel.</p>
+<p>To better understand values affecting two colors, have a look at the Hue - Saturation circle.</p>
+<p>For example, Cgr maps green light to the red color channel. Therefore, increasing Cgr amplifies
+green image components and shifts red image components towards green, resulting in a more
+orange red. Decreasing Cgr has the opposite effect: It attenuates green image components
+and shifts red image components towards
+magenta (the distance from red to green is larger).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For natural color reproduction (depending on the sensor’s capabilities), make sure all
+row sums are 1. Values that deviate from 1 may result in tinted images.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In machine vision, color correction is often used to emphasize a color of interest, to
+enhance the difference between two similar colors, or to reduce image complexity.</p>
+</div>
+<p>To reset the matrix to its default values, click <span class="guilabel">Reset</span>.</p>
+</section>
+</section>
+<section id="image-processing-tab">
+<h3>Image Processing tab<a class="headerlink" href="#image-processing-tab" title="Permalink to this heading"></a></h3>
+<section id="default-functionalities">
+<h4>Default functionalities<a class="headerlink" href="#default-functionalities" title="Permalink to this heading"></a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <span class="guilabel">Image Processing</span> tab is available only for cameras with
+ImageProcessingControl features.</p>
+</div>
+<p>The <span class="guilabel">Image Processing</span> tab contains features for contrast stretching
+(ContrastControl), color interpolation, and Convolution Mode.</p>
+<figure class="align-default" id="id36">
+<a class="reference internal image-reference" href="_images/Processing.PNG"><img alt="Image processing tab" src="_images/Processing.PNG" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Image Processing tab</span><a class="headerlink" href="#id36" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="custom-convolution">
+<h4>Custom Convolution<a class="headerlink" href="#custom-convolution" title="Permalink to this heading"></a></h4>
+<p>If you select <em>Custom Convolution</em> as Convolution Mode, a matrix opens and you can
+enter the desired values.</p>
+<figure class="align-default" id="id37">
+<a class="reference internal image-reference" href="_images/Convolution.PNG"><img alt="Custom Convolution" src="_images/Convolution.PNG" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Custom Convolution</span><a class="headerlink" href="#id37" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you want to use different custom convolution values, we recommend saving them together with
+the the other camera settings as an XML file.</p>
+</div>
+<p>If the value deviates from the preset and is present in the camera (for example, in the user set or because
+have changed it in the <span class="guilabel">All</span> tab), click <span class="guilabel">Load Values from Camera</span> to take over
+the values in the matrix.</p>
+<p>To apply new values to the camera, click <span class="guilabel">Write Values to Camera</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <span class="guilabel">All</span> tab reads and writes the custom convolution values directly. On the
+<span class="guilabel">Image Processing</span> tab, make sure to use <cite>Load Values from/to Camera</cite>.</p>
+</div>
+</section>
+</section>
+<section id="sequencer-tab">
+<h3>Sequencer tab<a class="headerlink" href="#sequencer-tab" title="Permalink to this heading"></a></h3>
+<section id="sequencer-overview">
+<h4>Sequencer overview<a class="headerlink" href="#sequencer-overview" title="Permalink to this heading"></a></h4>
+<p>The <span class="guilabel">Sequencer</span> tab is available for Alvium cameras with Sequencer
+features and firmware v13 or higher.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For a detailed description of the complex Sequencer functionality, see our
+<a class="reference external" href="https://cdn.alliedvision.com/fileadmin/content/documents/products/cameras/Alvium_common/appnote/Getting-Started_Alvium_Sequencer.pdf">application note</a></p>
+</div>
+<figure class="align-default" id="id38">
+<a class="reference internal image-reference" href="_images/Sequencer-tab.png"><img alt="Sequencer tab" src="_images/Sequencer-tab.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Sequencer tab</span><a class="headerlink" href="#id38" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The Sequence Overview shows sets and paths that are contained in a sequence.
+It is available in the tab and in the Sequence Configurator.
+The Active Set is bold.</p>
+<figure class="align-default" id="id39">
+<a class="reference internal image-reference" href="_images/sequence-overview.png"><img alt="Sequence overview" src="_images/sequence-overview.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">Sequence overview</span><a class="headerlink" href="#id39" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="sequence-configurator">
+<h4>Sequence Configurator<a class="headerlink" href="#sequence-configurator" title="Permalink to this heading"></a></h4>
+<p>If Configuration Mode is on, you can use the Sequence Configurator.</p>
+<figure class="align-default" id="id40">
+<a class="reference internal image-reference" href="_images/sequence-config.png"><img alt="Sequence Configurator" src="_images/sequence-config.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">Sequence Configurator</span><a class="headerlink" href="#id40" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id41">
+<a class="reference internal image-reference" href="_images/sequencer-sets.png"><img alt="Sets in a sequence, not in a sequence, unsaved" src="_images/sequencer-sets.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">Sets in a sequence, not in a sequence, not saved</span><a class="headerlink" href="#id41" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Notes on configuring sets:</p>
+<ul class="simple">
+<li><p>Sets that are saved in the camera and contained in a sequence are shown in <strong>bold</strong>.</p></li>
+<li><p>Unsaved sets have an asterisk*.</p></li>
+<li><p>In the <span class="guilabel">Next Set</span> drop-down list, sets that don’t yet exist in the camera are shown in <em>italics</em>.</p></li>
+<li><p>Changing values in the Sequence Configurator doesn’t automatically save them
+to the camera.</p></li>
+<li><p>If you leave a set, save it to the camera if you want to keep its data.</p></li>
+<li><p>Once a set is stored in the camera, it can be deleted
+only if you delete the Sequencer configuration. This is camera behavior.</p></li>
+<li><p>By default, Set0 is shown as start set and Set1 is shown as active set - even if the sets
+don’t exist in the camera.</p></li>
+<li><p>To get the current active set with high precision, use Chunk.</p></li>
+</ul>
+<p>Behavior of paths:</p>
+<ul class="simple">
+<li><p>You can configure a sequence with just one path. Using multiple paths is optional.</p></li>
+<li><p>A sequence may contain multiple paths.</p></li>
+<li><p>If multiple paths are used, then the path with the highest number has the highest priority.</p></li>
+</ul>
+<p>Sequencer features:
+-  In contrast to the <span class="guilabel">All</span> tab, the Sequence Configurator only</p>
+<blockquote>
+<div><p>shows features with <em>Sequencer Feature Enable</em> value <em>True</em>.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>For your convenience, Feature selectors such as <em>Balance Ratio Selector</em> are shown
+in the Sequence Configurator in italics. Note that the feature selectors are not available
+in the SequencerControl category. Always save non-SequencerControl features in a user set
+and call this user set before configurating and activating a sequence.</p></li>
+</ul>
+<p>Reset Sequencer:</p>
+<ul class="simple">
+<li><p>The reset deletes all sets in the camera.</p></li>
+<li><p>You can always export existing sequences to a JSON file.</p></li>
+</ul>
+</section>
+<section id="using-json-files-for-sequences">
+<h4>Using JSON files for sequences<a class="headerlink" href="#using-json-files-for-sequences" title="Permalink to this heading"></a></h4>
+<p>You can always export sequences from the camera to a JSON file. Sometimes it is
+quick and easy to configure the first set, path, and next set in the
+Vimba X Viewer and to continue with the configuration
+directly in the JSON file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you import a JSON file, it is directly imported to the camera.
+Existing sequences are overwritten.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that only currently writeable features are exported to JSON.</p>
+</div>
+<p>As a starting point for your sequences, you can use the Alvium Example Sequence file: <em>Sequencer_Presets.json</em>.
+To access this file, click <span class="guilabel">Import Sequence from file</span>.
+It uses a workaround for an issue described in the
+<a class="reference external" href="https://www.alliedvision.com/en/support/firmware-downloads/">camera release notes for firmware 13</a>.</p>
+<p>If the JSON file contains features that the camera doesn’t support,
+they are not loaded there is and no error message.</p>
+<p>If the JSON file has an invalid structure or doesn’t contain any sets, an error
+message is displayed.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fwUpdater.html" class="btn btn-neutral float-left" title="Firmware Updater Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sdkManual.html" class="btn btn-neutral float-right" title="SDK Manual" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

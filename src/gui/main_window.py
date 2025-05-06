@@ -25,9 +25,10 @@ class MainWindow(QMainWindow):
     Main application window for the TOSCA laser device control application.
     """
     
-    def __init__(self):
+    def __init__(self, vmb=None):
         """Initialize the main window."""
         super().__init__()
+        self.vmb = vmb
         
         self.setWindowTitle("TOSCA Laser Control System")
         self.setMinimumSize(1200, 800)
@@ -198,7 +199,7 @@ class MainWindow(QMainWindow):
         # Camera and imaging tab - using our CameraDisplayWidget
         self.camera_tab = QWidget()
         self.camera_tab_layout = QVBoxLayout(self.camera_tab)
-        self.camera_display = CameraDisplayWidget(parent=self.camera_tab)
+        self.camera_display = CameraDisplayWidget(parent=self.camera_tab, vmb=self.vmb)
         self.camera_tab_layout.addWidget(self.camera_display)
         self.tab_widget.addTab(self.camera_tab, "Camera & Imaging")
         

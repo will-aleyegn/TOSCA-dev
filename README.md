@@ -1,6 +1,32 @@
-# Laser Device Control Application
+# TOSCA Laser Device Control Application
 
-A comprehensive control application for laser devices with hardware control, image processing, data management, and a user-friendly GUI.
+## Overview
+This application provides a GUI for controlling a laser device and acquiring images from Allied Vision cameras using the Vimba X SDK and VmbPy. Only Allied Vision (Vimba X/VmbPy) cameras are supported.
+
+## Quick Start
+1. Install Python 3.7+ (64-bit recommended).
+2. Install the Vimba X SDK and VmbPy (see docs/vmbpy_summary.md for details).
+3. Copy the required .cti files to `docs/cti` and ensure the environment variable is set (handled in app.py).
+4. Run the application:
+   ```bash
+   python app.py
+   ```
+5. Use the GUI to connect, stream, and capture images from your Allied Vision camera.
+
+## Documentation
+- See `docs/vmbpy_summary.md` for VmbPy usage, best practices, and troubleshooting.
+- Example scripts for camera usage are in `docs/vmpy/examples/`.
+
+## Supported Features
+- Camera connection, streaming, and image capture (VmbPy only)
+- GUI controls for camera operations
+
+## Not Supported
+- OpenCV/USB cameras
+- Legacy camera controllers
+
+---
+For more details, see the summary and example scripts in the documentation folder.
 
 ## Features
 

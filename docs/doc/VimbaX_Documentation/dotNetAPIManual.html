@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>.NET API Manual &mdash; Vimba X Developer Guide 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Python API Manual" href="pythonAPIManual.html" />
+    <link rel="prev" title="CPP API Manual" href="cppAPIManual.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Vimba X Developer Guide
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Vimba X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">System Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrationGuide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examplesOverview.html">Examples Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manuals:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="driverInstaller.html">Driver Installer Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fwUpdater.html">Firmware Updater Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="viewerGuide.html">Viewer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdkManual.html">SDK Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cAPIManual.html">C API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cppAPIManual.html">CPP API Manual</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">.NET API Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction-to-the-api">Introduction to the API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#compatibility">Compatibility</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#net-and-c-version-for-examples">.NET and C# version for examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visual-studio-versions">Visual Studio versions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ide-for-linux">IDE for Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dispose-patterns">Dispose patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#idisposable-interface">IDisposable interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#features-as-dynamic-types">Features as dynamic types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-diagram">API diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#api-usage">API usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vmbnet-examples">VmbNET examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-examples-with-the-command-line">Building the examples with the command line</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#entry-point">Entry point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbc-api-version">VmbC API version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbnet-version">VmbNET version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#listing-cameras">Listing cameras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#listing-features">Listing features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opening-a-camera">Opening a camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-features">Accessing features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-feature-execution">Command feature execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#acquiring-images">Acquiring images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#convenience-methods">Convenience methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#asynchronous-acquisition">Asynchronous Acquisition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#synchronous-acquisition">Synchronous Acquisition</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#third-party-frame-buffers">Third-party frame buffers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-and-setting-pixel-formats">Getting and setting pixel formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#converting-a-pixel-format">Converting a pixel format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#listing-chunk-data">Listing chunk data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-and-saving-settings">Loading and saving settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#triggering">Triggering</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#software-trigger">Software trigger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trigger-over-ethernet-action-commands">Trigger over Ethernet - Action Commands</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced-api-usage">Advanced API usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-api-without-the-dispose-pattern">Using the API without the dispose pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manual-acquisition">Manual acquisition</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#manual-synchronous-acquisition">Manual synchronous acquisition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#manual-shutdown">Manual shutdown</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multithreading">Multithreading</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#logging">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#logging-levels">Logging levels</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visual-studio-extensions">Visual Studio Extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#feature-completion">Feature Completion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPIManual.html">Python API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagetransformManual.html">Image Transform Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help &amp; information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem.html">Vimba X Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legalInformation.html">Legal Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vimba X Developer Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">.NET API Manual</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="net-api-manual">
+<h1>.NET API Manual<a class="headerlink" href="#net-api-manual" title="Permalink to this heading"></a></h1>
+<section id="introduction-to-the-api">
+<h2>Introduction to the API<a class="headerlink" href="#introduction-to-the-api" title="Permalink to this heading"></a></h2>
+<p>VmbNET is a wrapper around the VmbC API.
+The VmbNET API provides the complete functionality of the VmbC API.
+For quick and easy development, VmbNET offers convenience methods
+and uses the dispose pattern.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note for Vimba users: VmbNET is a completely different API than VimbaNET.
+You cannot reuse C# code from Vimba. The new API supports compatibility
+with Windows and Unix-based operating systems.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To understand the API, read the <a class="reference internal" href="sdkManual.html"><span class="doc">SDK Manual</span></a> first:
+It contains essential information.
+For a quick start, use the examples. You can find them in C:\Users\Public\Documents\Allied Vision\Vimba X\Examples.</p>
+</div>
+<p>The VmbNET API enables you to develop your application with very few lines of code:</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">VmbNET</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Program</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Main</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">vmb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VmbSystem</span><span class="p">.</span><span class="n">Startup</span><span class="p">();</span><span class="w"> </span><span class="c1">// API startup (loads transport layers)</span>
+
+<span class="w">        </span><span class="n">cam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vmb</span><span class="p">.</span><span class="n">GetCameras</span><span class="p">()[</span><span class="m">0</span><span class="p">];</span><span class="w"> </span><span class="c1">// Get the first available camera</span>
+
+<span class="w">        </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">openCam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cam</span><span class="p">.</span><span class="n">Open</span><span class="p">();</span><span class="w"> </span><span class="c1">// Open the camera</span>
+
+<span class="w">        </span><span class="n">openCam</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">ExposureTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5000.0</span><span class="p">;</span><span class="w"> </span><span class="c1">// Set the exposure time value</span>
+
+<span class="w">        </span><span class="c1">// Register an event handler for incoming frames</span>
+<span class="w">        </span><span class="n">openCam</span><span class="p">.</span><span class="n">FrameReceived</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">Frame</span><span class="p">;</span>
+<span class="w">            </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Frame Received! ID={frame.Id}&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">};</span><span class="w"> </span><span class="c1">// IDisposable: Frame is automatically requeued</span>
+
+<span class="w">        </span><span class="c1">// Convenience function to start acquisition</span>
+<span class="w">        </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">acquisition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openCam</span><span class="p">.</span><span class="n">StartFrameAcquisition</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="n">Sleep</span><span class="p">(</span><span class="m">2000</span><span class="p">);</span>
+
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// IDisposable: Stops acquisition, closes camera, shuts down Vimba X</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Read the following chapters for detailed explanations and to learn about more possibilites.</p>
+<section id="compatibility">
+<h3>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this heading"></a></h3>
+<p>The VmbNET API is compatible with:</p>
+<ul class="simple">
+<li><p>Windows64, Linux64, and Linux ARM</p></li>
+<li><p>VmbNET API assembly is compliant with .NET standard 2.0</p></li>
+<li><p>Runtimes:</p>
+<ul>
+<li><p>.NET Core 2 or higher</p></li>
+<li><p>.NET Framework 4.6.1 or higher</p></li>
+</ul>
+</li>
+</ul>
+<section id="net-and-c-version-for-examples">
+<h4>.NET and C# version for examples<a class="headerlink" href="#net-and-c-version-for-examples" title="Permalink to this heading"></a></h4>
+<p>The examples use .NET 8 and C# 9.0.</p>
+</section>
+<section id="visual-studio-versions">
+<h4>Visual Studio versions<a class="headerlink" href="#visual-studio-versions" title="Permalink to this heading"></a></h4>
+<p>If using .NET 8.0, it is recommended to use VS 2022.
+Otherwise, use VS 2019.</p>
+<p>You can also use Visual Studio Code.</p>
+</section>
+<section id="ide-for-linux">
+<h4>IDE for Linux<a class="headerlink" href="#ide-for-linux" title="Permalink to this heading"></a></h4>
+<p>Visual Studio Code. Other IDEs may be possible but have not been tested.</p>
+<p>VmbNET is available as a NuGet package.
+Note that the NuGet package doesn’t contain any transport layers, drivers, or tools.
+Therefore, always install the Vimba X SDK.</p>
+<p>Install the NuGet package provided with Vimba X:</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="n">dotnet</span><span class="w"> </span><span class="n">nuget</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="o">&lt;</span><span class="n">path</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">package</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="dispose-patterns">
+<h3>Dispose patterns<a class="headerlink" href="#dispose-patterns" title="Permalink to this heading"></a></h3>
+<p>The VmbNET API uses RAII, which is common for C++ applications, via the dispose pattern.</p>
+<p>The dispose pattern enables the following:</p>
+<ul class="simple">
+<li><p>The required resources are acquired when creating an instance of a disposable interface.</p></li>
+<li><p>The resources are automatically released when the instance is no longer reachable.</p></li>
+</ul>
+</section>
+<section id="idisposable-interface">
+<h3>IDisposable interface<a class="headerlink" href="#idisposable-interface" title="Permalink to this heading"></a></h3>
+<p>VmbNET enables you to access the full functionality of Vimba X via interfaces.
+The concrete instances behind the interfaces are created by the API.
+You can use the interfaces directly upon retrieving them
+from the relevant method for resource acquisition (for example, opening the camera).</p>
+<p>You can create multiple instances of a disposable interface acquiring the same resource.
+Reference counting ensures that acquisition and release only occur when the first
+instance is created and the last instance is disposed.</p>
+<p>Chapter <a class="reference internal" href="#api-usage"><span class="std std-ref">API usage</span></a> contains commented code snippets where you can see how to
+use the interfaces. You will mainly work with <code class="docutils literal notranslate"><span class="pre">IOpenCamera</span></code>, <code class="docutils literal notranslate"><span class="pre">IFrame</span></code>, and <code class="docutils literal notranslate"><span class="pre">IFeature</span></code>.</p>
+</section>
+<section id="features-as-dynamic-types">
+<h3>Features as dynamic types<a class="headerlink" href="#features-as-dynamic-types" title="Permalink to this heading"></a></h3>
+<p>Features as dynamic types:</p>
+<ul class="simple">
+<li><p>Available features and their types of GenTL modules (see <a class="reference internal" href="sdkManual.html"><span class="doc">SDK Manual</span></a>) are not known at compile time.</p></li>
+<li><p>For easy access, VmbNET provides them as dynamic types.</p></li>
+<li><p>Methods are called by the runtime when needed.</p></li>
+<li><p>Features can be accessed like a property (for example, a desired feature’s name is known at compile time).</p></li>
+<li><p>Features can be accessed by using their name as a dictionary key
+(for example, a desired feature’s name is not known at compile time).</p></li>
+<li><p>Features behave like an instance of a type with properties / methods for feature operations.</p></li>
+<li><p>Additional operations are provided, for example, command features can behave as methods,
+features with values can be set using the equality operator.</p></li>
+</ul>
+<p>All features are available as dynamic objects, but can be treated as the underlying
+static type (such as <code class="docutils literal notranslate"><span class="pre">IFloatFeature</span></code>). You can always convert a dynamic feature object
+to its static type.</p>
+<p>All modules that provide features are derived from the IFeatureContainer interface.</p>
+<p>To aid development with camera features, a Visual Studio extension is provided
+(see chapter Chapter <a class="reference internal" href="#visual-studio-extensions"><span class="std std-ref">Visual Studio Extensions</span></a>).</p>
+<p>Note that VmbNET also provides <a class="reference internal" href="#convenience"><span class="std std-ref">Convenience methods</span></a>.</p>
+</section>
+<section id="events">
+<h3>Events<a class="headerlink" href="#events" title="Permalink to this heading"></a></h3>
+<p>Events serve a multitude of purposes. They can have several origins such as
+<code class="docutils literal notranslate"><span class="pre">VmbSystem</span></code>, <code class="docutils literal notranslate"><span class="pre">IFeature</span></code>, and <code class="docutils literal notranslate"><span class="pre">IOpenCamera</span></code>. You can register event handlers to receive events.</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">System.Threading</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">VmbNET</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Program</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Main</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">vmbSystem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IVmbSystem</span><span class="p">.</span><span class="n">Startup</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">vmbSystem</span><span class="p">.</span><span class="n">CameraListChanged</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Received event type {e.ListChangedEventType} for camera with ID {e.Camera.Id}&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="n">Sleep</span><span class="p">(</span><span class="m">60000</span><span class="p">);</span><span class="w"> </span><span class="c1">// Receive events for 1 minute</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="api-diagram">
+<h3>API diagram<a class="headerlink" href="#api-diagram" title="Permalink to this heading"></a></h3>
+<p>The image below shows a VmbNET API UML diagram.
+To ease understanding the concept, only the most important items are listed.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/VmbNET-diagram.png"><img alt="SDK architecture" src="_images/VmbNET-diagram.png" style="width: 800px;" /></a>
+<figcaption>
+<p><span class="caption-text">Simplified UML diagram</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="api-usage">
+<h2>API usage<a class="headerlink" href="#api-usage" title="Permalink to this heading"></a></h2>
+<section id="vmbnet-examples">
+<h3>VmbNET examples<a class="headerlink" href="#vmbnet-examples" title="Permalink to this heading"></a></h3>
+<section id="building-the-examples-with-the-command-line">
+<h4>Building the examples with the command line<a class="headerlink" href="#building-the-examples-with-the-command-line" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p>Make sure a .NET SDK is installed (we recommend .NET 8 SDK)</p></li>
+<li><p>Make sure the VmbNET NuGet package (.nupkg file) is present on your system</p></li>
+<li><p>Go to the VmbNET examples directory and see the README</p></li>
+</ul>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="c1">// Building the VmbNET examples with the command line</span>
+<span class="n">dotnet</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="o">&lt;</span><span class="n">ExampleName</span><span class="o">&gt;</span><span class="w"> </span><span class="o">--</span><span class="n">source</span><span class="w"> </span><span class="s">&quot;https://api.nuget.org/v3/index.json&quot;</span><span class="w"> </span><span class="o">--</span><span class="n">source</span><span class="w"> </span><span class="o">&lt;</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">VmbNET</span><span class="o">-</span><span class="n">nupkg</span><span class="o">-</span><span class="n">file</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Visual Studio:</p>
+<ul class="simple">
+<li><p>Open the properties of a solution and go to Application.</p></li>
+<li><p>In the Target Framework drop-down list, select an installed .NET framework version.</p></li>
+</ul>
+<p>Visual Studio Code:</p>
+<ul class="simple">
+<li><p>Install the C# Dev Kit extension from Microsoft:
+<a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit">https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit</a></p></li>
+</ul>
+</section>
+</section>
+<section id="entry-point">
+<h3>Entry point<a class="headerlink" href="#entry-point" title="Permalink to this heading"></a></h3>
+<p>The entry point of VmbNET is the <code class="docutils literal notranslate"><span class="pre">VmbSystem</span></code> singleton. Creating an instance of <code class="docutils literal notranslate"><span class="pre">IVmbSystem</span></code>
+starts up Vimba X.</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">VmbNET</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Program</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="nn">IVmbSystem</span><span class="w"> </span><span class="n">vmbSystem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IVmbSystem</span><span class="p">.</span><span class="n">Startup</span><span class="p">();</span>
+<span class="w">    </span><span class="n">ICamera</span><span class="w"> </span><span class="n">camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vmbSystem</span><span class="p">.</span><span class="n">GetCameras</span><span class="p">().</span><span class="n">First</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Open the camera to use features and to acquire images</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="n">IOpenCamera</span><span class="w"> </span><span class="n">openCamera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="p">.</span><span class="n">Open</span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Use features and acquire images</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// Closes the camera</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// Shuts down Vimba X</span>
+</pre></div>
+</div>
+</section>
+<section id="vmbc-api-version">
+<h3>VmbC API version<a class="headerlink" href="#vmbc-api-version" title="Permalink to this heading"></a></h3>
+<p>Even if new features are introduced to the underlying VmbC API, your software remains backward compatible.
+You can check the version number of VmbC without initializing the VmbNET API:</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">VmbNET</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Program</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Main</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;VmbC version: {IVmbSystem.VmbCVersion}&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="vmbnet-version">
+<h3>VmbNET version<a class="headerlink" href="#vmbnet-version" title="Permalink to this heading"></a></h3>
+<p>The VmbNET version is the same as the assembly version, and is therefore specified in the NuGet package name.
+It can also be extracted pogrammatically in the usual ways (for example, by calling <code class="docutils literal notranslate"><span class="pre">typeof(IVmbSystem).Assembly.GetName().Version</span></code>).</p>
+</section>
+<section id="listing-cameras">
+<h3>Listing cameras<a class="headerlink" href="#listing-cameras" title="Permalink to this heading"></a></h3>
+<p>Cameras are detected automatically during API startup. The order in which detected cameras are listed is determined by
+the order of camera discovery and therefore not deterministic. The discovery of GigE cameras may take
+several seconds. Before opening cameras, camera objects contain all static details of a physical camera
+that do not change throughout the object’s lifetime such as the camera ID and the camera model.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>see the <em>ListCameras.cs</em> example.</p>
+</div>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">VmbNET</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Program</span>
+<span class="p">{</span>
+<span class="w">     </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Main</span><span class="p">()</span>
+<span class="w">     </span><span class="p">{</span>
+<span class="w">         </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">vmbSystem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IVmbSystem</span><span class="p">.</span><span class="n">Startup</span><span class="p">();</span>
+
+<span class="w">         </span><span class="kt">var</span><span class="w"> </span><span class="n">cameras</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vmbSystem</span><span class="p">.</span><span class="n">GetCameras</span><span class="p">();</span>
+
+<span class="w">         </span><span class="k">if</span><span class="p">(</span><span class="n">cameras</span><span class="p">.</span><span class="n">Count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">         </span><span class="p">{</span>
+<span class="w">             </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Found {cameras.Count} cameras&quot;</span><span class="p">);</span>
+<span class="w">         </span><span class="p">}</span>
+<span class="w">         </span><span class="k">else</span>
+<span class="w">         </span><span class="p">{</span>
+<span class="w">             </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Found no cameras&quot;</span><span class="p">);</span>
+<span class="w">         </span><span class="p">}</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="listing-features">
+<h3>Listing features<a class="headerlink" href="#listing-features" title="Permalink to this heading"></a></h3>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To list all features of a camera and its physical interface,
+see the <em>ListFeatures.cs</em> example.</p>
+</div>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">VmbNET</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Program</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Main</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">vmbSystem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IVmbSystem</span><span class="p">.</span><span class="n">Startup</span><span class="p">();</span>
+
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vmbSystem</span><span class="p">.</span><span class="n">GetCameras</span><span class="p">().</span><span class="n">First</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Using camera with ID {camera.Id}&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">openCamera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="p">.</span><span class="n">Open</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Camera has {openCamera.Features.Count} features&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Camera has feature {feature.Name}&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="opening-a-camera">
+<h3>Opening a camera<a class="headerlink" href="#opening-a-camera" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ICamera.Open()</span></code> method opens the camera and returns an instance of a disposable <code class="docutils literal notranslate"><span class="pre">IOpenCamera</span></code>,
+which can be used to access the features of the camera and its local device, as well as acquire frames.
+On disposal the camera is implicitly closed.</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">VmbNET</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Program</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Main</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">using</span><span class="w"> </span><span class="nn">IVmbSystem</span><span class="w"> </span><span class="n">vmbSystem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IVmbSystem</span><span class="p">.</span><span class="n">Startup</span><span class="p">();</span>
+<span class="w">        </span><span class="n">ICamera</span><span class="w"> </span><span class="n">camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vmbSystem</span><span class="p">.</span><span class="n">GetCameras</span><span class="p">().</span><span class="n">First</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// Open the camera to use features and to acquire images</span>
+<span class="w">        </span><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="n">IOpenCamera</span><span class="w"> </span><span class="n">openCamera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="p">.</span><span class="n">Open</span><span class="p">())</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Use features and acquire images</span>
+<span class="w">        </span><span class="c1">// Leaving the scope closes the camera</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// Shuts down Vimba X</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="accessing-features">
+<h3>Accessing features<a class="headerlink" href="#accessing-features" title="Permalink to this heading"></a></h3>
+<p>.NET’s Dynamic Language Runtime (DLR) resolves underlying feature types at runtime.
+To set a feature value, you only need a single line of code:</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="c1">// Set an exposure time value</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">ExposureTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5000.0</span><span class="p">;</span>
+
+<span class="c1">// Increase the exposure time by a certain amount</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">ExposureTime</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">100.0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For more complex use cases, you can use the underlying static type:</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="c1">// Use the underlying static type</span>
+<span class="n">IFloatFeature</span><span class="w"> </span><span class="n">exposureTimeFeature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">ExposureTime</span><span class="p">;</span>
+<span class="n">exposureTimeFeature</span><span class="p">.</span><span class="n">Value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5000.0</span><span class="p">;</span>
+<span class="n">exposureTimeFeature</span><span class="p">.</span><span class="n">Value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">100.0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The following code snippet sums it up:</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">VmbNET</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Program</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Main</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Start Vimba X</span>
+<span class="w">        </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">vmbSystem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IVmbSystem</span><span class="p">.</span><span class="n">Startup</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// Get first camera in camera list</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vmbSystem</span><span class="p">.</span><span class="n">GetCameras</span><span class="p">().</span><span class="n">First</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// Open this camera</span>
+<span class="w">        </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">openCamera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="p">.</span><span class="n">Open</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// Change exposure time</span>
+<span class="w">        </span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">ExposureTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5000.0</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Increase exposure time</span>
+<span class="w">        </span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">ExposureTime</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">100.0</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Convert exposure time dynamic instance to static type</span>
+<span class="w">        </span><span class="n">IFloatFeature</span><span class="w"> </span><span class="n">exposureTimeFeature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">ExposureTime</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Increase exposure time again</span>
+<span class="w">        </span><span class="n">exposureTimeFeature</span><span class="p">.</span><span class="n">Value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">200.0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If an application accesses cameras with and without a given feature,
+use the <code class="docutils literal notranslate"><span class="pre">Exists</span></code> property:</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="c1">// Print the mainboard temperature to the console if the device provides the corresponding feature, otherwise print nothing</span>
+
+<span class="k">if</span><span class="p">(</span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">DeviceTemperatureSelector</span><span class="p">.</span><span class="n">Exists</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="p">(</span><span class="kt">bool</span><span class="p">)</span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">DeviceTemperatureSelector</span><span class="p">.</span><span class="n">EnumEntriesByName</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">(</span><span class="s">&quot;Mainboard&quot;</span><span class="p">))</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">DeviceTemperatureSelector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mainboard&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">mainboardTemperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">DeviceTemperature</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;The temperature of this device&#39;s mainboard temperature is {mainboardTemperature} degrees C&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If a feature’s name is not known at compile time (for example, it is read from a configuration file at run time), it can be accessed from the <code class="docutils literal notranslate"><span class="pre">Features</span></code>
+property using the name as a key:</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="n">featureName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetFeatureNameFromFile</span><span class="p">();</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">[</span><span class="n">featureName</span><span class="p">];</span>
+</pre></div>
+</div>
+</section>
+<section id="command-feature-execution">
+<h3>Command feature execution<a class="headerlink" href="#command-feature-execution" title="Permalink to this heading"></a></h3>
+<p>Commands are executed by calling their <code class="docutils literal notranslate"><span class="pre">Run()</span></code> method, and then checking whether the command
+completed successfully via the <code class="docutils literal notranslate"><span class="pre">IsDone</span></code> property:</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">UserSetSelector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UserSet2&quot;</span><span class="p">;</span>
+<span class="n">ICommandFeature</span><span class="w"> </span><span class="n">userSetSaveFeature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">UserSetSave</span><span class="p">;</span>
+<span class="n">userSetSaveFeature</span><span class="p">.</span><span class="n">Run</span><span class="p">();</span>
+<span class="c1">// Do some operations that don&#39;t depend on UserSetSave command completing</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">userSetSaveFeature</span><span class="p">.</span><span class="n">IsDone</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;UserSetSave command not yet completed&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Alternatively, the completion of a command can be asynchronously awaited, with a timeout after which
+an exception is thrown if the command did not complete:</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="k">try</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userSetSaveFeature</span><span class="p">.</span><span class="n">Run</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">2.0</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">// Do some operations that don&#39;t depend on UserSetSave command completing</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="n">task</span><span class="p">;</span><span class="w"> </span><span class="c1">// Wait for UserSetSave command to complete if not already completed</span>
+<span class="p">}</span>
+<span class="k">catch</span><span class="p">(</span><span class="n">VmbTimeoutException</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;UserSetSave command not yet completed&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When executing a command feature as a dynamic feature,
+the <code class="docutils literal notranslate"><span class="pre">Run()</span></code> method can be replaced by an invocation of the feature
+itself as if it was a method:</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">AcquisitionStart</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="acquiring-images">
+<h3>Acquiring images<a class="headerlink" href="#acquiring-images" title="Permalink to this heading"></a></h3>
+<section id="convenience-methods">
+<span id="convenience"></span><h4>Convenience methods<a class="headerlink" href="#convenience-methods" title="Permalink to this heading"></a></h4>
+<p>The VmbNET API provides the following convenience methods for image acquisition:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">StartFrameAcquisition()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AcquireSingleImage()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AcquireMultipleImages()</span></code></p></li>
+</ul>
+<p>For a description and code snippets, see below.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The SDK Manual, section <a class="reference internal" href="sdkManual.html#synchronous-and-asynchronous-image-acquisition"><span class="std std-ref">Synchronous and asynchronous image acquisition</span></a>,
+provides background knowledge. The C API Manual, section
+<a class="reference internal" href="cAPIManual.html#image-capture-vs-image-acquisition"><span class="std std-ref">Image Capture vs. Image Acquisition</span></a>, provides detailed information about functions of
+the underlying C API.</p>
+</div>
+</section>
+<section id="asynchronous-acquisition">
+<h4>Asynchronous Acquisition<a class="headerlink" href="#asynchronous-acquisition" title="Permalink to this heading"></a></h4>
+<p>The convenience methods <code class="docutils literal notranslate"><span class="pre">StartFrameAcquisition()</span></code>
+and <code class="docutils literal notranslate"><span class="pre">StartFrameAcquisition(AllocationModeValue</span> <span class="pre">allocationMode,</span> <span class="pre">UInt32</span> <span class="pre">bufferCount)</span></code>
+perform all steps for
+acquiring frames asynchronously. This is done via an event handler
+registered to the <code class="docutils literal notranslate"><span class="pre">FrameReceived</span></code> event of an instance of <code class="docutils literal notranslate"><span class="pre">IOpenCamera</span></code>.
+They return an instance of the disposable <code class="docutils literal notranslate"><span class="pre">IAcquisition</span></code>, which reverses these steps.
+If the parameterless version of this method is used,
+the API allocates the frame buffers (<code class="docutils literal notranslate"><span class="pre">AllocationModeValue.AnnounceFrame</span></code>) and 5 frame buffers are allocated.</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="n">openCamera</span><span class="p">.</span><span class="n">FrameReceived</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">                            </span><span class="p">{</span>
+<span class="w">                                </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">Frame</span><span class="p">;</span>
+<span class="w">                                </span><span class="c1">// Do something with frame</span>
+<span class="w">                            </span><span class="p">};</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">IAcquisition</span><span class="w"> </span><span class="n">acquisition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openCamera</span><span class="p">.</span><span class="n">StartFrameAcquisition</span><span class="p">();</span>
+
+<span class="c1">// Do something while acquiring</span>
+</pre></div>
+</div>
+<p>Disposable asynchronous acquisition:</p>
+<p>In the following code snippet, frames are acquired asynchronously from the camera’s first stream,
+using 5 frame buffers allocated by the transport layer.</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openCamera</span><span class="p">.</span><span class="n">OpenStream</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+
+<span class="n">stream</span><span class="p">.</span><span class="n">FrameReceived</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">                        </span><span class="p">{</span>
+<span class="w">                            </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">Frame</span><span class="p">;</span>
+<span class="w">                            </span><span class="c1">// Do something with frame</span>
+<span class="w">                        </span><span class="p">};</span>
+
+<span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">streamCapture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stream</span><span class="p">.</span><span class="n">PrepareCapture</span><span class="p">(</span><span class="n">AllocationModeValue</span><span class="p">.</span><span class="n">AllocAndAnnounceFrame</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">);</span>
+
+<span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">AcquisitionStart</span><span class="p">();</span>
+<span class="c1">// Do something while acquiring frames</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">AcquisitionStop</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The SDK Manual, section <a class="reference internal" href="sdkManual.html#synchronous-and-asynchronous-image-acquisition"><span class="std std-ref">Synchronous and asynchronous image acquisition</span></a>,
+provides background knowledge. The C API Manual, section
+<a class="reference internal" href="cAPIManual.html#image-capture-vs-image-acquisition"><span class="std std-ref">Image Capture vs. Image Acquisition</span></a>, provides detailed information about functions of
+the underlying C API.</p>
+</div>
+</section>
+<section id="synchronous-acquisition">
+<h4>Synchronous Acquisition<a class="headerlink" href="#synchronous-acquisition" title="Permalink to this heading"></a></h4>
+<p>A single frame can be acquired synchronously with the convenience methods
+<code class="docutils literal notranslate"><span class="pre">AcquireSingleImage(TimeSpan</span> <span class="pre">timeout)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">AcquireSingleImage(AllocationModeValue</span> <span class="pre">allocationMode,</span> <span class="pre">TimeSpan</span> <span class="pre">timeout)</span></code>.
+If the version without the <code class="docutils literal notranslate"><span class="pre">allocationMode</span></code> parameter is used, frame buffers are allocated by the API (<code class="docutils literal notranslate"><span class="pre">AllocationModeValue.AnnounceFrame</span></code>).</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="n">IFrame</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openCamera</span><span class="p">.</span><span class="n">AcquireSingleImage</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromMilliseconds</span><span class="p">(</span><span class="m">500.0</span><span class="p">)))</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="c1">// Do something with frame</span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// IFrame.Dispose() deallocates its buffer</span>
+</pre></div>
+</div>
+<p>Multiple frames can be acquired synchronously with the convenience methods
+<code class="docutils literal notranslate"><span class="pre">AcquireMultipleImages(UInt32</span> <span class="pre">frameCount,</span> <span class="pre">AllocationModeValue</span> <span class="pre">allocationMode,</span> <span class="pre">TimeSpan</span> <span class="pre">timeout)</span></code>
+and <code class="docutils literal notranslate"><span class="pre">AcquireMultipleImages(UInt32</span> <span class="pre">frameCount,</span> <span class="pre">TimeSpan</span> <span class="pre">timeout)</span></code>.
+If the version without the allocationMode parameter is used, frame buffers are allocated by the API (<code class="docutils literal notranslate"><span class="pre">AllocationModeValue.AnnounceFrame</span></code>).</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="n">IFrameList</span><span class="w"> </span><span class="n">frameList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openCamera</span><span class="p">.</span><span class="n">AcquireMultipleImages</span><span class="p">(</span><span class="m">5</span><span class="p">,</span>
+<span class="w">                                                               </span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromMilliseconds</span><span class="p">(</span><span class="m">500.0</span><span class="p">)))</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="c1">// Do something with the 5 frames in frameList</span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// IFrameList.Dispose() calls each IFrame.Dispose(), which deallocates its buffer</span>
+</pre></div>
+</div>
+<p>Disposable synchronous acquisition:</p>
+<p>Synchronous acquisition occurs if no event handlers are registered to
+<code class="docutils literal notranslate"><span class="pre">IOpenCamera.FrameReceived</span></code>. In this case, the frames are retrieved
+from <code class="docutils literal notranslate"><span class="pre">IStreamCapture.WaitForFrame()</span></code>. This method blocks until
+a frame has been filled.</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">IStream</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openCamera</span><span class="p">.</span><span class="n">Stream</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">IStreamCapture</span><span class="w"> </span><span class="n">preparedStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stream</span><span class="p">.</span><span class="n">PrepareCapture</span><span class="p">(</span><span class="n">AllocationModeValue</span><span class="p">.</span><span class="n">AnnounceFrame</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">AcquisitionStart</span><span class="p">();</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">10</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">     </span><span class="k">using</span><span class="w"> </span><span class="nn">IFrame</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">preparedStream</span><span class="p">.</span><span class="n">WaitForFrame</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromMilliseconds</span><span class="p">(</span><span class="m">500</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">// Do something with frame</span>
+<span class="p">}</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">AcquisitionStop</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="third-party-frame-buffers">
+<h3>Third-party frame buffers<a class="headerlink" href="#third-party-frame-buffers" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">IFrameBufferPool</span></code> interface allows you to pass a pool of
+externally allocated frame buffers (such as third-party ones) to Vimba X
+for filling with frame data. This interface is simply a list
+of buffer addresses and sizes, which is read-only and disposable.
+A reference implementation is provided by <code class="docutils literal notranslate"><span class="pre">FrameBufferPool</span></code>.</p>
+<p>The frame buffer pool is passed to the underlying VmbC API via an overloaded <code class="docutils literal notranslate"><span class="pre">PrepareCapture</span></code> method of <code class="docutils literal notranslate"><span class="pre">IStreamCapture</span></code>.
+Similarly, a frame buffer pool is passed for filling with converted frame data to
+VmbTransform via an overloaded <code class="docutils literal notranslate"><span class="pre">Create</span></code> method of <code class="docutils literal notranslate"><span class="pre">IFrameConverter</span></code>.</p>
+</section>
+<section id="getting-and-setting-pixel-formats">
+<h3>Getting and setting pixel formats<a class="headerlink" href="#getting-and-setting-pixel-formats" title="Permalink to this heading"></a></h3>
+<p>Pixel formats of a camera are accessed via the <code class="docutils literal notranslate"><span class="pre">PixelFormat</span></code> string feature:</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">PixelFormat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;RGB8&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The pixel format of a frame is obtained via its <code class="docutils literal notranslate"><span class="pre">PixelFormat</span></code> property of type <code class="docutils literal notranslate"><span class="pre">IFrame.PixelFormatValue</span></code>:</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="n">IFrame</span><span class="p">.</span><span class="n">PixelFormatValue</span><span class="w"> </span><span class="n">framePixelFormat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">frame</span><span class="p">.</span><span class="n">PixelFormat</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="converting-a-pixel-format">
+<h3>Converting a pixel format<a class="headerlink" href="#converting-a-pixel-format" title="Permalink to this heading"></a></h3>
+<p>With the <code class="docutils literal notranslate"><span class="pre">FrameConverter</span></code> VmbNET module, you can access the <a class="reference internal" href="imagetransformManual.html"><span class="doc">Image Transform Manual</span></a>
+Image Transform library.
+The methods <code class="docutils literal notranslate"><span class="pre">IsPixelFormatConversionSupported(string</span> <span class="pre">pixelFormatString,</span> <span class="pre">string</span> <span class="pre">conversionPixelFormatString)</span></code>
+and <code class="docutils literal notranslate"><span class="pre">IsPixelFormatConversionSupported(IFrame.PixelFormatValue</span> <span class="pre">pixelFormat,</span> <span class="pre">IFrame.PixelFormatValue</span> <span class="pre">conversionPixelFormat)</span></code>
+allow to determine whether a given pixel format conversion is supported.
+All possible conversions of a given pixel format can be obtained from
+<code class="docutils literal notranslate"><span class="pre">GetSupportedPixelFormatConversions(pixelFormat)</span></code>.</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">IFrame</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">preparedStream</span><span class="p">.</span><span class="n">WaitForFrame</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromMilliseconds</span><span class="p">(</span><span class="m">500.0</span><span class="p">));</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">conversionPixelFormat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IFrame</span><span class="p">.</span><span class="n">PixelFormatValue</span><span class="p">.</span><span class="n">RGB8</span><span class="p">;</span>
+<span class="c1">// Create frame converter for converting frames to RGB8</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">IFrameConverter</span><span class="w"> </span><span class="n">frameConverter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IFrameConverter</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">conversionPixelFormat</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">IFrameConverter</span><span class="p">.</span><span class="n">IsPixelFormatConversionSupported</span><span class="p">(</span><span class="n">frame</span><span class="p">.</span><span class="n">PixelFormat</span><span class="p">,</span><span class="w"> </span><span class="n">conversionPixelFormat</span><span class="p">))</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">IFrame</span><span class="w"> </span><span class="n">convertedFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">frameConverter</span><span class="p">.</span><span class="n">Convert</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span><span class="w"> </span><span class="c1">// Convert to RGB8</span>
+<span class="w">    </span><span class="c1">// Do something with converted frame</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">IFrame</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">preparedStream</span><span class="p">.</span><span class="n">WaitForFrame</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromMilliseconds</span><span class="p">(</span><span class="m">500.0</span><span class="p">));</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">IFrameConverter</span><span class="w"> </span><span class="n">frameConverter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IFrameConverter</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="s">&quot;RGB8&quot;</span><span class="p">);</span>
+<span class="kt">float</span><span class="p">[,]</span><span class="w"> </span><span class="n">transformParamerMatrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetSomeTransformParameterMatrix</span><span class="p">();</span>
+<span class="n">IFrame</span><span class="w"> </span><span class="n">convertedFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">frameConverter</span><span class="p">.</span><span class="n">SetDebayerMode</span><span class="p">(</span><span class="n">DebayerModeValue</span><span class="p">.</span><span class="n">Filter3x3</span><span class="p">)</span>
+<span class="w">                                      </span><span class="p">.</span><span class="n">SetColorCorrectionMatrix3x3</span><span class="p">(</span><span class="n">transformParamerMatrix</span><span class="p">)</span>
+<span class="w">                                      </span><span class="p">.</span><span class="n">Convert</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Disposing the <code class="docutils literal notranslate"><span class="pre">IFrameConverter</span></code> instance deallocates all buffers.
+Disposing the instance of <code class="docutils literal notranslate"><span class="pre">IFrame</span></code> returned by <code class="docutils literal notranslate"><span class="pre">IFrameConverter</span></code> frees the <code class="docutils literal notranslate"><span class="pre">IFrameConverter</span></code>.
+You don’t have to do this manually.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">IFrameConverter</span></code> instance should not be disposed when the user supplies an instance of
+their own implementation of <code class="docutils literal notranslate"><span class="pre">IFrameBufferPool</span></code> using one of the <code class="docutils literal notranslate"><span class="pre">Create</span></code> methods such as <code class="docutils literal notranslate"><span class="pre">Create(IFrame.PixelFormatValue</span> <span class="pre">conversionPixelFormat,</span> <span class="pre">IFrameBufferPool</span> <span class="pre">frameBufferPool)</span></code>.
+because in this case the <code class="docutils literal notranslate"><span class="pre">IFrameBufferPool</span></code> instance itself should rather be disposed.</p>
+</section>
+<section id="listing-chunk-data">
+<h3>Listing chunk data<a class="headerlink" href="#listing-chunk-data" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To use the <em>chunk</em> feature, make sure your camera supports it.</p>
+</div>
+<p>Chunk data are image metadata such as the exposure time that are
+available in the <code class="docutils literal notranslate"><span class="pre">Frame</span></code>. To activate chunk, see the user
+documentation of your camera.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The <em>ChunkData.cs</em> example shows in detail how to list chunk data such
+as the frame count or feature values such as the exposure time. See
+<a class="reference internal" href="examplesOverview.html#vmbnet-list-chunk-data-label"><span class="std std-ref">List Chunk data</span></a>.</p>
+</div>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">ChunkModeActive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span><span class="w"> </span><span class="c1">// Deactivate chunk mode before enabling chunk selections</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">ChunkSelector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ExposureTime&quot;</span><span class="p">;</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">ChunkEnable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">ChunkModeActive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// Reactivate chunk mode</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">FrameReceived</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">     </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">Frame</span><span class="p">;</span>
+<span class="w">     </span><span class="n">frame</span><span class="p">.</span><span class="n">AccessChunkData</span><span class="p">(</span><span class="n">featureContainer</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Frame&#39;s exposure time: {featureContainer.Features.ChunkExposureTime}&quot;</span><span class="p">));</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="loading-and-saving-settings">
+<h3>Loading and saving settings<a class="headerlink" href="#loading-and-saving-settings" title="Permalink to this heading"></a></h3>
+<p>Additionally to the user sets stored in the camera, you can save the feature values as an XML file to your
+host PC. For example, you can configure your camera with Vimba X Viewer, save the settings, and load
+them with any Vimba X API. Modules whose feature values can be saved and loaded are derived from the interface <code class="docutils literal notranslate"><span class="pre">IPersistableFeatureContainer</span></code>.</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="n">FeaturePersistSettings</span><span class="w"> </span><span class="n">featurePersistSettings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">LogLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FeaturePersistSettings</span><span class="p">.</span><span class="n">LogLevelValue</span><span class="p">.</span><span class="n">Trace</span><span class="p">,</span>
+<span class="w">    </span><span class="n">MaximumIterations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Modules</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FeaturePersistSettings</span><span class="p">.</span><span class="n">ModuleValues</span><span class="p">.</span><span class="n">Camera</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">FeaturePersistSettings</span><span class="p">.</span><span class="n">ModuleValues</span><span class="p">.</span><span class="n">TransportLayer</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FeaturePersistSettings</span><span class="p">.</span><span class="n">TypeValue</span><span class="p">.</span><span class="n">NoLUT</span>
+<span class="p">};</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">SaveSettings</span><span class="p">(</span><span class="s">&quot;temp.xml&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">featurePersistSettings</span><span class="p">);</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">LoadSettings</span><span class="p">(</span><span class="s">&quot;temp.xml&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">featurePersistSettings</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="triggering">
+<h3>Triggering<a class="headerlink" href="#triggering" title="Permalink to this heading"></a></h3>
+<section id="software-trigger">
+<h4>Software trigger<a class="headerlink" href="#software-trigger" title="Permalink to this heading"></a></h4>
+<p>Software trigger commands are supported by all Allied Vision cameras. To get started with triggering
+and explore the possibilities, you can use Vimba X Viewer. To program a software trigger application, use
+the following code snippet.</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="n">openCamera</span><span class="p">.</span><span class="n">FrameReceived</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">                            </span><span class="p">{</span>
+<span class="w">                                </span><span class="k">using</span><span class="w"> </span><span class="nn">var</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">Frame</span><span class="p">;</span>
+<span class="w">                                </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Frame acquired&quot;</span><span class="p">);</span>
+<span class="w">                            </span><span class="p">};</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">TriggerSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Software&quot;</span><span class="p">;</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">TriggerSelector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;FrameStart&quot;</span><span class="p">;</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">TriggerMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;On&quot;</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="n">IAcquisition</span><span class="w"> </span><span class="n">acquisition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openCamera</span><span class="p">.</span><span class="n">StartFrameAcquisition</span><span class="p">())</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Thread</span><span class="p">.</span><span class="n">Sleep</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">1.0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">TriggerSoftware</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Thread</span><span class="p">.</span><span class="n">Sleep</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">1.0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">TriggerSoftware</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Thread</span><span class="p">.</span><span class="n">Sleep</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">1.0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">TriggerSoftware</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="trigger-over-ethernet-action-commands">
+<h4>Trigger over Ethernet - Action Commands<a class="headerlink" href="#trigger-over-ethernet-action-commands" title="Permalink to this heading"></a></h4>
+<p>You can broadcast a trigger signal simultaneously to multiple GigE cameras via GigE cable. Action
+Commands must be set first to the camera(s) and then to the API, which sends the Action Commands to
+the camera(s).</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Find more details in the application note:
+<a class="reference external" href="https://cdn.alliedvision.com/fileadmin/content/documents/products/cameras/various/appnote/GigE/Action-Commands_Appnote.pdf">Trigger over Ethernet (ToE) - Action Commands</a></p>
+</div>
+</section>
+</section>
+</section>
+<section id="advanced-api-usage">
+<h2>Advanced API usage<a class="headerlink" href="#advanced-api-usage" title="Permalink to this heading"></a></h2>
+<section id="using-the-api-without-the-dispose-pattern">
+<h3>Using the API without the dispose pattern<a class="headerlink" href="#using-the-api-without-the-dispose-pattern" title="Permalink to this heading"></a></h3>
+<p>We recommend using the dispose pattern to avoid errors. If this is not desired,
+explicit methods are provided for releasing resources.</p>
+<p>Alternatively to the dispose pattern, each disposable interface also provides the
+<code class="docutils literal notranslate"><span class="pre">Close()</span></code> method. You can use it to
+explicitly and unconditionally release a resource, for example:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">openCamera.Close()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stream.Close()</span></code></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using such methods together with the dispose pattern is not supported.</p>
+</div>
+<p>Manual closing via the <code class="docutils literal notranslate"><span class="pre">IOpenCamera.Close()</span></code> method:</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="n">IOpenCamera</span><span class="w"> </span><span class="n">openCamera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">camera</span><span class="p">.</span><span class="n">Open</span><span class="p">();</span>
+
+<span class="c1">// Do something with open camera</span>
+
+<span class="n">openCamera</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="manual-acquisition">
+<h3>Manual acquisition<a class="headerlink" href="#manual-acquisition" title="Permalink to this heading"></a></h3>
+<p>Manual asynchronous acquisition from an initially unopened stream:</p>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="n">IStream</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openCamera</span><span class="p">.</span><span class="n">Stream</span><span class="p">;</span><span class="w"> </span><span class="c1">// Open the first stream</span>
+<span class="n">stream</span><span class="p">.</span><span class="n">FrameReceived</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">                        </span><span class="p">{</span>
+<span class="w">                            </span><span class="n">IFrame</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">Frame</span><span class="p">;</span>
+
+<span class="w">                            </span><span class="c1">// Do something with frame</span>
+
+<span class="w">                            </span><span class="c1">// Requeue the instance of IFrame internally</span>
+<span class="w">                            </span><span class="n">frame</span><span class="p">.</span><span class="n">Release</span><span class="p">();</span>
+<span class="w">                        </span><span class="p">};</span>
+<span class="n">IStreamCapture</span><span class="w"> </span><span class="n">preparedStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stream</span><span class="p">.</span><span class="n">PrepareCapture</span><span class="p">(</span><span class="n">AllocationModeValue</span><span class="p">.</span><span class="n">AnnounceFrame</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">AcquisitionStart</span><span class="p">();</span>
+
+<span class="c1">// Do something while acquiring (FrameReceived events can fire)</span>
+
+<span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">AcquisitionStop</span><span class="p">();</span>
+
+<span class="c1">// Reverse all steps involved in preparing a stream</span>
+<span class="n">preparedStream</span><span class="p">.</span><span class="n">TearDown</span><span class="p">();</span>
+
+<span class="c1">// Remove the registered event handler lambda function</span>
+<span class="n">stream</span><span class="p">.</span><span class="n">RemoveAllFrameEventHandlers</span><span class="p">();</span>
+
+<span class="c1">// Close the stream</span>
+<span class="n">stream</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+</pre></div>
+</div>
+<section id="manual-synchronous-acquisition">
+<h4>Manual synchronous acquisition<a class="headerlink" href="#manual-synchronous-acquisition" title="Permalink to this heading"></a></h4>
+<p>If you don’t use the dispose pattern for manual synchronous acquisition,
+use the following methods for cleanup:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">IFrame.Release()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IStreamCapture.TearDown()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IStream.Close()</span></code></p></li>
+</ul>
+<div class="highlight-c# notranslate"><div class="highlight"><pre><span></span><span class="n">IStream</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">openCamera</span><span class="p">.</span><span class="n">Stream</span><span class="p">;</span>
+<span class="n">IStreamCapture</span><span class="w"> </span><span class="n">preparedStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stream</span><span class="p">.</span><span class="n">PrepareCapture</span><span class="p">(</span><span class="n">AllocationModeValue</span><span class="p">.</span><span class="n">AnnounceFrame</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">AcquisitionStart</span><span class="p">();</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">10</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">IFrame</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">preparedStream</span><span class="p">.</span><span class="n">WaitForFrame</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromMilliseconds</span><span class="p">(</span><span class="m">500</span><span class="p">));</span>
+<span class="w">   </span><span class="c1">// Do something with frame</span>
+<span class="w">   </span><span class="n">frame</span><span class="p">.</span><span class="n">Release</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="n">openCamera</span><span class="p">.</span><span class="n">Features</span><span class="p">.</span><span class="n">AcquisitionStop</span><span class="p">();</span>
+<span class="n">preparedStream</span><span class="p">.</span><span class="n">TearDown</span><span class="p">();</span>
+<span class="n">stream</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="manual-shutdown">
+<h4>Manual shutdown<a class="headerlink" href="#manual-shutdown" title="Permalink to this heading"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">IVmbSystem.Shutdown()</span></code> causes:</p>
+<ul class="simple">
+<li><p>Interface and TL disposal, including Event Handlers</p></li>
+<li><p>Camera disposal, including Event Handlers</p></li>
+</ul>
+</section>
+<section id="multithreading">
+<h4>Multithreading<a class="headerlink" href="#multithreading" title="Permalink to this heading"></a></h4>
+<p>The VmbNET API is thread-safe. Note that multithreading must be organized by the user.
+Be aware that some methods take some time.</p>
+</section>
+</section>
+<section id="logging">
+<h3>Logging<a class="headerlink" href="#logging" title="Permalink to this heading"></a></h3>
+<p>Internal logging from the Vimba X .NET API for bug reporting and other purposes can be configured and activated
+by providing an instance of an implementation of the
+<code class="docutils literal notranslate"><span class="pre">Microsoft.Extensions.Logging.Logger</span></code> interface to the static method <code class="docutils literal notranslate"><span class="pre">IVmbSystem.Logger</span></code>.
+For details, see the examples.</p>
+<section id="logging-levels">
+<h4>Logging levels<a class="headerlink" href="#logging-levels" title="Permalink to this heading"></a></h4>
+<p>The logging levels used by the Vimba X .NET API are Error, Debug and Information.</p>
+</section>
+</section>
+</section>
+<section id="troubleshooting">
+<span id="index-0"></span><h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
+<p>Whenever VmbNET encounters problems it throws an exception of type <code class="docutils literal notranslate"><span class="pre">VmbNETException</span></code>
+with an error message explaining the problem.
+If the error occurred in VmbC, the exception is one of the more specific types
+<code class="docutils literal notranslate"><span class="pre">VmbException&lt;TSourceError&gt;</span></code> and also contains the VmbC error code.
+The generic parameter <code class="docutils literal notranslate"><span class="pre">TSourceError</span></code> is an empty type that indicates the source of the problem,
+such as <code class="docutils literal notranslate"><span class="pre">CameraError</span></code>, <code class="docutils literal notranslate"><span class="pre">FeatureError</span></code> etc.</p>
+</section>
+<section id="visual-studio-extensions">
+<h2>Visual Studio Extensions<a class="headerlink" href="#visual-studio-extensions" title="Permalink to this heading"></a></h2>
+<section id="feature-completion">
+<h3>Feature Completion<a class="headerlink" href="#feature-completion" title="Permalink to this heading"></a></h3>
+<p>The Feature Completion extension for Visual Studio 2022
+provides facilities similar to Visual Studio’s Intellisense
+to allow for easier, faster and reliable development with camera features.
+It can be installed by double-clicking the file FeatureCompletion.vsix,
+located in the same directory as the VmbNET NuGet package,
+and following the instructions in the VSIX installer.</p>
+<p>Since a camera’s features are handled by dynamic types in VmbNET
+to account for the fact that they are not known until runtime,
+Intellisense will not provide completion items
+when typing <code class="docutils literal notranslate"><span class="pre">.Features.</span></code> directly after an <code class="docutils literal notranslate"><span class="pre">IOpenCamera</span></code> instance in the VS editor.
+However, the Feature Completion extension produces
+a drop-down list containing all the feature names in version 2.7 of the GenICam
+Standard Feature Naming Convention (SFNC).
+Highlighting a feature name produces a pop-up describing the details of the feature,
+and selecting a feature name (i.e. pressing the tab key or clicking the left mouse button)
+enters it into the editor.</p>
+<p>The extension also provides completion items for each type member following <code class="docutils literal notranslate"><span class="pre">.Features.</span></code>,
+similar to Intellisense. For example, typing <code class="docutils literal notranslate"><span class="pre">.Features.BinningSelector.EnumEntry.</span></code> produces
+a drop-down list containing all the properties belonging to the <code class="docutils literal notranslate"><span class="pre">IEnumEntry</span></code> interface.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cppAPIManual.html" class="btn btn-neutral float-left" title="CPP API Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pythonAPIManual.html" class="btn btn-neutral float-right" title="Python API Manual" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

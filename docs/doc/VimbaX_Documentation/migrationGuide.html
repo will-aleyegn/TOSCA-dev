@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Migration Guide &mdash; Vimba X Developer Guide 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/tabs.js?v=3030b3cb"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples Overview" href="examplesOverview.html" />
+    <link rel="prev" title="System Settings" href="settings.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Vimba X Developer Guide
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Vimba X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">System Settings</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Migration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#migration-from-vimba">Migration from Vimba</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general-tips">General tips</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#high-level-changes">High-level changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-vimba-x-functions">Using Vimba X functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#previous-vimba-system-functions">Previous Vimba System functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#startup-open-close">Startup, Open, Close</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#query-features-and-camera-info">Query features and camera info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-gentl-modules">Using the GenTL modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-acquisition">Image acquisition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#chunk-replaces-ancillarydata">Chunk replaces AncillaryData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loading-and-saving-settings">Loading and saving settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmb-api-events">Vmb API Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#registers-read-write">Registers Read/Write</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examplesOverview.html">Examples Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manuals:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="driverInstaller.html">Driver Installer Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fwUpdater.html">Firmware Updater Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="viewerGuide.html">Viewer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdkManual.html">SDK Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cAPIManual.html">C API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cppAPIManual.html">CPP API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotNetAPIManual.html">.NET API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPIManual.html">Python API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagetransformManual.html">Image Transform Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help &amp; information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem.html">Vimba X Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legalInformation.html">Legal Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vimba X Developer Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Migration Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="migration-guide">
+<h1>Migration Guide<a class="headerlink" href="#migration-guide" title="Permalink to this heading"></a></h1>
+<section id="migration-from-vimba">
+<h2>Migration from Vimba<a class="headerlink" href="#migration-from-vimba" title="Permalink to this heading"></a></h2>
+<section id="general-tips">
+<h3>General tips<a class="headerlink" href="#general-tips" title="Permalink to this heading"></a></h3>
+<p>To enable easy migration, Vimba and Vimba X are very similar. Changes were mainly made to
+achieve CenICam-compliance, usage with cameras from all manufacturers, and to prepare
+future camera features. Only VmbNET is a completely new API.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Vimba X is not backward compatible with previous Vimba versions.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>To learn basics about Vimba X, read chapter <a class="reference internal" href="about.html"><span class="doc">About Vimba X</span></a> first.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For an easy migration to Vimba X, use the examples.</p>
+</div>
+</section>
+<section id="high-level-changes">
+<h3>High-level changes<a class="headerlink" href="#high-level-changes" title="Permalink to this heading"></a></h3>
+<p>General SDK changes:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">C</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">C++</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">.NET / C#</button><button aria-controls="panel-0-0-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-3" name="0-3" role="tab" tabindex="-1">Python</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><ul class="simple">
+<li><p><strong>API name</strong>: VmbC (instead of VimbaC)</p></li>
+<li><p><strong>Structs</strong>: Some members have changed, some renamings, new structs for new GenTL modules</p></li>
+<li><p><strong>Header files, includes</strong>: Paths and some file names changed, see the examples</p></li>
+<li><p>The <strong>transport layer enums</strong> now comply with GenICam. For details, see
+<a class="reference internal" href="cAPIManual.html#tl-enumerations"><span class="std std-ref">TL enumerations</span></a></p></li>
+</ul>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><ul class="simple">
+<li><p><strong>API name</strong>: VmbCPP (instead of VimbaCPP)</p></li>
+<li><p><strong>Namespace</strong>: VmbCPP (instead of AVT::VmbAPI)</p></li>
+<li><p><strong>VmbSystem</strong>: replaces VimbaSystem</p></li>
+<li><p><strong>Entry point</strong>: VmbSystem singleton</p></li>
+<li><p><strong>Classes</strong>: Some members have changed, some renamings,
+new classes for advanced configuration</p></li>
+<li><p><strong>Header files, includes</strong>: Paths and some file names changed, see the example</p></li>
+<li><p>The <strong>transport layer enums</strong> now comply with GenICam. For details, see
+<a class="reference internal" href="cAPIManual.html#tl-enumerations"><span class="std std-ref">TL enumerations</span></a></p></li>
+<li><p><strong>Shared pointers</strong>: Usage of template functions instead of macros, see
+<span class="xref std std-ref">cppAPIManual:Replacing the shared pointer library</span>.</p></li>
+</ul>
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><ul class="simple">
+<li><p>VmbNET is a completely different API than VimbaNET.</p></li>
+<li><p>You cannot reuse code from Vimba.</p></li>
+</ul>
+</div><div aria-labelledby="tab-0-0-3" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-3" name="0-3" role="tabpanel" tabindex="0"><ul class="simple">
+<li><p><strong>API name</strong>: VmbPy (instead of VimbaPython)</p></li>
+<li><p><strong>Installation</strong>: VmbPy is available as a .whl file, see <a class="reference internal" href="pythonAPIManual.html"><span class="doc">Python API Manual</span></a>.</p></li>
+<li><p><strong>Importing</strong>: via <code class="code docutils literal notranslate"><span class="pre">import</span> <span class="pre">vmbpy</span></code> (instead of import vimba)</p></li>
+<li><p><strong>VmbSystem</strong>: replaces the <cite>Vimba</cite> singleton class</p></li>
+<li><p><strong>Classes</strong>: Some members have changed, some renamings,
+new classes for advanced configuration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Frame.convert_pixel_format</span></code> was changed (see <em>convert_pixel_format.py</em> example).</p></li>
+<li><p>In the examples, the <cite>vimba</cite> variable was renamed to <cite>vmb</cite>.</p></li>
+</ul>
+</div></div>
+<p>Function-related changes:</p>
+<ul class="simple">
+<li><p><strong>Feature access</strong> of Camera, Stream, and Local Device is no longer merged. Access
+via GenTL modules (see graphics below) is now possible.</p></li>
+<li><p>C and C++: New <strong>Convenience function</strong> <code class="docutils literal notranslate"><span class="pre">VmbPayloadSizeGet()</span></code> for correct buffer allocation</p></li>
+<li><p><strong>Save/load settings</strong> allows to differentiate between GenTL modules</p></li>
+<li><p><strong>Chunk</strong> (GenICam-compliant implementation) replaces AncillaryData</p></li>
+<li><p><strong>Image Transform</strong>: <code class="docutils literal notranslate"><span class="pre">VmbGetVersion()</span></code> was renamed to <code class="docutils literal notranslate"><span class="pre">VmbGetImageTransformVersion()</span></code>.
+<code class="docutils literal notranslate"><span class="pre">VmbSetImageInfoFromPixelFormat()</span></code>: removed paramater <code class="docutils literal notranslate"><span class="pre">StringLength</span></code>.</p></li>
+</ul>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>Deinstalling Vimba X always deletes the includes examples, even if you have changed them.
+To preserve your changes, save the examples to a different location before deinstalling Vimba X.</p></li>
+<li><p>For details about the examples, see <a class="reference internal" href="examplesOverview.html"><span class="doc">Examples Overview</span></a>.</p></li>
+</ul>
+<p>GigE cameras:</p>
+<ul class="simple">
+<li><p>By default, Broadcast is enabled (instead of Discovery Once).</p></li>
+<li><p>Access Mode Config is not available - please use the VmbC PersistentIp example to change
+camera’s IP address permanently.</p></li>
+</ul>
+<p>Transport layers:</p>
+<ul class="simple">
+<li><p>Changed display name (AVT instead of Vimba) to ease distinguishing them from the TLs
+included in Vimba.</p></li>
+</ul>
+<p>Higher required version:</p>
+<ul class="simple">
+<li><p><strong>Visual Studio</strong>: Example solutions and release builds require VS 2017 or higher</p></li>
+<li><p><strong>C++ version</strong>: The C++ API is compatible with C++ 11 and higher</p></li>
+</ul>
+<p><strong>NEW</strong>: Vimba X features are now accessible in a GenICam-compliant way through GenTL modules:</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/GenTL-modules.png"><img alt="Vimba X at a glance" src="_images/GenTL-modules.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">Vimba X GenTL modules</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>Vimba merges features</strong> of the Camera, Stream, and Local Device -
+they are all accessible via Camera.</p>
+<p><strong>Vimba X separates these features</strong> in a GenICam-compliant way as GenTL modules,
+so that you can access and control features even if they have the same name
+(such as <cite>Width</cite> on the camera and the frame grabber). As a consequence,
+<strong>the Camera handle only accesses camera features</strong>, which is sufficient for
+many applications.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Accessing the Local Device is only necessary for advanced configuration. To access it,
+the camera must be open.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The first stream is opened implicitly by opening the camera object. You don’t need
+to work with Stream to acquire images.</p>
+</div>
+<p>To enable advanced configuration, the settings of the frame grabber
+or TL features can now be accessed directly through the TransportLayer module
+( named “System” in the official GenICam standard).</p>
+</section>
+<section id="using-vimba-x-functions">
+<h3>Using Vimba X functions<a class="headerlink" href="#using-vimba-x-functions" title="Permalink to this heading"></a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The following sections guide you through signficant function changes.</p>
+</div>
+<section id="previous-vimba-system-functions">
+<h4>Previous Vimba System functions<a class="headerlink" href="#previous-vimba-system-functions" title="Permalink to this heading"></a></h4>
+<p>Compared to Vimba, some previous “Vimba System” functions are now
+available as functions of the TransportLayer module:</p>
+<ul class="simple">
+<li><p>GigE camera discovery features, including Force IP</p></li>
+<li><p>Discovery Events</p></li>
+<li><p>Action Commands</p></li>
+</ul>
+</section>
+<section id="startup-open-close">
+<h4>Startup, Open, Close<a class="headerlink" href="#startup-open-close" title="Permalink to this heading"></a></h4>
+<p>The Vimba X API initialization opens the Camera module and additionally the
+TransportLayer and Interface modules. The corresponding handles are
+valid throughout a session.</p>
+<p>The following changes apply to Vimba X Startup, Open, and Close functions.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>If your TL or camera is not found or if you experience other issues, see <a class="reference internal" href="troubleshooting.html"><span class="doc">Troubleshooting</span></a>.</p>
+</div>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">C</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">C++</button><button aria-controls="panel-1-1-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-2" name="1-2" role="tab" tabindex="-1">Python</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Startup, open, close - new or changed functions</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbStartup()</p></td>
+<td><p>Extended - optional parameter to control TL usage. <br>
+Opens camera, transport layer, and interface modules</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbCameraOpen()</p></td>
+<td><p>Modified - camera handle only provides access <br>
+to camera (Remote Device) features</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbCameraClose()</p></td>
+<td><p>Modified - blocks until capture ended and all callbacks <br>
+have been returned</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbInterfaceOpen()</p></td>
+<td><p>Removed - interface handle is directly available</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbInterfaceClose()</p></td>
+<td><p>Removed - interface handle is directly available</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbShutdown()</p></td>
+<td><p>Modified - waits until frame callbacks are completed</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbTransportLayersList()</p></td>
+<td><p>New - for querying the new struct VmbTransportLayerInfo_t</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbFeatureListAffected()</p></td>
+<td><p>Removed - not part of the GenICam standard</p></td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal notranslate"><span class="pre">VmbStartup()</span></code> function was extended with an optional parameter. By default, the parameter is NULL.
+You can change it to use TLs from third-party vendors.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See the SDK Manual, chapter <a class="reference internal" href="sdkManual.html#tl-activation-and-deactivation"><span class="std std-ref">TL activation and deactivation</span></a>.</p>
+</div>
+<p>To quickly learn how to access features of the GenTL modules, see the <em>ListFeatures</em> example.
+Details and more possibilities are listed in the API manual.</p>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Startup, open, close - new or changed functions</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbSystem::Startup()</p></td>
+<td><p>Opens camera, TL, and interface modules. Optional <br>
+parameter VmbFilePathChar_t* pathConfiguration to <br>
+control TL usage.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Camera::Open()</p></td>
+<td><p>Modified - camera handle only provides access <br>
+to camera (Remote Device) features</p></td>
+</tr>
+<tr class="row-even"><td><p>Camera::Close()</p></td>
+<td><p>Modified - blocks until capture ended and all callbacks <br>
+have been returned</p></td>
+</tr>
+<tr class="row-odd"><td><p>Interface::Open()</p></td>
+<td><p>Removed - API startup opens interfaces</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbSystem::OpenInterfaceByID()</p></td>
+<td><p>Removed - API startup opens interfaces</p></td>
+</tr>
+<tr class="row-odd"><td><p>Interface::Closed()</p></td>
+<td><p>Removed - API shutdown closes interfaces</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbSystem::Shutdown()</p></td>
+<td><p>Modified - waits until frame callbacks are completed</p></td>
+</tr>
+<tr class="row-odd"><td><p>Interface::GetPermittedAccess()</p></td>
+<td><p>Removed - contained in API startup</p></td>
+</tr>
+<tr class="row-even"><td><p>BaseFeature::GetAffectedFeatures()</p></td>
+<td><p>Removed - not part of the GenICam standard</p></td>
+</tr>
+</tbody>
+</table>
+<p>The function <code class="docutils literal notranslate"><span class="pre">VmbSystem::Startup()</span></code> is overloaded to control TL usage.
+You can change it to use TLs from third-party vendors.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See the SDK Manual, chapter <a class="reference internal" href="sdkManual.html#tl-activation-and-deactivation"><span class="std std-ref">TL activation and deactivation</span></a>.</p>
+</div>
+</div><div aria-labelledby="tab-1-1-2" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-2" name="1-2" role="tabpanel" tabindex="0"><table class="docutils align-default" id="id4">
+<caption><span class="caption-text">Startup, open, close - new or changed functions</span><a class="headerlink" href="#id4" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>set_path_configuration()</p></td>
+<td><p>New - method to set optional paramater for <br>
+TL configuration, see SDK manual for details</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbSystem.get_all_transport_layers</p></td>
+<td><p>New - enumerates TLs (only required for <br>
+advanced configuration)</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbSystem.get_transport_layer_by_id()</p></td>
+<td><p>New - only required for advanced configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbSystem.get_interface_by_id()</p></td>
+<td><p>New - only required for advanced configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbSystem.set_network_discovery()</p></td>
+<td><p>Removed - functionality via GigE TL</p></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</section>
+<section id="query-features-and-camera-info">
+<h4>Query features and camera info<a class="headerlink" href="#query-features-and-camera-info" title="Permalink to this heading"></a></h4>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-2-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-2-2-0" name="2-0" role="tab" tabindex="0">C</button><button aria-controls="panel-2-2-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-1" name="2-1" role="tab" tabindex="-1">C++</button><button aria-controls="panel-2-2-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-2" name="2-2" role="tab" tabindex="-1">Python</button></div><div aria-labelledby="tab-2-2-0" class="sphinx-tabs-panel" id="panel-2-2-0" name="2-0" role="tabpanel" tabindex="0"><p>New features are available to query the valid value set of features and to query the camera
+info by handle.</p>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-text">Features and camera info - new functions</span><a class="headerlink" href="#id5" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbFeatureIntValidValueSetQuery()</p></td>
+<td><p>New: Query the valid value set of an <br>
+integer feature</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbCameraInfoQueryByHandle()</p></td>
+<td><p>New: Query the camera info given a local or <br>
+remote device handle</p></td>
+</tr>
+</tbody>
+</table>
+</div><div aria-labelledby="tab-2-2-1" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-1" name="2-1" role="tabpanel" tabindex="0"><p>The new function <code class="docutils literal notranslate"><span class="pre">feature::GetValidValueSet(Int64Vector&amp;</span> <span class="pre">validValues)</span></code>
+delivers the valid value set of an integer feature. Calling this function from the feature object
+of another type delivers VmbErrorWrongType. If some integer feature does not support valid value set,
+the error VmbErrorValidValueSetNotPresent is returned.</p>
+</div><div aria-labelledby="tab-2-2-2" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-2" name="2-2" role="tabpanel" tabindex="0"><table class="docutils align-default" id="id6">
+<caption><span class="caption-text">Features and camera info - removed functions</span><a class="headerlink" href="#id6" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>get_features_affected_by()</p></td>
+<td><p>Removed - not part of the GenICam standard</p></td>
+</tr>
+<tr class="row-odd"><td><p>has_affected_features()</p></td>
+<td><p>Removed - not part of the GenICam standard</p></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</section>
+<section id="using-the-gentl-modules">
+<h4>Using the GenTL modules<a class="headerlink" href="#using-the-gentl-modules" title="Permalink to this heading"></a></h4>
+<p>In contrast to Vimba, the retrieved Camera handle accesses camera features only.
+To access features of the other GenTL modules, several options are available.</p>
+<p>In many cases, it is practical to use:</p>
+<ul class="simple">
+<li><p><strong>C API</strong>: Members of the *info structs, especially Struct VmbCameraInfo_t.</p></li>
+<li><p><strong>C++ API</strong>: Members of the camera class</p></li>
+<li><p><strong>Python API</strong>: Members of the camera class</p></li>
+</ul>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-3-3-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-3-3-0" name="3-0" role="tab" tabindex="0">C</button><button aria-controls="panel-3-3-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-3-3-1" name="3-1" role="tab" tabindex="-1">C++</button><button aria-controls="panel-3-3-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-3-3-2" name="3-2" role="tab" tabindex="-1">Python</button></div><div aria-labelledby="tab-3-3-0" class="sphinx-tabs-panel" id="panel-3-3-0" name="3-0" role="tabpanel" tabindex="0"><p>For easy access to the GenTL modules, their handles are added to the *info
+structs:</p>
+<ul class="simple">
+<li><p><strong>New</strong>: <a class="reference internal" href="cAPIManual.html#struct-vmbtransportlayerinfo-t"><span class="std std-ref">Struct VmbTransportLayerInfo_t</span></a>, which can be queried with the
+new function <code class="docutils literal notranslate"><span class="pre">VmbTransportLayersList()</span></code>.</p></li>
+<li><p><strong>Modified</strong>: See <a class="reference internal" href="cAPIManual.html#struct-vmbcamerainfo-t"><span class="std std-ref">Struct VmbCameraInfo_t</span></a> and <a class="reference internal" href="cAPIManual.html#struct-vmbinterfaceinfo-t"><span class="std std-ref">Struct VmbInterfaceInfo_t</span></a>.
+Member functions that are now redundant were removed. Handles to all related GenTL modules were added.</p></li>
+</ul>
+<p><strong>Listing the GenTL modules</strong></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">VmbGenTLSystemsList()</span></code> function is new. It replaces <code class="docutils literal notranslate"><span class="pre">VmbInterfacesList()</span></code>.</p>
+</div><div aria-labelledby="tab-3-3-1" class="sphinx-tabs-panel" hidden="true" id="panel-3-3-1" name="3-1" role="tabpanel" tabindex="0"><p>The C++ API contains additional class member functions and convenience functions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For image acquisition, you can continue using the Camera class. The Stream
+module is required only to access data such as statistics of GigE cameras and for
+multiple streams.</p>
+</div>
+<p>The following additional class member functions have been added:</p>
+<blockquote>
+<div><dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VmbSystem</span></span></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li><p>GetInterfacesByTL()</p></li>
+<li><p>GetCamerasByTL()</p></li>
+<li><p>GetCamerasByInterface()</p></li>
+<li><p>GetTransportLayers()</p></li>
+<li><p>GetTransportLayerByID()</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Camera</span></span></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li><p>GetInterface()</p></li>
+<li><p>GetTransportLayer()</p></li>
+<li><p>GetStreams() (not needed for cameras with one stream)</p></li>
+<li><p>GetLocalDevice()</p></li>
+<li><p>GetInterfaceByID()</p></li>
+<li><p>GetTransportLayer() (LocalDevice, camera must be open)</p></li>
+<li><p>GetStreams() (not needed, implemented for future use)</p></li>
+<li><p>GetLocalDevice()(camera must be open)</p></li>
+<li><p>GetExtendedID()</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Frame</span></span></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li><p>AccessChunkData()</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Interface</span></span></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li><p>GetCameras()</p></li>
+<li><p>GetTransportLayer()</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TransportLayer</span></span></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li><p>TransportLayer()</p></li>
+<li><p>GetInterfaces()</p></li>
+<li><p>GetCameras()</p></li>
+<li><p>GetID()</p></li>
+<li><p>GetName()</p></li>
+<li><p>GetModelName()</p></li>
+<li><p>GetVendor()</p></li>
+<li><p>GetVersion()</p></li>
+<li><p>GetPath()</p></li>
+<li><p>GetType()</p></li>
+</ul>
+</div></blockquote>
+<p>For an overview, see <a class="reference internal" href="cppAPIManual.html#c-api-diagram"><span class="std std-ref">C++ API diagram</span></a>.</p>
+</div><div aria-labelledby="tab-3-3-2" class="sphinx-tabs-panel" hidden="true" id="panel-3-3-2" name="3-2" role="tabpanel" tabindex="0"><p>The Python API contains additional class member functions and convenience functions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For image acquisition, you can continue using the Camera class. The Stream
+module is required only to access data such as statistics of GigE cameras and for
+multiple streams.</p>
+</div>
+<p>The following additional class member functions have been added:</p>
+<blockquote>
+<div><dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VmbSystem</span></span></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li><p>get_interfaces_by_tl()</p></li>
+<li><p>get_cameras_by_tl()</p></li>
+<li><p>get_cameras_by_interface()</p></li>
+<li><p>get_transport_layers()</p></li>
+<li><p>get_transport_layer_by_id()</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Camera</span></span></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li><p>get_interface()</p></li>
+<li><p>get_transport_layer()</p></li>
+<li><p>get_streams() (not needed for cameras with one stream)</p></li>
+<li><p>get_local_device()</p></li>
+<li><p>get_interface_by_id()</p></li>
+<li><p>get_transport_layer() (LocalDevice, camera must be open)</p></li>
+<li><p>get_streams()</p></li>
+<li><p>get_extended_id()</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Frame</span></span></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li><p>access_chunk_data()</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Interface</span></span></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li><p>get_cameras()</p></li>
+<li><p>get_transport_layer()</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TransportLayer</span></span></dt>
+<dd></dd></dl>
+
+<ul class="simple">
+<li><p>get_interfaces()</p></li>
+<li><p>get_cameras()</p></li>
+<li><p>get_id()</p></li>
+<li><p>get_name()</p></li>
+<li><p>get_model_name()</p></li>
+<li><p>get_vendor()</p></li>
+<li><p>get_version()</p></li>
+<li><p>get_path()</p></li>
+<li><p>get_type()</p></li>
+</ul>
+</div></blockquote>
+</div></div>
+</section>
+<section id="image-acquisition">
+<h4>Image acquisition<a class="headerlink" href="#image-acquisition" title="Permalink to this heading"></a></h4>
+<p><strong>New convenience function</strong></p>
+<p><strong>C and C++</strong> only: Vimba X contains the new convenience function <code class="docutils literal notranslate"><span class="pre">VmbPayloadSizeGet()</span></code>.
+Please use it to apply correct buffer allocation.</p>
+<p>If the transport layer’s stream module provides a payload size,
+this has priority over the payload size of the camera. In Vimba, this
+behavior is hidden from the user and the camera’s payload size is overwritten
+by the payload size of the stream.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-4-4-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-4-4-0" name="4-0" role="tab" tabindex="0">C</button><button aria-controls="panel-4-4-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-4-4-1" name="4-1" role="tab" tabindex="-1">C++</button><button aria-controls="panel-4-4-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-4-4-2" name="4-2" role="tab" tabindex="-1">Python</button></div><div aria-labelledby="tab-4-4-0" class="sphinx-tabs-panel" id="panel-4-4-0" name="4-0" role="tabpanel" tabindex="0"><p><strong>Frame announce and frame revoke</strong></p>
+<ul class="simple">
+<li><p>The function <code class="docutils literal notranslate"><span class="pre">VmbFrameAnnounce()</span></code> was changed. It can be called during acquisition to add more frames
+(if supported by the TL).</p></li>
+</ul>
+<p>The function <code class="docutils literal notranslate"><span class="pre">VmbFrameRevoke()</span></code> was changed:</p>
+<ul class="simple">
+<li><p>Frames can be revoked during acquisition if they are currently
+not queued or currently in use in a pending frame callback.</p></li>
+<li><p>Frame buffers which are allocated by the TL are deleted by the TL.</p></li>
+<li><p>The call reports an error after <code class="docutils literal notranslate"><span class="pre">VmbCaptureQueueFlush()</span></code> if the frame
+is still in use by a currently executed callback.</p></li>
+</ul>
+<p><strong>Capture start</strong></p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">VmbCaptureStart()</span></code> was changed.
+The call discards all pending frame callbacks.
+Only the currently running callback is completed.</p>
+<p><strong>Capture end</strong></p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">VmbCaptureEnd()</span></code> was changed:</p>
+<p>Only the first call for a certain frame waits. All other parallel calls
+that try to wait for the same frame return an error (no multithreaded
+wait for the same frame). If a callback is executed when capture is stopped,
+this function does not return until the callback returns.</p>
+<p><strong>Capture frame wait</strong></p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">VmbCaptureFrameWait()</span></code> was changed.
+Only the first call for a certain frame waits. All other parallel calls
+that try to wait for the same frame return an error (no multithreaded
+wait for the same frame).</p>
+<p><strong>Frame callback</strong></p>
+<p>The frame callback needs the additional argument <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">VmbHandle_t</span> <span class="pre">streamHandle</span></code>.
+For details, see the AsynchronousGrab example.</p>
+<p><strong>Image size</strong></p>
+<p>In struct <code class="docutils literal notranslate"><span class="pre">VmbFrame_t</span></code>, entry VmbUint32_t imageSize was removed.</p>
+<p><strong>Payload type</strong></p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">GetPayloadType()</span></code> is new.</p>
+</div><div aria-labelledby="tab-4-4-1" class="sphinx-tabs-panel" hidden="true" id="panel-4-4-1" name="4-1" role="tabpanel" tabindex="0"><p><strong>Frame announce and frame revoke</strong></p>
+<ul class="simple">
+<li><p>The function <code class="docutils literal notranslate"><span class="pre">AnnounceFrame()</span></code> was changed. It can be called during acquisition to add more frames
+(if supported by the TL).</p></li>
+</ul>
+<p>The function <code class="docutils literal notranslate"><span class="pre">RevokeFrame()</span></code> was changed:</p>
+<ul class="simple">
+<li><p>Frames can be revoked during acquisition if they are currently
+not queued or currently in use in a pending frame callback.</p></li>
+<li><p>Frame buffers which are allocated by the TL are deleted by the TL.</p></li>
+<li><p>The call reports an error after <code class="docutils literal notranslate"><span class="pre">FlushQueue()</span></code> if the frame
+is still in use by a currently executed callback.</p></li>
+</ul>
+<p><strong>Capture start</strong></p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">StartCapture()</span></code> was changed.
+The call discards all pending frame callbacks.
+Only the currently running callback is completed.</p>
+<p><strong>Capture end</strong></p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">Camera::EndCapture()</span></code> was changed:</p>
+<p>Only the first call for a certain frame waits. All other parallel calls
+that try to wait for the same frame return an error (no multithreaded
+wait for the same frame). If a callback is executed when capture is stopped,
+this function does not return until the callback returns.
+<strong>Capture frame wait</strong></p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">VmbCaptureFrameWait()</span></code>
+is only used in <code class="docutils literal notranslate"><span class="pre">Camera::AcquireSingleImage()</span></code>.</p>
+<p><strong>Stream buffer alignment</strong></p>
+<p>New convenience function to query the required buffer alignment
+from the Stream module: <code class="docutils literal notranslate"><span class="pre">GetStreamBufferAlignment</span></code></p>
+<p><strong>Image size</strong></p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">Frame::GetImageSize()</span></code> was removed.</p>
+<p><strong>Payload type</strong></p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">GetPayloadType()</span></code> is new.</p>
+</div><div aria-labelledby="tab-4-4-2" class="sphinx-tabs-panel" hidden="true" id="panel-4-4-2" name="4-2" role="tabpanel" tabindex="0"><ul class="simple">
+<li><p>The method <code class="docutils literal notranslate"><span class="pre">get_image_size()</span></code> was removed.</p></li>
+<li><p>The frame handler additionally contains <code class="docutils literal notranslate"><span class="pre">stream:</span> <span class="pre">Stream</span></code>.
+Camera and frame within the frame handler are unchanged.</p></li>
+<li><p>New method: <code class="docutils literal notranslate"><span class="pre">Camera.get_frame_with_context</span></code>.</p></li>
+<li><p>Method <code class="docutils literal notranslate"><span class="pre">Camera.get_frame_generator</span></code> changed behavior:
+Frames generated with this method cannot be used outside of the loop.
+To enable frame usage outside of the loop, copy them.</p></li>
+</ul>
+</div></div>
+</section>
+<section id="chunk-replaces-ancillarydata">
+<h4>Chunk replaces AncillaryData<a class="headerlink" href="#chunk-replaces-ancillarydata" title="Permalink to this heading"></a></h4>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-5-5-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-5-5-0" name="5-0" role="tab" tabindex="0">C</button><button aria-controls="panel-5-5-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-5-5-1" name="5-1" role="tab" tabindex="-1">C++</button><button aria-controls="panel-5-5-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-5-5-2" name="5-2" role="tab" tabindex="-1">Python</button></div><div aria-labelledby="tab-5-5-0" class="sphinx-tabs-panel" id="panel-5-5-0" name="5-0" role="tabpanel" tabindex="0"><p>The function <code class="docutils literal notranslate"><span class="pre">VmbChunkDataAccess()</span></code> is new. It replaces functions
+for “AncillaryData”. In contrast to <code class="docutils literal notranslate"><span class="pre">VmbAncillaryDataOpen()</span></code>, no
+ancillary data handle is returned. To access Chunk data, use VmbChunkAccessCallback.</p>
+<p>For details, see the C API manual, section <a class="reference internal" href="cAPIManual.html#chunk"><span class="std std-ref">Chunk</span></a>.</p>
+<table class="docutils align-default" id="id7">
+<caption><span class="caption-text">Chunk replaces AncillaryData</span><a class="headerlink" href="#id7" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbAncillaryDataOpen()</p></td>
+<td><p>Removed - replaced by VmbChunkDataParse()</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbAncillaryDataClose()</p></td>
+<td><p>Removed - replaced by VmbChunkDataParse()</p></td>
+</tr>
+<tr class="row-even"><td><p>VmbChunkDataAccess()</p></td>
+<td><p>New - replaces VmbAncillaryDataOpen() and <br>
+VmbAncillaryDataClose()</p></td>
+</tr>
+</tbody>
+</table>
+</div><div aria-labelledby="tab-5-5-1" class="sphinx-tabs-panel" hidden="true" id="panel-5-5-1" name="5-1" role="tabpanel" tabindex="0"><p>The AncillaryData class was removed. To access chunk, use <code class="docutils literal notranslate"><span class="pre">Frame::AccessChunkData()</span></code>,
+calling it from <code class="docutils literal notranslate"><span class="pre">FrameObserver::FrameReceived()</span></code> as shown in the <em>ChunkAccess</em> example.</p>
+<table class="docutils align-default" id="id8">
+<caption><span class="caption-text">Chunk replaces AncillaryData</span><a class="headerlink" href="#id8" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Frame::GetAncillaryData()</p></td>
+<td><p>Removed</p></td>
+</tr>
+<tr class="row-odd"><td><p>Frame::GetAncillarySize()</p></td>
+<td><p>Removed</p></td>
+</tr>
+<tr class="row-even"><td><p>Frame::AccessChunkData</p></td>
+<td><p>New</p></td>
+</tr>
+</tbody>
+</table>
+</div><div aria-labelledby="tab-5-5-2" class="sphinx-tabs-panel" hidden="true" id="panel-5-5-2" name="5-2" role="tabpanel" tabindex="0"><table class="docutils align-default" id="id9">
+<caption><span class="caption-text">Chunk replaces AncillaryData</span><a class="headerlink" href="#id9" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>frame.get_ancillary_data()</p></td>
+<td><p>Removed</p></td>
+</tr>
+<tr class="row-odd"><td><p>frame.get_ancillary_size()</p></td>
+<td><p>Removed</p></td>
+</tr>
+<tr class="row-even"><td><p>frame.access_chunk_data()</p></td>
+<td><p>New</p></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</section>
+<section id="loading-and-saving-settings">
+<h4>Loading and saving settings<a class="headerlink" href="#loading-and-saving-settings" title="Permalink to this heading"></a></h4>
+<p>Vimba X enables you to load and save settings of the GenTL module of your choice or
+even of the whole system configuration including camera and TL settings. Therefore,
+you cannot reuse settings that you have saved with Vimba.
+Details are described in the API manuals.</p>
+</section>
+<section id="vmb-api-events">
+<h4>Vmb API Events<a class="headerlink" href="#vmb-api-events" title="Permalink to this heading"></a></h4>
+<p>Events as an API feature are now implemented and named in a GenICam-compliant way, the
+table below provides some examples of renamed functions.</p>
+<p>The events inform changes of the camera list or the interface list.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-6-6-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-6-6-0" name="6-0" role="tab" tabindex="0">C</button><button aria-controls="panel-6-6-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-6-6-1" name="6-1" role="tab" tabindex="-1">C++</button><button aria-controls="panel-6-6-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-6-6-2" name="6-2" role="tab" tabindex="-1">Python</button></div><div aria-labelledby="tab-6-6-0" class="sphinx-tabs-panel" id="panel-6-6-0" name="6-0" role="tabpanel" tabindex="0"><table class="docutils align-default" id="id10">
+<caption><span class="caption-text">Events - examples of renamed features</span><a class="headerlink" href="#id10" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>EventCameraDiscovery</p></td>
+<td><p>Renamed DiscoveryCameraEvent</p></td>
+</tr>
+<tr class="row-odd"><td><p>EventInterfaceDiscovery</p></td>
+<td><p>Renamed DiscoveryInterfaceEvent</p></td>
+</tr>
+</tbody>
+</table>
+</div><div aria-labelledby="tab-6-6-1" class="sphinx-tabs-panel" hidden="true" id="panel-6-6-1" name="6-1" role="tabpanel" tabindex="0"><table class="docutils align-default" id="id11">
+<caption><span class="caption-text">Events -  new features</span><a class="headerlink" href="#id11" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>EventCameraDiscovery</p></td>
+<td><p>New feature</p></td>
+</tr>
+<tr class="row-odd"><td><p>EventInterfaceDiscovery</p></td>
+<td><p>New feature</p></td>
+</tr>
+</tbody>
+</table>
+</div><div aria-labelledby="tab-6-6-2" class="sphinx-tabs-panel" hidden="true" id="panel-6-6-2" name="6-2" role="tabpanel" tabindex="0"><p>See changed event names in tab <strong>C</strong>.</p>
+</div></div>
+</section>
+<section id="registers-read-write">
+<h4>Registers Read/Write<a class="headerlink" href="#registers-read-write" title="Permalink to this heading"></a></h4>
+<p>Functions for reading and writing registers were removed.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-7-7-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-7-7-0" name="7-0" role="tab" tabindex="0">C</button><button aria-controls="panel-7-7-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-7-7-1" name="7-1" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-7-7-0" class="sphinx-tabs-panel" id="panel-7-7-0" name="7-0" role="tabpanel" tabindex="0"><table class="docutils align-default" id="id12">
+<caption><span class="caption-text">Registers - removed functions</span><a class="headerlink" href="#id12" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VmbRegistersRead()</p></td>
+<td><p>Removed</p></td>
+</tr>
+<tr class="row-odd"><td><p>VmbRegistersWrite()</p></td>
+<td><p>Removed</p></td>
+</tr>
+</tbody>
+</table>
+</div><div aria-labelledby="tab-7-7-1" class="sphinx-tabs-panel" hidden="true" id="panel-7-7-1" name="7-1" role="tabpanel" tabindex="0"><table class="docutils align-default" id="id13">
+<caption><span class="caption-text">Registers - removed functions</span><a class="headerlink" href="#id13" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ReadRegisters()</p></td>
+<td><p>Removed</p></td>
+</tr>
+<tr class="row-odd"><td><p>WriteRegisters()</p></td>
+<td><p>Removed</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default" id="id14">
+<caption><span class="caption-text">Registers - removed functions</span><a class="headerlink" href="#id14" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>read_registers()</p></td>
+<td><p>Removed</p></td>
+</tr>
+<tr class="row-odd"><td><p>write_registers()</p></td>
+<td><p>Removed</p></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="settings.html" class="btn btn-neutral float-left" title="System Settings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examplesOverview.html" class="btn btn-neutral float-right" title="Examples Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

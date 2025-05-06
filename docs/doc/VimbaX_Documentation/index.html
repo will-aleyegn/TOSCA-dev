@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vimba X Developer Guide &mdash; Vimba X Developer Guide 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="About Vimba X" href="about.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            Vimba X Developer Guide
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Vimba X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">System Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrationGuide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examplesOverview.html">Examples Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manuals:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="driverInstaller.html">Driver Installer Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fwUpdater.html">Firmware Updater Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="viewerGuide.html">Viewer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sdkManual.html">SDK Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cAPIManual.html">C API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cppAPIManual.html">CPP API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dotNetAPIManual.html">.NET API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPIManual.html">Python API Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagetransformManual.html">Image Transform Manual</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Help &amp; information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem.html">Vimba X Ecosystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legalInformation.html">Legal Information</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Vimba X Developer Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Vimba X Developer Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vimba-x-developer-guide">
+<h1>Vimba X Developer Guide<a class="headerlink" href="#vimba-x-developer-guide" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Get Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Vimba X</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#compatibility">Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#supported-features">Supported features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">System Settings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#all-operating-systems">All operating systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#linux-and-arm">Linux and ARM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#macos">macOS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="migrationGuide.html">Migration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="migrationGuide.html#migration-from-vimba">Migration from Vimba</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examplesOverview.html">Examples Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examplesOverview.html#compatibility-and-usage">Compatibility and usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examplesOverview.html#vmbc-examples">VmbC examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examplesOverview.html#vmbcpp-examples">VmbCPP examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examplesOverview.html#vmbnet-examples">VmbNET examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examplesOverview.html#vmbpy-examples">VmbPy examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Manuals:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="driverInstaller.html">Driver Installer Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="driverInstaller.html#main-window">Main window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="driverInstaller.html#changing-drivers">Changing drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="driverInstaller.html#command-line-options">Command line options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fwUpdater.html">Firmware Updater Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fwUpdater.html#firmware-updater">Firmware Updater</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="viewerGuide.html">Viewer Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="viewerGuide.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="viewerGuide.html#bandwidth-manager">Bandwidth Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="viewerGuide.html#setting-up-your-camera">Setting up your camera</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sdkManual.html">SDK Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sdkManual.html#architecture-and-apis">Architecture and APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdkManual.html#gentl-modules">GenTL modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdkManual.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdkManual.html#tl-activation-and-deactivation">TL activation and deactivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdkManual.html#synchronous-and-asynchronous-image-acquisition">Synchronous and asynchronous image acquisition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdkManual.html#notifications">Notifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdkManual.html#building-applications">Building applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cAPIManual.html">C API Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cAPIManual.html#introduction-to-the-api">Introduction to the API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cAPIManual.html#api-usage">API usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cppAPIManual.html">CPP API Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cppAPIManual.html#introduction-to-the-api">Introduction to the API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cppAPIManual.html#api-usage">API usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dotNetAPIManual.html">.NET API Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dotNetAPIManual.html#introduction-to-the-api">Introduction to the API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dotNetAPIManual.html#api-usage">API usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dotNetAPIManual.html#advanced-api-usage">Advanced API usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dotNetAPIManual.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dotNetAPIManual.html#visual-studio-extensions">Visual Studio Extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pythonAPIManual.html">Python API Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pythonAPIManual.html#introduction-to-the-api">Introduction to the API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pythonAPIManual.html#compatibility">Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pythonAPIManual.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pythonAPIManual.html#general-aspects-of-the-api">General aspects of the API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pythonAPIManual.html#api-usage">API usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pythonAPIManual.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pythonAPIManual.html#logging">Logging</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="imagetransformManual.html">Image Transform Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="imagetransformManual.html#general-aspects-of-the-library">General aspects of the library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imagetransformManual.html#supported-image-data-formats">Supported image data formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imagetransformManual.html#supported-transformations">Supported transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imagetransformManual.html#api-usage">API usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imagetransformManual.html#transformation-examples">Transformation examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imagetransformManual.html#function-reference">Function reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imagetransformManual.html#structs">Structs</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Help &amp; information:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#error-codes">Error codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#general-issues">General issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#issues-by-camera-interface">Issues by camera interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#typical-linux-issues">Typical Linux issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#typical-macos-issues">Typical macOS issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#technical-support">Technical support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ecosystem.html">Vimba X Ecosystem</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#vimba-x-bridge-for-open-evision">Vimba X Bridge for Open eVision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#camera-adapter-for-micro-manager">Camera Adapter for Micro-Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#vimba-x-ros2-driver">Vimba X ROS2 driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#gstreamer-plugin">GStreamer plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#defective-pixel-manager">Defective Pixel Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#vimba-x-cognex-adapter">Vimba X Cognex Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#compatible-transport-layers-and-hardware">Compatible transport layers and hardware</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="legalInformation.html">Legal Information</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="legalInformation.html#licensing-terms">Licensing terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="legalInformation.html#open-source-licenses">Open source licenses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="legalInformation.html#trademarks-and-copyright">Trademarks and copyright</a></li>
+<li class="toctree-l2"><a class="reference internal" href="legalInformation.html#contact-address">Contact address</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="about.html" class="btn btn-neutral float-right" title="About Vimba X" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

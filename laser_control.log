@@ -52,3 +52,182 @@
 2025-05-06 01:14:09,751 - src.hardware.vmpy_camera - INFO - Camera initialized: DEV_1AB22C04E780
 2025-05-06 01:14:10,241 - src.hardware.vmpy_camera - ERROR - Error initializing Vimba camera: 'IntFeature' object has no attribute 'get_value'
 2025-05-06 01:14:17,424 - src.gui.main_window - INFO - Hardware shutdown complete
+2025-05-06 01:33:43,784 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 01:33:43,831 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 01:33:43,832 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 01:33:43,988 - src.main - INFO - Application initialized successfully
+2025-05-06 01:33:44,328 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 01:33:44,539 - vmbpyLog - ERROR - Encountered an error loading Transport Layers during VmbStartup
+2025-05-06 01:33:44,540 - src.hardware.vmpy_camera - ERROR - Error initializing Vimba camera: Encountered an error loading Transport Layers during VmbStartup
+2025-05-06 01:33:44,541 - src.gui.camera_display - INFO - VMPy camera initialization failed, falling back to OpenCV
+2025-05-06 01:33:44,608 - src.image_processing.camera - ERROR - Failed to open camera (ID: 0)
+2025-05-06 01:33:54,507 - src.gui.main_window - INFO - Hardware shutdown complete
+2025-05-06 01:34:48,561 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 01:34:48,648 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 01:34:48,649 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 01:34:48,751 - src.main - INFO - Application initialized successfully
+2025-05-06 01:34:49,149 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 01:34:50,077 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 01:34:50,840 - src.hardware.vmpy_camera - INFO - Camera initialized: DEV_1AB22C04E780
+2025-05-06 01:34:50,840 - src.hardware.vmpy_camera - WARNING - Could not get camera resolution: 'IntFeature' object has no attribute 'get_value'
+2025-05-06 01:34:51,345 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 01:34:51,345 - src.hardware.vmpy_camera - INFO - Camera streaming started
+2025-05-06 01:34:53,118 - vmbpyLog - ERROR - 'Camera.start_streaming' called with unexpected argument type. Argument'handler'. Expected type: typing.Callable[[vmbpy.camera.Camera, vmbpy.stream.Stream, vmbpy.frame.Frame], NoneType].
+2025-05-06 01:34:53,119 - src.hardware.vmpy_camera - ERROR - Error during streaming: 'Camera.start_streaming' called with unexpected argument type. Argument'handler'. Expected type: typing.Callable[[vmbpy.camera.Camera, vmbpy.stream.Stream, vmbpy.frame.Frame], NoneType].
+2025-05-06 01:35:02,804 - src.gui.main_window - INFO - Hardware shutdown complete
+2025-05-06 01:35:28,282 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 01:35:28,330 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 01:35:28,331 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 01:35:28,435 - src.main - INFO - Application initialized successfully
+2025-05-06 01:35:28,830 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 01:35:29,816 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 01:35:30,579 - src.hardware.vmpy_camera - INFO - Camera initialized: DEV_1AB22C04E780
+2025-05-06 01:35:30,579 - src.hardware.vmpy_camera - WARNING - Could not get camera resolution: 'IntFeature' object has no attribute 'get_value'
+2025-05-06 01:35:31,085 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 01:35:31,085 - src.hardware.vmpy_camera - INFO - Camera streaming started
+2025-05-06 01:35:35,192 - src.hardware.vmpy_camera - INFO - Starting streaming on camera DEV_1AB22C04E780
+2025-05-06 01:35:35,203 - src.hardware.vmpy_camera - INFO - Camera streaming started on DEV_1AB22C04E780
+2025-05-06 01:35:35,409 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:35,591 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:35,773 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:35,955 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:36,137 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:36,319 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:36,501 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:36,683 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:36,865 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:37,047 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:37,229 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:37,411 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:37,592 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:37,775 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:37,957 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:38,138 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:38,320 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:38,502 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:38,683 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:38,865 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:39,048 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:39,229 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:39,411 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:39,594 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:39,775 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:39,957 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:40,139 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:40,321 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:40,503 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:40,685 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:40,867 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:41,049 - src.hardware.vmpy_camera - ERROR - Error converting frame to OpenCV format: Current Format 'Rgb8' is not in OPENCV_PIXEL_FORMATS
+2025-05-06 01:35:41,092 - src.gui.main_window - INFO - Hardware shutdown complete
+2025-05-06 02:27:44,696 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 02:27:44,747 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 02:27:44,747 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 02:27:44,833 - src.main - INFO - Application initialized successfully
+2025-05-06 02:27:45,245 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 02:27:45,468 - vmbpyLog - ERROR - Encountered an error loading Transport Layers during VmbStartup
+2025-05-06 02:27:45,468 - src.hardware.vmpy_camera - ERROR - Unexpected error during camera initialization: Encountered an error loading Transport Layers during VmbStartup
+Traceback (most recent call last):
+  File "C:\Users\wille\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\vmbpy\vmbsystem.py", line 500, in _startup
+    call_vmb_c('VmbStartup', _as_vmb_file_path(self.__path_configuration))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\wille\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\vmbpy\util\tracer.py", line 146, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\wille\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\vmbpy\c_binding\vmb_c.py", line 907, in call_vmb_c
+    getattr(_lib_instance, func_name)(*args)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\wille\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\vmbpy\c_binding\vmb_c.py", line 826, in _eval_vmberror
+    raise VmbCError(result)
+vmbpy.c_binding.vmb_common.VmbCError: VmbCError(<VmbError.NoTL: -16>)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\wille\Desktop\TOSCA-dev\src\hardware\vmpy_camera.py", line 94, in initialize
+    with self.vmb:
+         ^^^^^^^^
+  File "C:\Users\wille\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\vmbpy\util\tracer.py", line 146, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\wille\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\vmbpy\vmbsystem.py", line 86, in __enter__
+    self._startup()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\wille\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\vmbpy\util\tracer.py", line 146, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\wille\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\vmbpy\util\context_decorator.py", line 50, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\wille\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\vmbpy\vmbsystem.py", line 511, in _startup
+    raise Exc(msg) from e
+vmbpy.error.VmbTransportLayerError: Encountered an error loading Transport Layers during VmbStartup
+2025-05-06 02:27:45,474 - src.gui.camera_display - INFO - VMPy camera initialization failed, falling back to OpenCV
+2025-05-06 02:27:45,527 - src.image_processing.camera - ERROR - Failed to open camera (ID: 0)
+2025-05-06 02:27:58,990 - src.gui.main_window - INFO - Hardware shutdown complete
+2025-05-06 02:32:13,046 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 02:32:13,099 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 02:32:13,100 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 02:32:13,190 - src.main - INFO - Application initialized successfully
+2025-05-06 02:32:13,590 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 02:32:16,432 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 02:32:17,417 - src.hardware.vmpy_camera - INFO - Opened camera: DEV_1AB22C04E780
+2025-05-06 02:32:17,417 - src.hardware.vmpy_camera - INFO - Setting pixel format to: Mono8
+2025-05-06 02:32:17,438 - src.hardware.vmpy_camera - INFO - Camera Info: ID=DEV_1AB22C04E780, Model=1800 U-158c, Serial=06W00
+2025-05-06 02:32:17,438 - src.hardware.vmpy_camera - INFO - Resolution: 1456x1088, PayloadSize: 1584128 bytes
+2025-05-06 02:32:17,938 - vmbpyLog - ERROR - <VmbError.ApiNotStarted: -2>
+2025-05-06 02:32:17,939 - src.hardware.vmpy_camera - ERROR - Vimba specific error starting stream: <VmbError.ApiNotStarted: -2>
+2025-05-06 02:32:17,939 - src.gui.camera_display - ERROR - Failed to start camera stream
+2025-05-06 02:32:26,284 - src.gui.main_window - INFO - Hardware shutdown complete
+2025-05-06 02:37:36,558 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 02:37:36,577 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 02:37:37,593 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 02:37:37,594 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 02:37:37,692 - src.main - INFO - Application initialized successfully
+2025-05-06 02:37:38,093 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 02:37:38,870 - src.hardware.vmpy_camera - INFO - Opened camera: DEV_1AB22C04E780
+2025-05-06 02:37:38,870 - src.hardware.vmpy_camera - INFO - Setting pixel format to: Mono8
+2025-05-06 02:37:38,891 - src.hardware.vmpy_camera - INFO - Camera Info: ID=DEV_1AB22C04E780, Model=1800 U-158c, Serial=06W00
+2025-05-06 02:37:38,891 - src.hardware.vmpy_camera - INFO - Resolution: 1456x1088, PayloadSize: 1584128 bytes
+2025-05-06 02:37:39,662 - src.hardware.vmpy_camera - INFO - Starting asynchronous stream...
+2025-05-06 02:37:39,663 - vmbpyLog - ERROR - 'Camera.start_streaming' called with unexpected argument type. Argument'handler'. Expected type: typing.Callable[[vmbpy.camera.Camera, vmbpy.stream.Stream, vmbpy.frame.Frame], NoneType].
+2025-05-06 02:37:39,715 - src.hardware.vmpy_camera - ERROR - Unexpected error starting stream: 'Camera.start_streaming' called with unexpected argument type. Argument'handler'. Expected type: typing.Callable[[vmbpy.camera.Camera, vmbpy.stream.Stream, vmbpy.frame.Frame], NoneType].
+Traceback (most recent call last):
+  File "C:\Users\wille\Desktop\TOSCA-dev\src\hardware\vmpy_camera.py", line 212, in start_stream
+    cam.start_streaming(handler=self._frame_handler, buffer_count=DEFAULT_BUFFER_COUNT)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\wille\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\vmbpy\util\context_decorator.py", line 112, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\wille\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\vmbpy\util\tracer.py", line 146, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\wille\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\vmbpy\util\runtime_type_check.py", line 62, in wrapper
+    self.__verify_arg(func, hints[arg_name], (arg_name, full_args[arg_name]))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\wille\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\vmbpy\util\runtime_type_check.py", line 93, in __verify_arg
+    raise TypeError(msg)
+TypeError: 'Camera.start_streaming' called with unexpected argument type. Argument'handler'. Expected type: typing.Callable[[vmbpy.camera.Camera, vmbpy.stream.Stream, vmbpy.frame.Frame], NoneType].
+2025-05-06 02:37:39,718 - src.gui.camera_display - ERROR - Failed to start camera stream
+2025-05-06 02:39:10,624 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 02:39:10,644 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 02:39:11,687 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 02:39:11,687 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 02:39:11,782 - src.main - INFO - Application initialized successfully
+2025-05-06 02:39:12,187 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 02:39:12,929 - src.hardware.vmpy_camera - INFO - Opened camera: DEV_1AB22C04E780
+2025-05-06 02:39:12,929 - src.hardware.vmpy_camera - INFO - Setting pixel format to: Mono8
+2025-05-06 02:39:12,949 - src.hardware.vmpy_camera - INFO - Camera Info: ID=DEV_1AB22C04E780, Model=1800 U-158c, Serial=06W00
+2025-05-06 02:39:12,950 - src.hardware.vmpy_camera - INFO - Resolution: 1456x1088, PayloadSize: 1584128 bytes
+2025-05-06 02:39:13,713 - src.hardware.vmpy_camera - INFO - Starting asynchronous stream...
+2025-05-06 02:39:13,724 - src.hardware.vmpy_camera - INFO - Asynchronous stream started.
+2025-05-06 02:42:19,692 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 02:42:19,709 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 02:42:20,730 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 02:42:20,731 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 02:42:20,823 - src.main - INFO - Application initialized successfully
+2025-05-06 02:42:21,225 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 02:42:21,965 - src.hardware.vmpy_camera - INFO - Opened camera: DEV_1AB22C04E780
+2025-05-06 02:42:21,965 - src.hardware.vmpy_camera - INFO - Setting pixel format to: Mono8
+2025-05-06 02:42:21,985 - src.hardware.vmpy_camera - INFO - Camera Info: ID=DEV_1AB22C04E780, Model=1800 U-158c, Serial=06W00
+2025-05-06 02:42:21,986 - src.hardware.vmpy_camera - INFO - Resolution: 1456x1088, PayloadSize: 1584128 bytes
+2025-05-06 02:42:22,774 - src.hardware.vmpy_camera - INFO - Starting asynchronous stream...
+2025-05-06 02:42:22,785 - src.hardware.vmpy_camera - INFO - Asynchronous stream started.
+2025-05-06 02:43:03,174 - src.hardware.vmpy_camera - INFO - Image saved successfully to C:/Users/wille/Desktop/TOSCA-dev/capture_20250506_024258.png
+2025-05-06 02:43:22,091 - src.hardware.vmpy_camera - INFO - Stopping asynchronous stream...
+2025-05-06 02:43:22,845 - src.hardware.vmpy_camera - INFO - Asynchronous stream stopped.
+2025-05-06 02:43:27,217 - src.gui.main_window - INFO - Hardware shutdown complete

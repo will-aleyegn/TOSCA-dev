@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vimba USB TL Release Notes &mdash; Vimba X Release Notes 2025-1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f4d96de9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Vimba CSI TL Release Notes" href="CSITL.html" />
+    <link rel="prev" title="Vimba GigE TL Release Notes" href="GigETL.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Vimba X Release Notes
+          </a>
+              <div class="version">
+                2025-1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Windows.html">Vimba X for Windows Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Linux.html">Vimba X for Linux x86_64 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ARM.html">Vimba X for ARM64 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GigETL.html">Vimba GigE TL Release Notes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Vimba USB TL Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#components-and-version-reference">Components and Version Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#correlations-with-other-allied-vision-software-packages">Correlations with other Allied Vision Software Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#known-issues">Known issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changes-and-release-history">Changes and release history</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-5-0">Changes in version 1.5.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-4-6">Changes in version 1.4.6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-4-4">Changes in version 1.4.4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-4-3">Changes in version 1.4.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-4-2">Changes in version 1.4.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-4-1">Changes in version 1.4.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-4-0">Changes in version 1.4.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-3-0">Changes in version 1.3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-2-2">Changes in version 1.2.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-2-1">Changes in version 1.2.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-2-0">Changes in version 1.2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-1-1">Changes in version 1.1.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-1-0">Changes in version 1.1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-in-version-1-0-3">Changes in version 1.0.3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CSITL.html">Vimba CSI TL Release Notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vimba X Release Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Vimba USB TL Release Notes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vimba-usb-tl-release-notes">
+<h1>Vimba USB TL Release Notes<a class="headerlink" href="#vimba-usb-tl-release-notes" title="Permalink to this heading"></a></h1>
+<p>Version: 1.5.0</p>
+<section id="components-and-version-reference">
+<h2>Components and Version Reference<a class="headerlink" href="#components-and-version-reference" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>USB Transport Layer (VimbaUSBTL.cti)</p></td>
+<td><p>1.5.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vimba USB Driver (Windows only)</p></td>
+<td><p>1.0.1</p></td>
+</tr>
+<tr class="row-even"><td><p>Vimba Driver Installer (VimbaDriverInstaller.exe)</p></td>
+<td><p>2.0.1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="hardware-requirements">
+<h2>Hardware Requirements<a class="headerlink" href="#hardware-requirements" title="Permalink to this heading"></a></h2>
+<ul>
+<li><p>PC or laptop with 1 GHz x86 processor or better.</p></li>
+<li><p>ARMv8-compatible 64-bit embedded system, for example, Jetson Xavier.</p></li>
+<li><p>MacBookPro or Mac mini with M2 chip</p></li>
+<li><p>Additionally, a built-in USB 3.0 (or higher) controller for PCI Express bus is required.</p>
+<p>Remark (for macOS, see the macOS release notes):</p>
+<p>Testing has been performed on host controllers that are based on Asmedia chip sets. The driver may run on host controllers that are based on chip sets from other vendors, too.
+If there are any problems please feel free to contact our Technical Support.</p>
+</li>
+</ul>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<p>The Vimba USB Transport Layer is part of the Vimba X SDK. Linux: For instructions on how to install this module, please refer to the
+Vimba X for Linux or ARM64 Release Notes.</p>
+</section>
+<section id="correlations-with-other-allied-vision-software-packages">
+<h2>Correlations with other Allied Vision Software Packages<a class="headerlink" href="#correlations-with-other-allied-vision-software-packages" title="Permalink to this heading"></a></h2>
+<p>You can install and use Vimba and Vimba X on the same host.</p>
+</section>
+<section id="known-issues">
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
+<p>MSI Uninstallation by new Windows 10 dialog “Apps&amp;Features” is not supported by now.
+Please use the old “Programs and Features” dialog.</p>
+</section>
+<section id="changes-and-release-history">
+<h2>Changes and release history<a class="headerlink" href="#changes-and-release-history" title="Permalink to this heading"></a></h2>
+<section id="changes-in-version-1-5-0">
+<h3>Changes in version 1.5.0<a class="headerlink" href="#changes-in-version-1-5-0" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Added new GenTL Buffer Info “BUFFER_INFO_DATA_SIZE”</p></li>
+<li><p>Updated uriparser to 0.9.8</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-4-6">
+<h3>Changes in version 1.4.6<a class="headerlink" href="#changes-in-version-1-4-6" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Added macOS support</p></li>
+<li><p>Added Event support</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-4-4">
+<h3>Changes in version 1.4.4<a class="headerlink" href="#changes-in-version-1-4-4" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Fixed: Unknown USB DeviceLocation</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-4-3">
+<h3>Changes in version 1.4.3<a class="headerlink" href="#changes-in-version-1-4-3" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Improved: standard conformity of resend for control channel commands</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-4-2">
+<h3>Changes in version 1.4.2<a class="headerlink" href="#changes-in-version-1-4-2" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Display name: AVT USB TL (instead of Vimba USB TL)</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-4-1">
+<h3>Changes in version 1.4.1<a class="headerlink" href="#changes-in-version-1-4-1" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Fixed: software trigger for multiple cameras (error applied to Windows only)</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-4-0">
+<h3>Changes in version 1.4.0<a class="headerlink" href="#changes-in-version-1-4-0" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Fixed: Reset cameras streaming state when opened (Endpoint Halt)</p></li>
+<li><p>New: Zero-Copy for Linux/libusb for better performance</p></li>
+<li><p>Updated 3rd-party libraries</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-3-0">
+<h3>Changes in version 1.3.0<a class="headerlink" href="#changes-in-version-1-3-0" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Increased default MaxTransferSize value for better performance with current Linux versions</p></li>
+<li><p>Improved camera detection on Linux systems (plugin event handling)</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-2-2">
+<h3>Changes in version 1.2.2<a class="headerlink" href="#changes-in-version-1-2-2" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Solved conflicts between customers’ boost version and the internally used version</p></li>
+<li><p>Other internal bug fixes</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-2-1">
+<h3>Changes in version 1.2.1<a class="headerlink" href="#changes-in-version-1-2-1" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Improved visibility of USB camera status</p></li>
+<li><p>Other bug fixes</p></li>
+</ul>
+<p>Driver Installer:</p>
+<ul class="simple">
+<li><p>The version was incremented to 2.0.0 because of internal changes
+(no functional changes for the user)</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-2-0">
+<h3>Changes in version 1.2.0<a class="headerlink" href="#changes-in-version-1-2-0" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>GenTL 1.5 support</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-1-1">
+<h3>Changes in version 1.1.1<a class="headerlink" href="#changes-in-version-1-1-1" title="Permalink to this heading"></a></h3>
+<p>USB Transport Layer</p>
+<ul class="simple">
+<li><p>Minor bug fixes</p></li>
+</ul>
+<p>Installer and driver</p>
+<ul class="simple">
+<li><p>New certificates for installer and driver (Windows 7, Windows 8, and Windows 8.1)</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-1-0">
+<h3>Changes in version 1.1.0<a class="headerlink" href="#changes-in-version-1-1-0" title="Permalink to this heading"></a></h3>
+<p>USB Transport Layer</p>
+<ul class="simple">
+<li><p>Minor bug fixes</p></li>
+<li><p>Added transport layer XML file caching</p></li>
+</ul>
+</section>
+<section id="changes-in-version-1-0-3">
+<h3>Changes in version 1.0.3<a class="headerlink" href="#changes-in-version-1-0-3" title="Permalink to this heading"></a></h3>
+<p>USB Transport Layer</p>
+<ul class="simple">
+<li><p>Minor bug fixes</p></li>
+<li><p>Interface features DeviceDriverPath and DeviceLocation added</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="GigETL.html" class="btn btn-neutral float-left" title="Vimba GigE TL Release Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CSITL.html" class="btn btn-neutral float-right" title="Vimba CSI TL Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

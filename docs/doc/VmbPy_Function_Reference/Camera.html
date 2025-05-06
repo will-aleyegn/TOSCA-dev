@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camera &mdash; VmbPy 1.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=cbcdba59"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Stream" href="Stream.html" />
+    <link rel="prev" title="Interface" href="Interface.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            VmbPy
+          </a>
+              <div class="version">
+                1.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="VmbSystem.html">VmbSystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TransportLayer.html">TransportLayer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Interface.html">Interface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Camera</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#vmbpy.Camera"><code class="docutils literal notranslate"><span class="pre">Camera</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_access_mode"><code class="docutils literal notranslate"><span class="pre">Camera.get_access_mode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_all_features"><code class="docutils literal notranslate"><span class="pre">Camera.get_all_features()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_extended_id"><code class="docutils literal notranslate"><span class="pre">Camera.get_extended_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_feature_by_name"><code class="docutils literal notranslate"><span class="pre">Camera.get_feature_by_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_features_by_category"><code class="docutils literal notranslate"><span class="pre">Camera.get_features_by_category()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_features_by_type"><code class="docutils literal notranslate"><span class="pre">Camera.get_features_by_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_features_selected_by"><code class="docutils literal notranslate"><span class="pre">Camera.get_features_selected_by()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_frame"><code class="docutils literal notranslate"><span class="pre">Camera.get_frame()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_frame_generator"><code class="docutils literal notranslate"><span class="pre">Camera.get_frame_generator()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_frame_with_context"><code class="docutils literal notranslate"><span class="pre">Camera.get_frame_with_context()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_id"><code class="docutils literal notranslate"><span class="pre">Camera.get_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_interface"><code class="docutils literal notranslate"><span class="pre">Camera.get_interface()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_interface_id"><code class="docutils literal notranslate"><span class="pre">Camera.get_interface_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_local_device"><code class="docutils literal notranslate"><span class="pre">Camera.get_local_device()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_model"><code class="docutils literal notranslate"><span class="pre">Camera.get_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_name"><code class="docutils literal notranslate"><span class="pre">Camera.get_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_permitted_access_modes"><code class="docutils literal notranslate"><span class="pre">Camera.get_permitted_access_modes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_pixel_format"><code class="docutils literal notranslate"><span class="pre">Camera.get_pixel_format()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_pixel_formats"><code class="docutils literal notranslate"><span class="pre">Camera.get_pixel_formats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_serial"><code class="docutils literal notranslate"><span class="pre">Camera.get_serial()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_streams"><code class="docutils literal notranslate"><span class="pre">Camera.get_streams()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.get_transport_layer"><code class="docutils literal notranslate"><span class="pre">Camera.get_transport_layer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.is_streaming"><code class="docutils literal notranslate"><span class="pre">Camera.is_streaming()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.load_settings"><code class="docutils literal notranslate"><span class="pre">Camera.load_settings()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.queue_frame"><code class="docutils literal notranslate"><span class="pre">Camera.queue_frame()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.read_memory"><code class="docutils literal notranslate"><span class="pre">Camera.read_memory()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.save_settings"><code class="docutils literal notranslate"><span class="pre">Camera.save_settings()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.set_access_mode"><code class="docutils literal notranslate"><span class="pre">Camera.set_access_mode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.set_pixel_format"><code class="docutils literal notranslate"><span class="pre">Camera.set_pixel_format()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.start_streaming"><code class="docutils literal notranslate"><span class="pre">Camera.start_streaming()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.stop_streaming"><code class="docutils literal notranslate"><span class="pre">Camera.stop_streaming()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.Camera.write_memory"><code class="docutils literal notranslate"><span class="pre">Camera.write_memory()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vmbpy.AccessMode"><code class="docutils literal notranslate"><span class="pre">AccessMode</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.AccessMode.None_"><code class="docutils literal notranslate"><span class="pre">AccessMode.None_</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.AccessMode.Full"><code class="docutils literal notranslate"><span class="pre">AccessMode.Full</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.AccessMode.Read"><code class="docutils literal notranslate"><span class="pre">AccessMode.Read</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.AccessMode.Unknown"><code class="docutils literal notranslate"><span class="pre">AccessMode.Unknown</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.AccessMode.Exclusive"><code class="docutils literal notranslate"><span class="pre">AccessMode.Exclusive</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vmbpy.CameraEvent"><code class="docutils literal notranslate"><span class="pre">CameraEvent</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.CameraEvent.Missing"><code class="docutils literal notranslate"><span class="pre">CameraEvent.Missing</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.CameraEvent.Detected"><code class="docutils literal notranslate"><span class="pre">CameraEvent.Detected</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.CameraEvent.Reachable"><code class="docutils literal notranslate"><span class="pre">CameraEvent.Reachable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.CameraEvent.Unreachable"><code class="docutils literal notranslate"><span class="pre">CameraEvent.Unreachable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.CameraEvent.Unknown"><code class="docutils literal notranslate"><span class="pre">CameraEvent.Unknown</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Stream.html">Stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocalDevice.html">LocalDevice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Frame.html">Frame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Feature.html">Feature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Error.html">Error</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">VmbPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Camera</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="camera">
+<h1>Camera<a class="headerlink" href="#camera" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="vmbpy.Camera">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vmbpy.</span></span><span class="sig-name descname"><span class="pre">Camera</span></span><a class="headerlink" href="#vmbpy.Camera" title="Permalink to this definition"></a></dt>
+<dd><p>This class provides access to a Camera. It corresponds to the GenTL Remote Device.</p>
+<p>Camera is intended be used in conjunction with the <code class="docutils literal notranslate"><span class="pre">with</span></code> context. On entering the context,
+all Camera features are detected and can be accessed within the context. Static Camera
+properties like Name and Model can be accessed outside the context.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_access_mode">
+<span class="sig-name descname"><span class="pre">get_access_mode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#vmbpy.AccessMode" title="vmbpy.c_binding.wrapped_types.AccessMode"><span class="pre">AccessMode</span></a></span></span><a class="headerlink" href="#vmbpy.Camera.get_access_mode" title="Permalink to this definition"></a></dt>
+<dd><p>Get current camera access mode</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_all_features">
+<span class="sig-name descname"><span class="pre">get_all_features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.Camera.get_all_features" title="Permalink to this definition"></a></dt>
+<dd><p>Get access to all discovered features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A set of all currently detected Features.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_extended_id">
+<span class="sig-name descname"><span class="pre">get_extended_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#vmbpy.Camera.get_extended_id" title="Permalink to this definition"></a></dt>
+<dd><p>Get the extended (globally unique) ID of a Camera.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_feature_by_name">
+<span class="sig-name descname"><span class="pre">get_feature_by_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feat_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a></span></span><a class="headerlink" href="#vmbpy.Camera.get_feature_by_name" title="Permalink to this definition"></a></dt>
+<dd><p>Get a feature by its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>feat_name</strong> – Name used to find a feature.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Feature with the associated name.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbFeatureError" title="vmbpy.VmbFeatureError"><strong>VmbFeatureError</strong></a> – If no feature is associated with <code class="docutils literal notranslate"><span class="pre">feat_name</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_features_by_category">
+<span class="sig-name descname"><span class="pre">get_features_by_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.Camera.get_features_by_category" title="Permalink to this definition"></a></dt>
+<dd><p>Get all features of a specific category.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>category</strong> – Category that should be used for filtering.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A set of features of category <code class="docutils literal notranslate"><span class="pre">category</span></code>.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_features_by_type">
+<span class="sig-name descname"><span class="pre">get_features_by_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feat_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.Camera.get_features_by_type" title="Permalink to this definition"></a></dt>
+<dd><p>Get all features of a specific feature type.</p>
+<p>Valid FeatureTypes are: <code class="docutils literal notranslate"><span class="pre">IntFeature</span></code>, <code class="docutils literal notranslate"><span class="pre">FloatFeature</span></code>, <code class="docutils literal notranslate"><span class="pre">StringFeature</span></code>,
+<code class="docutils literal notranslate"><span class="pre">BoolFeature</span></code>, <code class="docutils literal notranslate"><span class="pre">EnumFeature</span></code>, <code class="docutils literal notranslate"><span class="pre">CommandFeature</span></code>, <code class="docutils literal notranslate"><span class="pre">RawFeature</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>feat_type</strong> – FeatureType used to find features of that type.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A set of features of type <cite>feat_type`</cite>.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_features_selected_by">
+<span class="sig-name descname"><span class="pre">get_features_selected_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.Camera.get_features_selected_by" title="Permalink to this definition"></a></dt>
+<dd><p>Get all features selected by a specific feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>feat</strong> – Feature used to find features that are selected by <code class="docutils literal notranslate"><span class="pre">feat</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A set of features selected by <code class="docutils literal notranslate"><span class="pre">feat</span></code>.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbFeatureError" title="vmbpy.VmbFeatureError"><strong>VmbFeatureError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">feat</span></code> is not a valid feature.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_frame">
+<span class="sig-name descname"><span class="pre">get_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allocation_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Frame.html#vmbpy.AllocationMode" title="vmbpy.frame.AllocationMode"><span class="pre">AllocationMode</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">AllocationMode.AnnounceFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="Frame.html#vmbpy.Frame" title="vmbpy.frame.Frame"><span class="pre">Frame</span></a></span></span><a class="headerlink" href="#vmbpy.Camera.get_frame" title="Permalink to this definition"></a></dt>
+<dd><p>Get copy of a single frame from camera. Synchronous frame acquisition.</p>
+<p>Records a single frame from the camera, creates a copy of the frame and returns it to the
+caller. This frame may be used by users as long as they want but can not be used e.g. to
+access chunk data associated with it. See also <code class="docutils literal notranslate"><span class="pre">get_frame_with_context</span></code> to avoid the frame
+copy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timeout_ms</strong> – Timeout in milliseconds of frame acquisition.</p></li>
+<li><p><strong>allocation_mode</strong> – Allocation mode deciding if buffer allocation should be done by vmbpy or the
+Transport Layer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Frame from camera</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><strong>ValueError</strong> – If a timeout_ms is negative.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbTimeout" title="vmbpy.VmbTimeout"><strong>VmbTimeout</strong></a> – If Frame acquisition timed out.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_frame_generator">
+<span class="sig-name descname"><span class="pre">get_frame_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allocation_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Frame.html#vmbpy.AllocationMode" title="vmbpy.frame.AllocationMode"><span class="pre">AllocationMode</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">AllocationMode.AnnounceFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.Camera.get_frame_generator" title="Permalink to this definition"></a></dt>
+<dd><p>Construct frame generator, providing synchronous image acquisition.</p>
+<p>The frame generator acquires a new frame with each execution. Frames may only be used inside
+their respective loop iteration. If a frame must be used outside the loop iteration, a copy
+of the frame must be created (e.g. via <code class="docutils literal notranslate"><span class="pre">copy.deepcopy(frame)</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>limit</strong> – The number of images the generator shall acquire (&gt;0). If limit is None, the
+generator will produce an unlimited amount of images and must be stopped by the user
+supplied code.</p></li>
+<li><p><strong>timeout_ms</strong> – Timeout in milliseconds of frame acquisition.</p></li>
+<li><p><strong>allocation_mode</strong> – Allocation mode deciding if buffer allocation should be done by vmbpy or the
+Transport Layer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Frame generator expression</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>RuntimeError</strong> – If called outside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><strong>ValueError</strong> – If a limit is supplied and <code class="docutils literal notranslate"><span class="pre">&lt;=</span> <span class="pre">0</span></code>.</p></li>
+<li><p><strong>ValueError</strong> – If a <code class="docutils literal notranslate"><span class="pre">timeout_ms</span></code> is negative.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbTimeout" title="vmbpy.VmbTimeout"><strong>VmbTimeout</strong></a> – If Frame acquisition timed out.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbCameraError" title="vmbpy.VmbCameraError"><strong>VmbCameraError</strong></a> – If Camera is streaming while executing the generator.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_frame_with_context">
+<span class="sig-name descname"><span class="pre">get_frame_with_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allocation_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Frame.html#vmbpy.AllocationMode" title="vmbpy.frame.AllocationMode"><span class="pre">AllocationMode</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">AllocationMode.AnnounceFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.Camera.get_frame_with_context" title="Permalink to this definition"></a></dt>
+<dd><p>Gets a single frame from camera to be used inside a context manager.</p>
+<p>Records a single frame from the camera and yields it to the caller for use inside a <cite>with</cite>
+context manager. The frame may only be used inside the context, but may be copied for use
+outside of it (e.g. via <code class="docutils literal notranslate"><span class="pre">copy.deepcopy(frame)</span></code>). The yielded frame can be used to access
+chunk data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timeout_ms</strong> – Timeout in milliseconds of frame acquisition.</p></li>
+<li><p><strong>allocation_mode</strong> – Allocation mode deciding if buffer allocation should be done by vmbpy or the
+Transport Layer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p>Frame from camera for use in <code class="docutils literal notranslate"><span class="pre">with</span></code> context manager</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><strong>ValueError</strong> – If a <code class="docutils literal notranslate"><span class="pre">timeout_ms</span></code> is negative.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbTimeout" title="vmbpy.VmbTimeout"><strong>VmbTimeout</strong></a> – If Frame acquisition timed out.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_id">
+<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#vmbpy.Camera.get_id" title="Permalink to this definition"></a></dt>
+<dd><p>Get Camera Id. For example ‘DEV_1AB22C00041B’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_interface">
+<span class="sig-name descname"><span class="pre">get_interface</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="Interface.html#vmbpy.Interface" title="vmbpy.Interface"><span class="pre">Interface</span></a></span></span><a class="headerlink" href="#vmbpy.Camera.get_interface" title="Permalink to this definition"></a></dt>
+<dd><p>Get the <code class="docutils literal notranslate"><span class="pre">Interface</span></code> instance for this Camera.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_interface_id">
+<span class="sig-name descname"><span class="pre">get_interface_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#vmbpy.Camera.get_interface_id" title="Permalink to this definition"></a></dt>
+<dd><p>Get ID of the Interface this camera is connected to. For example ‘VimbaUSBInterface_0x0’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_local_device">
+<span class="sig-name descname"><span class="pre">get_local_device</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="LocalDevice.html#vmbpy.LocalDevice" title="vmbpy.localdevice.LocalDevice"><span class="pre">LocalDevice</span></a></span></span><a class="headerlink" href="#vmbpy.Camera.get_local_device" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the instance of <code class="docutils literal notranslate"><span class="pre">LocalDevice</span></code> associated with this Camera.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_model">
+<span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#vmbpy.Camera.get_model" title="Permalink to this definition"></a></dt>
+<dd><p>Get Camera Model. For example ‘1800 U-500m’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_name">
+<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#vmbpy.Camera.get_name" title="Permalink to this definition"></a></dt>
+<dd><p>Get Camera Name. For example ‘Allied Vision 1800 U-500m’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_permitted_access_modes">
+<span class="sig-name descname"><span class="pre">get_permitted_access_modes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#vmbpy.AccessMode" title="vmbpy.c_binding.wrapped_types.AccessMode"><span class="pre">AccessMode</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.Camera.get_permitted_access_modes" title="Permalink to this definition"></a></dt>
+<dd><p>Get a set of all access modes the camera can be accessed with.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_pixel_format">
+<span class="sig-name descname"><span class="pre">get_pixel_format</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.Camera.get_pixel_format" title="Permalink to this definition"></a></dt>
+<dd><p>Get current pixel format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Current pixel format set on the camera.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If called outside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_pixel_formats">
+<span class="sig-name descname"><span class="pre">get_pixel_formats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Frame.html#vmbpy.PixelFormat" title="vmbpy.c_binding.wrapped_types.PixelFormat"><span class="pre">PixelFormat</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.Camera.get_pixel_formats" title="Permalink to this definition"></a></dt>
+<dd><p>Get supported pixel formats from Camera.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>All pixel formats the camera supports</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If called outside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_serial">
+<span class="sig-name descname"><span class="pre">get_serial</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#vmbpy.Camera.get_serial" title="Permalink to this definition"></a></dt>
+<dd><p>Get Camera serial number. For example ‘50-0503328442’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_streams">
+<span class="sig-name descname"><span class="pre">get_streams</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Stream.html#vmbpy.Stream" title="vmbpy.stream.Stream"><span class="pre">Stream</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.Camera.get_streams" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a Tuple containing all instances of <code class="docutils literal notranslate"><span class="pre">Stream</span></code> associated with this Camera.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.get_transport_layer">
+<span class="sig-name descname"><span class="pre">get_transport_layer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="TransportLayer.html#vmbpy.TransportLayer" title="vmbpy.TransportLayer"><span class="pre">TransportLayer</span></a></span></span><a class="headerlink" href="#vmbpy.Camera.get_transport_layer" title="Permalink to this definition"></a></dt>
+<dd><p>Get the <code class="docutils literal notranslate"><span class="pre">TransportLayer</span></code> instance for this Camera.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.is_streaming">
+<span class="sig-name descname"><span class="pre">is_streaming</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#vmbpy.Camera.is_streaming" title="Permalink to this definition"></a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the camera is currently in streaming mode. If not, returns <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.load_settings">
+<span class="sig-name descname"><span class="pre">load_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">persist_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Feature.html#vmbpy.PersistType" title="vmbpy.c_binding.wrapped_types.PersistType"><span class="pre">PersistType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PersistType.Streamable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">persist_flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Feature.html#vmbpy.ModulePersistFlags" title="vmbpy.c_binding.wrapped_types.ModulePersistFlags"><span class="pre">ModulePersistFlags</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ModulePersistFlags.None_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.Camera.load_settings" title="Permalink to this definition"></a></dt>
+<dd><p>Load settings from XML file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – The location for loading current settings. The given file must be a file ending with
+“.xml”.</p></li>
+<li><p><strong>persist_type</strong> – Parameter specifying which setting types to load. For an overview of the possible
+values and their implication see the <code class="docutils literal notranslate"><span class="pre">PersistType</span></code> enum</p></li>
+<li><p><strong>persist_flags</strong> – Flags specifying the modules to load. By default only features of the calling module
+itself are persisted. For an overview of available flags see the
+<code class="docutils literal notranslate"><span class="pre">ModulePersistFlags</span></code> type</p></li>
+<li><p><strong>max_iterations</strong> – Number of iterations when storing settings. If 0 is given (default) the value found
+in the XML file is used</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><strong>ValueError</strong> – If argument path is no “.xml” file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.queue_frame">
+<span class="sig-name descname"><span class="pre">queue_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Frame.html#vmbpy.Frame" title="vmbpy.frame.Frame"><span class="pre">Frame</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.Camera.queue_frame" title="Permalink to this definition"></a></dt>
+<dd><p>Reuse acquired frame in streaming mode.</p>
+<p>Add given frame back into the frame queue used in streaming mode. This should be the last
+operation on a registered <code class="docutils literal notranslate"><span class="pre">FrameHandler</span></code>. If streaming mode is not active, it returns
+silently.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>frame</strong> – The frame to reuse.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>ValueError</strong> – If the given frame is not from the internal buffer queue.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbCameraError" title="vmbpy.VmbCameraError"><strong>VmbCameraError</strong></a> – If reusing the frame was unsuccessful.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.read_memory">
+<span class="sig-name descname"><span class="pre">read_memory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#vmbpy.Camera.read_memory" title="Permalink to this definition"></a></dt>
+<dd><p>Read a byte sequence from a given memory address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr</strong> – Starting address to read from.</p></li>
+<li><p><strong>max_bytes</strong> – Maximum number of bytes to read from addr.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Read memory contents as bytes.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">addr</span></code> is negative.</p></li>
+<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">max_bytes</span></code> is negative.</p></li>
+<li><p><strong>ValueError</strong> – If the memory access was invalid.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.save_settings">
+<span class="sig-name descname"><span class="pre">save_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">persist_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Feature.html#vmbpy.PersistType" title="vmbpy.c_binding.wrapped_types.PersistType"><span class="pre">PersistType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PersistType.Streamable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">persist_flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Feature.html#vmbpy.ModulePersistFlags" title="vmbpy.c_binding.wrapped_types.ModulePersistFlags"><span class="pre">ModulePersistFlags</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ModulePersistFlags.None_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.Camera.save_settings" title="Permalink to this definition"></a></dt>
+<dd><p>Save settings to XML File.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – The location for storing the current settings. The given file must be a file ending
+with “.xml”.</p></li>
+<li><p><strong>persist_type</strong> – Parameter specifying which setting types to store. For an overview of the possible
+values and their implication see the <code class="docutils literal notranslate"><span class="pre">PersistType</span></code> enum</p></li>
+<li><p><strong>persist_flags</strong> – Flags specifying the modules to store. By default only features of the calling
+module itself are persisted. For an overview of available flags see the
+<code class="docutils literal notranslate"><span class="pre">ModulePersistFlags</span></code> type</p></li>
+<li><p><strong>max_iterations</strong> – Number of iterations when loading settings. If <code class="docutils literal notranslate"><span class="pre">0</span></code> is given (default) the VmbC
+default is used</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><strong>ValueError</strong> – If argument path is no “.xml”- File.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.set_access_mode">
+<span class="sig-name descname"><span class="pre">set_access_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#vmbpy.AccessMode" title="vmbpy.c_binding.wrapped_types.AccessMode"><span class="pre">AccessMode</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.Camera.set_access_mode" title="Permalink to this definition"></a></dt>
+<dd><p>Set camera access mode.</p>
+<p>Must be set before the camera connection is opened.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>access_mode</strong> – AccessMode for accessing a Camera.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called inside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.set_pixel_format">
+<span class="sig-name descname"><span class="pre">set_pixel_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Frame.html#vmbpy.PixelFormat" title="vmbpy.c_binding.wrapped_types.PixelFormat"><span class="pre">PixelFormat</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.Camera.set_pixel_format" title="Permalink to this definition"></a></dt>
+<dd><p>Set current pixel format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fmt</strong> – Pixel format to set on the camera.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><strong>ValueError</strong> – If the given pixel format is not supported by the cameras.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.start_streaming">
+<span class="sig-name descname"><span class="pre">start_streaming</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#vmbpy.Camera" title="vmbpy.camera.Camera"><span class="pre">Camera</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="Stream.html#vmbpy.Stream" title="vmbpy.stream.Stream"><span class="pre">Stream</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="Frame.html#vmbpy.Frame" title="vmbpy.frame.Frame"><span class="pre">Frame</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allocation_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Frame.html#vmbpy.AllocationMode" title="vmbpy.frame.AllocationMode"><span class="pre">AllocationMode</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">AllocationMode.AnnounceFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.Camera.start_streaming" title="Permalink to this definition"></a></dt>
+<dd><p>Enter streaming mode.</p>
+<p>Enter streaming mode is also known as asynchronous frame acquisition. While active, the
+camera acquires and buffers frames continuously. With each acquired frame, a given
+FrameHandler is called with a new Frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handler</strong> – Callable that is executed on each acquired frame.</p></li>
+<li><p><strong>buffer_count</strong> – Number of frames supplied as internal buffer.</p></li>
+<li><p><strong>allocation_mode</strong> – Allocation mode deciding if buffer allocation should be done by vmbpy or the
+Transport Layer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><strong>ValueError</strong> – If buffer is less or equal to zero.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbCameraError" title="vmbpy.VmbCameraError"><strong>VmbCameraError</strong></a> – If the camera is already streaming.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbCameraError" title="vmbpy.VmbCameraError"><strong>VmbCameraError</strong></a> – If anything went wrong on entering streaming mode.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.stop_streaming">
+<span class="sig-name descname"><span class="pre">stop_streaming</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.Camera.stop_streaming" title="Permalink to this definition"></a></dt>
+<dd><p>Leave streaming mode.</p>
+<p>Leave asynchronous frame acquisition. If streaming mode was not activated before, it just
+returns silently.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>RuntimeError</strong> – If called outside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbCameraError" title="vmbpy.VmbCameraError"><strong>VmbCameraError</strong></a> – If anything went wrong on leaving streaming mode.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.Camera.write_memory">
+<span class="sig-name descname"><span class="pre">write_memory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.Camera.write_memory" title="Permalink to this definition"></a></dt>
+<dd><p>Write a byte sequence to a given memory address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr</strong> – Address to write the content of ‘data’ too.</p></li>
+<li><p><strong>data</strong> – Byte sequence to write at address ‘addr’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">addr</span></code> is negative.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vmbpy.AccessMode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vmbpy.</span></span><span class="sig-name descname"><span class="pre">AccessMode</span></span><a class="headerlink" href="#vmbpy.AccessMode" title="Permalink to this definition"></a></dt>
+<dd><p>Enum specifying all available camera access modes.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.AccessMode.None_">
+<span class="sig-name descname"><span class="pre">None_</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#vmbpy.AccessMode.None_" title="Permalink to this definition"></a></dt>
+<dd><p>No access.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.AccessMode.Full">
+<span class="sig-name descname"><span class="pre">Full</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#vmbpy.AccessMode.Full" title="Permalink to this definition"></a></dt>
+<dd><p>Read and write access.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.AccessMode.Read">
+<span class="sig-name descname"><span class="pre">Read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#vmbpy.AccessMode.Read" title="Permalink to this definition"></a></dt>
+<dd><p>Read-only access. Setting features is not possible.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.AccessMode.Unknown">
+<span class="sig-name descname"><span class="pre">Unknown</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#vmbpy.AccessMode.Unknown" title="Permalink to this definition"></a></dt>
+<dd><p>Access type unknown.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.AccessMode.Exclusive">
+<span class="sig-name descname"><span class="pre">Exclusive</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#vmbpy.AccessMode.Exclusive" title="Permalink to this definition"></a></dt>
+<dd><p>Read and write access without permitting access for other consumers.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vmbpy.CameraEvent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vmbpy.</span></span><span class="sig-name descname"><span class="pre">CameraEvent</span></span><a class="headerlink" href="#vmbpy.CameraEvent" title="Permalink to this definition"></a></dt>
+<dd><p>Enum specifying a Camera Event</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.CameraEvent.Missing">
+<span class="sig-name descname"><span class="pre">Missing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#vmbpy.CameraEvent.Missing" title="Permalink to this definition"></a></dt>
+<dd><p>A known camera disappeared from the bus</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.CameraEvent.Detected">
+<span class="sig-name descname"><span class="pre">Detected</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#vmbpy.CameraEvent.Detected" title="Permalink to this definition"></a></dt>
+<dd><p>A new camera was discovered</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.CameraEvent.Reachable">
+<span class="sig-name descname"><span class="pre">Reachable</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#vmbpy.CameraEvent.Reachable" title="Permalink to this definition"></a></dt>
+<dd><p>A known camera can be accessed</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.CameraEvent.Unreachable">
+<span class="sig-name descname"><span class="pre">Unreachable</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#vmbpy.CameraEvent.Unreachable" title="Permalink to this definition"></a></dt>
+<dd><p>A known camera cannot be accessed anymore</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vmbpy.CameraEvent.Unknown">
+<span class="sig-name descname"><span class="pre">Unknown</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#vmbpy.CameraEvent.Unknown" title="Permalink to this definition"></a></dt>
+<dd><p>An unknown event occurred</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Interface.html" class="btn btn-neutral float-left" title="Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Stream.html" class="btn btn-neutral float-right" title="Stream" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
