@@ -184,30 +184,6 @@ python app.py
    - Implement treatment planning tools
    - Add outcome tracking
 
-## Recent Changes
-
-- **Enhanced Patient Integration**: 
-  - Camera captures now automatically save to patient-specific folders
-  - Images are now named with patient information for easier identification
-  - Added prompt to add captured images to treatment sessions
-
-- **Improved UI**:
-  - Removed duplicate buttons for cleaner interface
-  - Moved camera controls to the camera tab
-  - Added patient information display in status bar
-  - Retained only the emergency stop button in the main window
-
-- **File Organization**:
-  - Automated creation of patient-specific directories
-  - Improved image file naming with patient IDs and timestamps
-  - Added automatic saving of "latest" image for each patient
-
-- **Code Cleanup & Documentation (Recent)**:
-  - Performed code review across core modules (`gui`, `data_io`, `hardware`).
-  - Applied minor cleanups (path handling, UI consistency checks).
-  - Generated code structure and functional overview reports (`code_structure_report.md`, `functional_report.md`).
-  - Updated this README to reflect current structure.
-
 ## License
 
 [Specify your license information here]
