@@ -68,6 +68,9 @@ class CameraDisplayWidget(QWidget):
         self.current_frame = None
         self.frame_lock = Lock()
         
+        # Current patient data
+        self.current_patient = None
+        
         # Frame update timer
         self.update_timer = QTimer()
         self.update_timer.timeout.connect(self._update_frame)
@@ -379,6 +382,15 @@ class CameraDisplayWidget(QWidget):
             logger.error(f"Error stopping camera stream: {str(e)}")
             self.status_label.setText(f"Error stopping stream: {str(e)}")
     
+    def set_current_patient(self, patient_data):
+        """
+        Set the current patient data.
+        
+        Args:
+            patient_data (dict): Patient data dict or None to clear
+        """
+        self.current_patient = patient_data
+        
     def on_capture_image(self):
         """Capture a single image and save it to file."""
         if self.camera_controller is None:
@@ -398,6 +410,7 @@ class CameraDisplayWidget(QWidget):
                 logger.error("Failed to capture image")
                 self.status_label.setText("Failed to capture image")
                 return
+                
             # Get camera settings for filename
             exposure = gain = None
             auto_exp = auto_gain = None
@@ -422,20 +435,56 @@ class CameraDisplayWidget(QWidget):
                         auto_gain = None
             except Exception:
                 pass
+                
             # Build output filename
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             exp_str = f"exp{int(exposure)}us" if exposure is not None else "expNA"
             gain_str = f"gain{gain:.1f}dB" if gain is not None else "gainNA"
-            autoexp_str = f"autoExp{auto_exp}" if auto_exp is not None else "autoExpNA"
-            autogain_str = f"autoGain{auto_gain}" if auto_gain is not None else "autoGainNA"
-            filename = f"capture_{timestamp}_{exp_str}_{gain_str}_{autoexp_str}_{autogain_str}.png"
-            output_dir = os.path.join(os.getcwd(), "output")
-            os.makedirs(output_dir, exist_ok=True)
-            filepath = os.path.join(output_dir, filename)
+            
+            # Determine the output directory and filename
+            if self.current_patient:
+                # Use patient directory if a patient is loaded
+                patient_id = self.current_patient.get('patient_id', 'unknown')
+                patient_dir = Path("./data/patients") / patient_id / "images"
+                patient_dir.mkdir(exist_ok=True, parents=True)
+                
+                # Include patient ID in filename
+                patient_name = f"{self.current_patient.get('first_name', '')}-{self.current_patient.get('last_name', '')}"
+                filename = f"patient_{patient_id}_{patient_name}_{timestamp}_{exp_str}_{gain_str}.png"
+                filepath = str(patient_dir / filename)
+                
+                # Also save the image as the latest for this patient
+                latest_filepath = str(patient_dir / f"patient_{patient_id}_latest.png")
+            else:
+                # Use standard output directory if no patient
+                autoexp_str = f"autoExp{auto_exp}" if auto_exp is not None else "autoExpNA"
+                autogain_str = f"autoGain{auto_gain}" if auto_gain is not None else "autoGainNA"
+                filename = f"capture_{timestamp}_{exp_str}_{gain_str}_{autoexp_str}_{autogain_str}.png"
+                output_dir = os.path.join(os.getcwd(), "output")
+                os.makedirs(output_dir, exist_ok=True)
+                filepath = os.path.join(output_dir, filename)
+                latest_filepath = None
+                
             # Save the image
             success = self.camera_controller.save_image(filepath, frame)
+            
+            # Save latest image for patient if applicable
+            if success and latest_filepath:
+                self.camera_controller.save_image(latest_filepath, frame)
+                
             if success:
                 self.status_label.setText(f"Image saved to {filepath}")
+                
+                # Ask if user wants to save this image to the current treatment session
+                if self.current_patient:
+                    reply = QMessageBox.question(
+                        self, "Add to Session",
+                        "Do you want to add this image to the current treatment session?",
+                        QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                        QMessageBox.StandardButton.No
+                    )
+                    if reply == QMessageBox.StandardButton.Yes:
+                        self.parent().parent().parent().on_add_image_to_session(filepath)
             else:
                 self.status_label.setText("Failed to save image")
         except Exception as e:

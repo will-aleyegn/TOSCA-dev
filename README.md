@@ -9,23 +9,34 @@ A comprehensive control system for laser-based treatments with integrated patien
   - Search and filter patient database
   - Import/export patient data
   - User-friendly patient selection dialog
+  - Patient data automatically linked to treatment sessions and images
 
 - **Camera Control**
   - Support for Allied Vision cameras via VmbPy
   - Live video streaming
   - Image capture and storage
   - Advanced camera settings (pixel format, exposure, gain, etc.)
+  - Automatic image saving to patient-specific folders
+  - Integration with treatment sessions
 
 - **Treatment Session Management**
   - Create treatment sessions linked to patients
   - Record treatment parameters and results
   - Add and view session images
   - Track treatment history
+  - Direct integration with camera capture system
 
 - **Hardware Integration**
   - Camera control via VmbPy
   - Laser device control (placeholder for implementation)
   - Actuator control (placeholder for implementation)
+  - Status indicators in application status bar
+
+- **User Interface**
+  - Clean, intuitive tabbed interface
+  - Streamlined controls with redundant buttons removed
+  - Patient information displayed in status bar
+  - Emergency stop button for safety
 
 ## Installation
 
@@ -95,15 +106,15 @@ python app.py
 
 #### Recording Treatment Images
 1. Open an existing session or create a new one
-2. Click **Add Image** in the session form
-3. Select an image file from your computer
+2. Option 1: Click **Add Image** in the session form and select an image file
+3. Option 2: Capture an image from the camera tab - you'll be prompted to add it to the current session
 4. Choose the image type (e.g., "Before Treatment", "After Treatment")
 
 #### Viewing Treatment History
 1. Load a patient record
 2. Go to the **Treatment** tab
 3. Browse the list of sessions on the left panel
-4. Click on a session to view its details
+4. Click on a session to view its details and associated images
 
 ### Camera Control
 
@@ -116,7 +127,18 @@ python app.py
 #### Capturing Images
 1. Start the camera stream
 2. Click **Capture** to take a photo
-3. Save the captured image to a file or directly to the current patient/session
+3. If a patient is selected, the image will be saved to that patient's folder
+4. You'll be prompted to add the image to the current treatment session
+
+## Data Organization
+
+- Patient data is stored in SQLite database (`data/tosca.db`)
+- Patient-specific files are organized in folders:
+  - `data/patients/{patient_id}/` - Base patient directory
+  - `data/patients/{patient_id}/images/` - Patient images
+
+- Image files include patient information in filenames
+- Treatment sessions are linked to patients and their images
 
 ## Directory Structure
 
@@ -157,6 +179,24 @@ python app.py
    - Add specialized treatment protocols
    - Implement treatment planning tools
    - Add outcome tracking
+
+## Recent Changes
+
+- **Enhanced Patient Integration**: 
+  - Camera captures now automatically save to patient-specific folders
+  - Images are now named with patient information for easier identification
+  - Added prompt to add captured images to treatment sessions
+
+- **Improved UI**:
+  - Removed duplicate buttons for cleaner interface
+  - Moved camera controls to the camera tab
+  - Added patient information display in status bar
+  - Retained only the emergency stop button in the main window
+
+- **File Organization**:
+  - Automated creation of patient-specific directories
+  - Improved image file naming with patient IDs and timestamps
+  - Added automatic saving of "latest" image for each patient
 
 ## License
 

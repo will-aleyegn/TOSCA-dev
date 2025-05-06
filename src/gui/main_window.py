@@ -224,19 +224,14 @@ class MainWindow(QMainWindow):
         self.treatment_tab_layout.addWidget(self.session_form)
         self.tab_widget.addTab(self.treatment_tab, "Treatment")
         
-        # Quick access buttons at the bottom
+        # Quick access buttons at the bottom - removing duplicate buttons
         self.button_layout = QHBoxLayout()
         self.main_layout.addLayout(self.button_layout)
         
-        self.connect_btn = QPushButton("Connect Hardware")
-        self.start_camera_btn = QPushButton("Start Camera")
-        self.capture_btn = QPushButton("Capture Image")
+        # Only keep the emergency stop button
         self.emergency_stop_btn = QPushButton("EMERGENCY STOP")
         self.emergency_stop_btn.setStyleSheet("background-color: red; color: white; font-weight: bold;")
         
-        self.button_layout.addWidget(self.connect_btn)
-        self.button_layout.addWidget(self.start_camera_btn)
-        self.button_layout.addWidget(self.capture_btn)
         self.button_layout.addStretch()
         self.button_layout.addWidget(self.emergency_stop_btn)
     
@@ -262,10 +257,7 @@ class MainWindow(QMainWindow):
         self.about_action.triggered.connect(self._on_about)
         self.help_action.triggered.connect(self._on_help)
         
-        # Quick access buttons
-        self.connect_btn.clicked.connect(self._on_connect_hardware)
-        self.start_camera_btn.clicked.connect(self._on_start_camera)
-        self.capture_btn.clicked.connect(self._on_capture_image)
+        # Quick access buttons - only connecting emergency stop
         self.emergency_stop_btn.clicked.connect(self._on_emergency_stop)
     
     def _initialize_hardware(self):
@@ -367,11 +359,9 @@ class MainWindow(QMainWindow):
         
         # Camera is handled via the CameraDisplayWidget
         
-        # Update the button text
-        self.connect_btn.setText("Disconnect Hardware")
-        # Change the button action
-        self.connect_btn.clicked.disconnect()
-        self.connect_btn.clicked.connect(self._on_disconnect_hardware)
+        # Update the menu action
+        self.connect_hardware_action.setEnabled(False)
+        self.disconnect_hardware_action.setEnabled(True)
     
     def _on_disconnect_hardware(self):
         """Handle disconnect hardware action."""
@@ -389,11 +379,9 @@ class MainWindow(QMainWindow):
         
         # Camera is handled via the CameraDisplayWidget
         
-        # Update the button text
-        self.connect_btn.setText("Connect Hardware")
-        # Change the button action
-        self.connect_btn.clicked.disconnect()
-        self.connect_btn.clicked.connect(self._on_connect_hardware)
+        # Update the menu action
+        self.connect_hardware_action.setEnabled(True)
+        self.disconnect_hardware_action.setEnabled(False)
     
     def _on_start_camera(self):
         """Handle start camera action."""
@@ -408,11 +396,9 @@ class MainWindow(QMainWindow):
             # Start streaming if not already streaming
             self.camera_display.on_start_stream()
         
-        # Update button text
-        self.start_camera_btn.setText("Stop Camera")
-        # Change button action
-        self.start_camera_btn.clicked.disconnect()
-        self.start_camera_btn.clicked.connect(self._on_stop_camera)
+        # Update menu actions
+        self.start_camera_action.setEnabled(False)
+        self.stop_camera_action.setEnabled(True)
     
     def _on_stop_camera(self):
         """Handle stop camera action."""
@@ -422,11 +408,9 @@ class MainWindow(QMainWindow):
         if self.camera_display.camera_controller is not None:
             self.camera_display.on_stop_stream()
         
-        # Update button text
-        self.start_camera_btn.setText("Start Camera")
-        # Change button action
-        self.start_camera_btn.clicked.disconnect()
-        self.start_camera_btn.clicked.connect(self._on_start_camera)
+        # Update menu actions
+        self.start_camera_action.setEnabled(True)
+        self.stop_camera_action.setEnabled(False)
     
     def _on_capture_image(self):
         """Handle capture image action."""
@@ -478,12 +462,46 @@ class MainWindow(QMainWindow):
             # Update session form with the current patient
             self.session_form.set_patient(patient_data)
             
+            # Update camera display with current patient for image saving
+            self.camera_display.set_current_patient(patient_data)
+            
             logger.info(f"Working with patient: {patient_data.get('patient_id')}")
         else:
             # Clear patient status if no patient is selected
             self.patient_status.setText("Patient: None")
+            
+            # Clear patient data from camera display
+            self.camera_display.set_current_patient(None)
     
     def _on_session_updated(self, session_data):
         """Handle session data updates."""
         if session_data:
-            logger.info(f"Treatment session updated: {session_data.get('session_id', '')}") 
+            logger.info(f"Treatment session updated: {session_data.get('session_id', '')}")
+
+    def on_add_image_to_session(self, image_path):
+        """
+        Add a captured image to the current treatment session.
+        
+        Args:
+            image_path (str): Path to the image file
+        """
+        # Switch to the treatment tab
+        self.tab_widget.setCurrentWidget(self.treatment_tab)
+        
+        # Check if we have a current session
+        if not hasattr(self.session_form, 'current_session') or not self.session_form.current_session:
+            reply = QMessageBox.question(
+                self, "Create New Session",
+                "No active session. Do you want to create a new session for this image?",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                QMessageBox.StandardButton.Yes
+            )
+            
+            if reply == QMessageBox.StandardButton.Yes:
+                # Create a new session
+                self.session_form._on_new_session()
+            else:
+                return
+        
+        # Call the session form's add image method directly
+        self.session_form._on_add_image(image_path) 

@@ -3115,3 +3115,44 @@ TypeError: 'Camera.start_streaming' called with unexpected argument type. Argume
 2025-05-06 04:07:45,697 - src.hardware.vmpy_camera - INFO - Starting asynchronous stream...
 2025-05-06 04:07:45,709 - src.hardware.vmpy_camera - INFO - Asynchronous stream started.
 2025-05-06 04:08:10,767 - src.gui.main_window - INFO - Hardware shutdown complete
+2025-05-06 04:11:59,475 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 04:11:59,496 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 04:12:00,504 - src.data_io.patient_data - INFO - Database initialized successfully
+2025-05-06 04:12:00,531 - src.data_io.patient_data - INFO - Database initialized successfully
+2025-05-06 04:12:00,538 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 04:12:00,540 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 04:12:00,653 - src.main - INFO - Application initialized successfully
+2025-05-06 04:12:00,654 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 04:12:00,655 - src.hardware.vmpy_camera - INFO - Set camera access mode to: AccessMode.Full
+2025-05-06 04:12:01,402 - src.hardware.vmpy_camera - INFO - Opened camera: DEV_1AB22C04E780
+2025-05-06 04:12:01,403 - src.hardware.vmpy_camera - INFO - Setting pixel format to: Mono8
+2025-05-06 04:12:01,425 - src.hardware.vmpy_camera - INFO - Camera Info: ID=DEV_1AB22C04E780, Model=1800 U-158c, Serial=06W00
+2025-05-06 04:12:01,426 - src.hardware.vmpy_camera - INFO - Resolution: 1456x1088, PayloadSize: 1584128 bytes
+2025-05-06 04:12:04,102 - src.gui.camera_display - WARNING - ExposureAuto set to Continuous but read back as Continuous
+2025-05-06 04:12:04,106 - src.gui.camera_display - WARNING - GainAuto set to Continuous but read back as Continuous
+2025-05-06 04:12:04,900 - src.hardware.vmpy_camera - INFO - Starting asynchronous stream...
+2025-05-06 04:12:04,909 - src.hardware.vmpy_camera - INFO - Asynchronous stream started.
+2025-05-06 04:12:05,093 - src.hardware.vmpy_camera - INFO - Stopping asynchronous stream...
+2025-05-06 04:12:06,028 - src.hardware.vmpy_camera - INFO - Asynchronous stream stopped.
+2025-05-06 04:12:06,076 - src.hardware.vmpy_camera - INFO - Releasing VMPyCameraController resources...
+2025-05-06 04:12:06,077 - src.hardware.vmpy_camera - INFO - Camera resources released.
+2025-05-06 04:12:06,078 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 04:12:06,078 - src.hardware.vmpy_camera - INFO - Set camera access mode to: AccessMode.Full
+2025-05-06 04:12:06,824 - src.hardware.vmpy_camera - INFO - Opened camera: DEV_1AB22C04E780
+2025-05-06 04:12:06,824 - src.hardware.vmpy_camera - INFO - Setting pixel format to: Mono8
+2025-05-06 04:12:06,845 - src.hardware.vmpy_camera - INFO - Camera Info: ID=DEV_1AB22C04E780, Model=1800 U-158c, Serial=06W00
+2025-05-06 04:12:06,845 - src.hardware.vmpy_camera - INFO - Resolution: 1456x1088, PayloadSize: 1584128 bytes
+2025-05-06 04:12:10,102 - src.hardware.vmpy_camera - INFO - Starting asynchronous stream...
+2025-05-06 04:12:10,111 - src.hardware.vmpy_camera - INFO - Asynchronous stream started.
+2025-05-06 04:12:30,017 - src.data_io.patient_data - INFO - Added patient: 986452e4-d0a5-4fc4-98fa-c023081baf49 - rr rr
+2025-05-06 04:12:30,031 - src.gui.main_window - INFO - Working with patient: 986452e4-d0a5-4fc4-98fa-c023081baf49
+2025-05-06 04:12:30,031 - src.gui.patient_form - INFO - Created new patient: 986452e4-d0a5-4fc4-98fa-c023081baf49
+2025-05-06 04:12:35,288 - src.data_io.patient_data - INFO - Updated patient: 986452e4-d0a5-4fc4-98fa-c023081baf49
+2025-05-06 04:12:35,292 - src.gui.main_window - INFO - Working with patient: 986452e4-d0a5-4fc4-98fa-c023081baf49
+2025-05-06 04:12:36,663 - src.gui.patient_form - INFO - Saved patient: 986452e4-d0a5-4fc4-98fa-c023081baf49
+2025-05-06 04:12:42,918 - src.data_io.patient_data - INFO - Exported data for patient 986452e4-d0a5-4fc4-98fa-c023081baf49 to C:/Users/wille/Desktop
+2025-05-06 04:12:44,129 - src.gui.patient_form - INFO - Exported patient data: 986452e4-d0a5-4fc4-98fa-c023081baf49 to C:/Users/wille/Desktop
+2025-05-06 04:12:49,627 - src.gui.patient_form - INFO - New patient creation cancelled
+2025-05-06 04:12:56,754 - src.data_io.patient_data - INFO - Updated patient: 986452e4-d0a5-4fc4-98fa-c023081baf49
+2025-05-06 04:12:56,754 - src.data_io.patient_data - INFO - Imported patient data from C:/Users/wille/Desktop
+2025-05-06 04:12:58,314 - src.gui.patient_form - ERROR - Error importing patient data: 'bool' object is not subscriptable
