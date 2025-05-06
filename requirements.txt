@@ -1,0 +1,14 @@
+# Hardware control
+pyserial>=3.5
+# VMPy for Allied Vision cameras (install from the .whl file in docs/vmpy/)
+# vmbpy>=1.1.0
+# Image processing
+opencv-python>=4.8.0
+numpy>=1.26.0
+# GUI
+PyQt6>=6.6.0
+# Data processing and visualization
+pandas>=2.1.0
+matplotlib>=3.8.0
+# Testing
+pytest>=7.4.0 

@@ -1,0 +1,54 @@
+2025-05-06 01:02:30,369 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 01:02:30,734 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 01:02:30,735 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 01:02:30,846 - src.main - INFO - Application initialized successfully
+2025-05-06 01:02:31,232 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 01:02:31,468 - vmbpyLog - ERROR - Encountered an error loading Transport Layers during VmbStartup
+2025-05-06 01:02:31,469 - src.hardware.vmpy_camera - ERROR - Error initializing Vimba camera: Encountered an error loading Transport Layers during VmbStartup
+2025-05-06 01:02:44,108 - src.gui.main_window - INFO - Connect hardware action triggered
+2025-05-06 01:03:05,345 - src.gui.main_window - INFO - Hardware shutdown complete
+2025-05-06 01:03:30,899 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 01:03:30,947 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 01:03:30,947 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 01:03:31,034 - src.main - INFO - Application initialized successfully
+2025-05-06 01:03:31,448 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 01:03:32,471 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 01:03:33,200 - src.hardware.vmpy_camera - INFO - Camera initialized: DEV_1AB22C04E780
+2025-05-06 01:03:33,713 - src.hardware.vmpy_camera - ERROR - Error initializing Vimba camera: module 'vmbpy' has no attribute 'VmbCError'
+2025-05-06 01:03:59,475 - src.gui.main_window - INFO - Hardware shutdown complete
+2025-05-06 01:04:24,164 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 01:04:24,213 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 01:04:24,214 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 01:04:24,299 - src.main - INFO - Application initialized successfully
+2025-05-06 01:04:24,713 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 01:04:25,702 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 01:04:26,411 - src.hardware.vmpy_camera - INFO - Camera initialized: DEV_1AB22C04E780
+2025-05-06 01:04:26,909 - src.hardware.vmpy_camera - ERROR - Error initializing Vimba camera: 'IntFeature' object has no attribute 'get_value'
+2025-05-06 01:07:17,848 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 01:07:17,898 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 01:07:17,899 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 01:07:18,003 - src.main - INFO - Application initialized successfully
+2025-05-06 01:07:18,397 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 01:07:18,627 - vmbpyLog - ERROR - Encountered an error loading Transport Layers during VmbStartup
+2025-05-06 01:07:18,629 - src.hardware.vmpy_camera - ERROR - Error initializing Vimba camera: Encountered an error loading Transport Layers during VmbStartup
+2025-05-06 01:07:23,865 - src.gui.main_window - INFO - Hardware shutdown complete
+2025-05-06 01:07:53,364 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 01:07:53,414 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 01:07:53,415 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 01:07:53,537 - src.main - INFO - Application initialized successfully
+2025-05-06 01:07:53,914 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 01:07:54,120 - vmbpyLog - ERROR - Encountered an error loading Transport Layers during VmbStartup
+2025-05-06 01:07:54,121 - src.hardware.vmpy_camera - ERROR - Error initializing Vimba camera: Encountered an error loading Transport Layers during VmbStartup
+2025-05-06 01:07:54,121 - src.gui.camera_display - INFO - VMPy camera initialization failed, falling back to OpenCV
+2025-05-06 01:07:54,169 - src.image_processing.camera - ERROR - Failed to open camera (ID: 0)
+2025-05-06 01:07:58,510 - src.gui.main_window - INFO - Hardware shutdown complete
+2025-05-06 01:13:57,576 - src.gui.main_window - INFO - Start camera action triggered
+2025-05-06 01:13:57,577 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 01:13:58,561 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 01:13:59,352 - src.hardware.vmpy_camera - INFO - Camera initialized: DEV_1AB22C04E780
+2025-05-06 01:13:59,841 - src.hardware.vmpy_camera - ERROR - Error initializing Vimba camera: 'IntFeature' object has no attribute 'get_value'
+2025-05-06 01:14:08,033 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 01:14:08,989 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 01:14:09,751 - src.hardware.vmpy_camera - INFO - Camera initialized: DEV_1AB22C04E780
+2025-05-06 01:14:10,241 - src.hardware.vmpy_camera - ERROR - Error initializing Vimba camera: 'IntFeature' object has no attribute 'get_value'
+2025-05-06 01:14:17,424 - src.gui.main_window - INFO - Hardware shutdown complete
