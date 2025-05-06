@@ -3024,3 +3024,94 @@ TypeError: 'Camera.start_streaming' called with unexpected argument type. Argume
 2025-05-06 03:43:06,224 - src.hardware.vmpy_camera - INFO - Releasing VMPyCameraController resources...
 2025-05-06 03:43:06,225 - src.hardware.vmpy_camera - INFO - Camera resources released.
 2025-05-06 03:43:09,685 - src.gui.main_window - INFO - Hardware shutdown complete
+2025-05-06 03:59:33,281 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 03:59:33,298 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 03:59:34,841 - src.data_io.patient_data - INFO - Database initialized successfully
+2025-05-06 03:59:34,863 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 03:59:34,864 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 03:59:34,982 - src.main - INFO - Application initialized successfully
+2025-05-06 03:59:34,983 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 03:59:34,984 - src.hardware.vmpy_camera - INFO - Set camera access mode to: AccessMode.Full
+2025-05-06 03:59:35,789 - src.hardware.vmpy_camera - INFO - Opened camera: DEV_1AB22C04E780
+2025-05-06 03:59:35,789 - src.hardware.vmpy_camera - INFO - Setting pixel format to: Mono8
+2025-05-06 03:59:35,810 - src.hardware.vmpy_camera - INFO - Camera Info: ID=DEV_1AB22C04E780, Model=1800 U-158c, Serial=06W00
+2025-05-06 03:59:35,810 - src.hardware.vmpy_camera - INFO - Resolution: 1456x1088, PayloadSize: 1584128 bytes
+2025-05-06 03:59:38,409 - src.gui.camera_display - WARNING - ExposureAuto set to Continuous but read back as Continuous
+2025-05-06 03:59:38,412 - src.gui.camera_display - WARNING - GainAuto set to Continuous but read back as Continuous
+2025-05-06 03:59:39,201 - src.hardware.vmpy_camera - INFO - Starting asynchronous stream...
+2025-05-06 03:59:39,213 - src.hardware.vmpy_camera - INFO - Asynchronous stream started.
+2025-05-06 03:59:39,380 - vmbpyLog - INFO - Updated permitted access modes for camera "57:C:\Program Files\Allied Vision\Vimba X\cti\VimbaUSBTL.cti21:VimbaUSBInterface_0x016:DEV_1AB22C04E780"
+2025-05-06 03:59:39,393 - src.hardware.vmpy_camera - INFO - Stopping asynchronous stream...
+2025-05-06 03:59:40,348 - src.hardware.vmpy_camera - INFO - Asynchronous stream stopped.
+2025-05-06 03:59:40,388 - src.hardware.vmpy_camera - INFO - Releasing VMPyCameraController resources...
+2025-05-06 03:59:40,389 - src.hardware.vmpy_camera - INFO - Camera resources released.
+2025-05-06 03:59:40,390 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 03:59:40,390 - src.hardware.vmpy_camera - INFO - Set camera access mode to: AccessMode.Full
+2025-05-06 03:59:41,138 - src.hardware.vmpy_camera - INFO - Opened camera: DEV_1AB22C04E780
+2025-05-06 03:59:41,138 - src.hardware.vmpy_camera - INFO - Setting pixel format to: Mono8
+2025-05-06 03:59:41,158 - src.hardware.vmpy_camera - INFO - Camera Info: ID=DEV_1AB22C04E780, Model=1800 U-158c, Serial=06W00
+2025-05-06 03:59:41,159 - src.hardware.vmpy_camera - INFO - Resolution: 1456x1088, PayloadSize: 1584128 bytes
+2025-05-06 03:59:44,422 - vmbpyLog - INFO - Updated permitted access modes for camera "57:C:\Program Files\Allied Vision\Vimba X\cti\VimbaUSBTL.cti21:VimbaUSBInterface_0x016:DEV_1AB22C04E780"
+2025-05-06 03:59:45,220 - src.hardware.vmpy_camera - INFO - Starting asynchronous stream...
+2025-05-06 03:59:45,229 - src.hardware.vmpy_camera - INFO - Asynchronous stream started.
+2025-05-06 04:00:21,906 - src.gui.patient_form - INFO - New patient form initialized
+2025-05-06 04:00:30,377 - src.data_io.patient_data - INFO - Added patient: a2fb08fe-a977-48d1-bef5-4a92c8cec454 - d d
+2025-05-06 04:00:30,378 - src.gui.main_window - INFO - Working with patient: a2fb08fe-a977-48d1-bef5-4a92c8cec454
+2025-05-06 04:00:31,919 - src.gui.patient_form - INFO - Saved patient: a2fb08fe-a977-48d1-bef5-4a92c8cec454
+2025-05-06 04:00:43,319 - src.gui.patient_form - INFO - New patient form initialized
+2025-05-06 04:00:47,754 - src.gui.patient_form - INFO - New patient form initialized
+2025-05-06 04:00:51,907 - src.gui.main_window - INFO - Working with patient: a2fb08fe-a977-48d1-bef5-4a92c8cec454
+2025-05-06 04:00:51,908 - src.gui.patient_form - INFO - Loaded patient: a2fb08fe-a977-48d1-bef5-4a92c8cec454
+2025-05-06 04:00:56,585 - src.hardware.vmpy_camera - INFO - Stopping asynchronous stream...
+2025-05-06 04:00:57,355 - src.hardware.vmpy_camera - INFO - Asynchronous stream stopped.
+2025-05-06 04:00:57,397 - vmbpyLog - INFO - Updated permitted access modes for camera "57:C:\Program Files\Allied Vision\Vimba X\cti\VimbaUSBTL.cti21:VimbaUSBInterface_0x016:DEV_1AB22C04E780"
+2025-05-06 04:00:57,408 - src.hardware.vmpy_camera - INFO - Releasing VMPyCameraController resources...
+2025-05-06 04:00:57,409 - src.hardware.vmpy_camera - INFO - Camera resources released.
+2025-05-06 04:00:58,485 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 04:00:58,485 - src.hardware.vmpy_camera - INFO - Set camera access mode to: AccessMode.Full
+2025-05-06 04:00:59,233 - src.hardware.vmpy_camera - INFO - Opened camera: DEV_1AB22C04E780
+2025-05-06 04:00:59,233 - src.hardware.vmpy_camera - INFO - Setting pixel format to: Mono8
+2025-05-06 04:00:59,253 - src.hardware.vmpy_camera - INFO - Camera Info: ID=DEV_1AB22C04E780, Model=1800 U-158c, Serial=06W00
+2025-05-06 04:00:59,253 - src.hardware.vmpy_camera - INFO - Resolution: 1456x1088, PayloadSize: 1584128 bytes
+2025-05-06 04:01:03,094 - vmbpyLog - INFO - Updated permitted access modes for camera "57:C:\Program Files\Allied Vision\Vimba X\cti\VimbaUSBTL.cti21:VimbaUSBInterface_0x016:DEV_1AB22C04E780"
+2025-05-06 04:01:03,273 - src.hardware.vmpy_camera - INFO - Starting asynchronous stream...
+2025-05-06 04:01:03,285 - src.hardware.vmpy_camera - INFO - Asynchronous stream started.
+2025-05-06 04:01:13,417 - src.hardware.vmpy_camera - INFO - Image saved successfully to C:\Users\wille\Desktop\TOSCA-dev\output\capture_20250506_040113_exp46069us_gain1.7dB_autoExpContinuous_autoGainContinuous.png
+2025-05-06 04:01:41,290 - src.data_io.patient_data - INFO - Exported data for patient a2fb08fe-a977-48d1-bef5-4a92c8cec454 to C:/Users/wille
+2025-05-06 04:01:42,891 - src.gui.patient_form - INFO - Exported patient data: a2fb08fe-a977-48d1-bef5-4a92c8cec454 to C:/Users/wille
+2025-05-06 04:03:18,823 - src.data_io.patient_data - INFO - Updated patient: a2fb08fe-a977-48d1-bef5-4a92c8cec454
+2025-05-06 04:03:18,824 - src.data_io.patient_data - INFO - Imported patient data from C:/Users/wille
+2025-05-06 04:03:19,980 - src.gui.patient_form - ERROR - Error importing patient data: 'bool' object is not subscriptable
+2025-05-06 04:03:34,174 - src.gui.main_window - INFO - Hardware shutdown complete
+2025-05-06 04:07:33,680 - src.main - INFO - Starting Laser Device Control Application
+2025-05-06 04:07:33,699 - vmbpyLog - INFO - Starting vmbpy: 1.1.0 (using VmbC: 1.0.7, VmbImageTransform: 2.2)
+2025-05-06 04:07:35,165 - src.data_io.patient_data - INFO - Database initialized successfully
+2025-05-06 04:07:35,190 - src.data_io.patient_data - INFO - Database initialized successfully
+2025-05-06 04:07:35,198 - src.gui.main_window - INFO - Hardware controllers initialized
+2025-05-06 04:07:35,199 - src.gui.main_window - INFO - Main window initialized
+2025-05-06 04:07:35,320 - src.main - INFO - Application initialized successfully
+2025-05-06 04:07:35,323 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 04:07:35,324 - src.hardware.vmpy_camera - INFO - Set camera access mode to: AccessMode.Full
+2025-05-06 04:07:36,134 - src.hardware.vmpy_camera - INFO - Opened camera: DEV_1AB22C04E780
+2025-05-06 04:07:36,134 - src.hardware.vmpy_camera - INFO - Setting pixel format to: Mono8
+2025-05-06 04:07:36,155 - src.hardware.vmpy_camera - INFO - Camera Info: ID=DEV_1AB22C04E780, Model=1800 U-158c, Serial=06W00
+2025-05-06 04:07:36,155 - src.hardware.vmpy_camera - INFO - Resolution: 1456x1088, PayloadSize: 1584128 bytes
+2025-05-06 04:07:38,956 - src.gui.camera_display - WARNING - ExposureAuto set to Continuous but read back as Continuous
+2025-05-06 04:07:38,960 - src.gui.camera_display - WARNING - GainAuto set to Continuous but read back as Continuous
+2025-05-06 04:07:39,728 - vmbpyLog - INFO - Updated permitted access modes for camera "57:C:\Program Files\Allied Vision\Vimba X\cti\VimbaUSBTL.cti21:VimbaUSBInterface_0x016:DEV_1AB22C04E780"
+2025-05-06 04:07:40,011 - src.hardware.vmpy_camera - INFO - Starting asynchronous stream...
+2025-05-06 04:07:40,020 - src.hardware.vmpy_camera - INFO - Asynchronous stream started.
+2025-05-06 04:07:40,205 - src.hardware.vmpy_camera - INFO - Stopping asynchronous stream...
+2025-05-06 04:07:40,934 - src.hardware.vmpy_camera - INFO - Asynchronous stream stopped.
+2025-05-06 04:07:40,995 - src.hardware.vmpy_camera - INFO - Releasing VMPyCameraController resources...
+2025-05-06 04:07:40,995 - src.hardware.vmpy_camera - INFO - Camera resources released.
+2025-05-06 04:07:40,996 - src.hardware.vmpy_camera - INFO - Using first available camera: DEV_1AB22C04E780
+2025-05-06 04:07:40,996 - src.hardware.vmpy_camera - INFO - Set camera access mode to: AccessMode.Full
+2025-05-06 04:07:41,742 - src.hardware.vmpy_camera - INFO - Opened camera: DEV_1AB22C04E780
+2025-05-06 04:07:41,743 - src.hardware.vmpy_camera - INFO - Setting pixel format to: Mono8
+2025-05-06 04:07:41,763 - src.hardware.vmpy_camera - INFO - Camera Info: ID=DEV_1AB22C04E780, Model=1800 U-158c, Serial=06W00
+2025-05-06 04:07:41,764 - src.hardware.vmpy_camera - INFO - Resolution: 1456x1088, PayloadSize: 1584128 bytes
+2025-05-06 04:07:42,243 - vmbpyLog - INFO - Updated permitted access modes for camera "57:C:\Program Files\Allied Vision\Vimba X\cti\VimbaUSBTL.cti21:VimbaUSBInterface_0x016:DEV_1AB22C04E780"
+2025-05-06 04:07:45,697 - src.hardware.vmpy_camera - INFO - Starting asynchronous stream...
+2025-05-06 04:07:45,709 - src.hardware.vmpy_camera - INFO - Asynchronous stream started.
+2025-05-06 04:08:10,767 - src.gui.main_window - INFO - Hardware shutdown complete

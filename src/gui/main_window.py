@@ -17,6 +17,10 @@ from PyQt6.QtGui import QIcon, QAction, QPixmap
 
 # Import the camera display widget
 from .camera_display import CameraDisplayWidget
+# Import the patient form widget
+from .patient_form import PatientFormWidget
+# Import the session form widget
+from .session_form import SessionFormWidget
 
 logger = logging.getLogger(__name__)
 
@@ -194,8 +198,11 @@ class MainWindow(QMainWindow):
         
         # Patient information tab
         self.patient_tab = QWidget()
+        self.patient_tab_layout = QVBoxLayout(self.patient_tab)
+        self.patient_form = PatientFormWidget(parent=self.patient_tab, data_dir="./data")
+        self.patient_form.patient_updated.connect(self._on_patient_updated)
+        self.patient_tab_layout.addWidget(self.patient_form)
         self.tab_widget.addTab(self.patient_tab, "Patient Information")
-        # TODO: Implement Patient Information panel
         
         # Laser control tab
         self.laser_tab = QWidget()
@@ -209,10 +216,13 @@ class MainWindow(QMainWindow):
         self.camera_tab_layout.addWidget(self.camera_display)
         self.tab_widget.addTab(self.camera_tab, "Camera & Imaging")
         
-        # Treatment tab
+        # Treatment tab - using our SessionFormWidget
         self.treatment_tab = QWidget()
+        self.treatment_tab_layout = QVBoxLayout(self.treatment_tab)
+        self.session_form = SessionFormWidget(parent=self.treatment_tab, data_dir="./data")
+        self.session_form.session_updated.connect(self._on_session_updated)
+        self.treatment_tab_layout.addWidget(self.session_form)
         self.tab_widget.addTab(self.treatment_tab, "Treatment")
-        # TODO: Implement Treatment panel
         
         # Quick access buttons at the bottom
         self.button_layout = QHBoxLayout()
@@ -312,40 +322,34 @@ class MainWindow(QMainWindow):
     def _on_new_patient(self):
         """Handle new patient action."""
         logger.info("New patient action triggered")
-        # Will open a dialog to create a new patient
-        QMessageBox.information(self, "New Patient", "New patient dialog will be implemented.")
+        # Switch to patient tab
+        self.tab_widget.setCurrentWidget(self.patient_tab)
+        # Delegate to patient form widget
+        self.patient_form.on_new_patient()
     
     def _on_open_patient(self):
         """Handle open patient action."""
         logger.info("Open patient action triggered")
-        # Will open a dialog to select an existing patient
-        QMessageBox.information(self, "Open Patient", "Open patient dialog will be implemented.")
+        # Switch to patient tab
+        self.tab_widget.setCurrentWidget(self.patient_tab)
+        # Delegate to patient form widget
+        self.patient_form.on_load_patient()
     
     def _on_export_data(self):
         """Handle export data action."""
         logger.info("Export data action triggered")
-        # Will open a dialog to export patient data
-        export_dir = QFileDialog.getExistingDirectory(
-            self, "Select Export Directory", str(Path.home()),
-            QFileDialog.Option.ShowDirsOnly
-        )
-        
-        if export_dir:
-            # Will implement data export
-            QMessageBox.information(self, "Export Data", f"Data will be exported to {export_dir}")
+        # Switch to patient tab
+        self.tab_widget.setCurrentWidget(self.patient_tab)
+        # Delegate to patient form widget
+        self.patient_form.on_export_data()
     
     def _on_import_data(self):
         """Handle import data action."""
         logger.info("Import data action triggered")
-        # Will open a dialog to import patient data
-        import_dir = QFileDialog.getExistingDirectory(
-            self, "Select Import Directory", str(Path.home()),
-            QFileDialog.Option.ShowDirsOnly
-        )
-        
-        if import_dir:
-            # Will implement data import
-            QMessageBox.information(self, "Import Data", f"Data will be imported from {import_dir}")
+        # Switch to patient tab
+        self.tab_widget.setCurrentWidget(self.patient_tab)
+        # Delegate to patient form widget
+        self.patient_form.on_import_data()
     
     def _on_connect_hardware(self):
         """Handle connect hardware action."""
@@ -459,4 +463,27 @@ class MainWindow(QMainWindow):
         QMessageBox.information(
             self, "Help", 
             "Help documentation will be implemented."
-        ) 
+        )
+    
+    def _on_patient_updated(self, patient_data):
+        """Handle patient data updates."""
+        if patient_data:
+            # Update patient status in status bar
+            self.patient_status.setText(f"Patient: {patient_data.get('first_name', '')} {patient_data.get('last_name', '')}")
+            
+            # Create patient-specific directory for data if needed
+            patient_dir = Path("./data/patients") / patient_data.get('patient_id', '')
+            patient_dir.mkdir(exist_ok=True)
+            
+            # Update session form with the current patient
+            self.session_form.set_patient(patient_data)
+            
+            logger.info(f"Working with patient: {patient_data.get('patient_id')}")
+        else:
+            # Clear patient status if no patient is selected
+            self.patient_status.setText("Patient: None")
+    
+    def _on_session_updated(self, session_data):
+        """Handle session data updates."""
+        if session_data:
+            logger.info(f"Treatment session updated: {session_data.get('session_id', '')}") 
