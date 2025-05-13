@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VmbSystem &mdash; VmbPy 1.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=cbcdba59"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="TransportLayer" href="TransportLayer.html" />
+    <link rel="prev" title="VmbPy API Function Reference" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            VmbPy
+          </a>
+              <div class="version">
+                1.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">VmbSystem</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#vmbpy.VmbSystem"><code class="docutils literal notranslate"><span class="pre">VmbSystem</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.disable_log"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.disable_log()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.enable_log"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.enable_log()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.get_all_cameras"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.get_all_cameras()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.get_all_features"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.get_all_features()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.get_all_interfaces"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.get_all_interfaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.get_all_transport_layers"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.get_all_transport_layers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.get_camera_by_id"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.get_camera_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.get_cameras_by_interface"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.get_cameras_by_interface()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.get_cameras_by_tl"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.get_cameras_by_tl()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.get_feature_by_name"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.get_feature_by_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.get_features_by_category"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.get_features_by_category()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.get_features_by_type"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.get_features_by_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.get_features_selected_by"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.get_features_selected_by()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.get_interface_by_id"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.get_interface_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.get_interfaces_by_tl"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.get_interfaces_by_tl()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.get_transport_layer_by_id"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.get_transport_layer_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.get_version"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.get_version()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.read_memory"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.read_memory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.register_camera_change_handler"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.register_camera_change_handler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.register_interface_change_handler"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.register_interface_change_handler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.set_path_configuration"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.set_path_configuration()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.unregister_all_camera_change_handlers"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.unregister_all_camera_change_handlers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.unregister_all_interface_change_handlers"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.unregister_all_interface_change_handlers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.unregister_camera_change_handler"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.unregister_camera_change_handler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.unregister_interface_change_handler"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.unregister_interface_change_handler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl.write_memory"><code class="docutils literal notranslate"><span class="pre">VmbSystem.__Impl.write_memory()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TransportLayer.html">TransportLayer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Camera.html">Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stream.html">Stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LocalDevice.html">LocalDevice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Frame.html">Frame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Feature.html">Feature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Error.html">Error</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">VmbPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">VmbSystem</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vmbsystem">
+<h1>VmbSystem<a class="headerlink" href="#vmbsystem" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vmbpy.</span></span><span class="sig-name descname"><span class="pre">VmbSystem</span></span></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_instance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#vmbpy.VmbSystem.__Impl" title="vmbpy.VmbSystem.__Impl"><span class="pre">__Impl</span></a></span></span></dt>
+<dd><p>Get VmbSystem Singleton.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vmbpy.</span></span><span class="sig-name descname"><span class="pre">VmbSystem</span></span><a class="headerlink" href="#vmbpy.VmbSystem" title="Permalink to this definition"></a></dt>
+<dd><dl class="py class">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__Impl</span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl" title="Permalink to this definition"></a></dt>
+<dd><p>This class allows access to the entire Vimba X System.
+VmbSystem is meant be used in conjunction with the <code class="docutils literal notranslate"><span class="pre">with</span></code> context. Upon entering the
+context, all system features, connected cameras and interfaces are detected and can be used.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.disable_log">
+<span class="sig-name descname"><span class="pre">disable_log</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.disable_log" title="Permalink to this definition"></a></dt>
+<dd><p>Disable vmbpy’s logging mechanism.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.enable_log">
+<span class="sig-name descname"><span class="pre">enable_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">LogConfig</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.enable_log" title="Permalink to this definition"></a></dt>
+<dd><p>Enable vmbpy’s logging mechanism.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> – Configuration for the logging mechanism.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If parameters do not match their type hint.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.get_all_cameras">
+<span class="sig-name descname"><span class="pre">get_all_cameras</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Camera.html#vmbpy.Camera" title="vmbpy.camera.Camera"><span class="pre">Camera</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.get_all_cameras" title="Permalink to this definition"></a></dt>
+<dd><p>Get access to all discovered Cameras.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A set of all currently detected Cameras.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.get_all_features">
+<span class="sig-name descname"><span class="pre">get_all_features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.get_all_features" title="Permalink to this definition"></a></dt>
+<dd><p>Get access to all discovered features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A set of all currently detected Features.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.get_all_interfaces">
+<span class="sig-name descname"><span class="pre">get_all_interfaces</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Interface.html#vmbpy.Interface" title="vmbpy.interface.Interface"><span class="pre">Interface</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.get_all_interfaces" title="Permalink to this definition"></a></dt>
+<dd><p>Get access to all discovered Interfaces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A set of all currently detected Interfaces.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.get_all_transport_layers">
+<span class="sig-name descname"><span class="pre">get_all_transport_layers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="TransportLayer.html#vmbpy.TransportLayer" title="vmbpy.transportlayer.TransportLayer"><span class="pre">TransportLayer</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.get_all_transport_layers" title="Permalink to this definition"></a></dt>
+<dd><p>Get access to all loaded Transport Layers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A set of all currently loaded Transport Layers.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.get_camera_by_id">
+<span class="sig-name descname"><span class="pre">get_camera_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="Camera.html#vmbpy.Camera" title="vmbpy.camera.Camera"><span class="pre">Camera</span></a></span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.get_camera_by_id" title="Permalink to this definition"></a></dt>
+<dd><p>Lookup Camera with given Id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> – Camera Id to search for. For GigE Cameras, the IP and MAC Address can be used
+for Camera lookup.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Camera associated with given Id.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbCameraError" title="vmbpy.VmbCameraError"><strong>VmbCameraError</strong></a> – If camera with <code class="docutils literal notranslate"><span class="pre">id_</span></code> can’t be found.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.get_cameras_by_interface">
+<span class="sig-name descname"><span class="pre">get_cameras_by_interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inter_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Interface.html#vmbpy.Interface" title="vmbpy.interface.Interface"><span class="pre">Interface</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.get_cameras_by_interface" title="Permalink to this definition"></a></dt>
+<dd><p>Get access to cameras associated with the given interface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>inter</strong> – Interface whose cameras should be returned.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple of all cameras associated with the given interface.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.get_cameras_by_tl">
+<span class="sig-name descname"><span class="pre">get_cameras_by_tl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tl_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="TransportLayer.html#vmbpy.TransportLayer" title="vmbpy.transportlayer.TransportLayer"><span class="pre">TransportLayer</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Camera.html#vmbpy.Camera" title="vmbpy.camera.Camera"><span class="pre">Camera</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.get_cameras_by_tl" title="Permalink to this definition"></a></dt>
+<dd><p>Get access to cameras associated with the given Transport Layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tl</strong> – Transport Layer whose cameras should be returned.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple of all cameras associated with the given Transport Layer.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.get_feature_by_name">
+<span class="sig-name descname"><span class="pre">get_feature_by_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feat_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a></span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.get_feature_by_name" title="Permalink to this definition"></a></dt>
+<dd><p>Get a feature by its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>feat_name</strong> – Name used to find a feature.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Feature with the associated name.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbFeatureError" title="vmbpy.VmbFeatureError"><strong>VmbFeatureError</strong></a> – If no feature is associated with <code class="docutils literal notranslate"><span class="pre">feat_name</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.get_features_by_category">
+<span class="sig-name descname"><span class="pre">get_features_by_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.get_features_by_category" title="Permalink to this definition"></a></dt>
+<dd><p>Get all features of a specific category.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>category</strong> – Category that should be used for filtering.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A set of features of category <code class="docutils literal notranslate"><span class="pre">category</span></code>.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.get_features_by_type">
+<span class="sig-name descname"><span class="pre">get_features_by_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feat_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.get_features_by_type" title="Permalink to this definition"></a></dt>
+<dd><p>Get all features of a specific feature type.</p>
+<p>Valid FeatureTypes are: <code class="docutils literal notranslate"><span class="pre">IntFeature</span></code>, <code class="docutils literal notranslate"><span class="pre">FloatFeature</span></code>, <code class="docutils literal notranslate"><span class="pre">StringFeature</span></code>,
+<code class="docutils literal notranslate"><span class="pre">BoolFeature</span></code>, <code class="docutils literal notranslate"><span class="pre">EnumFeature</span></code>, <code class="docutils literal notranslate"><span class="pre">CommandFeature</span></code>, <code class="docutils literal notranslate"><span class="pre">RawFeature</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>feat_type</strong> – FeatureType used to find features of that type.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A set of features of type <cite>feat_type`</cite>.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.get_features_selected_by">
+<span class="sig-name descname"><span class="pre">get_features_selected_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.get_features_selected_by" title="Permalink to this definition"></a></dt>
+<dd><p>Get all features selected by a specific feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>feat</strong> – Feature used to find features that are selected by <code class="docutils literal notranslate"><span class="pre">feat</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A set of features selected by <code class="docutils literal notranslate"><span class="pre">feat</span></code>.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbFeatureError" title="vmbpy.VmbFeatureError"><strong>VmbFeatureError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">feat</span></code> is not a valid feature.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.get_interface_by_id">
+<span class="sig-name descname"><span class="pre">get_interface_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="Interface.html#vmbpy.Interface" title="vmbpy.interface.Interface"><span class="pre">Interface</span></a></span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.get_interface_by_id" title="Permalink to this definition"></a></dt>
+<dd><p>Lookup Interface with given Id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> – Interface Id to search for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Interface associated with given Id.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbInterfaceError" title="vmbpy.VmbInterfaceError"><strong>VmbInterfaceError</strong></a> – If interface with <code class="docutils literal notranslate"><span class="pre">id_</span></code> can’t be found.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.get_interfaces_by_tl">
+<span class="sig-name descname"><span class="pre">get_interfaces_by_tl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tl_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="TransportLayer.html#vmbpy.TransportLayer" title="vmbpy.transportlayer.TransportLayer"><span class="pre">TransportLayer</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Interface.html#vmbpy.Interface" title="vmbpy.interface.Interface"><span class="pre">Interface</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.get_interfaces_by_tl" title="Permalink to this definition"></a></dt>
+<dd><p>Get access to interfaces associated with the given Transport Layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tl</strong> – Transport Layer whose interfaces should be returned.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple of all interfaces associated with the given Transport Layer.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.get_transport_layer_by_id">
+<span class="sig-name descname"><span class="pre">get_transport_layer_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="TransportLayer.html#vmbpy.TransportLayer" title="vmbpy.transportlayer.TransportLayer"><span class="pre">TransportLayer</span></a></span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.get_transport_layer_by_id" title="Permalink to this definition"></a></dt>
+<dd><p>Lookup Transport Layer with given Id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> – Transport Layer Id to search for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Transport Layer associated with given Id.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbTransportLayerError" title="vmbpy.VmbTransportLayerError"><strong>VmbTransportLayerError</strong></a> – If Transport Layer with <code class="docutils literal notranslate"><span class="pre">id_</span></code> can’t be found.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.get_version">
+<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.get_version" title="Permalink to this definition"></a></dt>
+<dd><p>Returns version string of vmbpy and underlying dependencies.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.read_memory">
+<span class="sig-name descname"><span class="pre">read_memory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.read_memory" title="Permalink to this definition"></a></dt>
+<dd><p>Read a byte sequence from a given memory address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr</strong> – Starting address to read from.</p></li>
+<li><p><strong>max_bytes</strong> – Maximum number of bytes to read from addr.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Read memory contents as bytes.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">addr</span></code> is negative.</p></li>
+<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">max_bytes</span></code> is negative.</p></li>
+<li><p><strong>ValueError</strong> – If the memory access was invalid.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.register_camera_change_handler">
+<span class="sig-name descname"><span class="pre">register_camera_change_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Camera.html#vmbpy.Camera" title="vmbpy.camera.Camera"><span class="pre">Camera</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="Camera.html#vmbpy.CameraEvent" title="vmbpy.camera.CameraEvent"><span class="pre">CameraEvent</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.register_camera_change_handler" title="Permalink to this definition"></a></dt>
+<dd><p>Add Callable that is executed on camera connect/disconnect.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>handler</strong> – The change handler that shall be added.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If parameters do not match their type hint.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.register_interface_change_handler">
+<span class="sig-name descname"><span class="pre">register_interface_change_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Interface.html#vmbpy.Interface" title="vmbpy.interface.Interface"><span class="pre">Interface</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="Interface.html#vmbpy.InterfaceEvent" title="vmbpy.interface.InterfaceEvent"><span class="pre">InterfaceEvent</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.register_interface_change_handler" title="Permalink to this definition"></a></dt>
+<dd><p>Add Callable that is executed on interface connect/disconnect.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>handler</strong> – The change handler that shall be added.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If parameters do not match their type hint.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.set_path_configuration">
+<span class="sig-name descname"><span class="pre">set_path_configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.set_path_configuration" title="Permalink to this definition"></a></dt>
+<dd><p>Set the path_configuration parameter that can be passed to VmbStartup.</p>
+<p>Using this is optional. If no path configuration is set, the
+<code class="docutils literal notranslate"><span class="pre">GENICAM_GENTL{32|64}_PATH</span></code> environment variables are considered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – Paths of directories that should be included in the path configuration. Each
+path should be a separate argument. The paths contain directories to search for
+.cti files, paths to .cti files and optionally the path to a configuration xml
+file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of self. This allows setting the path configuration while entering the
+<code class="docutils literal notranslate"><span class="pre">VmbSystem</span></code> <code class="docutils literal notranslate"><span class="pre">with</span></code> context at the same time.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Using the returned instance to directly open the <code class="docutils literal notranslate"><span class="pre">with</span></code> context of
+<code class="docutils literal notranslate"><span class="pre">VmbSystem</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">vmbpy</span><span class="o">.</span><span class="n">VmbSytem</span><span class="o">.</span><span class="n">get_instance</span><span class="p">()</span><span class="o">.</span><span class="n">set_path_configuration</span><span class="p">(</span><span class="s1">&#39;/foo&#39;</span><span class="p">,</span> <span class="s1">&#39;/bar&#39;</span><span class="p">):</span>
+    <span class="c1"># do something</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.unregister_all_camera_change_handlers">
+<span class="sig-name descname"><span class="pre">unregister_all_camera_change_handlers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.unregister_all_camera_change_handlers" title="Permalink to this definition"></a></dt>
+<dd><p>Remove all currently registered camera change handlers</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.unregister_all_interface_change_handlers">
+<span class="sig-name descname"><span class="pre">unregister_all_interface_change_handlers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.unregister_all_interface_change_handlers" title="Permalink to this definition"></a></dt>
+<dd><p>Remove all currently registered interface change handlers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.unregister_camera_change_handler">
+<span class="sig-name descname"><span class="pre">unregister_camera_change_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Camera.html#vmbpy.Camera" title="vmbpy.camera.Camera"><span class="pre">Camera</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="Camera.html#vmbpy.CameraEvent" title="vmbpy.camera.CameraEvent"><span class="pre">CameraEvent</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.unregister_camera_change_handler" title="Permalink to this definition"></a></dt>
+<dd><p>Remove previously registered camera change handler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>handler</strong> – The change handler that shall be removed.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If parameters do not match their type hint.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.unregister_interface_change_handler">
+<span class="sig-name descname"><span class="pre">unregister_interface_change_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Interface.html#vmbpy.Interface" title="vmbpy.interface.Interface"><span class="pre">Interface</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="Interface.html#vmbpy.InterfaceEvent" title="vmbpy.interface.InterfaceEvent"><span class="pre">InterfaceEvent</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.unregister_interface_change_handler" title="Permalink to this definition"></a></dt>
+<dd><p>Remove previously registered interface change handler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>handler</strong> – The change handler that shall be removed.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If parameters do not match their type hint.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.VmbSystem.__Impl.write_memory">
+<span class="sig-name descname"><span class="pre">write_memory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.VmbSystem.__Impl.write_memory" title="Permalink to this definition"></a></dt>
+<dd><p>Write a byte sequence to a given memory address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr</strong> – Address to write the content of <code class="docutils literal notranslate"><span class="pre">data</span></code> to.</p></li>
+<li><p><strong>data</strong> – Byte sequence to write at address <code class="docutils literal notranslate"><span class="pre">addr</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">addr</span></code> is negative.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="VmbPy API Function Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="TransportLayer.html" class="btn btn-neutral float-right" title="TransportLayer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

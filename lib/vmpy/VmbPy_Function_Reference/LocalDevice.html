@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LocalDevice &mdash; VmbPy 1.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_new.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/dark_mode_css/dark.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=cbcdba59"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/dark_mode_js/default_dark.js?v=fd565c74"></script>
+        <script src="_static/dark_mode_js/theme_switcher.js?v=358d3910"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Frame" href="Frame.html" />
+    <link rel="prev" title="Stream" href="Stream.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            VmbPy
+          </a>
+              <div class="version">
+                1.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="VmbSystem.html">VmbSystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TransportLayer.html">TransportLayer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Interface.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Camera.html">Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stream.html">Stream</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">LocalDevice</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#vmbpy.LocalDevice"><code class="docutils literal notranslate"><span class="pre">LocalDevice</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.LocalDevice.get_all_features"><code class="docutils literal notranslate"><span class="pre">LocalDevice.get_all_features()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.LocalDevice.get_feature_by_name"><code class="docutils literal notranslate"><span class="pre">LocalDevice.get_feature_by_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.LocalDevice.get_features_by_category"><code class="docutils literal notranslate"><span class="pre">LocalDevice.get_features_by_category()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.LocalDevice.get_features_by_type"><code class="docutils literal notranslate"><span class="pre">LocalDevice.get_features_by_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.LocalDevice.get_features_selected_by"><code class="docutils literal notranslate"><span class="pre">LocalDevice.get_features_selected_by()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.LocalDevice.load_settings"><code class="docutils literal notranslate"><span class="pre">LocalDevice.load_settings()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vmbpy.LocalDevice.save_settings"><code class="docutils literal notranslate"><span class="pre">LocalDevice.save_settings()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Frame.html">Frame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Feature.html">Feature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Error.html">Error</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">VmbPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">LocalDevice</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="localdevice">
+<h1>LocalDevice<a class="headerlink" href="#localdevice" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="vmbpy.LocalDevice">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vmbpy.</span></span><span class="sig-name descname"><span class="pre">LocalDevice</span></span><a class="headerlink" href="#vmbpy.LocalDevice" title="Permalink to this definition"></a></dt>
+<dd><p>This class provides access to the Local Device of a Camera.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.LocalDevice.get_all_features">
+<span class="sig-name descname"><span class="pre">get_all_features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.LocalDevice.get_all_features" title="Permalink to this definition"></a></dt>
+<dd><p>Get access to all discovered features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A set of all currently detected Features.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.LocalDevice.get_feature_by_name">
+<span class="sig-name descname"><span class="pre">get_feature_by_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feat_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a></span></span><a class="headerlink" href="#vmbpy.LocalDevice.get_feature_by_name" title="Permalink to this definition"></a></dt>
+<dd><p>Get a feature by its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>feat_name</strong> – Name used to find a feature.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Feature with the associated name.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbFeatureError" title="vmbpy.VmbFeatureError"><strong>VmbFeatureError</strong></a> – If no feature is associated with <code class="docutils literal notranslate"><span class="pre">feat_name</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.LocalDevice.get_features_by_category">
+<span class="sig-name descname"><span class="pre">get_features_by_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.LocalDevice.get_features_by_category" title="Permalink to this definition"></a></dt>
+<dd><p>Get all features of a specific category.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>category</strong> – Category that should be used for filtering.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A set of features of category <code class="docutils literal notranslate"><span class="pre">category</span></code>.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.LocalDevice.get_features_by_type">
+<span class="sig-name descname"><span class="pre">get_features_by_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feat_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.LocalDevice.get_features_by_type" title="Permalink to this definition"></a></dt>
+<dd><p>Get all features of a specific feature type.</p>
+<p>Valid FeatureTypes are: <code class="docutils literal notranslate"><span class="pre">IntFeature</span></code>, <code class="docutils literal notranslate"><span class="pre">FloatFeature</span></code>, <code class="docutils literal notranslate"><span class="pre">StringFeature</span></code>,
+<code class="docutils literal notranslate"><span class="pre">BoolFeature</span></code>, <code class="docutils literal notranslate"><span class="pre">EnumFeature</span></code>, <code class="docutils literal notranslate"><span class="pre">CommandFeature</span></code>, <code class="docutils literal notranslate"><span class="pre">RawFeature</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>feat_type</strong> – FeatureType used to find features of that type.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A set of features of type <cite>feat_type`</cite>.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.LocalDevice.get_features_selected_by">
+<span class="sig-name descname"><span class="pre">get_features_selected_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Feature.html#vmbpy.IntFeature" title="vmbpy.feature.IntFeature"><span class="pre">IntFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.FloatFeature" title="vmbpy.feature.FloatFeature"><span class="pre">FloatFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.StringFeature" title="vmbpy.feature.StringFeature"><span class="pre">StringFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.BoolFeature" title="vmbpy.feature.BoolFeature"><span class="pre">BoolFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.EnumFeature" title="vmbpy.feature.EnumFeature"><span class="pre">EnumFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.CommandFeature" title="vmbpy.feature.CommandFeature"><span class="pre">CommandFeature</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="Feature.html#vmbpy.RawFeature" title="vmbpy.feature.RawFeature"><span class="pre">RawFeature</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#vmbpy.LocalDevice.get_features_selected_by" title="Permalink to this definition"></a></dt>
+<dd><p>Get all features selected by a specific feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>feat</strong> – Feature used to find features that are selected by <code class="docutils literal notranslate"><span class="pre">feat</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A set of features selected by <code class="docutils literal notranslate"><span class="pre">feat</span></code>.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside of <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><a class="reference internal" href="Error.html#vmbpy.VmbFeatureError" title="vmbpy.VmbFeatureError"><strong>VmbFeatureError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">feat</span></code> is not a valid feature.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.LocalDevice.load_settings">
+<span class="sig-name descname"><span class="pre">load_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">persist_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Feature.html#vmbpy.PersistType" title="vmbpy.c_binding.wrapped_types.PersistType"><span class="pre">PersistType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PersistType.Streamable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">persist_flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Feature.html#vmbpy.ModulePersistFlags" title="vmbpy.c_binding.wrapped_types.ModulePersistFlags"><span class="pre">ModulePersistFlags</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ModulePersistFlags.None_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.LocalDevice.load_settings" title="Permalink to this definition"></a></dt>
+<dd><p>Load settings from XML file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – The location for loading current settings. The given file must be a file ending with
+“.xml”.</p></li>
+<li><p><strong>persist_type</strong> – Parameter specifying which setting types to load. For an overview of the possible
+values and their implication see the <code class="docutils literal notranslate"><span class="pre">PersistType</span></code> enum</p></li>
+<li><p><strong>persist_flags</strong> – Flags specifying the modules to load. By default only features of the calling module
+itself are persisted. For an overview of available flags see the
+<code class="docutils literal notranslate"><span class="pre">ModulePersistFlags</span></code> type</p></li>
+<li><p><strong>max_iterations</strong> – Number of iterations when storing settings. If 0 is given (default) the value found
+in the XML file is used</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><strong>ValueError</strong> – If argument path is no “.xml” file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vmbpy.LocalDevice.save_settings">
+<span class="sig-name descname"><span class="pre">save_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">persist_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Feature.html#vmbpy.PersistType" title="vmbpy.c_binding.wrapped_types.PersistType"><span class="pre">PersistType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PersistType.Streamable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">persist_flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Feature.html#vmbpy.ModulePersistFlags" title="vmbpy.c_binding.wrapped_types.ModulePersistFlags"><span class="pre">ModulePersistFlags</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ModulePersistFlags.None_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vmbpy.LocalDevice.save_settings" title="Permalink to this definition"></a></dt>
+<dd><p>Save settings to XML File.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – The location for storing the current settings. The given file must be a file ending
+with “.xml”.</p></li>
+<li><p><strong>persist_type</strong> – Parameter specifying which setting types to store. For an overview of the possible
+values and their implication see the <code class="docutils literal notranslate"><span class="pre">PersistType</span></code> enum</p></li>
+<li><p><strong>persist_flags</strong> – Flags specifying the modules to store. By default only features of the calling
+module itself are persisted. For an overview of available flags see the
+<code class="docutils literal notranslate"><span class="pre">ModulePersistFlags</span></code> type</p></li>
+<li><p><strong>max_iterations</strong> – Number of iterations when loading settings. If <code class="docutils literal notranslate"><span class="pre">0</span></code> is given (default) the VmbC
+default is used</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If parameters do not match their type hint.</p></li>
+<li><p><strong>RuntimeError</strong> – If called outside <code class="docutils literal notranslate"><span class="pre">with</span></code> context.</p></li>
+<li><p><strong>ValueError</strong> – If argument path is no “.xml”- File.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Stream.html" class="btn btn-neutral float-left" title="Stream" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Frame.html" class="btn btn-neutral float-right" title="Frame" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Allied Vision.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

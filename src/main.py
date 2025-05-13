@@ -10,8 +10,8 @@ import sys
 import logging
 from PyQt6.QtWidgets import QApplication
 
-# Don't import VmbSystem here since we'll initialize it only when needed
-# from vmbpy import VmbSystem
+# Import VmbSystem for persistent context
+from vmbpy import VmbSystem
 
 # Import project modules
 from src.gui.main_window import MainWindow
@@ -36,18 +36,24 @@ def main():
     app = QApplication(sys.argv)
     app.setApplicationName("TOSCA Control System")
     
+    # Enter VmbSystem context for the whole app lifetime
+    vmb = VmbSystem.get_instance()
+    vmb.__enter__()
     try:
-        # Initialize the main window without vmb - it will be created when needed
-        main_window = MainWindow(vmb=None)
+        # Initialize the main window with persistent vmb
+        main_window = MainWindow(vmb=vmb)
         main_window.show()
         
         # Start the application event loop
         logger.info("Application initialized successfully")
-        return app.exec()
-    
+        result = app.exec()
     except Exception as e:
         logger.error(f"Error during application startup: {e}", exc_info=True)
-        return 1
-    
+        result = 1
+    finally:
+        # Exit VmbSystem context on app exit
+        vmb.__exit__(None, None, None)
+    return result
+
 if __name__ == "__main__":
     sys.exit(main()) 

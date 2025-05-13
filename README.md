@@ -143,8 +143,6 @@ python app.py
 ## Directory Structure
 
 - `app.py`: Main application entry point
-- `code_structure_report.md`: Brief overview of the source code structure.
-- `functional_report.md`: Detailed description of module and function purposes.
 - `src/`: Source code directory
   - `data_io/`: Data input/output modules
     - `patient_data.py`: Patient data management (SQLite backend)
@@ -158,15 +156,58 @@ python app.py
     - `vmpy_camera.py`: Allied Vision camera controller (VmbPy)
     - `laser_controller.py`: Laser device controller (Serial)
     - `actuator_controller.py`: Motion actuator controller (Serial)
+    - `actuator-control/`: Xeryon actuator control libraries
+  - `utils/`: Utility modules
+    - `error_handling.py`: Standardized error handling system
+- `lib/`: External libraries
+  - `vmpy/`: VmbPy SDK for camera control
+    - `cti/`: GenICam Transport Layer files
 - `data/`: Data storage directory (Created automatically)
   - `patients/`: Patient-specific data and session images
   - `tosca.db`: SQLite database
 - `docs/`: Documentation files
+  - `developer/`: Developer documentation
+    - `architecture.md`: System architecture overview
+    - `error_handling_guide.md`: Error handling best practices
   - `cti/`: GenICam Transport Layer files (Needed for Vimba X)
-- `reports/`: Directory for generated reports (Note: Ignored by Git).
+- `reports/`: Directory for reports and screenshots
+  - `images/`: Image files for reports
+  - `screenshots/`: Application screenshots
+  - `generated/`: Generated report files
+  - `api_summaries/`: API documentation summaries
+- `tools/`: Utility scripts for development and reporting
+- `logs/`: Application log files
 
 
-### Adding New Features
+## Developer Documentation
+
+The project includes comprehensive developer documentation:
+
+### System Architecture
+
+The `docs/developer/architecture.md` file provides a detailed overview of the system architecture, including:
+- Component descriptions
+- Data flow
+- Directory structure
+- Threading model
+- Configuration
+- Logging
+- Testing
+- Extension guidelines
+
+### Error Handling
+
+The project uses a standardized error handling approach defined in `src/utils/error_handling.py`. This approach ensures consistent error reporting, logging, and handling across all components of the application.
+
+The `docs/developer/error_handling_guide.md` file provides detailed information on:
+- Custom exception classes
+- Error types and severity levels
+- Helper functions and decorators
+- Best practices for error handling
+- Error handling in GUI components and background threads
+- Common error scenarios and recovery strategies
+
+## Adding New Features
 
 1. Camera features
    - Add support for additional camera parameters
@@ -182,3 +223,8 @@ python app.py
    - Add specialized treatment protocols
    - Implement treatment planning tools
    - Add outcome tracking
+
+4. Error Handling
+   - Implement standardized error handling in all modules
+   - Add error recovery strategies
+   - Improve user feedback for error conditions

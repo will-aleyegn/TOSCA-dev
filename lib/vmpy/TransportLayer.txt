@@ -1,0 +1,594 @@
+TransportLayer — VmbPy 1.1.0 documentation
+VmbPy
+1.1.0
+VmbSystem
+TransportLayer
+TransportLayer
+TransportLayer.get_all_features()
+TransportLayer.get_cameras()
+TransportLayer.get_feature_by_name()
+TransportLayer.get_features_by_category()
+TransportLayer.get_features_by_type()
+TransportLayer.get_features_selected_by()
+TransportLayer.get_id()
+TransportLayer.get_interfaces()
+TransportLayer.get_model_name()
+TransportLayer.get_name()
+TransportLayer.get_path()
+TransportLayer.get_type()
+TransportLayer.get_vendor()
+TransportLayer.get_version()
+TransportLayer.load_settings()
+TransportLayer.save_settings()
+TransportLayerType
+TransportLayerType.Unknown
+TransportLayerType.GEV
+TransportLayerType.CL
+TransportLayerType.IIDC
+TransportLayerType.UVC
+TransportLayerType.CXP
+TransportLayerType.CLHS
+TransportLayerType.U3V
+TransportLayerType.Ethernet
+TransportLayerType.PCI
+TransportLayerType.Custom
+TransportLayerType.Mixed
+Interface
+Camera
+Stream
+LocalDevice
+Frame
+Feature
+Error
+VmbPy
+TransportLayer
+TransportLayer
+
+class
+vmbpy.
+TransportLayer
+
+This class allows access to a Transport Layer.
+get_all_features
+(
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get access to all discovered features.
+Returns
+:
+A set of all currently detected Features.
+Raises
+:
+RuntimeError
+– If called outside of
+with
+context.
+get_cameras
+(
+)
+→
+CamerasTuple
+
+Get access to cameras associated with the Transport Layer instance.
+Returns
+:
+A tuple of all cameras associated with this Transport Layer.
+Raises
+:
+RuntimeError
+– If called outside of VmbSystem
+with
+context.
+get_feature_by_name
+(
+feat_name
+:
+str
+)
+→
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+
+Get a feature by its name.
+Parameters
+:
+feat_name
+– Name used to find a feature.
+Returns
+:
+Feature with the associated name.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+VmbFeatureError
+– If no feature is associated with
+feat_name
+.
+get_features_by_category
+(
+category
+:
+str
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get all features of a specific category.
+Parameters
+:
+category
+– Category that should be used for filtering.
+Returns
+:
+A set of features of category
+category
+.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+get_features_by_type
+(
+feat_type
+:
+Type
+[
+IntFeature
+]
+|
+Type
+[
+FloatFeature
+]
+|
+Type
+[
+StringFeature
+]
+|
+Type
+[
+BoolFeature
+]
+|
+Type
+[
+EnumFeature
+]
+|
+Type
+[
+CommandFeature
+]
+|
+Type
+[
+RawFeature
+]
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get all features of a specific feature type.
+Valid FeatureTypes are:
+IntFeature
+,
+FloatFeature
+,
+StringFeature
+,
+BoolFeature
+,
+EnumFeature
+,
+CommandFeature
+,
+RawFeature
+Parameters
+:
+feat_type
+– FeatureType used to find features of that type.
+Returns
+:
+A set of features of type
+feat_type`
+.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+get_features_selected_by
+(
+feat
+:
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get all features selected by a specific feature.
+Parameters
+:
+feat
+– Feature used to find features that are selected by
+feat
+.
+Returns
+:
+A set of features selected by
+feat
+.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+VmbFeatureError
+– If
+feat
+is not a valid feature.
+get_id
+(
+)
+→
+str
+
+Get Transport Layer Id such as ‘VimbaGigETL’
+get_interfaces
+(
+)
+→
+InterfacesTuple
+
+Get all interfaces associated with the Transport Layer instance.
+Returns
+:
+A tuple of all interfaces associated with this Transport Layer.
+Raises
+:
+RuntimeError
+– If called outside of VmbSystem
+with
+context.
+get_model_name
+(
+)
+→
+str
+
+Get Transport Layer Model Name such as ‘GigETL’
+get_name
+(
+)
+→
+str
+
+Get Transport Layer Display Name such as ‘AVT GigE Transport Layer’
+get_path
+(
+)
+→
+str
+
+Get path to Transport Layer file
+get_type
+(
+)
+→
+TransportLayerType
+
+Get Transport Layer Type such as
+TransportLayerType.GEV
+get_vendor
+(
+)
+→
+str
+
+Get Transport Layer Vendor such as ‘Allied Vision Technologies’
+get_version
+(
+)
+→
+str
+
+Get Transport Layer Version
+load_settings
+(
+file_path
+:
+str
+,
+persist_type
+:
+PersistType
+=
+PersistType.Streamable
+,
+persist_flags
+:
+ModulePersistFlags
+=
+ModulePersistFlags.None_
+,
+max_iterations
+:
+int
+=
+0
+)
+
+Load settings from XML file.
+Parameters
+:
+file_path
+– The location for loading current settings. The given file must be a file ending with
+“.xml”.
+persist_type
+– Parameter specifying which setting types to load. For an overview of the possible
+values and their implication see the
+PersistType
+enum
+persist_flags
+– Flags specifying the modules to load. By default only features of the calling module
+itself are persisted. For an overview of available flags see the
+ModulePersistFlags
+type
+max_iterations
+– Number of iterations when storing settings. If 0 is given (default) the value found
+in the XML file is used
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside
+with
+context.
+ValueError
+– If argument path is no “.xml” file.
+save_settings
+(
+file_path
+:
+str
+,
+persist_type
+:
+PersistType
+=
+PersistType.Streamable
+,
+persist_flags
+:
+ModulePersistFlags
+=
+ModulePersistFlags.None_
+,
+max_iterations
+:
+int
+=
+0
+)
+
+Save settings to XML File.
+Parameters
+:
+file_path
+– The location for storing the current settings. The given file must be a file ending
+with “.xml”.
+persist_type
+– Parameter specifying which setting types to store. For an overview of the possible
+values and their implication see the
+PersistType
+enum
+persist_flags
+– Flags specifying the modules to store. By default only features of the calling
+module itself are persisted. For an overview of available flags see the
+ModulePersistFlags
+type
+max_iterations
+– Number of iterations when loading settings. If
+0
+is given (default) the VmbC
+default is used
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside
+with
+context.
+ValueError
+– If argument path is no “.xml”- File.
+class
+vmbpy.
+TransportLayerType
+
+Enum specifying all interface types.
+Unknown
+=
+0
+
+Interface is not known to this version of the API
+GEV
+=
+1
+
+GigE Vision
+CL
+=
+2
+
+Camera Link
+IIDC
+=
+3
+
+IIDC 1394
+UVC
+=
+4
+
+USB video class
+CXP
+=
+5
+
+CoaXPress
+CLHS
+=
+6
+
+Camera Link HS
+U3V
+=
+7
+
+USB3 Vision Standard
+Ethernet
+=
+8
+
+Generic Ethernet
+PCI
+=
+9
+
+PCI / PCIe
+Custom
+=
+10
+
+Non standard
+Mixed
+(
+transport
+layer
+only
+)
+=
+11
+
+Mixed (transport layer only)
+Previous
+Next
+© Copyright 2023, Allied Vision.
+Built with
+Sphinx
+using a
+theme
+provided by
+Read the Docs
+.

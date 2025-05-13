@@ -1,7 +1,7 @@
 # Hardware control
 pyserial>=3.5
-# Optional: VMPy for Allied Vision cameras (install from the .whl file in docs/vmpy/)
-# vmbpy>=1.1.0
+# VMPy for Allied Vision cameras (required for camera functionality)
+vmbpy>=1.1.0
 # Image processing
 opencv-python>=4.8.0
 numpy>=1.26.0
@@ -17,7 +17,6 @@ pyautogui==0.9.54
 markdown>=3.5.1
 pillow>=10.0.0
 
-# Note: For Allied Vision camera support, you'll need to install vmbpy
+# Note: VmbPy is required for camera functionality
 # You can install from the provided .whl file in docs/vmpy/ directory or from Allied Vision's website
-# Install with: pip install <path_to_vmbpy_whl_file>
-# vmbpy>=1.1.0 
+# Install with: pip install <path_to_vmbpy_whl_file> 

@@ -14,6 +14,7 @@ import numpy as np
 from threading import Lock
 from datetime import datetime
 import os
+import threading
 
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, 
@@ -68,19 +69,19 @@ class CameraDisplayWidget(QWidget):
         self.camera_controller = None
         self.current_frame = None
         self.frame_lock = Lock()
+        self._frame_update_lock = threading.Lock()
         
         # Current patient data
         self.current_patient = None
-        
-        # Frame update timer
-        self.update_timer = QTimer()
-        self.update_timer.timeout.connect(self._update_frame)
         
         # Initialize UI
         self._init_ui()
         
         # Set auto-connect checkbox to false by default now
         self.auto_connect_checkbox.setChecked(False)
+        
+        # Connect the frame_available signal to the image update slot
+        self.frame_available.connect(self._on_frame_available)
     
     def _init_ui(self):
         """Initialize the widget's UI elements."""
@@ -230,7 +231,6 @@ class CameraDisplayWidget(QWidget):
         """Populate the camera ID combo box with available cameras."""
         if not self.vmb:
             try:
-                # Import VmbSystem here to avoid initialization at import time
                 from vmbpy import VmbSystem
                 self.vmb = VmbSystem.get_instance()
             except ImportError:
@@ -243,27 +243,17 @@ class CameraDisplayWidget(QWidget):
                 QMessageBox.critical(self, "Camera Error", 
                                    f"Error initializing camera system: {str(e)}")
                 return
-        
         try:
-            # Save current selection if any
             current_camera_id = self.camera_id_combo.currentData()
-            
-            # Clear and repopulate
             self.camera_id_combo.clear()
             self.camera_id_combo.addItem("Default/Auto-detect", None)
-            
-            # Add all cameras found by VmbPy
             cameras = self.vmb.get_all_cameras()
             for i, cam in enumerate(cameras):
-                # Use the camera ID as both display name and data
                 self.camera_id_combo.addItem(f"{cam.get_id()} ({cam.get_name()})", cam.get_id())
-            
-            # Restore previous selection if it exists
             if current_camera_id:
                 index = self.camera_id_combo.findData(current_camera_id)
                 if index >= 0:
                     self.camera_id_combo.setCurrentIndex(index)
-        
         except Exception as e:
             logger.error(f"Error populating camera list: {str(e)}")
             QMessageBox.warning(self, "Camera List Error", 
@@ -274,11 +264,8 @@ class CameraDisplayWidget(QWidget):
         if self.camera_controller is not None:
             logger.warning("Already connected to camera")
             return
-        
-        # Make sure VmbSystem is initialized
         if not self.vmb:
             try:
-                # Import VmbSystem here to avoid initialization at import time
                 from vmbpy import VmbSystem
                 self.vmb = VmbSystem.get_instance()
                 logger.info("VmbSystem initialized")
@@ -292,36 +279,40 @@ class CameraDisplayWidget(QWidget):
                 QMessageBox.critical(self, "Camera Error", 
                                    f"Error initializing camera system: {str(e)}")
                 return
-        
-        # Populate camera list now that we have VmbSystem
-        self._populate_camera_list()
-        
-        # Get selected camera ID
-        camera_id = self.camera_id_combo.currentData()
-        
-        # Get selected pixel format
-        pixel_format = self.pixel_format_combo.currentData()
-        
-        # Get selected access mode
-        access_mode = self.access_mode_combo.currentData()
-        
         try:
-            # Create camera controller
+            self._populate_camera_list()
+            camera_id = self.camera_id_combo.currentData()
+            pixel_format = self.pixel_format_combo.currentData()
+            access_mode = self.access_mode_combo.currentData()
             self.camera_controller = VMPyCameraController(
                 self.vmb, camera_id=camera_id, 
                 pixel_format=pixel_format, 
                 access_mode=access_mode
             )
-            
-            # Connect to camera
-            self.camera_controller.connect()
-            
-            # Populate pixel format combo
+            # Set the parent_widget attribute so the controller can notify us
+            self.camera_controller.parent_widget = self
+            success = self.camera_controller.initialize()
+            if not success:
+                raise Exception("Failed to initialize camera")
             self.pixel_format_combo.clear()
-            for fmt in self.camera_controller.get_available_pixel_formats():
+            available_formats = self.camera_controller.get_available_pixel_formats()
+            for fmt in available_formats:
                 self.pixel_format_combo.addItem(fmt.name, fmt)
-            
-            # Update UI state
+            # Always set to Bgr8 or Mono8 if available
+            opencv_compatible = [fmt for fmt in available_formats if fmt.name in ('Bgr8', 'Mono8')]
+            if opencv_compatible:
+                preferred = opencv_compatible[0]
+                if self.camera_controller.pixel_format != preferred:
+                    self.camera_controller.pixel_format = preferred
+                    self.camera_controller.initialize()
+                    idx = self.pixel_format_combo.findText(preferred.name)
+                    if idx >= 0:
+                        self.pixel_format_combo.setCurrentIndex(idx)
+            else:
+                logger.error("No OpenCV-compatible pixel format available (Bgr8 or Mono8).")
+                QMessageBox.critical(self, "Camera Error", "No OpenCV-compatible pixel format (Bgr8 or Mono8) available.")
+                self.on_disconnect_camera()
+                return
             self.connect_btn.setEnabled(False)
             self.disconnect_btn.setEnabled(True)
             self.start_stream_btn.setEnabled(True)
@@ -329,28 +320,22 @@ class CameraDisplayWidget(QWidget):
             self.save_settings_btn.setEnabled(True)
             self.load_settings_btn.setEnabled(True)
             self.show_features_btn.setEnabled(True)
-            
-            # Update exposure and gain settings from camera
             self._update_feature_controls_from_camera()
-            
-            # Start streaming if auto-connect was checked
             if self.auto_connect_checkbox.isChecked():
                 self.on_start_stream()
-            
-            # Update pixel format combo handler
             self.pixel_format_combo.currentIndexChanged.connect(self.on_pixel_format_changed)
-            
-            logger.info(f"Connected to camera: {camera_id}")
-        
+            # Log the actual connected camera ID
+            if self.camera_controller and self.camera_controller.camera:
+                logger.info(f"Connected to camera: {self.camera_controller.camera.get_id()}")
+            else:
+                logger.info("Connected to camera: None")
         except Exception as e:
             logger.error(f"Error connecting to camera: {str(e)}")
             QMessageBox.warning(self, "Camera Connection Error", 
                               f"Error connecting to camera: {str(e)}")
-            
-            # Clean up if partially initialized
             if self.camera_controller:
                 try:
-                    self.camera_controller.disconnect()
+                    self.camera_controller.release()
                 except:
                     pass
                 self.camera_controller = None
@@ -359,16 +344,11 @@ class CameraDisplayWidget(QWidget):
         """Disconnect from the camera."""
         if self.camera_controller is None:
             return
-        
         try:
             # Stop streaming if active
-            if self.update_timer.isActive():
-                self.on_stop_stream()
-            
-            # Disconnect the camera
-            self.camera_controller.disconnect()
+            self.camera_controller.stop_stream()
+            self.camera_controller.release()
             self.camera_controller = None
-            
             # Update UI
             self.connect_btn.setEnabled(True)
             self.disconnect_btn.setEnabled(False)
@@ -378,24 +358,19 @@ class CameraDisplayWidget(QWidget):
             self.save_settings_btn.setEnabled(False)
             self.load_settings_btn.setEnabled(False)
             self.show_features_btn.setEnabled(False)
-            
             # Reset image label
             self.image_label.setText("No camera connected")
             self.image_label.setPixmap(QPixmap())
-            
             # Disconnect pixel format combo handler to avoid issues
             try:
                 self.pixel_format_combo.currentIndexChanged.disconnect(self.on_pixel_format_changed)
             except:
                 pass
-            
             logger.info("Disconnected from camera")
-        
         except Exception as e:
             logger.error(f"Error disconnecting from camera: {str(e)}")
             QMessageBox.warning(self, "Camera Disconnection Error", 
                               f"Error disconnecting from camera: {str(e)}")
-            
             # Force cleanup
             self.camera_controller = None
     
@@ -403,7 +378,6 @@ class CameraDisplayWidget(QWidget):
         """Start the camera stream."""
         if self.camera_controller is None:
             return
-        
         try:
             # Start camera streaming
             success = self.camera_controller.start_stream()
@@ -411,16 +385,9 @@ class CameraDisplayWidget(QWidget):
                 logger.error("Failed to start camera stream")
                 self.status_label.setText("Failed to start camera stream")
                 return
-            
-            # Start the frame update timer
-            self.update_timer.start(33)  # ~30 FPS
-            
-            # Update UI
             self.start_stream_btn.setEnabled(False)
             self.stop_stream_btn.setEnabled(True)
-            
             self.status_label.setText("Camera streaming started")
-            
         except Exception as e:
             logger.error(f"Error starting camera stream: {str(e)}")
             self.status_label.setText(f"Streaming error: {str(e)}")
@@ -429,21 +396,11 @@ class CameraDisplayWidget(QWidget):
         """Stop the camera stream."""
         if self.camera_controller is None:
             return
-        
         try:
-            # Stop the update timer
-            if self.update_timer.isActive():
-                self.update_timer.stop()
-            
-            # Stop camera streaming
             self.camera_controller.stop_stream()
-            
-            # Update UI
             self.start_stream_btn.setEnabled(True)
             self.stop_stream_btn.setEnabled(False)
-            
             self.status_label.setText("Camera streaming stopped")
-            
         except Exception as e:
             logger.error(f"Error stopping camera stream: {str(e)}")
             self.status_label.setText(f"Error stopping stream: {str(e)}")
@@ -559,56 +516,8 @@ class CameraDisplayWidget(QWidget):
     
     def _update_frame(self):
         """Update the displayed frame from the camera stream."""
-        if self.camera_controller is None:
-            return
-        try:
-            # Get current frame from the camera
-            frame = self.camera_controller.get_current_frame()
-            if frame is None or not isinstance(frame, np.ndarray) or frame.size == 0:
-                return
-            # Store the current frame
-            with self.frame_lock:
-                self.current_frame = frame.copy()
-            # Convert the frame to QImage
-            height, width = frame.shape[:2]
-            if frame.ndim == 2:
-                # Grayscale
-                qt_image = QImage(
-                    frame.data, width, height, width, QImage.Format.Format_Grayscale8
-                )
-            elif frame.ndim == 3 and frame.shape[2] == 1:
-                # Grayscale with singleton channel
-                frame2d = np.squeeze(frame, axis=2)
-                qt_image = QImage(
-                    frame2d.data, width, height, width, QImage.Format.Format_Grayscale8
-                )
-            elif frame.ndim == 3 and frame.shape[2] == 3:
-                # BGR to RGB
-                rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                bytes_per_line = 3 * width
-                qt_image = QImage(
-                    rgb_frame.data, width, height, bytes_per_line, QImage.Format.Format_RGB888
-                )
-            else:
-                logger.warning("Unsupported frame format for display.")
-                return
-            # Resize to fit the label while maintaining aspect ratio
-            pixmap = QPixmap.fromImage(qt_image)
-            if pixmap.isNull():
-                logger.warning("QPixmap is null, not displaying.")
-                return
-            label_size = self.image_label.size()
-            scaled_pixmap = pixmap.scaled(
-                label_size, 
-                Qt.AspectRatioMode.KeepAspectRatio,
-                Qt.TransformationMode.SmoothTransformation
-            )
-            self.image_label.setPixmap(scaled_pixmap)
-            self.frame_available.emit(self.current_frame)
-        except Exception as e:
-            logger.error(f"Error updating frame: {str(e)}")
-            self.status_label.setText(f"Frame update error: {str(e)}")
-            self.update_timer.stop()
+        # This method is now obsolete and not used. All updates are signal-based.
+        pass
     
     def _update_feature_controls_from_camera(self):
         """Read camera feature values and update UI controls."""
@@ -673,7 +582,7 @@ class CameraDisplayWidget(QWidget):
             return
         def set_pixel_format():
             self.camera_controller.pixel_format = new_format
-            self.camera_controller.initialize(force=True)
+            self.camera_controller.initialize()
         self._apply_camera_setting_with_restart(set_pixel_format)
         self.status_label.setText("Pixel format changed.")
 
@@ -803,11 +712,48 @@ class CameraDisplayWidget(QWidget):
     def closeEvent(self, event):
         """Handle widget close event."""
         # Stop streaming and release camera
-        if hasattr(self, 'update_timer') and self.update_timer.isActive():
-            self.update_timer.stop()
-        
         if self.camera_controller is not None:
             self.camera_controller.release()
             self.camera_controller = None
-        
-        super().closeEvent(event) 
+        super().closeEvent(event)
+
+    def _on_frame_available(self, frame):
+        """Slot to update the displayed image when a new frame is available."""
+        logger.debug(f"_on_frame_available called. Frame shape: {getattr(frame, 'shape', None)}")
+        if frame is None or not isinstance(frame, np.ndarray) or frame.size == 0:
+            return
+        height, width = frame.shape[:2]
+        if frame.ndim == 2:
+            qt_image = QImage(
+                frame.data, width, height, width, QImage.Format.Format_Grayscale8
+            )
+        elif frame.ndim == 3 and frame.shape[2] == 1:
+            frame2d = np.squeeze(frame, axis=2)
+            qt_image = QImage(
+                frame2d.data, width, height, width, QImage.Format.Format_Grayscale8
+            )
+        elif frame.ndim == 3 and frame.shape[2] == 3:
+            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            bytes_per_line = 3 * width
+            qt_image = QImage(
+                rgb_frame.data, width, height, bytes_per_line, QImage.Format.Format_RGB888
+            )
+        else:
+            logger.warning("Unsupported frame format for display.")
+            return
+        pixmap = QPixmap.fromImage(qt_image)
+        if pixmap.isNull():
+            logger.warning("QPixmap is null, not displaying.")
+            return
+        label_size = self.image_label.size()
+        scaled_pixmap = pixmap.scaled(
+            label_size, 
+            Qt.AspectRatioMode.KeepAspectRatio,
+            Qt.TransformationMode.SmoothTransformation
+        )
+        self.image_label.setPixmap(scaled_pixmap)
+
+    def notify_new_frame(self, frame):
+        """Called by the camera controller when a new frame is available."""
+        # This method is thread-safe and emits the signal to the GUI thread
+        self.frame_available.emit(frame) 

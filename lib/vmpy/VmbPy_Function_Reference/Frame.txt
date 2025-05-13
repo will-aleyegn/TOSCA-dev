@@ -1,0 +1,823 @@
+Frame — VmbPy 1.1.0 documentation
+VmbPy
+1.1.0
+VmbSystem
+TransportLayer
+Interface
+Camera
+Stream
+LocalDevice
+Frame
+Frame
+Frame.access_chunk_data()
+Frame.as_numpy_ndarray()
+Frame.as_opencv_image()
+Frame.contains_chunk_data()
+Frame.convert_pixel_format()
+Frame.get_buffer()
+Frame.get_buffer_size()
+Frame.get_height()
+Frame.get_id()
+Frame.get_offset_x()
+Frame.get_offset_y()
+Frame.get_payload_type()
+Frame.get_pixel_format()
+Frame.get_status()
+Frame.get_timestamp()
+Frame.get_width()
+FrameStatus
+FrameStatus.Complete
+FrameStatus.Incomplete
+FrameStatus.TooSmall
+FrameStatus.Invalid
+AllocationMode
+AllocationMode.AnnounceFrame
+AllocationMode.AllocAndAnnounceFrame
+PixelFormat
+PixelFormat.Mono8
+PixelFormat.Mono10
+PixelFormat.Mono10p
+PixelFormat.Mono12
+PixelFormat.Mono12Packed
+PixelFormat.Mono12p
+PixelFormat.Mono14
+PixelFormat.Mono16
+PixelFormat.BayerGR8
+PixelFormat.BayerRG8
+PixelFormat.BayerGB8
+PixelFormat.BayerBG8
+PixelFormat.BayerGR10
+PixelFormat.BayerRG10
+PixelFormat.BayerGB10
+PixelFormat.BayerBG10
+PixelFormat.BayerGR12
+PixelFormat.BayerRG12
+PixelFormat.BayerGB12
+PixelFormat.BayerBG12
+PixelFormat.BayerGR12Packed
+PixelFormat.BayerRG12Packed
+PixelFormat.BayerGB12Packed
+PixelFormat.BayerBG12Packed
+PixelFormat.BayerGR10p
+PixelFormat.BayerRG10p
+PixelFormat.BayerGB10p
+PixelFormat.BayerBG10p
+PixelFormat.BayerGR12p
+PixelFormat.BayerRG12p
+PixelFormat.BayerGB12p
+PixelFormat.BayerBG12p
+PixelFormat.BayerGR16
+PixelFormat.BayerRG16
+PixelFormat.BayerGB16
+PixelFormat.BayerBG16
+PixelFormat.Rgb8
+PixelFormat.Bgr8
+PixelFormat.Rgb10
+PixelFormat.Bgr10
+PixelFormat.Rgb12
+PixelFormat.Bgr12
+PixelFormat.Rgb14
+PixelFormat.Bgr14
+PixelFormat.Rgb16
+PixelFormat.Bgr16
+PixelFormat.Rgba8
+PixelFormat.Bgra8
+PixelFormat.Argb8
+PixelFormat.Rgba10
+PixelFormat.Bgra10
+PixelFormat.Rgba12
+PixelFormat.Bgra12
+PixelFormat.Rgba14
+PixelFormat.Bgra14
+PixelFormat.Rgba16
+PixelFormat.Bgra16
+PixelFormat.Yuv411
+PixelFormat.Yuv422
+PixelFormat.Yuv444
+PixelFormat.YCbCr411_8_CbYYCrYY
+PixelFormat.YCbCr422_8_CbYCrY
+PixelFormat.YCbCr8_CbYCr
+intersect_pixel_formats()
+Feature
+Error
+VmbPy
+Frame
+Frame
+
+class
+vmbpy.
+Frame
+
+This class allows access to Frames acquired by a camera. The Frame is basically
+a buffer that wraps image data and some metadata.
+access_chunk_data
+(
+callback
+:
+Callable
+[
+[
+FeatureContainer
+]
+,
+None
+]
+)
+→
+None
+
+Access chunk data for a frame.
+This function blocks until the user supplied callback has been executed. It may only be
+called inside a frame callback.
+Parameters
+:
+callback
+– A callback function that takes one argument. That argument will be a populated
+FeatureContainer
+instance. Only inside this callback is it possible to access
+the chunk features of the
+Frame
+instance.
+Raises
+:
+Any Exception
+– Any Exception raised in the user supplied callback
+VmbFrameError
+– If the frame does not contain any chunk data
+VmbChunkError
+– If some other error occurred during chunk handling
+as_numpy_ndarray
+(
+)
+→
+numpy.ndarray
+
+Construct
+numpy.ndarray
+view on VmbCFrame.
+Returns
+:
+numpy.ndarray
+on internal image buffer.
+Raises
+:
+ImportError
+– If numpy is not installed.
+VmbFrameError
+– If current PixelFormat can’t be converted to a
+numpy.ndarray
+.
+as_opencv_image
+(
+)
+→
+numpy.ndarray
+
+Construct OpenCV compatible view on VmbCFrame.
+Returns
+:
+OpenCV compatible
+numpy.ndarray
+Raises
+:
+ImportError
+– If numpy is not installed.
+ValueError
+– If current pixel format is not compatible with opencv. Compatible formats are listed
+    in
+OPENCV_PIXEL_FORMATS
+.
+contains_chunk_data
+(
+)
+→
+bool
+|
+None
+
+Does the frame contain chunk data?
+Returns
+:
+True
+if frame contains chunk data,
+False
+if frame does not contain chunk data.
+None
+if this information is not provided by the underlying Transport Layer.
+convert_pixel_format
+(
+target_fmt
+:
+PixelFormat
+,
+debayer_mode
+:
+Debayer
+|
+None
+=
+None
+,
+destination_buffer
+:
+memoryview
+|
+None
+=
+None
+)
+→
+Frame
+
+Return a converted version of the frame in the given format.
+This method always returns a new frame object and leaves the original instance unchanged.
+The returned frame object does not include the chunk data associated with the original
+instance. The original instance may for example be used for future frame transmissions.
+Note: This method allocates a new buffer for the returned image data leading to some runtime
+overhead. For performance reasons, it might be better to set the value of the camera’s
+PixelFormat
+feature instead. In addition, a non-default debayer mode can be specified.
+Parameters
+:
+target_fmt
+– PixelFormat to convert to.
+debayer_mode
+– Non-default algorithm used to debayer images in Bayer Formats. If no mode is
+specified, default debayering mode of the image transform library is applied. If the
+current format is not a Bayer format, this parameter is silently ignored.
+destination_buffer
+– A buffer that the transformation result should be written to. The buffer must be
+large enough to hold the transformation result, writeable and be contiguous in
+memory. The recommended way to create a compatible buffer is to let
+convert_pixel_format
+perform a conversion
+without
+a
+destination_buffer
+and
+reuse the memory that was allocated for that transformation on future calls to
+convert_pixel_format
+. See the
+convert_pixel_format.py
+example.
+Raises
+:
+TypeError
+– If parameters do not match their type hint. ValueError if the current format can’t
+    be converted into
+target_fmt
+. Convertible Formats can be queried via
+get_convertible_formats()
+of
+PixelFormat
+.
+AssertionError
+– If image width or height can’t be determined.
+BufferError
+– If user supplied
+destination_buffer
+is too small, not writeable, or not
+    contiguous in memory.
+get_buffer
+(
+)
+→
+Array
+
+Get internal buffer object containing image data and (if existent) chunk data.
+get_buffer_size
+(
+)
+→
+int
+
+Get byte size of internal buffer.
+get_height
+(
+)
+→
+int
+|
+None
+
+Get image height in pixels.
+Returns
+:
+Image height in pixels if dimension data is provided by the camera.
+None
+if
+dimension data is not provided by the camera.
+get_id
+(
+)
+→
+int
+|
+None
+
+Get Frame ID.
+Returns
+:
+Frame ID if the id is provided by the camera.
+None
+if frame id is not provided by
+the camera.
+get_offset_x
+(
+)
+→
+int
+|
+None
+
+Get horizontal offset in pixels.
+Returns
+:
+Horizontal offset in pixel if offset data is provided by the camera.
+None
+if offset
+data is not provided by the camera.
+get_offset_y
+(
+)
+→
+int
+|
+None
+
+Get vertical offset in pixels.
+Returns
+:
+Vertical offset in pixels if offset data is provided by the camera.
+None
+if offset
+data is not provided by the camera.
+get_payload_type
+(
+)
+→
+PayloadType
+|
+None
+
+Returns the frame’s payload type.
+get_pixel_format
+(
+)
+→
+PixelFormat
+
+Get format of the acquired image data
+get_status
+(
+)
+→
+FrameStatus
+
+Returns current frame status.
+get_timestamp
+(
+)
+→
+int
+|
+None
+
+Get Frame timestamp.
+Returns
+:
+Timestamp if provided by the camera.
+None
+if timestamp is not provided by the
+camera.
+get_width
+(
+)
+→
+int
+|
+None
+
+Get image width in pixels.
+Returns
+:
+Image width in pixels if dimension data is provided by the camera.
+None
+if dimension
+data is not provided by the camera.
+class
+vmbpy.
+FrameStatus
+
+Enum specifying the current status of internal Frame data.
+Complete
+=
+0
+
+Frame data is complete without errors
+Incomplete
+=
+-1
+
+Frame could not be filled to the end
+TooSmall
+=
+-2
+
+Frame buffer was too small
+Invalid
+=
+-3
+
+Frame buffer was invalid
+class
+vmbpy.
+AllocationMode
+
+Enum specifying the supported frame allocation modes.
+AnnounceFrame
+=
+0
+
+The buffer is allocated by vmbpy
+AllocAndAnnounceFrame
+=
+1
+
+The buffer is allocated by the Transport Layer
+class
+vmbpy.
+PixelFormat
+
+Enum specifying all PixelFormats. Note: Not all Cameras support all Pixelformats.
+Mono8
+=
+17301505
+
+Monochrome, 8 bits (PFNC Mono8)
+Mono10
+=
+17825795
+
+Monochrome, 10 bits in 16 bits (PFNC Mono10)
+Mono10p
+=
+17432646
+
+Monochrome, 4x10 bits continuously packed in 40 bits (PFNC Mono10p)
+Mono12
+=
+17825797
+
+Monochrome, 12 bits in 16 bits (PFNC Mono12)
+Mono12Packed
+=
+17563654
+
+Monochrome, 2x12 bits in 24 bits (GEV Mono12Packed)
+Mono12p
+=
+17563719
+
+Monochrome, 2x12 bits continuously packed in 24 bits (PFNC Mono12p)
+Mono14
+=
+17825829
+
+Monochrome, 14 bits in 16 bits (PFNC Mono14)
+Mono16
+=
+17825799
+
+Monochrome, 16 bits (PFNC Mono16)
+BayerGR8
+=
+17301512
+
+Bayer-color, 8 bits, starting with GR line (PFNC BayerGR8)
+BayerRG8
+=
+17301513
+
+Bayer-color, 8 bits, starting with RG line (PFNC BayerRG8)
+BayerGB8
+=
+17301514
+
+Bayer-color, 8 bits, starting with GB line (PFNC BayerGB8)
+BayerBG8
+=
+17301515
+
+Bayer-color, 8 bits, starting with BG line (PFNC BayerBG8)
+BayerGR10
+=
+17825804
+
+Bayer-color, 10 bits in 16 bits, starting with GR line (PFNC BayerGR10)
+BayerRG10
+=
+17825805
+
+Bayer-color, 10 bits in 16 bits, starting with RG line (PFNC BayerRG10)
+BayerGB10
+=
+17825806
+
+Bayer-color, 10 bits in 16 bits, starting with GB line (PFNC BayerGB10)
+BayerBG10
+=
+17825807
+
+Bayer-color, 10 bits in 16 bits, starting with BG line (PFNC BayerBG10)
+BayerGR12
+=
+17825808
+
+Bayer-color, 12 bits in 16 bits, starting with GR line (PFNC BayerGR12)
+BayerRG12
+=
+17825809
+
+Bayer-color, 12 bits in 16 bits, starting with RG line (PFNC BayerRG12)
+BayerGB12
+=
+17825810
+
+Bayer-color, 12 bits in 16 bits, starting with GB line (PFNC BayerGB12)
+BayerBG12
+=
+17825811
+
+Bayer-color, 12 bits in 16 bits, starting with BG line (PFNC BayerBG12)
+BayerGR12Packed
+=
+17563690
+
+Bayer-color, 2x12 bits in 24 bits, starting with GR line (GEV BayerGR12Packed)
+BayerRG12Packed
+=
+17563691
+
+Bayer-color, 2x12 bits in 24 bits, starting with RG line (GEV BayerRG12Packed)
+BayerGB12Packed
+=
+17563692
+
+Bayer-color, 2x12 bits in 24 bits, starting with GB line (GEV BayerGB12Packed)
+BayerBG12Packed
+=
+17563693
+
+Bayer-color, 2x12 bits in 24 bits, starting with BG line (GEV BayerBG12Packed)
+BayerGR10p
+=
+17432662
+
+Bayer-color, 4x10 bits continuously packed in 40 bits, starting with GR line (PFNC BayerGR10p)
+BayerRG10p
+=
+17432664
+
+Bayer-color, 4x10 bits continuously packed in 40 bits, starting with RG line (PFNC BayerRG10p)
+BayerGB10p
+=
+17432660
+
+Bayer-color, 4x10 bits continuously packed in 40 bits, starting with GB line (PFNC BayerGB10p)
+BayerBG10p
+=
+17432658
+
+Bayer-color, 4x10 bits continuously packed in 40 bits, starting with BG line (PFNC BayerBG10p)
+BayerGR12p
+=
+17563735
+
+Bayer-color, 2x12 bits continuously packed in 24 bits, starting with GR line (PFNC BayerGR12p)
+BayerRG12p
+=
+17563737
+
+Bayer-color, 2x12 bits continuously packed in 24 bits, starting with RG line (PFNC BayerRG12p)
+BayerGB12p
+=
+17563733
+
+Bayer-color, 2x12 bits continuously packed in 24 bits, starting with GB line (PFNC BayerGB12p)
+BayerBG12p
+=
+17563731
+
+Bayer-color, 2x12 bits continuously packed in 24 bits, starting with BG line (PFNC BayerBG12p)
+BayerGR16
+=
+17825838
+
+Bayer-color, 16 bits, starting with GR line (PFNC BayerGR16)
+BayerRG16
+=
+17825839
+
+Bayer-color, 16 bits, starting with RG line (PFNC BayerRG16)
+BayerGB16
+=
+17825840
+
+Bayer-color, 16 bits, starting with GB line (PFNC BayerGB16)
+BayerBG16
+=
+17825841
+
+Bayer-color, 16 bits, starting with BG line (PFNC BayerBG16)
+Rgb8
+=
+35127316
+
+RGB, 8 bits x 3 (PFNC RGB8)
+Bgr8
+=
+35127317
+
+BGR, 8 bits x 3 (PFNC Bgr8)
+Rgb10
+=
+36700184
+
+RGB, 10 bits in 16 bits x 3 (PFNC RGB10)
+Bgr10
+=
+36700185
+
+BGR, 10 bits in 16 bits x 3 (PFNC BGR10)
+Rgb12
+=
+36700186
+
+RGB, 12 bits in 16 bits x 3 (PFNC RGB12)
+Bgr12
+=
+36700187
+
+BGR, 12 bits in 16 bits x 3 (PFNC BGR12)
+Rgb14
+=
+36700254
+
+RGB, 14 bits in 16 bits x 3 (PFNC RGB14)
+Bgr14
+=
+36700234
+
+BGR, 14 bits in 16 bits x 3 (PFNC BGR14)
+Rgb16
+=
+36700211
+
+RGB, 16 bits x 3 (PFNC RGB16)
+Bgr16
+=
+36700235
+
+BGR, 16 bits x 3 (PFNC BGR16)
+Rgba8
+=
+35651606
+
+ARGB, 8 bits x 4 (PFNC RGBa8)
+Bgra8
+=
+35651607
+
+RGBA, 8 bits x 4, legacy name
+Argb8
+=
+35651606
+
+BGRA, 8 bits x 4 (PFNC BGRa8)
+Rgba10
+=
+37748831
+
+RGBA, 10 bits in 16 bits x 4
+Bgra10
+=
+37748812
+
+BGRA, 10 bits in 16 bits x 4
+Rgba12
+=
+37748833
+
+RGBA, 12 bits in 16 bits x 4
+Bgra12
+=
+37748814
+
+BGRA, 12 bits in 16 bits x 4
+Rgba14
+=
+37748835
+
+RGBA, 14 bits in 16 bits x 4
+Bgra14
+=
+37748816
+
+BGRA, 14 bits in 16 bits x 4
+Rgba16
+=
+37748836
+
+RGBA, 16 bits x 4
+Bgra16
+=
+37748817
+
+BGRA, 16 bits x 4
+Yuv411
+=
+34340894
+
+YUV 411 with 8 bits (GEV YUV411Packed)
+Yuv422
+=
+34603039
+
+YUV 422 with 8 bits (GEV YUV422Packed)
+Yuv444
+=
+35127328
+
+YUV 444 with 8 bits (GEV YUV444Packed)
+YCbCr411_8_CbYYCrYY
+=
+34340924
+
+YCbCr 411 with 8 bits (PFNC YCbCr411_8_CbYYCrYY) - identical to Yuv411
+YCbCr422_8_CbYCrY
+=
+34603075
+
+YCbCr 422 with 8 bits (PFNC YCbCr422_8_CbYCrY) - identical to Yuv422
+YCbCr8_CbYCr
+=
+35127354
+
+YCbCr 444 with 8 bits (PFNC YCbCr8_CbYCr) - identical to Yuv444
+vmbpy.
+intersect_pixel_formats
+(
+fmts1
+:
+Tuple
+[
+PixelFormat
+,
+...
+]
+,
+fmts2
+:
+Tuple
+[
+PixelFormat
+,
+...
+]
+)
+→
+Tuple
+[
+PixelFormat
+,
+...
+]
+
+Build intersection of two sets containing PixelFormat.
+Parameters
+:
+fmts1
+– PixelFormats to intersect with fmts2
+fmts2
+– PixelFormats to intersect with fmts1
+Returns
+:
+Set of PixelFormats that occur in
+fmts1
+and
+fmts2
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+Previous
+Next
+© Copyright 2023, Allied Vision.
+Built with
+Sphinx
+using a
+theme
+provided by
+Read the Docs
+.

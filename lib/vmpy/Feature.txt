@@ -1,0 +1,2483 @@
+Feature — VmbPy 1.1.0 documentation
+VmbPy
+1.1.0
+VmbSystem
+TransportLayer
+Interface
+Camera
+Stream
+LocalDevice
+Frame
+Feature
+BoolFeature
+BoolFeature.get()
+BoolFeature.get_access_mode()
+BoolFeature.get_category()
+BoolFeature.get_description()
+BoolFeature.get_display_name()
+BoolFeature.get_flags()
+BoolFeature.get_name()
+BoolFeature.get_polling_time()
+BoolFeature.get_representation()
+BoolFeature.get_sfnc_namespace()
+BoolFeature.get_tooltip()
+BoolFeature.get_type()
+BoolFeature.get_unit()
+BoolFeature.get_visibility()
+BoolFeature.has_selected_features()
+BoolFeature.is_readable()
+BoolFeature.is_streamable()
+BoolFeature.is_writeable()
+BoolFeature.register_change_handler()
+BoolFeature.set()
+BoolFeature.unregister_all_change_handlers()
+BoolFeature.unregister_change_handler()
+FloatFeature
+FloatFeature.get()
+FloatFeature.get_access_mode()
+FloatFeature.get_category()
+FloatFeature.get_description()
+FloatFeature.get_display_name()
+FloatFeature.get_flags()
+FloatFeature.get_increment()
+FloatFeature.get_name()
+FloatFeature.get_polling_time()
+FloatFeature.get_range()
+FloatFeature.get_representation()
+FloatFeature.get_sfnc_namespace()
+FloatFeature.get_tooltip()
+FloatFeature.get_type()
+FloatFeature.get_unit()
+FloatFeature.get_visibility()
+FloatFeature.has_selected_features()
+FloatFeature.is_readable()
+FloatFeature.is_streamable()
+FloatFeature.is_writeable()
+FloatFeature.register_change_handler()
+FloatFeature.set()
+FloatFeature.unregister_all_change_handlers()
+FloatFeature.unregister_change_handler()
+IntFeature
+IntFeature.get()
+IntFeature.get_access_mode()
+IntFeature.get_category()
+IntFeature.get_description()
+IntFeature.get_display_name()
+IntFeature.get_flags()
+IntFeature.get_increment()
+IntFeature.get_name()
+IntFeature.get_polling_time()
+IntFeature.get_range()
+IntFeature.get_representation()
+IntFeature.get_sfnc_namespace()
+IntFeature.get_tooltip()
+IntFeature.get_type()
+IntFeature.get_unit()
+IntFeature.get_visibility()
+IntFeature.has_selected_features()
+IntFeature.is_readable()
+IntFeature.is_streamable()
+IntFeature.is_writeable()
+IntFeature.register_change_handler()
+IntFeature.set()
+IntFeature.unregister_all_change_handlers()
+IntFeature.unregister_change_handler()
+StringFeature
+StringFeature.get()
+StringFeature.get_access_mode()
+StringFeature.get_category()
+StringFeature.get_description()
+StringFeature.get_display_name()
+StringFeature.get_flags()
+StringFeature.get_max_length()
+StringFeature.get_name()
+StringFeature.get_polling_time()
+StringFeature.get_representation()
+StringFeature.get_sfnc_namespace()
+StringFeature.get_tooltip()
+StringFeature.get_type()
+StringFeature.get_unit()
+StringFeature.get_visibility()
+StringFeature.has_selected_features()
+StringFeature.is_readable()
+StringFeature.is_streamable()
+StringFeature.is_writeable()
+StringFeature.register_change_handler()
+StringFeature.set()
+StringFeature.unregister_all_change_handlers()
+StringFeature.unregister_change_handler()
+EnumFeature
+EnumFeature.get()
+EnumFeature.get_access_mode()
+EnumFeature.get_all_entries()
+EnumFeature.get_available_entries()
+EnumFeature.get_category()
+EnumFeature.get_description()
+EnumFeature.get_display_name()
+EnumFeature.get_entry()
+EnumFeature.get_flags()
+EnumFeature.get_name()
+EnumFeature.get_polling_time()
+EnumFeature.get_representation()
+EnumFeature.get_sfnc_namespace()
+EnumFeature.get_tooltip()
+EnumFeature.get_type()
+EnumFeature.get_unit()
+EnumFeature.get_visibility()
+EnumFeature.has_selected_features()
+EnumFeature.is_readable()
+EnumFeature.is_streamable()
+EnumFeature.is_writeable()
+EnumFeature.register_change_handler()
+EnumFeature.set()
+EnumFeature.unregister_all_change_handlers()
+EnumFeature.unregister_change_handler()
+EnumEntry
+EnumEntry.as_tuple()
+EnumEntry.is_available()
+CommandFeature
+CommandFeature.get_access_mode()
+CommandFeature.get_category()
+CommandFeature.get_description()
+CommandFeature.get_display_name()
+CommandFeature.get_flags()
+CommandFeature.get_name()
+CommandFeature.get_polling_time()
+CommandFeature.get_representation()
+CommandFeature.get_sfnc_namespace()
+CommandFeature.get_tooltip()
+CommandFeature.get_type()
+CommandFeature.get_unit()
+CommandFeature.get_visibility()
+CommandFeature.has_selected_features()
+CommandFeature.is_done()
+CommandFeature.is_readable()
+CommandFeature.is_streamable()
+CommandFeature.is_writeable()
+CommandFeature.register_change_handler()
+CommandFeature.run()
+CommandFeature.unregister_all_change_handlers()
+CommandFeature.unregister_change_handler()
+RawFeature
+RawFeature.get()
+RawFeature.get_access_mode()
+RawFeature.get_category()
+RawFeature.get_description()
+RawFeature.get_display_name()
+RawFeature.get_flags()
+RawFeature.get_name()
+RawFeature.get_polling_time()
+RawFeature.get_representation()
+RawFeature.get_sfnc_namespace()
+RawFeature.get_tooltip()
+RawFeature.get_type()
+RawFeature.get_unit()
+RawFeature.get_visibility()
+RawFeature.has_selected_features()
+RawFeature.is_readable()
+RawFeature.is_streamable()
+RawFeature.is_writeable()
+RawFeature.length()
+RawFeature.register_change_handler()
+RawFeature.set()
+RawFeature.unregister_all_change_handlers()
+RawFeature.unregister_change_handler()
+FeatureVisibility
+FeatureVisibility.Unknown
+FeatureVisibility.Beginner
+FeatureVisibility.Expert
+FeatureVisibility.Guru
+FeatureVisibility.Invisible
+Enums relating to load/save feature functionality
+PersistType
+PersistType.All
+PersistType.Streamable
+PersistType.NoLUT
+ModulePersistFlags
+ModulePersistFlags.None_
+ModulePersistFlags.TransportLayer
+ModulePersistFlags.Interface
+ModulePersistFlags.RemoteDevice
+ModulePersistFlags.LocalDevice
+ModulePersistFlags.Streams
+ModulePersistFlags.All
+Error
+VmbPy
+Feature
+Feature
+
+class
+vmbpy.
+BoolFeature
+
+The BoolFeature is a feature represented by a boolean value.
+get
+(
+)
+→
+bool
+
+Get current feature value of type bool.
+Returns
+:
+Feature value of type bool.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+get_access_mode
+(
+)
+→
+Tuple
+[
+bool
+,
+bool
+]
+
+Get features current access mode.
+Returns
+:
+A pair of bool. In the first bool is
+True
+, read access on this Feature is granted.
+If the second bool is
+True
+write access on this Feature is granted.
+get_category
+(
+)
+→
+str
+
+Get Feature category, e.g. ‘/Discovery’
+get_description
+(
+)
+→
+str
+
+Long feature description.
+get_display_name
+(
+)
+→
+str
+
+Get lengthy Feature name e.g. ‘Discovery Interface Event’
+get_flags
+(
+)
+→
+Tuple
+[
+FeatureFlags
+,
+...
+]
+
+Get a set of FeatureFlags, e.g.
+(FeatureFlags.Read,
+FeatureFlags.Write)
+get_name
+(
+)
+→
+str
+
+Get Feature Name, e.g. ‘DiscoveryInterfaceEvent’
+get_polling_time
+(
+)
+→
+int
+
+Predefined Polling Time for volatile features.
+get_representation
+(
+)
+→
+str
+
+Representation of a numeric feature.
+get_sfnc_namespace
+(
+)
+→
+str
+
+Namespace of this feature
+get_tooltip
+(
+)
+→
+str
+
+Short Feature description.
+get_type
+(
+)
+→
+Type
+[
+_BaseFeature
+]
+
+Get Feature Type, e.g.
+IntFeature
+get_unit
+(
+)
+→
+str
+
+Get unit of this Feature, e.g. ‘dB’ on Feature ‘GainAutoMax’
+get_visibility
+(
+)
+→
+FeatureVisibility
+
+UI visibility of this feature
+has_selected_features
+(
+)
+→
+bool
+
+Indicates if this feature selects other features.
+is_readable
+(
+)
+→
+bool
+
+Is read access on this Features granted?
+Returns
+:
+True
+if read access is allowed on this feature.
+False
+is returned if read access
+is not allowed.
+is_streamable
+(
+)
+→
+bool
+
+Indicates if a feature can be stored in /loaded from a file.
+is_writeable
+(
+)
+→
+bool
+
+Is write access on this Feature granted?
+Returns
+:
+True
+if write access is allowed on this feature.
+False
+is returned if write
+access is not allowed.
+register_change_handler
+(
+handler
+:
+Callable
+[
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+]
+,
+None
+]
+)
+
+Register Callable on the Feature.
+The Callable will be executed as soon as the Feature value changes. The first parameter on
+a registered handler will be called with the changed feature itself. The methods returns
+early if a given handler is already registered.
+Parameters
+:
+handler
+– The Callable that should be executed on change.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+set
+(
+val
+)
+
+Set current feature value of type bool.
+Parameters
+:
+val
+– The boolean value to set.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+VmbFeatureError
+– If called with an invalid value.
+VmbFeatureError
+– If executed within a registered change_handler.
+unregister_all_change_handlers
+(
+)
+
+Remove all registered change handlers.
+unregister_change_handler
+(
+handler
+:
+Callable
+[
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+]
+,
+None
+]
+)
+
+Remove registered Callable from the Feature.
+Removes a previously registered
+handler
+from this Feature. In case the
+handler
+that
+should be removed was never added in the first place, the method returns silently.
+Parameters
+:
+handler
+– The Callable that should be removed.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+class
+vmbpy.
+FloatFeature
+
+The FloatFeature is a feature represented by a floating point number.
+get
+(
+)
+→
+float
+
+Get current value (float).
+Returns
+:
+Current float value.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+get_access_mode
+(
+)
+→
+Tuple
+[
+bool
+,
+bool
+]
+
+Get features current access mode.
+Returns
+:
+A pair of bool. In the first bool is
+True
+, read access on this Feature is granted.
+If the second bool is
+True
+write access on this Feature is granted.
+get_category
+(
+)
+→
+str
+
+Get Feature category, e.g. ‘/Discovery’
+get_description
+(
+)
+→
+str
+
+Long feature description.
+get_display_name
+(
+)
+→
+str
+
+Get lengthy Feature name e.g. ‘Discovery Interface Event’
+get_flags
+(
+)
+→
+Tuple
+[
+FeatureFlags
+,
+...
+]
+
+Get a set of FeatureFlags, e.g.
+(FeatureFlags.Read,
+FeatureFlags.Write)
+get_increment
+(
+)
+→
+float
+|
+None
+
+Get increment (steps between valid values, starting from minimum value).
+Returns
+:
+The increment or
+None
+if the feature currently has no increment.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+get_name
+(
+)
+→
+str
+
+Get Feature Name, e.g. ‘DiscoveryInterfaceEvent’
+get_polling_time
+(
+)
+→
+int
+
+Predefined Polling Time for volatile features.
+get_range
+(
+)
+→
+Tuple
+[
+float
+,
+float
+]
+
+Get range of accepted values
+Returns
+:
+A pair of range boundaries. First value is the minimum, second value is the maximum.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+get_representation
+(
+)
+→
+str
+
+Representation of a numeric feature.
+get_sfnc_namespace
+(
+)
+→
+str
+
+Namespace of this feature
+get_tooltip
+(
+)
+→
+str
+
+Short Feature description.
+get_type
+(
+)
+→
+Type
+[
+_BaseFeature
+]
+
+Get Feature Type, e.g.
+IntFeature
+get_unit
+(
+)
+→
+str
+
+Get unit of this Feature, e.g. ‘dB’ on Feature ‘GainAutoMax’
+get_visibility
+(
+)
+→
+FeatureVisibility
+
+UI visibility of this feature
+has_selected_features
+(
+)
+→
+bool
+
+Indicates if this feature selects other features.
+is_readable
+(
+)
+→
+bool
+
+Is read access on this Features granted?
+Returns
+:
+True
+if read access is allowed on this feature.
+False
+is returned if read access
+is not allowed.
+is_streamable
+(
+)
+→
+bool
+
+Indicates if a feature can be stored in /loaded from a file.
+is_writeable
+(
+)
+→
+bool
+
+Is write access on this Feature granted?
+Returns
+:
+True
+if write access is allowed on this feature.
+False
+is returned if write
+access is not allowed.
+register_change_handler
+(
+handler
+:
+Callable
+[
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+]
+,
+None
+]
+)
+
+Register Callable on the Feature.
+The Callable will be executed as soon as the Feature value changes. The first parameter on
+a registered handler will be called with the changed feature itself. The methods returns
+early if a given handler is already registered.
+Parameters
+:
+handler
+– The Callable that should be executed on change.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+set
+(
+val
+:
+float
+)
+
+Set current value of type float.
+Parameters
+:
+val
+– The float value to set.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+VmbFeatureError
+– If value is out of bounds.
+VmbFeatureError
+– If executed within a registered change_handler.
+unregister_all_change_handlers
+(
+)
+
+Remove all registered change handlers.
+unregister_change_handler
+(
+handler
+:
+Callable
+[
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+]
+,
+None
+]
+)
+
+Remove registered Callable from the Feature.
+Removes a previously registered
+handler
+from this Feature. In case the
+handler
+that
+should be removed was never added in the first place, the method returns silently.
+Parameters
+:
+handler
+– The Callable that should be removed.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+class
+vmbpy.
+IntFeature
+
+The IntFeature is a feature represented by an integer.
+get
+(
+)
+→
+int
+
+Get current value (int).
+Returns
+:
+Current int value.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+get_access_mode
+(
+)
+→
+Tuple
+[
+bool
+,
+bool
+]
+
+Get features current access mode.
+Returns
+:
+A pair of bool. In the first bool is
+True
+, read access on this Feature is granted.
+If the second bool is
+True
+write access on this Feature is granted.
+get_category
+(
+)
+→
+str
+
+Get Feature category, e.g. ‘/Discovery’
+get_description
+(
+)
+→
+str
+
+Long feature description.
+get_display_name
+(
+)
+→
+str
+
+Get lengthy Feature name e.g. ‘Discovery Interface Event’
+get_flags
+(
+)
+→
+Tuple
+[
+FeatureFlags
+,
+...
+]
+
+Get a set of FeatureFlags, e.g.
+(FeatureFlags.Read,
+FeatureFlags.Write)
+get_increment
+(
+)
+→
+int
+
+Get increment (steps between valid values, starting from minimal values).
+Returns
+:
+The increment of this feature.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+get_name
+(
+)
+→
+str
+
+Get Feature Name, e.g. ‘DiscoveryInterfaceEvent’
+get_polling_time
+(
+)
+→
+int
+
+Predefined Polling Time for volatile features.
+get_range
+(
+)
+→
+Tuple
+[
+int
+,
+int
+]
+
+Get range of accepted values.
+Returns
+:
+A pair of range boundaries. First value is the minimum, second value is the maximum.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+get_representation
+(
+)
+→
+str
+
+Representation of a numeric feature.
+get_sfnc_namespace
+(
+)
+→
+str
+
+Namespace of this feature
+get_tooltip
+(
+)
+→
+str
+
+Short Feature description.
+get_type
+(
+)
+→
+Type
+[
+_BaseFeature
+]
+
+Get Feature Type, e.g.
+IntFeature
+get_unit
+(
+)
+→
+str
+
+Get unit of this Feature, e.g. ‘dB’ on Feature ‘GainAutoMax’
+get_visibility
+(
+)
+→
+FeatureVisibility
+
+UI visibility of this feature
+has_selected_features
+(
+)
+→
+bool
+
+Indicates if this feature selects other features.
+is_readable
+(
+)
+→
+bool
+
+Is read access on this Features granted?
+Returns
+:
+True
+if read access is allowed on this feature.
+False
+is returned if read access
+is not allowed.
+is_streamable
+(
+)
+→
+bool
+
+Indicates if a feature can be stored in /loaded from a file.
+is_writeable
+(
+)
+→
+bool
+
+Is write access on this Feature granted?
+Returns
+:
+True
+if write access is allowed on this feature.
+False
+is returned if write
+access is not allowed.
+register_change_handler
+(
+handler
+:
+Callable
+[
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+]
+,
+None
+]
+)
+
+Register Callable on the Feature.
+The Callable will be executed as soon as the Feature value changes. The first parameter on
+a registered handler will be called with the changed feature itself. The methods returns
+early if a given handler is already registered.
+Parameters
+:
+handler
+– The Callable that should be executed on change.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+set
+(
+val
+:
+int
+)
+
+Set current value of type int.
+Parameters
+:
+val
+– The int value to set.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+VmbFeatureError
+– If value is out of bounds or misaligned to the increment.
+VmbFeatureError
+– If executed within a registered change_handler.
+unregister_all_change_handlers
+(
+)
+
+Remove all registered change handlers.
+unregister_change_handler
+(
+handler
+:
+Callable
+[
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+]
+,
+None
+]
+)
+
+Remove registered Callable from the Feature.
+Removes a previously registered
+handler
+from this Feature. In case the
+handler
+that
+should be removed was never added in the first place, the method returns silently.
+Parameters
+:
+handler
+– The Callable that should be removed.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+class
+vmbpy.
+StringFeature
+
+The StringFeature is a feature represented by a string.
+get
+(
+)
+→
+str
+
+Get current value (str)
+Returns
+:
+Current str value.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+get_access_mode
+(
+)
+→
+Tuple
+[
+bool
+,
+bool
+]
+
+Get features current access mode.
+Returns
+:
+A pair of bool. In the first bool is
+True
+, read access on this Feature is granted.
+If the second bool is
+True
+write access on this Feature is granted.
+get_category
+(
+)
+→
+str
+
+Get Feature category, e.g. ‘/Discovery’
+get_description
+(
+)
+→
+str
+
+Long feature description.
+get_display_name
+(
+)
+→
+str
+
+Get lengthy Feature name e.g. ‘Discovery Interface Event’
+get_flags
+(
+)
+→
+Tuple
+[
+FeatureFlags
+,
+...
+]
+
+Get a set of FeatureFlags, e.g.
+(FeatureFlags.Read,
+FeatureFlags.Write)
+get_max_length
+(
+)
+→
+int
+
+Get maximum string length the Feature can store.
+Note
+In this context, string length does not mean the number of characters, it means the
+number of bytes after encoding. A string encoded in UTF-8 could exceed the maximum
+length. Additionally the last byte of the string feature is reserved for a null-byte to
+indicate the end of the string.
+Returns
+:
+The number of ASCII characters the Feature can store.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+get_name
+(
+)
+→
+str
+
+Get Feature Name, e.g. ‘DiscoveryInterfaceEvent’
+get_polling_time
+(
+)
+→
+int
+
+Predefined Polling Time for volatile features.
+get_representation
+(
+)
+→
+str
+
+Representation of a numeric feature.
+get_sfnc_namespace
+(
+)
+→
+str
+
+Namespace of this feature
+get_tooltip
+(
+)
+→
+str
+
+Short Feature description.
+get_type
+(
+)
+→
+Type
+[
+_BaseFeature
+]
+
+Get Feature Type, e.g.
+IntFeature
+get_unit
+(
+)
+→
+str
+
+Get unit of this Feature, e.g. ‘dB’ on Feature ‘GainAutoMax’
+get_visibility
+(
+)
+→
+FeatureVisibility
+
+UI visibility of this feature
+has_selected_features
+(
+)
+→
+bool
+
+Indicates if this feature selects other features.
+is_readable
+(
+)
+→
+bool
+
+Is read access on this Features granted?
+Returns
+:
+True
+if read access is allowed on this feature.
+False
+is returned if read access
+is not allowed.
+is_streamable
+(
+)
+→
+bool
+
+Indicates if a feature can be stored in /loaded from a file.
+is_writeable
+(
+)
+→
+bool
+
+Is write access on this Feature granted?
+Returns
+:
+True
+if write access is allowed on this feature.
+False
+is returned if write
+access is not allowed.
+register_change_handler
+(
+handler
+:
+Callable
+[
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+]
+,
+None
+]
+)
+
+Register Callable on the Feature.
+The Callable will be executed as soon as the Feature value changes. The first parameter on
+a registered handler will be called with the changed feature itself. The methods returns
+early if a given handler is already registered.
+Parameters
+:
+handler
+– The Callable that should be executed on change.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+set
+(
+val
+:
+str
+)
+
+Set current value of type str.
+Parameters
+:
+val
+– The str value to set.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+VmbFeatureError
+– If value exceeds the maximum string length.
+VmbFeatureError
+– If executed within a registered change_handler.
+unregister_all_change_handlers
+(
+)
+
+Remove all registered change handlers.
+unregister_change_handler
+(
+handler
+:
+Callable
+[
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+]
+,
+None
+]
+)
+
+Remove registered Callable from the Feature.
+Removes a previously registered
+handler
+from this Feature. In case the
+handler
+that
+should be removed was never added in the first place, the method returns silently.
+Parameters
+:
+handler
+– The Callable that should be removed.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+class
+vmbpy.
+EnumFeature
+
+The EnumFeature is a feature where only
+EnumEntry
+values are allowed.
+All possible values of an EnumFeature can be queried through the Feature itself.
+get
+(
+)
+→
+EnumEntry
+
+Get current feature value of type EnumEntry.
+Returns
+:
+Feature value of type EnumEntry.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+get_access_mode
+(
+)
+→
+Tuple
+[
+bool
+,
+bool
+]
+
+Get features current access mode.
+Returns
+:
+A pair of bool. In the first bool is
+True
+, read access on this Feature is granted.
+If the second bool is
+True
+write access on this Feature is granted.
+get_all_entries
+(
+)
+→
+Tuple
+[
+EnumEntry
+,
+...
+]
+
+Get a set of all possible EnumEntries of this feature.
+Note
+It is possible that not all EnumEntries returned by this area have currently valid
+values. See also
+get_available_entries()
+get_available_entries
+(
+)
+→
+Tuple
+[
+EnumEntry
+,
+...
+]
+
+Get a set of all currently available EnumEntries of this feature.
+get_category
+(
+)
+→
+str
+
+Get Feature category, e.g. ‘/Discovery’
+get_description
+(
+)
+→
+str
+
+Long feature description.
+get_display_name
+(
+)
+→
+str
+
+Get lengthy Feature name e.g. ‘Discovery Interface Event’
+get_entry
+(
+val_or_name
+:
+int
+|
+str
+)
+→
+EnumEntry
+
+Get a specific EnumEntry.
+Parameters
+:
+val_or_name
+– Look up EnumEntry either by its name or its associated value.
+Returns
+:
+EnumEntry associated with Argument
+val_or_name
+.
+Raises
+:
+TypeError
+– If
+int_or_name
+is not of type
+int
+or type
+str
+.
+VmbFeatureError
+– If no EnumEntry is associated with
+val_or_name
+get_flags
+(
+)
+→
+Tuple
+[
+FeatureFlags
+,
+...
+]
+
+Get a set of FeatureFlags, e.g.
+(FeatureFlags.Read,
+FeatureFlags.Write)
+get_name
+(
+)
+→
+str
+
+Get Feature Name, e.g. ‘DiscoveryInterfaceEvent’
+get_polling_time
+(
+)
+→
+int
+
+Predefined Polling Time for volatile features.
+get_representation
+(
+)
+→
+str
+
+Representation of a numeric feature.
+get_sfnc_namespace
+(
+)
+→
+str
+
+Namespace of this feature
+get_tooltip
+(
+)
+→
+str
+
+Short Feature description.
+get_type
+(
+)
+→
+Type
+[
+_BaseFeature
+]
+
+Get Feature Type, e.g.
+IntFeature
+get_unit
+(
+)
+→
+str
+
+Get unit of this Feature, e.g. ‘dB’ on Feature ‘GainAutoMax’
+get_visibility
+(
+)
+→
+FeatureVisibility
+
+UI visibility of this feature
+has_selected_features
+(
+)
+→
+bool
+
+Indicates if this feature selects other features.
+is_readable
+(
+)
+→
+bool
+
+Is read access on this Features granted?
+Returns
+:
+True
+if read access is allowed on this feature.
+False
+is returned if read access
+is not allowed.
+is_streamable
+(
+)
+→
+bool
+
+Indicates if a feature can be stored in /loaded from a file.
+is_writeable
+(
+)
+→
+bool
+
+Is write access on this Feature granted?
+Returns
+:
+True
+if write access is allowed on this feature.
+False
+is returned if write
+access is not allowed.
+register_change_handler
+(
+handler
+:
+Callable
+[
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+]
+,
+None
+]
+)
+
+Register Callable on the Feature.
+The Callable will be executed as soon as the Feature value changes. The first parameter on
+a registered handler will be called with the changed feature itself. The methods returns
+early if a given handler is already registered.
+Parameters
+:
+handler
+– The Callable that should be executed on change.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+set
+(
+val
+:
+int
+|
+str
+|
+EnumEntry
+)
+
+Set current feature value.
+Parameters
+:
+val
+– The value to set. Can be
+int
+, or
+str
+, or
+EnumEntry
+.
+Raises
+:
+VmbFeatureError
+– If val is of type
+int
+or
+str
+and does not match an
+EnumEntry
+.
+VmbFeatureError
+– If access rights are not sufficient.
+VmbFeatureError
+– If executed within a registered change_handler.
+unregister_all_change_handlers
+(
+)
+
+Remove all registered change handlers.
+unregister_change_handler
+(
+handler
+:
+Callable
+[
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+]
+,
+None
+]
+)
+
+Remove registered Callable from the Feature.
+Removes a previously registered
+handler
+from this Feature. In case the
+handler
+that
+should be removed was never added in the first place, the method returns silently.
+Parameters
+:
+handler
+– The Callable that should be removed.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+class
+vmbpy.
+EnumEntry
+
+An EnumEntry represents a single value of an EnumFeature. An EnumEntry
+is a one-to-one association between a
+str
+and an
+int
+.
+as_tuple
+(
+)
+→
+Tuple
+[
+str
+,
+int
+]
+
+Get EnumEntry in
+str
+and
+int
+representation
+is_available
+(
+)
+→
+bool
+
+Query if the EnumEntry can currently be used as a value.
+Returns
+:
+True
+if the EnumEntry can be used as a value, otherwise
+False
+.
+class
+vmbpy.
+CommandFeature
+
+The CommandFeature is a feature that can perform some kind of operation such as
+saving a user set.
+get_access_mode
+(
+)
+→
+Tuple
+[
+bool
+,
+bool
+]
+
+Get features current access mode.
+Returns
+:
+A pair of bool. In the first bool is
+True
+, read access on this Feature is granted.
+If the second bool is
+True
+write access on this Feature is granted.
+get_category
+(
+)
+→
+str
+
+Get Feature category, e.g. ‘/Discovery’
+get_description
+(
+)
+→
+str
+
+Long feature description.
+get_display_name
+(
+)
+→
+str
+
+Get lengthy Feature name e.g. ‘Discovery Interface Event’
+get_flags
+(
+)
+→
+Tuple
+[
+FeatureFlags
+,
+...
+]
+
+Get a set of FeatureFlags, e.g.
+(FeatureFlags.Read,
+FeatureFlags.Write)
+get_name
+(
+)
+→
+str
+
+Get Feature Name, e.g. ‘DiscoveryInterfaceEvent’
+get_polling_time
+(
+)
+→
+int
+
+Predefined Polling Time for volatile features.
+get_representation
+(
+)
+→
+str
+
+Representation of a numeric feature.
+get_sfnc_namespace
+(
+)
+→
+str
+
+Namespace of this feature
+get_tooltip
+(
+)
+→
+str
+
+Short Feature description.
+get_type
+(
+)
+→
+Type
+[
+_BaseFeature
+]
+
+Get Feature Type, e.g.
+IntFeature
+get_unit
+(
+)
+→
+str
+
+Get unit of this Feature, e.g. ‘dB’ on Feature ‘GainAutoMax’
+get_visibility
+(
+)
+→
+FeatureVisibility
+
+UI visibility of this feature
+has_selected_features
+(
+)
+→
+bool
+
+Indicates if this feature selects other features.
+is_done
+(
+)
+→
+bool
+
+Test if a feature execution is done.
+Returns
+:
+True
+if feature was fully executed.
+False
+if the feature is still being
+executed.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+is_readable
+(
+)
+→
+bool
+
+Is read access on this Features granted?
+Returns
+:
+True
+if read access is allowed on this feature.
+False
+is returned if read access
+is not allowed.
+is_streamable
+(
+)
+→
+bool
+
+Indicates if a feature can be stored in /loaded from a file.
+is_writeable
+(
+)
+→
+bool
+
+Is write access on this Feature granted?
+Returns
+:
+True
+if write access is allowed on this feature.
+False
+is returned if write
+access is not allowed.
+register_change_handler
+(
+handler
+:
+Callable
+[
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+]
+,
+None
+]
+)
+
+Register Callable on the Feature.
+The Callable will be executed as soon as the Feature value changes. The first parameter on
+a registered handler will be called with the changed feature itself. The methods returns
+early if a given handler is already registered.
+Parameters
+:
+handler
+– The Callable that should be executed on change.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+run
+(
+)
+
+Execute command feature.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+unregister_all_change_handlers
+(
+)
+
+Remove all registered change handlers.
+unregister_change_handler
+(
+handler
+:
+Callable
+[
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+]
+,
+None
+]
+)
+
+Remove registered Callable from the Feature.
+Removes a previously registered
+handler
+from this Feature. In case the
+handler
+that
+should be removed was never added in the first place, the method returns silently.
+Parameters
+:
+handler
+– The Callable that should be removed.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+class
+vmbpy.
+RawFeature
+
+The RawFeature is a feature represented by sequence of bytes.
+get
+(
+)
+→
+bytes
+
+Get current value as a sequence of bytes
+Returns
+:
+Current value.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+get_access_mode
+(
+)
+→
+Tuple
+[
+bool
+,
+bool
+]
+
+Get features current access mode.
+Returns
+:
+A pair of bool. In the first bool is
+True
+, read access on this Feature is granted.
+If the second bool is
+True
+write access on this Feature is granted.
+get_category
+(
+)
+→
+str
+
+Get Feature category, e.g. ‘/Discovery’
+get_description
+(
+)
+→
+str
+
+Long feature description.
+get_display_name
+(
+)
+→
+str
+
+Get lengthy Feature name e.g. ‘Discovery Interface Event’
+get_flags
+(
+)
+→
+Tuple
+[
+FeatureFlags
+,
+...
+]
+
+Get a set of FeatureFlags, e.g.
+(FeatureFlags.Read,
+FeatureFlags.Write)
+get_name
+(
+)
+→
+str
+
+Get Feature Name, e.g. ‘DiscoveryInterfaceEvent’
+get_polling_time
+(
+)
+→
+int
+
+Predefined Polling Time for volatile features.
+get_representation
+(
+)
+→
+str
+
+Representation of a numeric feature.
+get_sfnc_namespace
+(
+)
+→
+str
+
+Namespace of this feature
+get_tooltip
+(
+)
+→
+str
+
+Short Feature description.
+get_type
+(
+)
+→
+Type
+[
+_BaseFeature
+]
+
+Get Feature Type, e.g.
+IntFeature
+get_unit
+(
+)
+→
+str
+
+Get unit of this Feature, e.g. ‘dB’ on Feature ‘GainAutoMax’
+get_visibility
+(
+)
+→
+FeatureVisibility
+
+UI visibility of this feature
+has_selected_features
+(
+)
+→
+bool
+
+Indicates if this feature selects other features.
+is_readable
+(
+)
+→
+bool
+
+Is read access on this Features granted?
+Returns
+:
+True
+if read access is allowed on this feature.
+False
+is returned if read access
+is not allowed.
+is_streamable
+(
+)
+→
+bool
+
+Indicates if a feature can be stored in /loaded from a file.
+is_writeable
+(
+)
+→
+bool
+
+Is write access on this Feature granted?
+Returns
+:
+True
+if write access is allowed on this feature.
+False
+is returned if write
+access is not allowed.
+length
+(
+)
+→
+int
+
+Get length of byte sequence representing the value.
+Returns
+:
+Length of current value.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+register_change_handler
+(
+handler
+:
+Callable
+[
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+]
+,
+None
+]
+)
+
+Register Callable on the Feature.
+The Callable will be executed as soon as the Feature value changes. The first parameter on
+a registered handler will be called with the changed feature itself. The methods returns
+early if a given handler is already registered.
+Parameters
+:
+handler
+– The Callable that should be executed on change.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+set
+(
+buf
+:
+bytes
+)
+
+Set current value as a sequence of bytes.
+Parameters
+:
+val
+– The value to set.
+Raises
+:
+VmbFeatureError
+– If access rights are not sufficient.
+VmbFeatureError
+– If executed within a registered change_handler.
+unregister_all_change_handlers
+(
+)
+
+Remove all registered change handlers.
+unregister_change_handler
+(
+handler
+:
+Callable
+[
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+]
+,
+None
+]
+)
+
+Remove registered Callable from the Feature.
+Removes a previously registered
+handler
+from this Feature. In case the
+handler
+that
+should be removed was never added in the first place, the method returns silently.
+Parameters
+:
+handler
+– The Callable that should be removed.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+class
+vmbpy.
+FeatureVisibility
+
+Enumeration specifying UI feature visibility.
+Unknown
+=
+0
+
+Feature visibility is not known
+Beginner
+=
+1
+
+Feature is visible in feature list (beginner level)
+Expert
+=
+2
+
+Feature is visible in feature list (expert level)
+Guru
+=
+3
+
+Feature is visible in feature list (guru level)
+Invisible
+=
+4
+
+Feature is not visible in feature list
+Enums relating to load/save feature functionality
+
+class
+vmbpy.
+PersistType
+
+Persistence Type for camera configuration storing and loading.
+All
+=
+0
+
+Save all features to XML, including look-up tables (if possible)
+Streamable
+=
+1
+
+Save only features marked as streamable, excluding look-up tables
+NoLUT
+=
+2
+
+Save all features except look-up tables
+class
+vmbpy.
+ModulePersistFlags
+
+Parameters determining the operation mode of VmbSettingsSave and VmbSettingsLoad.
+None_
+=
+0
+
+Persist/Load features for no module
+TransportLayer
+=
+1
+
+Persist/Load the transport layer features
+Interface
+=
+2
+
+Persist/Load the interface features
+RemoteDevice
+=
+4
+
+Persist/Load the remote device features
+LocalDevice
+=
+8
+
+Persist/Load the local device features
+Streams
+=
+16
+
+Persist/Load the features of stream modules
+All
+=
+255
+
+Persist/Load features for all modules
+Previous
+Next
+© Copyright 2023, Allied Vision.
+Built with
+Sphinx
+using a
+theme
+provided by
+Read the Docs
+.

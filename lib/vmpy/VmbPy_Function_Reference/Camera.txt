@@ -1,0 +1,1042 @@
+Camera — VmbPy 1.1.0 documentation
+VmbPy
+1.1.0
+VmbSystem
+TransportLayer
+Interface
+Camera
+Camera
+Camera.get_access_mode()
+Camera.get_all_features()
+Camera.get_extended_id()
+Camera.get_feature_by_name()
+Camera.get_features_by_category()
+Camera.get_features_by_type()
+Camera.get_features_selected_by()
+Camera.get_frame()
+Camera.get_frame_generator()
+Camera.get_frame_with_context()
+Camera.get_id()
+Camera.get_interface()
+Camera.get_interface_id()
+Camera.get_local_device()
+Camera.get_model()
+Camera.get_name()
+Camera.get_permitted_access_modes()
+Camera.get_pixel_format()
+Camera.get_pixel_formats()
+Camera.get_serial()
+Camera.get_streams()
+Camera.get_transport_layer()
+Camera.is_streaming()
+Camera.load_settings()
+Camera.queue_frame()
+Camera.read_memory()
+Camera.save_settings()
+Camera.set_access_mode()
+Camera.set_pixel_format()
+Camera.start_streaming()
+Camera.stop_streaming()
+Camera.write_memory()
+AccessMode
+AccessMode.None_
+AccessMode.Full
+AccessMode.Read
+AccessMode.Unknown
+AccessMode.Exclusive
+CameraEvent
+CameraEvent.Missing
+CameraEvent.Detected
+CameraEvent.Reachable
+CameraEvent.Unreachable
+CameraEvent.Unknown
+Stream
+LocalDevice
+Frame
+Feature
+Error
+VmbPy
+Camera
+Camera
+
+class
+vmbpy.
+Camera
+
+This class provides access to a Camera. It corresponds to the GenTL Remote Device.
+Camera is intended be used in conjunction with the
+with
+context. On entering the context,
+all Camera features are detected and can be accessed within the context. Static Camera
+properties like Name and Model can be accessed outside the context.
+get_access_mode
+(
+)
+→
+AccessMode
+
+Get current camera access mode
+get_all_features
+(
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get access to all discovered features.
+Returns
+:
+A set of all currently detected Features.
+Raises
+:
+RuntimeError
+– If called outside of
+with
+context.
+get_extended_id
+(
+)
+→
+str
+
+Get the extended (globally unique) ID of a Camera.
+get_feature_by_name
+(
+feat_name
+:
+str
+)
+→
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+
+Get a feature by its name.
+Parameters
+:
+feat_name
+– Name used to find a feature.
+Returns
+:
+Feature with the associated name.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+VmbFeatureError
+– If no feature is associated with
+feat_name
+.
+get_features_by_category
+(
+category
+:
+str
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get all features of a specific category.
+Parameters
+:
+category
+– Category that should be used for filtering.
+Returns
+:
+A set of features of category
+category
+.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+get_features_by_type
+(
+feat_type
+:
+Type
+[
+IntFeature
+]
+|
+Type
+[
+FloatFeature
+]
+|
+Type
+[
+StringFeature
+]
+|
+Type
+[
+BoolFeature
+]
+|
+Type
+[
+EnumFeature
+]
+|
+Type
+[
+CommandFeature
+]
+|
+Type
+[
+RawFeature
+]
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get all features of a specific feature type.
+Valid FeatureTypes are:
+IntFeature
+,
+FloatFeature
+,
+StringFeature
+,
+BoolFeature
+,
+EnumFeature
+,
+CommandFeature
+,
+RawFeature
+Parameters
+:
+feat_type
+– FeatureType used to find features of that type.
+Returns
+:
+A set of features of type
+feat_type`
+.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+get_features_selected_by
+(
+feat
+:
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+)
+→
+Tuple
+[
+IntFeature
+|
+FloatFeature
+|
+StringFeature
+|
+BoolFeature
+|
+EnumFeature
+|
+CommandFeature
+|
+RawFeature
+,
+...
+]
+
+Get all features selected by a specific feature.
+Parameters
+:
+feat
+– Feature used to find features that are selected by
+feat
+.
+Returns
+:
+A set of features selected by
+feat
+.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside of
+with
+context.
+VmbFeatureError
+– If
+feat
+is not a valid feature.
+get_frame
+(
+timeout_ms
+:
+int
+=
+2000
+,
+allocation_mode
+:
+AllocationMode
+=
+AllocationMode.AnnounceFrame
+)
+→
+Frame
+
+Get copy of a single frame from camera. Synchronous frame acquisition.
+Records a single frame from the camera, creates a copy of the frame and returns it to the
+caller. This frame may be used by users as long as they want but can not be used e.g. to
+access chunk data associated with it. See also
+get_frame_with_context
+to avoid the frame
+copy.
+Parameters
+:
+timeout_ms
+– Timeout in milliseconds of frame acquisition.
+allocation_mode
+– Allocation mode deciding if buffer allocation should be done by vmbpy or the
+Transport Layer
+Returns
+:
+Frame from camera
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside
+with
+context.
+ValueError
+– If a timeout_ms is negative.
+VmbTimeout
+– If Frame acquisition timed out.
+get_frame_generator
+(
+limit
+:
+int
+|
+None
+=
+None
+,
+timeout_ms
+:
+int
+=
+2000
+,
+allocation_mode
+:
+AllocationMode
+=
+AllocationMode.AnnounceFrame
+)
+
+Construct frame generator, providing synchronous image acquisition.
+The frame generator acquires a new frame with each execution. Frames may only be used inside
+their respective loop iteration. If a frame must be used outside the loop iteration, a copy
+of the frame must be created (e.g. via
+copy.deepcopy(frame)
+).
+Parameters
+:
+limit
+– The number of images the generator shall acquire (>0). If limit is None, the
+generator will produce an unlimited amount of images and must be stopped by the user
+supplied code.
+timeout_ms
+– Timeout in milliseconds of frame acquisition.
+allocation_mode
+– Allocation mode deciding if buffer allocation should be done by vmbpy or the
+Transport Layer
+Returns
+:
+Frame generator expression
+Raises
+:
+RuntimeError
+– If called outside
+with
+context.
+ValueError
+– If a limit is supplied and
+<=
+0
+.
+ValueError
+– If a
+timeout_ms
+is negative.
+VmbTimeout
+– If Frame acquisition timed out.
+VmbCameraError
+– If Camera is streaming while executing the generator.
+get_frame_with_context
+(
+timeout_ms
+:
+int
+=
+2000
+,
+allocation_mode
+:
+AllocationMode
+=
+AllocationMode.AnnounceFrame
+)
+
+Gets a single frame from camera to be used inside a context manager.
+Records a single frame from the camera and yields it to the caller for use inside a
+with
+context manager. The frame may only be used inside the context, but may be copied for use
+outside of it (e.g. via
+copy.deepcopy(frame)
+). The yielded frame can be used to access
+chunk data.
+Parameters
+:
+timeout_ms
+– Timeout in milliseconds of frame acquisition.
+allocation_mode
+– Allocation mode deciding if buffer allocation should be done by vmbpy or the
+Transport Layer
+Yields
+:
+Frame from camera for use in
+with
+context manager
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside
+with
+context.
+ValueError
+– If a
+timeout_ms
+is negative.
+VmbTimeout
+– If Frame acquisition timed out.
+get_id
+(
+)
+→
+str
+
+Get Camera Id. For example ‘DEV_1AB22C00041B’
+get_interface
+(
+)
+→
+Interface
+
+Get the
+Interface
+instance for this Camera.
+get_interface_id
+(
+)
+→
+str
+
+Get ID of the Interface this camera is connected to. For example ‘VimbaUSBInterface_0x0’
+get_local_device
+(
+)
+→
+LocalDevice
+
+Returns the instance of
+LocalDevice
+associated with this Camera.
+get_model
+(
+)
+→
+str
+
+Get Camera Model. For example ‘1800 U-500m’
+get_name
+(
+)
+→
+str
+
+Get Camera Name. For example ‘Allied Vision 1800 U-500m’
+get_permitted_access_modes
+(
+)
+→
+Tuple
+[
+AccessMode
+,
+...
+]
+
+Get a set of all access modes the camera can be accessed with.
+get_pixel_format
+(
+)
+
+Get current pixel format.
+Returns
+:
+Current pixel format set on the camera.
+Raises
+:
+RuntimeError
+– If called outside
+with
+context.
+get_pixel_formats
+(
+)
+→
+Tuple
+[
+PixelFormat
+,
+...
+]
+
+Get supported pixel formats from Camera.
+Returns
+:
+All pixel formats the camera supports
+Raises
+:
+RuntimeError
+– If called outside
+with
+context.
+get_serial
+(
+)
+→
+str
+
+Get Camera serial number. For example ‘50-0503328442’
+get_streams
+(
+)
+→
+Tuple
+[
+Stream
+,
+...
+]
+
+Returns a Tuple containing all instances of
+Stream
+associated with this Camera.
+get_transport_layer
+(
+)
+→
+TransportLayer
+
+Get the
+TransportLayer
+instance for this Camera.
+is_streaming
+(
+)
+→
+bool
+
+Returns
+True
+if the camera is currently in streaming mode. If not, returns
+False
+.
+load_settings
+(
+file_path
+:
+str
+,
+persist_type
+:
+PersistType
+=
+PersistType.Streamable
+,
+persist_flags
+:
+ModulePersistFlags
+=
+ModulePersistFlags.None_
+,
+max_iterations
+:
+int
+=
+0
+)
+
+Load settings from XML file.
+Parameters
+:
+file_path
+– The location for loading current settings. The given file must be a file ending with
+“.xml”.
+persist_type
+– Parameter specifying which setting types to load. For an overview of the possible
+values and their implication see the
+PersistType
+enum
+persist_flags
+– Flags specifying the modules to load. By default only features of the calling module
+itself are persisted. For an overview of available flags see the
+ModulePersistFlags
+type
+max_iterations
+– Number of iterations when storing settings. If 0 is given (default) the value found
+in the XML file is used
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside
+with
+context.
+ValueError
+– If argument path is no “.xml” file.
+queue_frame
+(
+frame
+:
+Frame
+)
+
+Reuse acquired frame in streaming mode.
+Add given frame back into the frame queue used in streaming mode. This should be the last
+operation on a registered
+FrameHandler
+. If streaming mode is not active, it returns
+silently.
+Parameters
+:
+frame
+– The frame to reuse.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+ValueError
+– If the given frame is not from the internal buffer queue.
+RuntimeError
+– If called outside
+with
+context.
+VmbCameraError
+– If reusing the frame was unsuccessful.
+read_memory
+(
+addr
+:
+int
+,
+max_bytes
+:
+int
+)
+→
+bytes
+
+Read a byte sequence from a given memory address.
+Parameters
+:
+addr
+– Starting address to read from.
+max_bytes
+– Maximum number of bytes to read from addr.
+Returns
+:
+Read memory contents as bytes.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside
+with
+context.
+ValueError
+– If
+addr
+is negative.
+ValueError
+– If
+max_bytes
+is negative.
+ValueError
+– If the memory access was invalid.
+save_settings
+(
+file_path
+:
+str
+,
+persist_type
+:
+PersistType
+=
+PersistType.Streamable
+,
+persist_flags
+:
+ModulePersistFlags
+=
+ModulePersistFlags.None_
+,
+max_iterations
+:
+int
+=
+0
+)
+
+Save settings to XML File.
+Parameters
+:
+file_path
+– The location for storing the current settings. The given file must be a file ending
+with “.xml”.
+persist_type
+– Parameter specifying which setting types to store. For an overview of the possible
+values and their implication see the
+PersistType
+enum
+persist_flags
+– Flags specifying the modules to store. By default only features of the calling
+module itself are persisted. For an overview of available flags see the
+ModulePersistFlags
+type
+max_iterations
+– Number of iterations when loading settings. If
+0
+is given (default) the VmbC
+default is used
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside
+with
+context.
+ValueError
+– If argument path is no “.xml”- File.
+set_access_mode
+(
+access_mode
+:
+AccessMode
+)
+
+Set camera access mode.
+Must be set before the camera connection is opened.
+Parameters
+:
+access_mode
+– AccessMode for accessing a Camera.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called inside
+with
+context.
+set_pixel_format
+(
+fmt
+:
+PixelFormat
+)
+
+Set current pixel format.
+Parameters
+:
+fmt
+– Pixel format to set on the camera.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside
+with
+context.
+ValueError
+– If the given pixel format is not supported by the cameras.
+start_streaming
+(
+handler
+:
+Callable
+[
+[
+Camera
+,
+Stream
+,
+Frame
+]
+,
+None
+]
+,
+buffer_count
+:
+int
+=
+5
+,
+allocation_mode
+:
+AllocationMode
+=
+AllocationMode.AnnounceFrame
+)
+
+Enter streaming mode.
+Enter streaming mode is also known as asynchronous frame acquisition. While active, the
+camera acquires and buffers frames continuously. With each acquired frame, a given
+FrameHandler is called with a new Frame.
+Parameters
+:
+handler
+– Callable that is executed on each acquired frame.
+buffer_count
+– Number of frames supplied as internal buffer.
+allocation_mode
+– Allocation mode deciding if buffer allocation should be done by vmbpy or the
+Transport Layer
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside
+with
+context.
+ValueError
+– If buffer is less or equal to zero.
+VmbCameraError
+– If the camera is already streaming.
+VmbCameraError
+– If anything went wrong on entering streaming mode.
+stop_streaming
+(
+)
+
+Leave streaming mode.
+Leave asynchronous frame acquisition. If streaming mode was not activated before, it just
+returns silently.
+Raises
+:
+RuntimeError
+– If called outside
+with
+context.
+VmbCameraError
+– If anything went wrong on leaving streaming mode.
+write_memory
+(
+addr
+:
+int
+,
+data
+:
+bytes
+)
+
+Write a byte sequence to a given memory address.
+Parameters
+:
+addr
+– Address to write the content of ‘data’ too.
+data
+– Byte sequence to write at address ‘addr’.
+Raises
+:
+TypeError
+– If parameters do not match their type hint.
+RuntimeError
+– If called outside
+with
+context.
+ValueError
+– If
+addr
+is negative.
+class
+vmbpy.
+AccessMode
+
+Enum specifying all available camera access modes.
+None_
+=
+0
+
+No access.
+Full
+=
+1
+
+Read and write access.
+Read
+=
+2
+
+Read-only access. Setting features is not possible.
+Unknown
+=
+4
+
+Access type unknown.
+Exclusive
+=
+8
+
+Read and write access without permitting access for other consumers.
+class
+vmbpy.
+CameraEvent
+
+Enum specifying a Camera Event
+Missing
+=
+0
+
+A known camera disappeared from the bus
+Detected
+=
+1
+
+A new camera was discovered
+Reachable
+=
+2
+
+A known camera can be accessed
+Unreachable
+=
+3
+
+A known camera cannot be accessed anymore
+Unknown
+=
+4
+
+An unknown event occurred
+Previous
+Next
+© Copyright 2023, Allied Vision.
+Built with
+Sphinx
+using a
+theme
+provided by
+Read the Docs
+.

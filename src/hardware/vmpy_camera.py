@@ -130,18 +130,20 @@ class VMPyCameraController:
 
                 # --- Configuration ---
                 # Set Pixel Format (important for consistency)
-                try:
-                    logger.info(f"Setting pixel format to: {self.pixel_format}")
-                    cam.set_pixel_format(self.pixel_format)
-                except (VmbCameraError, AttributeError, ValueError) as e:
-                    logger.warning(f"Could not set pixel format {self.pixel_format}: {e}. Using camera default.")
-                    # Store the actual format being used
+                if self.pixel_format is not None:
                     try:
-                        self.pixel_format = cam.get_pixel_format()
-                        logger.info(f"Camera is using pixel format: {self.pixel_format}")
-                    except VmbCameraError:
-                        logger.error("Failed to get current pixel format.")
-
+                        logger.info(f"Setting pixel format to: {self.pixel_format}")
+                        cam.set_pixel_format(self.pixel_format)
+                    except (VmbCameraError, AttributeError, ValueError, TypeError) as e:
+                        logger.warning(f"Could not set pixel format {self.pixel_format}: {e}. Using camera default.")
+                        # Store the actual format being used
+                        try:
+                            self.pixel_format = cam.get_pixel_format()
+                            logger.info(f"Camera is using pixel format: {self.pixel_format}")
+                        except VmbCameraError:
+                            logger.error("Failed to get current pixel format.")
+                else:
+                    logger.info("No pixel format specified, using camera default.")
 
                 # Set Resolution (Width/Height) if specified
                 if self.resolution is not None:
@@ -181,31 +183,39 @@ class VMPyCameraController:
         """Callback function executed for each incoming frame during async streaming. (VmbPy 1.1.0+ requires cam, stream, frame)"""
         try:
             if frame.get_status() == FrameStatus.Complete:
-                # Process the completed frame
-                opencv_frame = frame.as_opencv_image() # Converts to BGR8 by default if possible
-
-                # Store the frame
-                with self.frame_lock:
-                    self.current_frame = opencv_frame # Store the converted frame
-
-                # Emit signal if using Qt signals (requires QObject inheritance)
-                # self.frame_ready.emit(opencv_frame)
-
+                pf = frame.get_pixel_format()
+                from vmbpy import PixelFormat
+                if pf not in (PixelFormat.Bgr8, PixelFormat.Mono8):
+                    try:
+                        opencv_frame = frame.convert_pixel_format(PixelFormat.Bgr8).as_opencv_image()
+                    except Exception as e:
+                        logger.error(f"Failed to convert frame to Bgr8: {e}")
+                        opencv_frame = None
+                else:
+                    opencv_frame = frame.as_opencv_image()
+                if opencv_frame is not None:
+                    with self.frame_lock:
+                        self.current_frame = opencv_frame
+                    # Notify the GUI widget if possible
+                    try:
+                        parent = getattr(self, 'parent_widget', None)
+                        if parent and hasattr(parent, 'notify_new_frame'):
+                            logger.debug('Emitting new frame to GUI via notify_new_frame.')
+                            parent.notify_new_frame(opencv_frame)
+                    except Exception as e:
+                        logger.error(f"Error notifying GUI of new frame: {e}")
             elif frame.get_status() == FrameStatus.Incomplete:
                 logger.warning(f"Received incomplete frame: {frame.get_status()}")
             else:
                 logger.error(f"Received frame with error status: {frame.get_status()}")
-
         except Exception as e:
             logger.error(f"Error processing frame in callback: {e}", exc_info=True)
         finally:
-            # CRITICAL: Re-queue the frame for continuous acquisition
             try:
                 cam.queue_frame(frame)
             except VmbCameraError as e:
                 logger.error(f"Error requeuing frame: {e}. Stopping stream.")
-                # Need a way to signal the main thread/widget to stop
-                self.stop_stream() # Attempt to stop from callback context (may have issues)
+                self.stop_stream()
             except Exception as e:
                 logger.error(f"Unexpected error requeuing frame: {e}", exc_info=True)
 

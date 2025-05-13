@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 
@@ -95,13 +96,8 @@ env/
 ENV.bak/
 env.bak/
 trash/
-+output/
-+VmbPy_Function_Reference/
-+docs/**/*.txt
 
 # Folders to ignore
-reports-gen/
-
 .cursor/rules/
 
 # Spyder project settings
@@ -134,9 +130,18 @@ cython_debug/
 
 # Python cache files
 *.pyc
+**/*.pyc
 
 # Project Specific
 *.log
 .repomix-*
 # data/ # REMOVED - We want to track data
-+.repomixignore 
+.repomixignore
+
+# Explicitly include these directories and files
+!lib/
+!lib/**
+!docs/
+!docs/cti/
+!docs/cti/**
+!docs/index.html
