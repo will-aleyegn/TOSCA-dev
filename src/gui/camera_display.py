@@ -26,6 +26,7 @@ from PyQt6.QtGui import QImage, QPixmap
 # Import our camera controllers
 from src.hardware.vmpy_camera import VMPyCameraController
 
+# Only import directly used symbols to avoid initializing VmbSystem at import time
 try:
     from vmbpy import PixelFormat, AccessMode
 except ImportError:
@@ -78,12 +79,8 @@ class CameraDisplayWidget(QWidget):
         # Initialize UI
         self._init_ui()
         
-        if self.vmb:
-            self._populate_camera_list()
-        
-        # Try to initialize camera on startup if auto-connect is checked
-        if self.auto_connect_checkbox.isChecked():
-            QTimer.singleShot(500, self.on_connect_camera)
+        # Set auto-connect checkbox to false by default now
+        self.auto_connect_checkbox.setChecked(False)
     
     def _init_ui(self):
         """Initialize the widget's UI elements."""
@@ -117,7 +114,7 @@ class CameraDisplayWidget(QWidget):
         camera_row.addWidget(self.access_mode_combo)
         
         self.auto_connect_checkbox = QCheckBox("Auto-connect")
-        self.auto_connect_checkbox.setChecked(True)
+        self.auto_connect_checkbox.setChecked(False)  # Default to false
         
         self.connect_btn = QPushButton("Connect")
         self.connect_btn.clicked.connect(self.on_connect_camera)
@@ -211,145 +208,165 @@ class CameraDisplayWidget(QWidget):
         # Add control panel to main layout
         layout.addWidget(control_panel)
         
-        # Image display
-        self.image_label = QLabel()
+        # Display area
+        display_box = QGroupBox("Camera Preview")
+        display_layout = QVBoxLayout(display_box)
+        
+        self.image_label = QLabel("No camera connected")
         self.image_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.image_label.setMinimumSize(640, 480)
-        self.image_label.setSizePolicy(
-            QSizePolicy.Policy.Expanding, 
-            QSizePolicy.Policy.Expanding
-        )
-        self.image_label.setStyleSheet("background-color: black;")
+        self.image_label.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        self.image_label.setMinimumSize(QSize(640, 480))
+        self.image_label.setStyleSheet("background-color: #333333; color: #FFFFFF;")
         
-        # Add a "No Camera" text to the display
-        self.image_label.setText("No Camera Connected")
-        self.image_label.setStyleSheet("color: white; background-color: black;")
+        display_layout.addWidget(self.image_label)
         
-        layout.addWidget(self.image_label)
+        layout.addWidget(display_box)
         
-        # Status bar
-        status_layout = QHBoxLayout()
+        # Add status label - always create this to ensure the attribute exists
         self.status_label = QLabel("Ready")
-        status_layout.addWidget(self.status_label)
-        layout.addLayout(status_layout)
+        layout.addWidget(self.status_label)
     
     def _populate_camera_list(self):
         """Populate the camera ID combo box with available cameras."""
-        self.camera_id_combo.clear()
-        self.camera_id_combo.addItem("Default/Auto-detect", None) # Add default option first
         if not self.vmb:
-            logger.warning("VmbSystem instance not available to populate camera list.")
-            return
+            try:
+                # Import VmbSystem here to avoid initialization at import time
+                from vmbpy import VmbSystem
+                self.vmb = VmbSystem.get_instance()
+            except ImportError:
+                logger.error("VmbPy not installed - camera functionality disabled")
+                QMessageBox.critical(self, "Camera Error", 
+                                    "VmbPy not installed or not found. Camera functionality disabled.")
+                return
+            except Exception as e:
+                logger.error(f"Error initializing VmbSystem: {str(e)}")
+                QMessageBox.critical(self, "Camera Error", 
+                                   f"Error initializing camera system: {str(e)}")
+                return
+        
         try:
+            # Save current selection if any
+            current_camera_id = self.camera_id_combo.currentData()
+            
+            # Clear and repopulate
+            self.camera_id_combo.clear()
+            self.camera_id_combo.addItem("Default/Auto-detect", None)
+            
+            # Add all cameras found by VmbPy
             cameras = self.vmb.get_all_cameras()
-            if not cameras:
-                logger.info("No cameras detected.")
-                self.camera_id_combo.addItem("No cameras found", None)
-                self.camera_id_combo.setEnabled(False)
-            else:
-                for i, cam in enumerate(cameras):
-                    try:
-                        # Using camera ID if available, otherwise index
-                        cam_id = cam.get_id()
-                        cam_name = f"{cam.get_name()} ({cam_id})"
-                        self.camera_id_combo.addItem(cam_name, cam_id)
-                    except Exception as e:
-                        logger.error(f"Error getting info for camera {i}: {e}")
-                        self.camera_id_combo.addItem(f"Camera {i} (Error)", None) # Fallback
-                self.camera_id_combo.setEnabled(True)
+            for i, cam in enumerate(cameras):
+                # Use the camera ID as both display name and data
+                self.camera_id_combo.addItem(f"{cam.get_id()} ({cam.get_name()})", cam.get_id())
+            
+            # Restore previous selection if it exists
+            if current_camera_id:
+                index = self.camera_id_combo.findData(current_camera_id)
+                if index >= 0:
+                    self.camera_id_combo.setCurrentIndex(index)
+        
         except Exception as e:
-            logger.error(f"Failed to get camera list: {e}")
-            self.camera_id_combo.addItem("Error listing cameras", None)
-            self.camera_id_combo.setEnabled(False)
+            logger.error(f"Error populating camera list: {str(e)}")
+            QMessageBox.warning(self, "Camera List Error", 
+                              f"Error listing available cameras: {str(e)}")
     
     def on_connect_camera(self):
-        """Connect to the camera."""
-        try:
-            if self.camera_controller is not None:
-                self.on_disconnect_camera()
-            camera_id = self.camera_id_combo.currentData()
-            # Get selected pixel format and access mode
-            pixel_format = self.pixel_format_combo.currentData()
-            if pixel_format is None:
-                pixel_format = PixelFormat.Mono8  # Default fallback
-            access_mode = self.access_mode_combo.currentData()
-            if access_mode is None:
-                access_mode = AccessMode.Full
-            self.camera_controller = VMPyCameraController(
-                vmb=self.vmb, camera_id=camera_id,
-                pixel_format=pixel_format, access_mode=access_mode
-            )
-            self.status_label.setText("Connecting to VMPy camera...")
-            success = self.camera_controller.initialize()
-            if not success:
-                QMessageBox.critical(
-                    self, "Camera Error", 
-                    "Failed to initialize VMPy camera. Check connections and try again."
-                )
-                self.camera_controller = None
-                self.status_label.setText("Camera initialization failed")
-                return
-            # Populate pixel format combo with available formats
-            self.pixel_format_combo.clear()
-            formats = self.camera_controller.get_available_pixel_formats()
-            for fmt in formats:
-                self.pixel_format_combo.addItem(str(fmt), fmt)
-            # Set the current pixel format in the combo
-            idx = self.pixel_format_combo.findData(self.camera_controller.pixel_format)
-            if idx >= 0:
-                self.pixel_format_combo.setCurrentIndex(idx)
-            # Enable Save/Load Settings buttons
-            self.save_settings_btn.setEnabled(True)
-            self.load_settings_btn.setEnabled(True)
-            self.show_features_btn.setEnabled(True)
-            # Set auto exposure and auto gain ON by default (Try 'Continuous')
-            auto_on_value = "Continuous" # Common alternative to 'On'
-            auto_off_value = "Off"
+        """Connect to the selected camera."""
+        if self.camera_controller is not None:
+            logger.warning("Already connected to camera")
+            return
+        
+        # Make sure VmbSystem is initialized
+        if not self.vmb:
             try:
-                cam = self.camera_controller.camera
-                with cam:
-                    # Try setting to Continuous first
-                    cam.get_feature_by_name("ExposureAuto").set(auto_on_value)
-                    cam.get_feature_by_name("GainAuto").set(auto_on_value)
+                # Import VmbSystem here to avoid initialization at import time
+                from vmbpy import VmbSystem
+                self.vmb = VmbSystem.get_instance()
+                logger.info("VmbSystem initialized")
+            except ImportError:
+                logger.error("VmbPy not installed - camera functionality disabled")
+                QMessageBox.critical(self, "Camera Error", 
+                                    "VmbPy not installed or not found. Camera functionality disabled.")
+                return
             except Exception as e:
-                logger.warning(f"Could not set auto exposure/gain to '{auto_on_value}' on connect: {e}")
-                # If 'Continuous' fails, maybe 'On' works on some models? Try that? (Less likely given previous error)
-                # Or just default to Off?
-                try:
-                    with cam:
-                         cam.get_feature_by_name("ExposureAuto").set(auto_off_value)
-                         cam.get_feature_by_name("GainAuto").set(auto_off_value)
-                    logger.info("Defaulting auto exposure/gain to Off after failing to set 'Continuous'")
-                except Exception as e2:
-                     logger.error(f"Also failed to set auto exposure/gain to Off: {e2}")
-
-            # Update UI elements (reading back values)
+                logger.error(f"Error initializing VmbSystem: {str(e)}")
+                QMessageBox.critical(self, "Camera Error", 
+                                   f"Error initializing camera system: {str(e)}")
+                return
+        
+        # Populate camera list now that we have VmbSystem
+        self._populate_camera_list()
+        
+        # Get selected camera ID
+        camera_id = self.camera_id_combo.currentData()
+        
+        # Get selected pixel format
+        pixel_format = self.pixel_format_combo.currentData()
+        
+        # Get selected access mode
+        access_mode = self.access_mode_combo.currentData()
+        
+        try:
+            # Create camera controller
+            self.camera_controller = VMPyCameraController(
+                self.vmb, camera_id=camera_id, 
+                pixel_format=pixel_format, 
+                access_mode=access_mode
+            )
+            
+            # Connect to camera
+            self.camera_controller.connect()
+            
+            # Populate pixel format combo
+            self.pixel_format_combo.clear()
+            for fmt in self.camera_controller.get_available_pixel_formats():
+                self.pixel_format_combo.addItem(fmt.name, fmt)
+            
+            # Update UI state
             self.connect_btn.setEnabled(False)
             self.disconnect_btn.setEnabled(True)
             self.start_stream_btn.setEnabled(True)
             self.capture_btn.setEnabled(True)
-            self.status_label.setText("VMPy camera connected successfully")
-            # Read and set camera feature UI
+            self.save_settings_btn.setEnabled(True)
+            self.load_settings_btn.setEnabled(True)
+            self.show_features_btn.setEnabled(True)
+            
+            # Update exposure and gain settings from camera
             self._update_feature_controls_from_camera()
-            # Optionally start streaming immediately
-            self.on_start_stream()
+            
+            # Start streaming if auto-connect was checked
+            if self.auto_connect_checkbox.isChecked():
+                self.on_start_stream()
+            
+            # Update pixel format combo handler
+            self.pixel_format_combo.currentIndexChanged.connect(self.on_pixel_format_changed)
+            
+            logger.info(f"Connected to camera: {camera_id}")
+        
         except Exception as e:
             logger.error(f"Error connecting to camera: {str(e)}")
-            QMessageBox.critical(
-                self, "Camera Error", 
-                f"An error occurred while connecting to the camera: {str(e)}"
-            )
-            self.status_label.setText(f"Error: {str(e)}")
+            QMessageBox.warning(self, "Camera Connection Error", 
+                              f"Error connecting to camera: {str(e)}")
+            
+            # Clean up if partially initialized
+            if self.camera_controller:
+                try:
+                    self.camera_controller.disconnect()
+                except:
+                    pass
+                self.camera_controller = None
     
     def on_disconnect_camera(self):
         """Disconnect from the camera."""
-        if self.camera_controller is not None:
+        if self.camera_controller is None:
+            return
+        
+        try:
             # Stop streaming if active
-            if hasattr(self, 'update_timer') and self.update_timer.isActive():
+            if self.update_timer.isActive():
                 self.on_stop_stream()
             
-            # Release camera resources
-            self.camera_controller.release()
+            # Disconnect the camera
+            self.camera_controller.disconnect()
             self.camera_controller = None
             
             # Update UI
@@ -358,12 +375,29 @@ class CameraDisplayWidget(QWidget):
             self.start_stream_btn.setEnabled(False)
             self.stop_stream_btn.setEnabled(False)
             self.capture_btn.setEnabled(False)
+            self.save_settings_btn.setEnabled(False)
+            self.load_settings_btn.setEnabled(False)
+            self.show_features_btn.setEnabled(False)
             
-            # Clear display
-            self.image_label.setText("No Camera Connected")
+            # Reset image label
+            self.image_label.setText("No camera connected")
             self.image_label.setPixmap(QPixmap())
             
-            self.status_label.setText("Camera disconnected")
+            # Disconnect pixel format combo handler to avoid issues
+            try:
+                self.pixel_format_combo.currentIndexChanged.disconnect(self.on_pixel_format_changed)
+            except:
+                pass
+            
+            logger.info("Disconnected from camera")
+        
+        except Exception as e:
+            logger.error(f"Error disconnecting from camera: {str(e)}")
+            QMessageBox.warning(self, "Camera Disconnection Error", 
+                              f"Error disconnecting from camera: {str(e)}")
+            
+            # Force cleanup
+            self.camera_controller = None
     
     def on_start_stream(self):
         """Start the camera stream."""
@@ -616,15 +650,41 @@ class CameraDisplayWidget(QWidget):
         except Exception as e:
             logger.error(f"Error updating feature controls from camera: {e}")
     
+    def _apply_camera_setting_with_restart(self, setting_func, *args, **kwargs):
+        """
+        Helper to stop stream, apply a camera setting, and restart if needed.
+        setting_func: function to call to apply the setting
+        *args, **kwargs: arguments to pass to setting_func
+        """
+        if self.camera_controller is None:
+            return
+        was_running = self.camera_controller.is_running
+        if was_running:
+            self.camera_controller.stop_stream()
+        setting_func(*args, **kwargs)
+        if was_running:
+            self.camera_controller.start_stream()
+
+    def on_pixel_format_changed(self, index):
+        if self.camera_controller is None:
+            return
+        new_format = self.pixel_format_combo.itemData(index)
+        if new_format is None:
+            return
+        def set_pixel_format():
+            self.camera_controller.pixel_format = new_format
+            self.camera_controller.initialize(force=True)
+        self._apply_camera_setting_with_restart(set_pixel_format)
+        self.status_label.setText("Pixel format changed.")
+
+    # Add similar wrappers for exposure, gain, auto exposure, auto gain
     def on_exposure_auto_changed(self, state):
-        if self.camera_controller and self.camera_controller.camera:
+        def set_exposure_auto():
             cam = self.camera_controller.camera
-            # Determine target state string (Assume 'Continuous' for On, 'Off' for Off)
             target_state_str = "Continuous" if state else "Off"
             with cam:
                 try:
                     cam.get_feature_by_name("ExposureAuto").set(target_state_str)
-                    # Read back and update UI
                     actual = cam.get_feature_by_name("ExposureAuto").get()
                     self.exposure_auto_checkbox.setChecked(actual != "Off")
                     if actual != target_state_str:
@@ -633,15 +693,15 @@ class CameraDisplayWidget(QWidget):
                 except Exception as e:
                     logger.error(f"Failed to set ExposureAuto to {target_state_str}: {e}")
                     self.status_label.setText("Failed to set Auto Exposure")
-    
+        self._apply_camera_setting_with_restart(set_exposure_auto)
+
     def on_exposure_slider_changed(self, value):
         self.exposure_value_label.setText(f"{value:,} us")
-        if self.camera_controller and self.camera_controller.camera:
+        def set_exposure():
             cam = self.camera_controller.camera
             with cam:
                 try:
                     cam.get_feature_by_name("ExposureTime").set(value)
-                    # Read back and update UI
                     actual = cam.get_feature_by_name("ExposureTime").get()
                     self.exposure_slider.setValue(int(actual))
                     self.exposure_value_label.setText(f"{int(actual):,} us")
@@ -651,16 +711,15 @@ class CameraDisplayWidget(QWidget):
                 except Exception as e:
                     logger.error(f"Failed to set ExposureTime: {e}")
                     self.status_label.setText("Failed to set Exposure")
-    
+        self._apply_camera_setting_with_restart(set_exposure)
+
     def on_gain_auto_changed(self, state):
-        if self.camera_controller and self.camera_controller.camera:
+        def set_gain_auto():
             cam = self.camera_controller.camera
-             # Determine target state string (Assume 'Continuous' for On, 'Off' for Off)
             target_state_str = "Continuous" if state else "Off"
             with cam:
                 try:
                     cam.get_feature_by_name("GainAuto").set(target_state_str)
-                    # Read back and update UI
                     actual = cam.get_feature_by_name("GainAuto").get()
                     self.gain_auto_checkbox.setChecked(actual != "Off")
                     if actual != target_state_str:
@@ -669,16 +728,16 @@ class CameraDisplayWidget(QWidget):
                 except Exception as e:
                     logger.error(f"Failed to set GainAuto to {target_state_str}: {e}")
                     self.status_label.setText("Failed to set Auto Gain")
-    
+        self._apply_camera_setting_with_restart(set_gain_auto)
+
     def on_gain_slider_changed(self, value):
         gain_db = value / 10.0
         self.gain_value_label.setText(f"{gain_db:.1f} dB")
-        if self.camera_controller and self.camera_controller.camera:
+        def set_gain():
             cam = self.camera_controller.camera
             with cam:
                 try:
                     cam.get_feature_by_name("Gain").set(gain_db)
-                    # Read back and update UI
                     actual = cam.get_feature_by_name("Gain").get()
                     self.gain_slider.setValue(int(actual * 10))
                     self.gain_value_label.setText(f"{actual:.1f} dB")
@@ -688,6 +747,7 @@ class CameraDisplayWidget(QWidget):
                 except Exception as e:
                     logger.error(f"Failed to set Gain: {e}")
                     self.status_label.setText("Failed to set Gain")
+        self._apply_camera_setting_with_restart(set_gain)
     
     def on_save_settings(self):
         if self.camera_controller is None:

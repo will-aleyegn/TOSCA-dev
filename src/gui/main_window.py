@@ -26,6 +26,8 @@ from .camera_display import CameraDisplayWidget
 from .patient_form import PatientFormWidget
 # Import the session form widget
 from .session_form import SessionFormWidget
+# Import the actuator control widget
+from .actuator_control import ActuatorControlWidget
 
 logger = logging.getLogger(__name__)
 
@@ -57,9 +59,8 @@ class MainWindow(QMainWindow):
         self.status_timer.timeout.connect(self._update_status)
         self.status_timer.start(5000)  # Update every 5 seconds
         
-        # Switch to camera tab and auto-connect camera on startup
+        # Switch to camera tab on startup (but don't auto-connect)
         self.tab_widget.setCurrentWidget(self.camera_tab)
-        QTimer.singleShot(100, self.camera_display.on_connect_camera)
         
         logger.info("Main window initialized")
     
@@ -209,10 +210,16 @@ class MainWindow(QMainWindow):
         self.patient_tab_layout.addWidget(self.patient_form)
         self.tab_widget.addTab(self.patient_tab, "Patient Information")
         
-        # Laser control tab
+        # Laser control tab with actuator control
         self.laser_tab = QWidget()
-        self.tab_widget.addTab(self.laser_tab, "Laser Control")
-        # TODO: Implement Laser Control panel
+        self.laser_tab_layout = QVBoxLayout(self.laser_tab)
+        
+        # Create and add the ActuatorControlWidget
+        self.actuator_control = ActuatorControlWidget(parent=self.laser_tab)
+        self.actuator_control.actuator_status_changed.connect(self._on_actuator_status_changed)
+        self.laser_tab_layout.addWidget(self.actuator_control)
+        
+        self.tab_widget.addTab(self.laser_tab, "Actuator Control")
         
         # Camera and imaging tab - using our CameraDisplayWidget
         self.camera_tab = QWidget()
@@ -270,12 +277,21 @@ class MainWindow(QMainWindow):
         # This method will be implemented to create instances of
         # the laser controller, actuator controller, and camera controller
         
-        # For now, we'll just set some placeholders
+        # For now, we'll just set some placeholders - don't auto-connect
         self.laser_controller = None
         self.actuator_controller = None
         
         # Camera controller is now handled by the CameraDisplayWidget
         self.camera_controller = self.camera_display
+        
+        # Set disconnect_hardware_action to disabled initially since we're not connected
+        self.disconnect_hardware_action.setEnabled(False)
+        self.connect_hardware_action.setEnabled(True)
+        
+        # Also set camera actions to appropriate initial state
+        self.start_camera_action.setEnabled(True)
+        self.stop_camera_action.setEnabled(False)
+        self.capture_image_action.setEnabled(False)
         
         logger.info("Hardware controllers initialized")
     
@@ -291,15 +307,21 @@ class MainWindow(QMainWindow):
             except Exception as e:
                 logger.error(f"Error disconnecting laser: {str(e)}")
         
-        # Disconnect actuator
-        if hasattr(self, 'actuator_controller') and self.actuator_controller:
+        # Disconnect actuator via the ActuatorControlWidget
+        if hasattr(self, 'actuator_control') and self.actuator_control.is_connected:
             try:
-                self.actuator_controller.disconnect()
+                self.actuator_control.connect_disconnect()  # This will disconnect if connected
                 logger.info("Actuator disconnected")
             except Exception as e:
                 logger.error(f"Error disconnecting actuator: {str(e)}")
         
-        # Camera is handled by the CameraDisplayWidget which has its own cleanup
+        # Disconnect camera using the CameraDisplayWidget
+        if hasattr(self, 'camera_display') and self.camera_display.camera_controller is not None:
+            try:
+                self.camera_display.on_disconnect_camera()
+                logger.info("Camera disconnected")
+            except Exception as e:
+                logger.error(f"Error disconnecting camera: {str(e)}")
         
         logger.info("Hardware shutdown complete")
     
@@ -310,9 +332,11 @@ class MainWindow(QMainWindow):
             if self.camera_display.camera_controller is not None:
                 self.camera_status.setText("Camera: Connected")
                 self.camera_status.setStyleSheet("color: green;")
+                self.capture_image_action.setEnabled(True)
             else:
                 self.camera_status.setText("Camera: Disconnected")
                 self.camera_status.setStyleSheet("color: red;")
+                self.capture_image_action.setEnabled(False)
     
     # Action handlers
     
@@ -351,42 +375,68 @@ class MainWindow(QMainWindow):
     def _on_connect_hardware(self):
         """Handle connect hardware action."""
         logger.info("Connect hardware action triggered")
-        # Will connect to all hardware devices
-        QMessageBox.information(self, "Connect Hardware", "Hardware connection will be implemented.")
         
-        # Update the status indicators when implemented
-        # For now just change the text for demonstration
-        self.laser_status.setText("Laser: Connected")
-        self.laser_status.setStyleSheet("color: green;")
+        # Change tab based on what hardware we're connecting to
+        current_tab = self.tab_widget.currentWidget()
         
-        self.actuator_status.setText("Actuator: Connected")
-        self.actuator_status.setStyleSheet("color: green;")
+        if current_tab == self.camera_tab:
+            # Connect camera
+            self._on_start_camera()
+        elif current_tab == self.laser_tab:
+            # For now, just connect the actuator since that's what we've implemented
+            if self.actuator_control and not self.actuator_control.is_connected:
+                self.actuator_control.connect_disconnect()
+                if self.actuator_control.is_connected:
+                    self.actuator_status.setText("Actuator: Connected")
+                    self.actuator_status.setStyleSheet("color: green;")
+        else:
+            # Generic hardware connection dialog
+            QMessageBox.information(self, "Connect Hardware", 
+                                   "Please go to the specific tab (Camera or Actuator Control) to connect to hardware.")
         
-        # Camera is handled via the CameraDisplayWidget
-        
-        # Update the menu action
-        self.connect_hardware_action.setEnabled(False)
-        self.disconnect_hardware_action.setEnabled(True)
+        # Update hardware menu actions
+        self._update_hardware_action_state()
     
     def _on_disconnect_hardware(self):
         """Handle disconnect hardware action."""
         logger.info("Disconnect hardware action triggered")
-        # Will disconnect from all hardware devices
-        QMessageBox.information(self, "Disconnect Hardware", "Hardware disconnection will be implemented.")
         
-        # Update the status indicators when implemented
-        # For now just change the text for demonstration
-        self.laser_status.setText("Laser: Disconnected")
-        self.laser_status.setStyleSheet("color: red;")
+        # Determine which hardware to disconnect based on current tab
+        current_tab = self.tab_widget.currentWidget()
         
-        self.actuator_status.setText("Actuator: Disconnected")
-        self.actuator_status.setStyleSheet("color: red;")
+        if current_tab == self.camera_tab:
+            # Disconnect camera
+            self._on_stop_camera()
+        elif current_tab == self.laser_tab:
+            # Disconnect actuator
+            if self.actuator_control and self.actuator_control.is_connected:
+                self.actuator_control.connect_disconnect()
+                self.actuator_status.setText("Actuator: Disconnected")
+                self.actuator_status.setStyleSheet("color: red;")
+        else:
+            # Disconnect all hardware
+            self._shutdown_hardware()
         
-        # Camera is handled via the CameraDisplayWidget
+        # Update hardware menu actions
+        self._update_hardware_action_state()
+    
+    def _update_hardware_action_state(self):
+        """Update the state of hardware-related menu actions."""
+        # Check if any hardware is connected
+        camera_connected = self.camera_display.camera_controller is not None
+        actuator_connected = hasattr(self, 'actuator_control') and self.actuator_control.is_connected
+        laser_connected = self.laser_controller is not None
         
-        # Update the menu action
-        self.connect_hardware_action.setEnabled(True)
-        self.disconnect_hardware_action.setEnabled(False)
+        any_connected = camera_connected or actuator_connected or laser_connected
+        
+        # Update menu actions
+        self.connect_hardware_action.setEnabled(not any_connected)
+        self.disconnect_hardware_action.setEnabled(any_connected)
+        
+        # Update camera actions
+        self.start_camera_action.setEnabled(not camera_connected)
+        self.stop_camera_action.setEnabled(camera_connected)
+        self.capture_image_action.setEnabled(camera_connected)
     
     def _on_start_camera(self):
         """Handle start camera action."""
@@ -401,21 +451,22 @@ class MainWindow(QMainWindow):
             # Start streaming if not already streaming
             self.camera_display.on_start_stream()
         
-        # Update menu actions
-        self.start_camera_action.setEnabled(False)
-        self.stop_camera_action.setEnabled(True)
+        # Update status and menu actions
+        self._update_status()
+        self._update_hardware_action_state()
     
     def _on_stop_camera(self):
         """Handle stop camera action."""
         logger.info("Stop camera action triggered")
         
-        # Stop the camera streaming
+        # Stop the camera streaming and disconnect
         if self.camera_display.camera_controller is not None:
             self.camera_display.on_stop_stream()
+            self.camera_display.on_disconnect_camera()
         
-        # Update menu actions
-        self.start_camera_action.setEnabled(True)
-        self.stop_camera_action.setEnabled(False)
+        # Update status and menu actions
+        self._update_status()
+        self._update_hardware_action_state()
     
     def _on_capture_image(self):
         """Handle capture image action."""
@@ -431,11 +482,14 @@ class MainWindow(QMainWindow):
     def _on_emergency_stop(self):
         """Handle emergency stop action."""
         logger.info("EMERGENCY STOP triggered")
-        # Will implement emergency stop functionality
-        QMessageBox.critical(self, "EMERGENCY STOP", "Emergency stop functionality will be implemented.")
+        QMessageBox.critical(self, "EMERGENCY STOP", "Emergency stop activated. Shutting down all hardware.")
         
         # Disconnect from all hardware as a safety measure
-        self._on_disconnect_hardware()
+        self._shutdown_hardware()
+        
+        # Update status and menu actions
+        self._update_status()
+        self._update_hardware_action_state()
     
     def _on_about(self):
         """Handle about action."""
@@ -482,6 +536,18 @@ class MainWindow(QMainWindow):
         """Handle session data updates."""
         if session_data:
             logger.info(f"Treatment session updated: {session_data.get('session_id', '')}")
+
+    def _on_actuator_status_changed(self, is_connected, status_text):
+        """Handle actuator status changes."""
+        if is_connected:
+            self.actuator_status.setText("Actuator: Connected")
+            self.actuator_status.setStyleSheet("color: green;")
+        else:
+            self.actuator_status.setText("Actuator: Disconnected")
+            self.actuator_status.setStyleSheet("color: red;")
+        
+        # Update hardware menu actions
+        self._update_hardware_action_state()
 
     def on_add_image_to_session(self, image_path):
         """

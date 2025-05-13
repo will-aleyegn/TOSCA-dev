@@ -9,7 +9,9 @@ It initializes all necessary components and starts the GUI.
 import sys
 import logging
 from PyQt6.QtWidgets import QApplication
-from vmbpy import VmbSystem
+
+# Don't import VmbSystem here since we'll initialize it only when needed
+# from vmbpy import VmbSystem
 
 # Import project modules
 from src.gui.main_window import MainWindow
@@ -32,17 +34,16 @@ def main():
     
     # Create the Qt application
     app = QApplication(sys.argv)
-    app.setApplicationName("Laser Device Control")
+    app.setApplicationName("TOSCA Control System")
     
     try:
-        with VmbSystem.get_instance() as vmb:
-            # Initialize the main window with vmb
-            main_window = MainWindow(vmb=vmb)
-            main_window.show()
-            
-            # Start the application event loop
-            logger.info("Application initialized successfully")
-            return app.exec()
+        # Initialize the main window without vmb - it will be created when needed
+        main_window = MainWindow(vmb=None)
+        main_window.show()
+        
+        # Start the application event loop
+        logger.info("Application initialized successfully")
+        return app.exec()
     
     except Exception as e:
         logger.error(f"Error during application startup: {e}", exc_info=True)

@@ -393,11 +393,9 @@ class VMPyCameraController:
             logger.error("Camera not initialized. Cannot get pixel formats.")
             return []
         try:
-            # Camera features must be accessed within the camera's context
             with self.camera as cam:
                 formats = cam.get_pixel_formats()
-                # Convert to string representations if they are VmbPy enum objects for easier use in GUI
-                return [str(f) for f in formats] # Example, adjust based on actual VmbPy return type
+                return list(formats)  # Return enums, not strings
         except VmbCameraError as e:
             logger.error(f"Vimba specific error getting pixel formats: {e}")
             return []

@@ -1,0 +1,300 @@
+v3.26 Page 15 of 56 www.xeryon.com
+PROP 16 bits Closed loop Proportional control factor for zone 1. Default: 100.
+PRO2 16 bits Closed loop Proportional control factor for zone 2. Default: 100.
+ZON1 26 bits Closed loop Width of zone 1: +/- value around target position. Expressed
+in encoder units. Default: 100.
+ZON2 26 bits Closed loop Width of zone 2: +/- value around target position. Expressed
+in encoder units. Default: 1000.
+CFRQ 16 bits Closed loop Control frequency. Adapt this value to obtain stable closed-
+loop control. The optimal control frequency depends on the
+mass or inertia of the load. Default: 30000 (30 000 Hz) for zero
+load.
+DUCO 1 bit Closed loop Amplitude is used in closed loop if set to 1. If set to 0, a fixed
+amplitude of 50% is used. Default: 1.
+ELIM 20 bits Closed loop ELIM (error limit) sets the maximum following error. When
+the following error exceeds the value set bij ELIM, then the
+controller goes in safe mode and the motor signals are
+switched off. Recovery: RSET or ENBL=1
+This error may be triggered when trying to move beyond the
+physical limits of the stage, or by setting a too high speed. Do
+not forget to first find the index position (INDX command) to
+avoid that the stage travels beyond the end stops and triggers
+this error.
+Default: 10000.
+ILIM 26 bits Closed loop Sets the following-error at which the index search algorithm
+reverses direction. This influences the time the stage stalls at
+the end position during an index search.
+PTOL 16 bits Closed loop Position tolerance. When the stage is within +/- position
+tolerance of the desired position, the control is switched off
+and the ‘position reached’ flag is raised.
+Values are expressed in encoder units and should be in the
+range 0 – 65535. The range is applied symmetrically with
+respect to positive and negative position errors. e.g. PTOL=2
+allows s errors between -2 and +2 encoder units.
+Default: 2.
+See also TOUT and PTO2.
+PTO2 16 bits Closed loop Second position tolerance, similar to PTOL. Comes into action
+if first position tolerance PTOL fails within a timeout time
+TOUT. The default value is 10.
+TOUT 16 bits Closed loop Set timeout time. To avoid that the stage keeps vibrating
+indefinitely around the desired position without ‘landing’, a
+www.xeryon.com Page 16 of 56 v3.25
+timeout time can be set. The timer starts when the stage is
+near the desired position, within a distance of +/- PTO2. After
+passing the timeout time, PTO2 becomes the new position
+tolerance.
+The time is expressed in milliseconds. The default value is 50
+(50 ms).
+Also check PTOL and PTO2.
+TOU2 16 bits Closed loop This defines a safety timeout. When the motor is on for a time
+longer that the value set by TOU2, then the controller goes in
+safe mode and the motor signals are switched off. Recovery:
+RSET or ENBL=1 depending on BLCK.
+Status bit #18 goes up when this timeout is triggered.
+TOU2=0 disables this timeout. Any other value sets the
+timeout time in seconds. Maximum value: 65535 seconds
+TOU3 16 bits Closed loop This defines another safety timeout. When the stage is trying
+to “land” to a specific position for longer than the value set by
+TOU3, then the controller goes in safe mode. The motor
+signals are switched off.
+Status bit #
+ENCR 1 bit Closed loop Reset the encoder by sending “ENCR=1”.
+VI. Signal shape and conditioning stage command
+Command Range Mode Explanation
+ENBL 0-3 - For XRTA only: Enable amplifiers. Bit 0 is for piezo signal 1, bit
+1 for piezo signal 2. ENBL=3 enables both amplifiers, ENBL=0
+disables both amplifiers. ENBL=1 enables only amplifier 1,
+ENBL=2 enables only amplifier 2.
+COMP 12 bits - For XRTA only. Percentage of active error compensation.
+COMP=0 disables active error compensation. COMP=100
+applies 100 % compensation, as set by the compensation
+values stored in memory. For other percentage values, the
+compensation is scaled accordingly. Maximum value: 4095.
+ZERO - Open &
+closed loop
+Force the piezo signals to zero volt.
+MAMP 16 bits Open and
+closed loop
+Set maximum amplitude. The piezo excitation signals are
+limited to the corresponding voltages. MAMP=65535 sets
+them to the maximum voltage of 45 V. MAMP=36400 sets the
+maximum to 25 V. The relation is linear.
+MIMP 16 bits Closed loop Set minimum amplitude for the piezo excitation signals. See
+MAMP for values.
+PHAC 16 bit Open &
+closed loop
+Phase correction. Corrects an imbalance in the motor. Such
+imbalance may cause a rattling or scratching noise when the
+stage moves at low speed. Practical values are in the range of
+v3.26 Page 17 of 56 www.xeryon.com
+a few 1000, positive or negative.
+Default: 0 (no correction)
+OFSA 12 bits - Offset on the piezo signals on piezo phase 1. OFSA=4095
+corresponds to full scale (45 V), OFSA=0 produces no offset.
+The relation is linear.
+OFSB 12 bits - Similar to OFSB, but for piezo phase 2.
+FILP 8 bits Open and
+closed loop
+Filter speed for phase of piezo excitation signals. Default
+value: 1. Max. value: 255.
+FILA 8 bits Open and
+closed loop
+Filter speed for amplitude of piezo excitation signals. Default
+value: 1. Max. value: 255.
+VII. Directional settings stage command
+Command Range Mode Explanation
+ENCD 1 bit Open and
+closed loop
+Set the encoder direction. Set the counting direction with
+respect to the A/B signals or sin/cos signals of the encoder.
+Flip this bit to swap left and right, or clockwise and counter-
+clockwise. Default value is 0.
+ENCO 32 bits Open and
+closed loop
+Sets the encoder offset: distance between the index position
+and the desired zero position. In encoder units. Default value
+is 0.
+ACTD 1 bit Open and
+closed loop
+Set the actuation direction. If not set correctly, the stage will
+move away from the desired position. Default value is 0.
+PATH 1 bit Closed loop For rotation stages only. Selects whether the stage will follow
+the shortest path (PATH=1) to the target position or follow a
+linear approach, respecting high to low or low to high
+(PATH=0). Default: 1 for rotation stages, 0 for linear stages
+VIII. Trigger outputs stage command
+Command Range Mode Explanation
+TRGS 26 bits Closed loop Start of the trigger pulses, expressed in encoder units.
+TRGW 26 bits Closed loop Width of the trigger pulses, expressed in encoder units. This
+(positive) value should be lower than the pitch (TRGP).
+TRGP 26 bits Closed loop Pitch of the trigger pulses, expressed in encoder units. The
+pitch can’t be negative. To trigger pulses in the negative
+direction: set the TRGS at the most negative point and use a
+positive pitch.
+www.xeryon.com Page 18 of 56 v3.25
+TRGN 26 bits Closed loop Number of trigger pulses
+IX. Communication controller command
+Command Range Mode Explanation
+INFO 4 bits - Select type of info to be transmitted from the driver to the
+master (PC).
+0: Stop broadcasting info automatically
+1: SRNO, SOFT, STAGE, STAT, SYNC
+2: SRNO, SOFT, STAGE, STAT, FREQ, SYNC, EPOS, DPOS,
+REQUESTED PARAMETER*, TIME
+3: EPOS, DPOS, STAT
+4: EPOS, STAT, DPOS, TIME
+5: STAT, FREQ, EPOS, DPOS, REQUESTED PARAMETER*, TIME
+6: REQUESTED PARAMETER*
+7: EPOS, STAT
+Default: 2
+e.g. INFO=7 will alternatingly send EPOS & STAT values.
+* REQUESTED VALUE, when a parameter value is requested
+(e.g. by sending FREQ=?) the value for the parameter will be
+returned here.
+UART 0,
+2400,
+4800,
+9600,
+14400,
+19200,
+28800
+38400,
+57600,
+76800
+- Set UART baud rate.
+To switch UART off: UART=0.
+To set the baud rate to 9600: UART=9600
+The maximum baud rate is 76800.
+When UART is off, the UART can only be restarted by sending
+the UART command via USB.
+POLI 1-
+65535
+- Set polling interval. Specifies the time between data updates.
+Also defines the polling interval of the analog IO. The interval
+is expressed in milliseconds. The default value is 97 (97 ms).
+DLAY 16 bit Closed loop Sets the delay between the moment the stage reaches its
+target position and the moment the ‘position reached’ flag is
+v3.26 Page 19 of 56 www.xeryon.com
+raised. Expressed in milliseconds.
+Default: 100 (100 ms).
+X. Manage settings controller command
+Command Range Mode Explanation
+RSET - - Reset the driver. All piezo signals go to zero and settings are
+reset to their saved value.
+LOAD - - Load settings from memory
+SAVE - - Save settings to memory
+FACT - - Reset to factory settings
+BLCK 0 - 1 - Blocked mode. When blocking mode is enabled (1), the ENBL
+command should be send to the controller if an error occurs.
+If blocking mode is disabled (0), the controllers executes the
+next command even when an error occurs.
+GPIO 0-13 - Select the preferred input mode using the GPIO command.
+For more details see section “7 Communication using digital
+and analog IO”
+GPIO=0
+Control via IO pins switched off. The controller
+will only react to text commands sent through
+USB or UART.
+GPIO=2 Pulse and direction mode, with direction &
+enable pins.
+GPIO=3 Pulse and direction mode, with forward &
+backward pins.
+GPIO=4 A quad B input mode
+GPIO=8 PWM control, with direction & enable pins.
+GPIO=9 PWM control, with forward & backward pins.
+GPIO=12 Analog control, with direction & enable pins.
+GPIO=13 Analog control, with forward & backward pins.
+SPTS 16 bits Closed loop Select the step size for each STEP pulse. The step size is
+expressed in encoder units. Default: 1 encoder unit
+www.xeryon.com Page 20 of 56 v3.25
+XI. Test controller command
+Command Range Mode Explanation
+TEST 0-1 - Test LED indicators (XD-M and XD-19). TEST=1 switches all
+indicators on. TEST=0 brings them back to their function.
+XII. Integrated controller (for XLA open loop) specific commands
+Command Range Mode Explanation
+VOLT 16 bits Open loop Set the desired voltage level expressed in mV. Default value:
+48000
+DICF 1 bit Open loop Select a way to change direction. A value of “0” means that
+the direction can be controlled using the “MOVE” command
+(default). A value of “1” means that the direction can be
+controlled using the “DIR” pin.
+SPCF 2 bits Open loop Select a way to control the speed. A value of “0” means that
+the speed can be controlled using the “SSPD” command
+(default). A value of “1” means that the speed can be
+controlled using a PWM signal on the “SPD” pin. A value of
+“2” means that the speed can be controlled using an analog
+signal on the “SPD” pin.
+PLIM 1 bit Set wether or not to react to physical limits (eg. magnetical
+limits on XLA).
+1: Physical limits on
+0: Physical limits off
+Default value: 0
+5.3. Feedback from controller
+Information is sent back from the Xeryon controller to the master (PC) in ASCII format. The format is
+as follows:
+1. One character identifying the axis, followed by a colon. This only applies to multiple-axes
+systems. For a single-axis system the axis identification is omitted.
+2. Tag: Four characters describing the type of information
+3. ‘=’ sign separating the command from the corresponding value
+4. Signed value associated with that information (sign + 8 decimal places). The message is
+terminated with a ‘new line’ character (ASCII code 10).
+e.g. X:EPOS=+12345678
+Different types of information:
+For multiple-axis systems this information is being sent for every axis. First all data for axis 1, then all
+data for axis 2, … . The command INFO determines which information is sent back.
+Tag Explanation
+v3.26 Page 21 of 56 www.xeryon.com
+SRNO Serial number of the driver (hardware)
+SOFT Software version installed on the driver. e.g. 20103 → 2.1.3
+[STAGE] Type of stage (XLS1, XLS3, XRT1, XRT3, XLA1, XLA3, XRTA and its resolution e.g.
+XLS1=312
+STAT Status (see below)
+FREQ Excitation frequency currently in use
+SYNC Fixed value “12345678”. Can be used for debugging communication issues.
+EPOS Encoder position
+DPOS Desired position
+TIME Time stamp: resolution 0,1 ms
+Meaning of the STAT(US) Word:
+The Status Word contains 24 bits:
+Status
+bit
+Name Explanation
+0 Amplifiers enabled XRTA only: Amplifiers for phase 1 and 2 enabled
+1 End stop Stage stopped by end stop
+2 Thermal protection 1 Amplifier for phase 1 or 3 in thermal protection.
+3 Thermal protection 2 Amplifier for phase 2 or 4 in thermal protection.
+4 Force zero Motor signals are currently forced to zero.
+5 Motor on The piezo motor is on.
+6 Closed loop The stage is currently in closed loop control.
+7 Encoder at index Indicates whether the stage is positioned exactly at the encoder
+index.
+8 Encoder valid Indicates whether the encoder index has been passed and
+therefore the encoder value reflects the absolute position, not the
+relative position with respect to the startup position.
+9 Searching index Indicates whether the stage is currently searching the index
+position.
+10 Position reached Indicates whether the target position is reached (within tolerance
+limits).
+11 Error compensation Error compensation is on.
+www.xeryon.com Page 22 of 56 v3.25
+12 Encoder error Indicates an error produced by the encoder.
+13 Scanning Indicates whether the stage is in a scanning mode.
+14 Left end stop Indicates that the left end stop is passed.
+15 Right end stop Indicates that the right end stop is passed.
+16 Error limit Indicates that the position error has reached the limit set by ELIM.
+This can indicate a collision or mechanical limit (end of stroke).
+17 Searching optimal
+frequency
+The driver is searching for the optimal excitation frequency of the
+piezo motor.
+18 Safety timeout
+triggered
+If this is set to “1”, then the safety timeout was triggered. See the
+explanation of the command “TOU2” several pages back.
+19 EtherCAT
+acknowledge
+only used when control via EtherCAT
+20 Emergency stop not used
+21 Position fail If this is set to “1”, then the safety timeout TOU3 was triggered.
+v3.26 Page 23 of 56 www.xeryon.com
