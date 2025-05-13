@@ -207,6 +207,29 @@ The `docs/developer/error_handling_guide.md` file provides detailed information 
 - Error handling in GUI components and background threads
 - Common error scenarios and recovery strategies
 
+## Recent Updates (May 13, 2025)
+
+The following improvements and fixes have been implemented:
+
+1. **User Interface Enhancements**
+   - Added direct numeric input fields for camera exposure and gain values
+   - Changed default startup tab to Patient Information for better workflow
+   - Updated default COM port to COM4 for actuator control
+
+2. **File Organization**
+   - Standardized file locations for all data storage
+   - Implemented consistent directory structure:
+     - Patient data: `data/patients/[patient_id]/`
+     - Captured images (no patient): `data/captures/`
+     - Patient images: `data/patients/[patient_id]/images/`
+
+3. **Bug Fixes**
+   - Fixed UI element references in camera display module
+   - Resolved missing import issues
+   - Improved error handling for camera settings
+
+For a detailed list of changes, see [docs/developer/changes_summary.md](docs/developer/changes_summary.md).
+
 ## Adding New Features
 
 1. Camera features

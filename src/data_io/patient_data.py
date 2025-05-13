@@ -25,7 +25,17 @@ class PatientDataManager:
     and treatment session data.
     """
     
-    def __init__(self, data_dir="./data"):
+    def __init__(self, data_dir=None):
+        """
+        Initialize the patient data manager.
+        
+        Args:
+            data_dir (str): Directory for storing patient data. If None, uses the default
+                           directory within the working directory.
+        """
+        if data_dir is None:
+            # Use a directory within the working directory
+            data_dir = Path.cwd() / "data"
         """
         Initialize the patient data manager.
         
@@ -967,4 +977,4 @@ class PatientDataManager:
             
         except Exception as e:
             logger.error(f"Error generating report for session {session_id}: {str(e)}")
-            return None 
+            return None

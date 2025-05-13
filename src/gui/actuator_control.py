@@ -103,7 +103,7 @@ class ActuatorControlWidget(QWidget):
         self.connect_btn = QPushButton("Connect")
         
         self.port_combo.setEditable(True)
-        self.port_combo.addItem("COM3")  # Default port
+        self.port_combo.addItem("COM4")  # Default port
         
         conn_layout.addWidget(self.port_label)
         conn_layout.addWidget(self.port_combo)
@@ -861,4 +861,4 @@ class ActuatorControlWidget(QWidget):
         self.tab_widget.setEnabled(True)
         
         # Keep the status timer running
-        self.status_timer.start(500) 
+        self.status_timer.start(500)

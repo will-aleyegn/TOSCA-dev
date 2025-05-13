@@ -59,8 +59,8 @@ class MainWindow(QMainWindow):
         self.status_timer.timeout.connect(self._update_status)
         self.status_timer.start(5000)  # Update every 5 seconds
         
-        # Switch to camera tab on startup (but don't auto-connect)
-        self.tab_widget.setCurrentWidget(self.camera_tab)
+        # Switch to patient tab on startup
+        self.tab_widget.setCurrentWidget(self.patient_tab)
         
         logger.info("Main window initialized")
     
@@ -575,4 +575,4 @@ class MainWindow(QMainWindow):
                 return
         
         # Call the session form's add image method directly
-        self.session_form._on_add_image(image_path) 
+        self.session_form._on_add_image(image_path)

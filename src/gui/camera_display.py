@@ -19,7 +19,7 @@ import threading
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, 
     QComboBox, QCheckBox, QSlider, QGroupBox, QFileDialog, 
-    QSizePolicy, QMessageBox
+    QSizePolicy, QMessageBox, QLineEdit
 )
 from PyQt6.QtCore import Qt, QTimer, pyqtSignal, pyqtSlot, QSize
 from PyQt6.QtGui import QImage, QPixmap
@@ -134,9 +134,18 @@ class CameraDisplayWidget(QWidget):
         
         # --- Camera Feature Controls ---
         feature_row = QHBoxLayout()
-        # Exposure
+        # Exposure controls
+        exposure_group = QGroupBox("Exposure")
+        exposure_layout = QVBoxLayout(exposure_group)
+        
+        # Auto exposure checkbox
         self.exposure_auto_checkbox = QCheckBox("Auto Exposure")
         self.exposure_auto_checkbox.stateChanged.connect(self.on_exposure_auto_changed)
+        self.exposure_auto_checkbox.setChecked(False)  # Default to manual exposure
+        exposure_layout.addWidget(self.exposure_auto_checkbox)
+        
+        # Exposure slider and input field
+        exposure_slider_layout = QHBoxLayout()
         self.exposure_slider = QSlider(Qt.Orientation.Horizontal)
         self.exposure_slider.setMinimum(100)  # in microseconds
         self.exposure_slider.setMaximum(1000000)
@@ -145,27 +154,53 @@ class CameraDisplayWidget(QWidget):
         self.exposure_slider.setTickInterval(10000)
         self.exposure_slider.setTickPosition(QSlider.TickPosition.TicksBelow)
         self.exposure_slider.valueChanged.connect(self.on_exposure_slider_changed)
-        self.exposure_value_label = QLabel("20,000 us")
-        feature_row.addWidget(self.exposure_auto_checkbox)
-        feature_row.addWidget(QLabel("Exposure:"))
-        feature_row.addWidget(self.exposure_slider)
-        feature_row.addWidget(self.exposure_value_label)
-        # Gain
+        
+        self.exposure_input = QLineEdit()
+        self.exposure_input.setText("20000")
+        self.exposure_input.setFixedWidth(80)
+        self.exposure_input.returnPressed.connect(self.on_exposure_input_changed)
+        
+        exposure_slider_layout.addWidget(QLabel("Exposure:"))
+        exposure_slider_layout.addWidget(self.exposure_slider)
+        exposure_slider_layout.addWidget(self.exposure_input)
+        exposure_slider_layout.addWidget(QLabel("μs"))
+        
+        exposure_layout.addLayout(exposure_slider_layout)
+        feature_row.addWidget(exposure_group)
+        
+        # Gain controls
+        gain_group = QGroupBox("Gain")
+        gain_layout = QVBoxLayout(gain_group)
+        
+        # Auto gain checkbox
         self.gain_auto_checkbox = QCheckBox("Auto Gain")
         self.gain_auto_checkbox.stateChanged.connect(self.on_gain_auto_changed)
+        self.gain_auto_checkbox.setChecked(False)  # Default to manual gain
+        gain_layout.addWidget(self.gain_auto_checkbox)
+        
+        # Gain slider and input field
+        gain_slider_layout = QHBoxLayout()
         self.gain_slider = QSlider(Qt.Orientation.Horizontal)
         self.gain_slider.setMinimum(0)
         self.gain_slider.setMaximum(240)
-        self.gain_slider.setValue(10)
+        self.gain_slider.setValue(0)  # Start with gain zero
         self.gain_slider.setSingleStep(1)
         self.gain_slider.setTickInterval(10)
         self.gain_slider.setTickPosition(QSlider.TickPosition.TicksBelow)
         self.gain_slider.valueChanged.connect(self.on_gain_slider_changed)
-        self.gain_value_label = QLabel("1.0 dB")
-        feature_row.addWidget(self.gain_auto_checkbox)
-        feature_row.addWidget(QLabel("Gain:"))
-        feature_row.addWidget(self.gain_slider)
-        feature_row.addWidget(self.gain_value_label)
+        
+        self.gain_input = QLineEdit()
+        self.gain_input.setText("0.0")
+        self.gain_input.setFixedWidth(80)
+        self.gain_input.returnPressed.connect(self.on_gain_input_changed)
+        
+        gain_slider_layout.addWidget(QLabel("Gain:"))
+        gain_slider_layout.addWidget(self.gain_slider)
+        gain_slider_layout.addWidget(self.gain_input)
+        gain_slider_layout.addWidget(QLabel("dB"))
+        
+        gain_layout.addLayout(gain_slider_layout)
+        feature_row.addWidget(gain_group)
         control_layout.addLayout(feature_row)
         # Save/Load Settings buttons
         settings_row = QHBoxLayout()
@@ -483,7 +518,8 @@ class CameraDisplayWidget(QWidget):
                 autoexp_str = f"autoExp{auto_exp}" if auto_exp is not None else "autoExpNA"
                 autogain_str = f"autoGain{auto_gain}" if auto_gain is not None else "autoGainNA"
                 filename = f"capture_{timestamp}_{exp_str}_{gain_str}_{autoexp_str}_{autogain_str}.png"
-                output_dir = os.path.join(os.getcwd(), "output")
+                # Use a directory within the working directory
+                output_dir = os.path.join(os.getcwd(), "data", "captures")
                 os.makedirs(output_dir, exist_ok=True)
                 filepath = os.path.join(output_dir, filename)
                 latest_filepath = None
@@ -536,7 +572,7 @@ class CameraDisplayWidget(QWidget):
                 try:
                     exposure_time = cam.get_feature_by_name("ExposureTime").get()
                     self.exposure_slider.setValue(int(exposure_time))
-                    self.exposure_value_label.setText(f"{int(exposure_time):,} us")
+                    self.exposure_input.setText(str(int(exposure_time)))
                 except Exception as e:
                     logger.error(f"Error reading ExposureTime: {e}")
                     pass
@@ -552,7 +588,7 @@ class CameraDisplayWidget(QWidget):
                 try:
                     gain = cam.get_feature_by_name("Gain").get()
                     self.gain_slider.setValue(int(gain * 10))
-                    self.gain_value_label.setText(f"{gain:.1f} dB")
+                    self.gain_input.setText(f"{gain:.1f}")
                 except Exception as e:
                     logger.error(f"Error reading Gain: {e}")
                     pass
@@ -605,7 +641,8 @@ class CameraDisplayWidget(QWidget):
         self._apply_camera_setting_with_restart(set_exposure_auto)
 
     def on_exposure_slider_changed(self, value):
-        self.exposure_value_label.setText(f"{value:,} us")
+        # Update the input field when slider changes
+        self.exposure_input.setText(str(value))
         def set_exposure():
             cam = self.camera_controller.camera
             with cam:
@@ -613,7 +650,7 @@ class CameraDisplayWidget(QWidget):
                     cam.get_feature_by_name("ExposureTime").set(value)
                     actual = cam.get_feature_by_name("ExposureTime").get()
                     self.exposure_slider.setValue(int(actual))
-                    self.exposure_value_label.setText(f"{int(actual):,} us")
+                    self.exposure_input.setText(str(int(actual)))
                     if int(actual) != value:
                         self.status_label.setText("Warning: Exposure setting not applied!")
                         logger.warning("ExposureTime set to %d but read back as %d", value, int(actual))
@@ -641,7 +678,9 @@ class CameraDisplayWidget(QWidget):
 
     def on_gain_slider_changed(self, value):
         gain_db = value / 10.0
-        self.gain_value_label.setText(f"{gain_db:.1f} dB")
+        # Update the input field when slider changes
+        self.gain_input.setText(f"{gain_db:.1f}")
+        
         def set_gain():
             cam = self.camera_controller.camera
             with cam:
@@ -649,7 +688,58 @@ class CameraDisplayWidget(QWidget):
                     cam.get_feature_by_name("Gain").set(gain_db)
                     actual = cam.get_feature_by_name("Gain").get()
                     self.gain_slider.setValue(int(actual * 10))
-                    self.gain_value_label.setText(f"{actual:.1f} dB")
+                    if abs(actual - gain_db) > 0.05:
+                        self.status_label.setText("Warning: Gain setting not applied!")
+                        logger.warning("Gain set to %.1f but read back as %.1f", gain_db, actual)
+                except Exception as e:
+                    logger.error(f"Failed to set Gain: {e}")
+                    self.status_label.setText("Failed to set Gain")
+        self._apply_camera_setting_with_restart(set_gain)
+        
+    def on_exposure_input_changed(self):
+        """Handle manual input of exposure value"""
+        try:
+            value = int(self.exposure_input.text())
+            if value < self.exposure_slider.minimum():
+                value = self.exposure_slider.minimum()
+                self.exposure_input.setText(str(value))
+            elif value > self.exposure_slider.maximum():
+                value = self.exposure_slider.maximum()
+                self.exposure_input.setText(str(value))
+            
+            # Update slider (which will trigger the camera update)
+            self.exposure_slider.setValue(value)
+        except ValueError:
+            # Restore the previous value if input is invalid
+            self.exposure_input.setText(str(self.exposure_slider.value()))
+            
+    def on_gain_input_changed(self):
+        """Handle manual input of gain value"""
+        try:
+            gain_db = float(self.gain_input.text())
+            value = int(gain_db * 10)
+            
+            if value < self.gain_slider.minimum():
+                value = self.gain_slider.minimum()
+                self.gain_input.setText(f"{value/10.0:.1f}")
+            elif value > self.gain_slider.maximum():
+                value = self.gain_slider.maximum()
+                self.gain_input.setText(f"{value/10.0:.1f}")
+            
+            # Update slider (which will trigger the camera update)
+            self.gain_slider.setValue(value)
+        except ValueError:
+            # Restore the previous value if input is invalid
+            gain_db = self.gain_slider.value() / 10.0
+            self.gain_input.setText(f"{gain_db:.1f}")
+        def set_gain():
+            cam = self.camera_controller.camera
+            with cam:
+                try:
+                    cam.get_feature_by_name("Gain").set(gain_db)
+                    actual = cam.get_feature_by_name("Gain").get()
+                    self.gain_slider.setValue(int(actual * 10))
+                    self.gain_input.setText(f"{actual:.1f}")
                     if abs(actual - gain_db) > 0.05:
                         self.status_label.setText("Warning: Gain setting not applied!")
                         logger.warning("Gain set to %.1f but read back as %.1f", gain_db, actual)
@@ -756,4 +846,4 @@ class CameraDisplayWidget(QWidget):
     def notify_new_frame(self, frame):
         """Called by the camera controller when a new frame is available."""
         # This method is thread-safe and emits the signal to the GUI thread
-        self.frame_available.emit(frame) 
+        self.frame_available.emit(frame)
